@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="applicationMainTheme">#00BCD4</color>
+    <color name="textDefault">#0A0A0A</color>
+    <color name="ib_gray_no_focused">#A2A2A2</color>
+
+</resources>
