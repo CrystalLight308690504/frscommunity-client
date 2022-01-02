@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="applicationMainTheme">#00BCD4</color>
+    <color name="colorPrimary">#00BCD4</color>
     <color name="topBar_while">#FFFFFF</color>
     <color name="textDefault">#0A0A0A</color>
     <color name="input_box_background_gray0">#DADADA</color>

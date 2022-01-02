@@ -13,12 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.activity.adapter.HomeViewpageAdapter;
-import com.qmuiteam.qmui.widget.QMUIViewPager;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author crystallight
@@ -49,19 +45,21 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.bottomItem)
     LinearLayout bottomItem;
     TextView tvOlder;
-    @BindView(R.id.home_vp)
-    QMUIViewPager homeVp;
 
+    Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
-        setViewPages(null);
+        bind = ButterKnife.bind(this);
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     void replaceFragment(Fragment addedFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -71,33 +69,7 @@ public class HomeActivity extends BaseActivity {
         ft.commit();
     }
 
-    /**
-     *
-     *
-     * @param views
-     */
-    private void setViewPages(List<View> views) {
 
-
-        views = new LinkedList<>();
-
-        int i = 0;
-        int j = 0;
-        while (j++ < 8) {
-            TextView textView = new TextView(this);
-            textView.setHeight(60);
-            textView.setWidth(100);
-            textView.setText("dfsad" + i++);
-            Drawable a = getDrawable(R.color.applicationMainTheme);
-            textView.setBackground(a);
-            views.add(textView);
-        }
-
-
-        HomeViewpageAdapter adapter = new HomeViewpageAdapter(this, views);
-        homeVp.setAdapter(adapter);
-
-    }
 
     public void toDefaultState() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_no_clicked));
@@ -167,6 +139,9 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(bind != null){
+            bind.unbind();
+        }
     }
 }
 
