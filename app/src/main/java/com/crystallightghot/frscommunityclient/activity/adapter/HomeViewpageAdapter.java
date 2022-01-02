@@ -46,6 +46,7 @@ public class HomeViewpageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {//必须实现，实例化
 
+
         container.addView(lists.get(position));
         return lists.get(position);
     }

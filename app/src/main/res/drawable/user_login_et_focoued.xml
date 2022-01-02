@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <stroke android:color="@android:color/holo_blue_light" android:width="@dimen/user_login_et_border_width"/>
+            <corners android:radius="@dimen/user_login_et_radius"/>
+            <padding android:bottom="@dimen/user_login_et_padding"
+                android:top="@dimen/user_login_et_padding"
+                android:left="@dimen/user_login_et_padding"
+                android:right="@dimen/user_login_et_padding"
+                />
+        </shape>
+    </item>
+</layer-list>

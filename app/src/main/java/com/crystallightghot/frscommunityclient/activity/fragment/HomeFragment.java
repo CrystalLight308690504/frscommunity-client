@@ -6,16 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.activity.adapter.HomeViewpageAdapter;
-import com.qmuiteam.qmui.widget.QMUIViewPager;
-import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -27,14 +22,6 @@ import java.util.List;
  * description：
  */
 public class HomeFragment extends Fragment {
-    @BindView(R.id.home_search_input_box)
-    TextView homeSearchInputBox;
-    @BindView(R.id.imageButton)
-    ImageButton imageButton;
-    @BindView(R.id.tabs)
-    QMUITabSegment tabs;
-    @BindView(R.id.pager)
-    QMUIViewPager pager;
 
     Activity activity;
 
@@ -45,6 +32,7 @@ public class HomeFragment extends Fragment {
         return view;
 
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -72,8 +60,6 @@ public class HomeFragment extends Fragment {
             textView.setBackground(a);
             lists.add(textView);
         }
-
-        pager.setAdapter(new HomeViewpageAdapter(activity, lists));
 
     }
 }

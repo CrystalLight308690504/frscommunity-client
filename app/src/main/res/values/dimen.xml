@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="ib_radius">10dp</dimen>
+    <dimen name="user_login_text_size">16dp</dimen>
+    <dimen name="user_login_et_padding">10dp</dimen>
+    <dimen name="user_login_et_radius">20dp</dimen>
+    <dimen name="user_login_et_border_width">2dp</dimen>
+    <dimen name="user_login_btn_margin_size">40dp</dimen>
+    <dimen name="application_text_size">15dp</dimen>
+    <dimen name="application_margin_size_public">5dp</dimen>
+    <dimen name="application_navigation_bar_padding_size">5dp</dimen>
+    <dimen name="application_navigation_bar_margin_size">5dp</dimen>
+    <dimen name="application_navigation_bar_height">40dp</dimen>
+    <dimen name="application_navigation_ibtn_bar_back__size">32dp</dimen>
 </resources>

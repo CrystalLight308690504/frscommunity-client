@@ -1,34 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
->
+        android:orientation="vertical">
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              app:layout_constraintTop_toTopOf="parent"
-              android:background="@color/topBar_while"
-              android:id="@+id/home_top_bar_background"
+    <com.qmuiteam.qmui.widget.QMUIViewPager
+            android:id="@+id/home_vp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
     />
+    <FrameLayout
+            android:id="@+id/homeFrameLayout"
+            android:layout_weight="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        <fragment
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment"
+        />
+    </FrameLayout>
 
-<!--    <FrameLayout-->
-<!--            android:id="@+id/homeFrameLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf = "home_top_bar_background">-->
-<!--        <fragment android:layout_width="match_parent"-->
-<!--                  android:layout_height="wrap_content"-->
-<!--                  app:layout_constraintTop_toBottomOf="@id/home_top_bar_background"-->
-<!--                  android:id="@+id/home_frag"-->
-<!--        />-->
-<!--    </FrameLayout>-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent" android:layout_height="50dp"
+    <LinearLayout
+            android:id="@+id/bottomItem"
+            android:orientation="horizontal"
+            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:background="@color/color_white"
+            android:padding="5dp"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
     >
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0sp"
+                android:layout_weight="1">
+            <ImageButton
+                    android:id="@+id/ibtnHome"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/home_home_no_clicked"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/color_black"
+                      android:id="@+id/tvHome"
+                      android:text="@string/home_home"
+                      app:layout_constraintLeft_toLeftOf="@id/ibtnHome"
+                      app:layout_constraintRight_toRightOf="@id/ibtnHome"
+                      app:layout_constraintTop_toBottomOf="@id/ibtnHome"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0sp"
+                android:layout_weight="1">
+            <ImageButton
+                    android:id="@+id/ibtnBlog"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/home_blog_no_clicked"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/color_black"
+                      android:id="@+id/tvBlog"
+                      android:text="@string/home_blog"
+                      app:layout_constraintLeft_toLeftOf="@id/ibtnBlog"
+                      app:layout_constraintRight_toRightOf="@id/ibtnBlog"
+                      app:layout_constraintTop_toBottomOf="@id/ibtnBlog"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0sp"
+                android:layout_weight="1">
+            <ImageButton
+                    android:id="@+id/ibtnFounded"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/home_founded_no_clicked"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/color_black"
+                      android:id="@+id/tvFounded"
+                      android:text="@string/home_founded"
+                      app:layout_constraintLeft_toLeftOf="@id/ibtnFounded"
+                      app:layout_constraintRight_toRightOf="@id/ibtnFounded"
+                      app:layout_constraintTop_toBottomOf="@id/ibtnFounded"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0sp"
+                android:layout_weight="1">
+            <ImageButton
+                    android:id="@+id/ibtnAnswer"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/home_answer_no_clicked"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/home_answer"
+                      android:textColor="@color/color_black"
+                      android:id="@+id/tvAnswer"
+                      app:layout_constraintLeft_toLeftOf="@id/ibtnAnswer"
+                      app:layout_constraintRight_toRightOf="@id/ibtnAnswer"
+                      app:layout_constraintTop_toBottomOf="@id/ibtnAnswer"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0sp"
+                android:layout_weight="1">
+            <ImageButton
+                    android:id="@+id/ibtnSelf"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@drawable/home_self_no_clicked"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+            />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/color_black"
+                      android:text="@string/home_self"
+                      android:id="@+id/tvSelf"
+                      app:layout_constraintLeft_toLeftOf="@id/ibtnSelf"
+                      app:layout_constraintRight_toRightOf="@id/ibtnSelf"
+                      app:layout_constraintTop_toBottomOf="@id/ibtnSelf"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
