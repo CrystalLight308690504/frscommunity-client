@@ -12,9 +12,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".contract.BaseContract">
+        <activity android:name=".activity.BaseActivity">
         </activity>
-        <activity android:name=".contract.HomeContract">
+        <activity android:name=".activity.HomeActivity">
         </activity>
         <activity android:name=".AccessActivity">
             <intent-filter>

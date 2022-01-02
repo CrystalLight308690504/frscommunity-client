@@ -1,5 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
+import com.crystallightghot.frscommunityclient.contract.Contract;
+
 /**
  * @author crystallightghost
  * @date 2022/1/2
@@ -8,8 +10,8 @@ package com.crystallightghot.frscommunityclient.model;
  */
 /*
  * @Description TODO
- * @Date 2022/1/2 10:52
+ * @Date 2022/1/2 11:43
  * @Created by CrystalLightGhost
  */
-public class BaseModel  {
+public class Model implements Contract.Model {
 }
