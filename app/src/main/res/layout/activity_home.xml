@@ -6,19 +6,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <FrameLayout
-            android:id="@+id/homeFrameLayout"
-            android:layout_weight="100"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        <fragment
+        <FrameLayout
+                android:id="@+id/homeFragment"
+                android:layout_weight="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment"
         />
-    </FrameLayout>
 
     <LinearLayout
             android:id="@+id/bottomItem"

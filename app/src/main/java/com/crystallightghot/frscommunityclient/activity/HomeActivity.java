@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -15,6 +16,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
+import com.crystallightghot.frscommunityclient.activity.fragment.TabFragment;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author crystallight
@@ -44,7 +50,10 @@ public class HomeActivity extends BaseActivity {
     TextView tvSelf;
     @BindView(R.id.bottomItem)
     LinearLayout bottomItem;
-    TextView tvOlder;
+
+    List<Fragment> fragments = new LinkedList<>();
+    TextView tvClicked;
+
 
     Unbinder bind;
 
@@ -59,16 +68,50 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        addFragemntToShow(HomeFragment.newInstant("s"));
     }
 
-    void replaceFragment(Fragment addedFragment) {
+    /**
+     * 替换中间的fragment
+     *
+     * @param addedFragment
+     */
+    void addFragemntToShow(Fragment addedFragment) {
+        if (null == addedFragment) {
+            return;
+        }
+        // 隐藏所有fragment
+        setAllFragmentToHideen();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.replace(R.id.homeFrameLayout, addedFragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (addedFragment.isAdded()) { // 已经添加fragment
+            transaction.show(addedFragment);
+        } else { // 新加入的fragment
+            transaction.add(R.id.homeFragment, addedFragment);
+            transaction.show(addedFragment);
+            fragments.add(addedFragment);
+        }
+
+
+        transaction.commitAllowingStateLoss();
     }
 
+    /**
+     * 隐藏所有已加入的fragment
+     */
+    private void setAllFragmentToHideen() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < fragments.size(); i++) {
+            Fragment fragment = fragments.get(i);
+            Log.d("HomeActivity", "fragment: isAdded： " + i + fragment.isAdded());
+            Log.d("HomeActivity", "fragment: isVisible： " + i + fragment.isVisible());
+            Log.d("HomeActivity", "fragment: isHidden： " + i + fragment.isHidden());
+            transaction.hide(fragment);
+        }
+        transaction.commitAllowingStateLoss();
+    }
 
 
     public void toDefaultState() {
@@ -77,8 +120,8 @@ public class HomeActivity extends BaseActivity {
         ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_no_clicked));
         ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_no_clicked));
         ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_no_clicked));
-        if (null != tvOlder) {
-            setItemTextColorNoClicked(tvOlder);
+        if (null != tvClicked) {
+            setItemTextColorNoClicked(tvClicked);
         }
 
     }
@@ -90,35 +133,45 @@ public class HomeActivity extends BaseActivity {
                 toDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                tvOlder = tvHome;
+                addFragemntToShow(HomeFragment.newInstant("s"));
                 break;
             case R.id.ibtnBlog:
                 toDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                tvOlder = tvBlog;
+                tvClicked = tvBlog;
+                addFragemntToShow(TabFragment.newinstance("fdfasf"));
                 break;
             case R.id.ibtnFounded:
                 toDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                tvOlder = tvFounded;
+                tvClicked = tvFounded;
                 break;
             case R.id.ibtnAnswer:
                 toDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                tvOlder = tvAnswer;
+                tvClicked = tvAnswer;
                 break;
             case R.id.ibtnSelf:
                 toDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                tvOlder = tvSelf;
+                tvClicked = tvSelf;
+                break;
+            default:
                 break;
         }
     }
 
+
+    /**
+     * 获取
+     *
+     * @param resourceId
+     * @return
+     */
     public Drawable getResourceDrawable(int resourceId) {
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), resourceId);
         return drawable;
@@ -139,7 +192,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(bind != null){
+        if (bind != null) {
             bind.unbind();
         }
     }

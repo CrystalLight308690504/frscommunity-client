@@ -1,6 +1,5 @@
 package com.crystallightghot.frscommunityclient.activity.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,10 @@ import com.crystallightghot.frscommunityclient.R;
  * @Date 2022/1/2 19:00
  * @Created by CrystalLightGhost
  */
-public class TabFragment extends Fragment {
+public  class TabFragment extends Fragment {
+
+    static TabFragment tabFragment;
+
     public static TabFragment newInstance(String label) {
         Bundle args = new Bundle();
         args.putString("label", label);
@@ -30,6 +32,20 @@ public class TabFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    public static TabFragment newinstance(String label) {
+        if (null != tabFragment){
+            return tabFragment;
+        }
+        Bundle args = new Bundle();
+        args.putString("label", label);
+        tabFragment = new TabFragment();
+        tabFragment.setArguments(args);
+        return tabFragment;
+    }
+
+
+
 
     @Nullable
     @Override
@@ -43,6 +59,5 @@ public class TabFragment extends Fragment {
         String label = getArguments().getString("label");
         TextView text = getView().findViewById(R.id.tv_bg);
         text.setText(label);
-        text.setBackgroundColor(Color.rgb((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255)));
     }
 }

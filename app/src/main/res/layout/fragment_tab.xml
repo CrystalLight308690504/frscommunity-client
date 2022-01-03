@@ -5,6 +5,7 @@
           android:layout_height="match_parent"
           android:gravity="center_horizontal"
           android:textSize="60dp"
+          android:background="@color/color_transparent"
           android:paddingTop="10dp"
 />
 

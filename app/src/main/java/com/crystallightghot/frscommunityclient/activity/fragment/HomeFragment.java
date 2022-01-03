@@ -27,7 +27,9 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class HomeFragment extends Fragment {
+public  class HomeFragment extends Fragment {
+
+    static  HomeFragment homeFragment;
 
     AppCompatActivity activity;
     @BindView(R.id.home_top_bar_background)
@@ -44,6 +46,21 @@ public class HomeFragment extends Fragment {
     TabLayout tabs;
 
     String[] s = {"tab1", "tab2", "tab3", "tab4", "tab4", "tab4", "tab4", "tab4", "tab4", "tab4", "tab4"};
+
+
+   public static HomeFragment newInstant(String str){
+       if (null == homeFragment){
+           Bundle bundle = new Bundle();
+           homeFragment = new HomeFragment();
+           bundle.putString("label", str);
+           homeFragment.setArguments(bundle);
+       }
+
+       return homeFragment;
+   }
+
+
+
     private List<TabFragment> tabFragmentList = new ArrayList<>();
     @Nullable
     @Override
@@ -105,4 +122,5 @@ public class HomeFragment extends Fragment {
         });
         tabs.setupWithViewPager(viewPager);
     }
+
 }
