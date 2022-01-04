@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="applicationMainTheme">#00BCD4</color>
-    <color name="colorPrimary">#00BCD4</color>
+    <color name="applicationMainTheme">#0F95D3</color>
     <color name="topBar_while">#FFFFFF</color>
     <color name="textDefault">#0A0A0A</color>
-    <color name="input_box_background_gray0">#DADADA</color>
+
+    <!--  输入框样式  -->
+    <color name="input_box_background">#EDEDED</color>
     <color name="input_box_background_gray1">#8a8a8a</color>
+
+
     <color name="ib_gray_no_focused">#A2A2A2</color>
     <color name="ib_gray_focused">#FFFFFF</color>
     <color name="application_color_primary">#1296db</color>

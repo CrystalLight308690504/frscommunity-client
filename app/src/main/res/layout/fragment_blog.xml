@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/blog_tabs"
+            app:tabMode="scrollable"
+            app:tabIndicatorFullWidth="false"
+            app:tabRippleColor="@color/applicationMainTheme"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabTextColor="@color/color_gray_5"
+            app:tabSelectedTextColor="@color/applicationMainTheme"
+    />
+
+
+    <ImageButton
+            android:id="@+id/blog_more_list"
+            android:layout_width="@dimen/icon_default"
+            android:layout_height="@dimen/icon_default"
+            android:src="@drawable/more"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/blog_tabs"
+            android:layout_marginRight="@dimen/margin_small"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <ImageButton
+
+            android:src="@drawable/search"
+            android:layout_width="@dimen/icon_default"
+            android:layout_height="@dimen/icon_default"
+            app:layout_constraintRight_toLeftOf="@id/blog_more_list"
+            app:layout_constraintBottom_toBottomOf="@+id/blog_tabs"
+            android:layout_marginRight="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/blog_more_list" app:layout_constraintTop_toTopOf="@+id/blog_tabs"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/blog_viewPager"
+            android:layout_width="match_parent" android:layout_height="200dp"
+            android:background="@color/color_red"
+            android:layout_marginTop="@dimen/margin_small"
+            app:layout_constraintTop_toBottomOf="@id/blog_tabs"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

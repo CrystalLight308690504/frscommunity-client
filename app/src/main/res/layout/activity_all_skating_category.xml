@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_small"
+        tools:context=".activity.AllSkatingCategoryActivity">
+    <LinearLayout
+            android:id="@+id/all_categories_ly_my"
+            android:layout_width="match_parent" android:layout_height="42dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+        <ImageView android:layout_width="32dp" android:layout_height="32dp"
+                   android:layout_gravity="bottom"
+                   android:src="@drawable/all_category"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="32dp"
+                  android:layout_gravity="bottom"
+                  android:gravity="bottom"
+                  android:textColor="@color/applicationMainTheme"
+                  android:text="我的分类"
+        />
+    </LinearLayout>
+    <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+            android:id="@+id/all_categories_ftl_my"
+            app:layout_constraintTop_toBottomOf="@id/all_categories_ly_my"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="10dp"
+    />
+
+    <LinearLayout
+            android:id="@+id/all_categories_ly_more"
+            app:layout_constraintTop_toBottomOf="@id/all_categories_ftl_my"
+            android:layout_width="match_parent" android:layout_height="42dp"
+            app:layout_constraintLeft_toLeftOf="parent">
+        <ImageView android:layout_width="32dp" android:layout_height="32dp"
+                   android:layout_gravity="bottom"
+                   android:src="@drawable/all_category_more_icon"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="32dp"
+                  android:layout_gravity="bottom"
+                  android:gravity="bottom"
+                  android:textColor="@color/applicationMainTheme"
+                  android:text="更多分类"/>
+    </LinearLayout>
+
+    <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
+
+            android:id="@+id/all_categories_ftl_more"
+            app:layout_constraintTop_toBottomOf="@id/all_categories_ly_more"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="10dp"
+           />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

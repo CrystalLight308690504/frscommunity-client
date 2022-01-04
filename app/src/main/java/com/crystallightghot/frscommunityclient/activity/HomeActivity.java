@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.activity.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
-import com.crystallightghot.frscommunityclient.activity.fragment.TabFragment;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -52,24 +52,9 @@ public class HomeActivity extends BaseActivity {
     LinearLayout bottomItem;
 
     List<Fragment> fragments = new LinkedList<>();
-    TextView tvClicked;
-
-
     Unbinder bind;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        bind = ButterKnife.bind(this);
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        addFragemntToShow(HomeFragment.newInstant("s"));
-    }
+    String TAG = "调试";
 
     /**
      * 替换中间的fragment
@@ -82,18 +67,16 @@ public class HomeActivity extends BaseActivity {
         }
         // 隐藏所有fragment
         setAllFragmentToHideen();
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (addedFragment.isAdded()) { // 已经添加fragment
+        // 已经添加fragment
+        if (addedFragment.isAdded()) {
             transaction.show(addedFragment);
         } else { // 新加入的fragment
             transaction.add(R.id.homeFragment, addedFragment);
-            transaction.show(addedFragment);
             fragments.add(addedFragment);
         }
-
-
+        Log.d("调试", "addFragemntToShow: fragments 数量" + fragments.size());
         transaction.commitAllowingStateLoss();
     }
 
@@ -105,9 +88,6 @@ public class HomeActivity extends BaseActivity {
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         for (int i = 0; i < fragments.size(); i++) {
             Fragment fragment = fragments.get(i);
-            Log.d("HomeActivity", "fragment: isAdded： " + i + fragment.isAdded());
-            Log.d("HomeActivity", "fragment: isVisible： " + i + fragment.isVisible());
-            Log.d("HomeActivity", "fragment: isHidden： " + i + fragment.isHidden());
             transaction.hide(fragment);
         }
         transaction.commitAllowingStateLoss();
@@ -120,10 +100,11 @@ public class HomeActivity extends BaseActivity {
         ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_no_clicked));
         ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_no_clicked));
         ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_no_clicked));
-        if (null != tvClicked) {
-            setItemTextColorNoClicked(tvClicked);
-        }
-
+        setItemTextColorNoClicked(tvHome);
+        setItemTextColorNoClicked(tvAnswer);
+        setItemTextColorNoClicked(tvBlog);
+        setItemTextColorNoClicked(tvFounded);
+        setItemTextColorNoClicked(tvSelf);
     }
 
     @OnClick({R.id.ibtnHome, R.id.ibtnBlog, R.id.ibtnFounded, R.id.ibtnAnswer, R.id.ibtnSelf})
@@ -139,26 +120,22 @@ public class HomeActivity extends BaseActivity {
                 toDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                tvClicked = tvBlog;
-                addFragemntToShow(TabFragment.newinstance("fdfasf"));
+                addFragemntToShow(BlogFragment.newInstance("fdfasf"));
                 break;
             case R.id.ibtnFounded:
                 toDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                tvClicked = tvFounded;
                 break;
             case R.id.ibtnAnswer:
                 toDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                tvClicked = tvAnswer;
                 break;
             case R.id.ibtnSelf:
                 toDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                tvClicked = tvSelf;
                 break;
             default:
                 break;
@@ -189,12 +166,67 @@ public class HomeActivity extends BaseActivity {
         bottomItem.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
+
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        bind = ButterKnife.bind(this);
+
+        ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
+        setItemTextColorClicked(tvHome);
+        addFragemntToShow(HomeFragment.newInstant("s"));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: ");
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart: ");
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart: ");
+    }
+
     @Override
     protected void onDestroy() {
+        Log.d(TAG, "onRestart: ");
+
         super.onDestroy();
         if (bind != null) {
             bind.unbind();
         }
     }
+
 }
 

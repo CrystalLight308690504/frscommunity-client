@@ -6,6 +6,7 @@
           android:gravity="center_horizontal"
           android:textSize="60dp"
           android:background="@color/color_transparent"
+          android:text="klsfdjlk"
           android:paddingTop="10dp"
 />
 

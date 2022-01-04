@@ -60,4 +60,6 @@ public  class TabFragment extends Fragment {
         TextView text = getView().findViewById(R.id.tv_bg);
         text.setText(label);
     }
+
+
 }

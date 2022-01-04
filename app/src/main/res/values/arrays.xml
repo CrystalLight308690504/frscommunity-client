@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--标签-->
+    <string-array name="tags_values">
+        <item>平花</item>
+        <item>速滑</item>
+        <item>极限轮滑</item>
+        <item>花式刹车</item>
+        <item>轮舞</item>
+
+    </string-array>
+</resources>
