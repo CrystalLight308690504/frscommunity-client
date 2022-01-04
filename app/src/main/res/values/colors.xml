@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="applicationMainTheme">#0F95D3</color>
+    <color name="applicationMainTheme">#299EE3</color>
     <color name="topBar_while">#FFFFFF</color>
     <color name="textDefault">#0A0A0A</color>
 
     <!--  输入框样式  -->
     <color name="input_box_background">#EDEDED</color>
     <color name="input_box_background_gray1">#8a8a8a</color>
+
+    <!--默认显示字体样式-->
+
+    <color name="default_displayed_font_color">#838383</color>
 
 
     <color name="ib_gray_no_focused">#A2A2A2</color>

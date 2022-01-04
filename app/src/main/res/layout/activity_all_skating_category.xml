@@ -5,22 +5,38 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/margin_small"
         tools:context=".activity.AllSkatingCategoryActivity">
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:tb_leftImageResource="@drawable/application_navigation_bar_back"
+            app:tb_titleText="所有分类"
+            app:tb_useThemeColor="false"
+            android:background="@color/applicationMainTheme"/>
+
     <LinearLayout
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titlebar"
+            android:layout_marginTop="@dimen/margin_small"
             android:id="@+id/all_categories_ly_my"
+            android:padding="@dimen/margin_small"
             android:layout_width="match_parent" android:layout_height="42dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
-        <ImageView android:layout_width="32dp" android:layout_height="32dp"
+           >
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
                    android:layout_gravity="bottom"
-                   android:src="@drawable/all_category"/>
+                   android:src="@drawable/all_category"
+
+        />
         <TextView android:layout_width="wrap_content"
                   android:layout_height="32dp"
                   android:layout_gravity="bottom"
+                  android:layout_marginLeft="@dimen/margin_small"
                   android:gravity="bottom"
-                  android:textColor="@color/applicationMainTheme"
+                  android:textColor="@color/default_displayed_font_color"
                   android:text="我的分类"
         />
     </LinearLayout>
@@ -37,15 +53,17 @@
             android:id="@+id/all_categories_ly_more"
             app:layout_constraintTop_toBottomOf="@id/all_categories_ftl_my"
             android:layout_width="match_parent" android:layout_height="42dp"
+            android:padding="@dimen/margin_small"
             app:layout_constraintLeft_toLeftOf="parent">
-        <ImageView android:layout_width="32dp" android:layout_height="32dp"
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
                    android:layout_gravity="bottom"
                    android:src="@drawable/all_category_more_icon"/>
         <TextView android:layout_width="wrap_content"
+                  android:layout_marginLeft="@dimen/margin_small"
                   android:layout_height="32dp"
                   android:layout_gravity="bottom"
                   android:gravity="bottom"
-                  android:textColor="@color/applicationMainTheme"
+                  android:textColor="@color/default_displayed_font_color"
                   android:text="更多分类"/>
     </LinearLayout>
 

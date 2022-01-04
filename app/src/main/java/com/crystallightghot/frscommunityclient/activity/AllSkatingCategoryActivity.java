@@ -4,10 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.Utils.XToastUtils;
 import com.xuexiang.xui.utils.ResUtils;
+import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.flowlayout.BaseTagAdapter;
 import com.xuexiang.xui.widget.flowlayout.FlowTagLayout;
 
@@ -18,22 +22,29 @@ public class AllSkatingCategoryActivity extends BaseActivity {
 
     @BindView(R.id.all_categories_ftl_more)
     FlowTagLayout allCategoriesFtlMore;
+    @BindView(R.id.titlebar)
+    TitleBar titlebar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_skating_category);
         ButterKnife.bind(this);
-
         initView();
     }
+
     private void initView() {
         String[] strings = ResUtils.getStringArray(R.array.tags_values);
 
         initMultiFlowTagLayout(allCategoriesFtlMy, strings);
         initMultiFlowTagLayout(allCategoriesFtlMore, strings);
+        titlebar.setLeftClickListener(view -> finish());
+
+
+
 
     }
+
     private void initMultiFlowTagLayout(FlowTagLayout flowTagLayout, String[] tags) {
         MyAdapter tagAdapter = new MyAdapter(this);
         flowTagLayout.setAdapter(tagAdapter);
@@ -48,6 +59,7 @@ public class AllSkatingCategoryActivity extends BaseActivity {
         public MyAdapter(Context context) {
             super(context);
         }
+
         @Override
         protected TextView newViewHolder(View convertView) {
             return (TextView) convertView.findViewById(R.id.tv_tag);
