@@ -53,10 +53,6 @@ public class HomeActivity extends BaseActivity {
 
     List<Fragment> fragments = new LinkedList<>();
     Unbinder bind;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-
-
-
     String TAG = "调试";
 
     /**
@@ -86,6 +82,7 @@ public class HomeActivity extends BaseActivity {
      * 隐藏所有已加入的fragment
      */
     private void setAllFragmentToHideen() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         for (int i = 0; i < fragments.size(); i++) {
             Fragment fragment = fragments.get(i);
@@ -143,6 +140,18 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 设置底部栏可见
+     */
+
+    public  void  bottomItemIsVisible(boolean isShowed){
+        if(isShowed){
+            bottomItem.setVisibility(View.VISIBLE);
+        }else {
+            bottomItem.setVisibility(View.INVISIBLE);
+        }
+    }
+
 
     /**
      * 获取
@@ -166,9 +175,6 @@ public class HomeActivity extends BaseActivity {
     public void setBottomItemSate(boolean isVisible) {
         bottomItem.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
-
-
-
 
 
     @Override
@@ -195,8 +201,8 @@ public class HomeActivity extends BaseActivity {
 
         Log.d(TAG, "---------------------------------- ");
 
-
         /** 清楚原来fragment里现有的fragment修复重叠BUG */
+        FragmentManager fragmentManager = getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         Log.d(TAG, "onStart-fragmentManager栈里的数量: " + fragmentManager.getFragments().size());
 

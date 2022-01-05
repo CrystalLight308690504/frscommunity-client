@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:ndroid="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:padding="@dimen/margin_small"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             app:tabIndicatorFullWidth="false"
             app:tabRippleColor="@color/applicationMainTheme"
             android:layout_marginTop="@dimen/margin_small"
-            android:layout_width="360dp" android:layout_height="wrap_content"
+            android:layout_width="350dp" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_search_input_box"
             app:tabTextColor="@color/color_gray_5"
@@ -55,6 +55,19 @@
             app:layout_constraintTop_toBottomOf="@id/tabs"
             android:layout_marginBottom="10dp"
     />
+
+    <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+            android:id="@+id/home_iv_add"
+            android:layout_width="50dp" android:layout_height="50dp"
+            android:src="@drawable/home_add_icon"
+            app:qmui_corner_radius="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:flow_verticalBias="0.8"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="50dp"
+          />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.crystallightghot.frscommunityclient.activity.fragment;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,9 @@ import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.activity.AllSkatingCategoryActivity;
 import com.crystallightghot.frscommunityclient.activity.adapter.HomeViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.activity.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.google.android.material.tabs.TabLayout;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +50,13 @@ public class HomeFragment extends Fragment {
     AppCompatActivity activity;
     Unbinder bind;
     static HomeFragment homeFragment;
+    @BindView(R.id.home_iv_add)
+    QMUIRadiusImageView2 homeIvAdd;
+    HomeViewPagerItemScrollChangedReceiver receiver;
 
-    private List<HomeViewPagerItemFragment> pagerFragments = new ArrayList<>();
+    private List<HomeRecycleViewInViewPagerItemFragment> pagerFragments = new ArrayList<>();
 
-    String[] tabTitles ;
+    String[] tabTitles;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,45 +74,43 @@ public class HomeFragment extends Fragment {
     }
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        bind = ButterKnife.bind(this, view);
-        init();
-        setViewPages(null);
-        return view;
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (bind != null) {
-            bind.unbind();
-        }
-    }
 
     private void init() {
         activity = (AppCompatActivity) getActivity();
         tabTitles = activity.getResources().getStringArray(R.array.tags_values);
+
+        // 注册广播
+        IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
+        receiver = new HomeViewPagerItemScrollChangedReceiver(this);
+        activity.registerReceiver(receiver, intentFilter);
+    }
+
+    /**
+     * 显示添加图标
+     */
+    public void addIconIsShowed(boolean isShowed){
+        if(isShowed){
+            homeIvAdd.setVisibility(View.VISIBLE);
+        }else {
+            homeIvAdd.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**
      * @param views
      */
     private void setViewPages(List<View> views) {
-     if (null != pagerFragments) {
-         pagerFragments.clear();
+        if (null != pagerFragments) {
+            pagerFragments.clear();
             tabs.removeAllTabs();
         }
 
         int i = 0;
         while (i < tabTitles.length) {
-            pagerFragments.add(new HomeViewPagerItemFragment(tabTitles[i], null));
+            pagerFragments.add(new HomeRecycleViewInViewPagerItemFragment(tabTitles[i], null));
             i++;
         }
-        viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,pagerFragments,tabTitles));
+        viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
         tabs.setupWithViewPager(viewPager);
     }
 
@@ -122,4 +126,22 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        bind = ButterKnife.bind(this, view);
+        init();
+        setViewPages(null);
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (bind != null) {
+            bind.unbind();
+        }
+        activity.unregisterReceiver(receiver);
+    }
 }
