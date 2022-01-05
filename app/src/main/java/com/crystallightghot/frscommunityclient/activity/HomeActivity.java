@@ -53,6 +53,9 @@ public class HomeActivity extends BaseActivity {
 
     List<Fragment> fragments = new LinkedList<>();
     Unbinder bind;
+    FragmentManager fragmentManager = getSupportFragmentManager();
+
+
 
     String TAG = "调试";
 
@@ -76,15 +79,13 @@ public class HomeActivity extends BaseActivity {
             transaction.add(R.id.homeFragment, addedFragment);
             fragments.add(addedFragment);
         }
-        Log.d("调试", "addFragemntToShow: fragments 数量" + fragments.size());
-        transaction.commitAllowingStateLoss();
+        transaction.commit();
     }
 
     /**
      * 隐藏所有已加入的fragment
      */
     private void setAllFragmentToHideen() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         for (int i = 0; i < fragments.size(); i++) {
             Fragment fragment = fragments.get(i);
@@ -114,13 +115,13 @@ public class HomeActivity extends BaseActivity {
                 toDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                addFragemntToShow(HomeFragment.newInstant("s"));
+                addFragemntToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()));
                 break;
             case R.id.ibtnBlog:
                 toDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                addFragemntToShow(BlogFragment.newInstance("fdfasf"));
+                addFragemntToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()));
                 break;
             case R.id.ibtnFounded:
                 toDefaultState();
@@ -172,15 +173,14 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate: ");
 
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
 
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
-        addFragemntToShow(HomeFragment.newInstant("s"));
     }
 
     @Override
@@ -192,9 +192,25 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart: ");
 
+        Log.d(TAG, "---------------------------------- ");
+
+
+        /** 清楚原来fragment里现有的fragment修复重叠BUG */
+        List<Fragment> fragments = fragmentManager.getFragments();
+        Log.d(TAG, "onStart-fragmentManager栈里的数量: " + fragmentManager.getFragments().size());
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < fragments.size(); i++) {
+            fragmentTransaction.remove(fragments.get(i));
+            Log.d(TAG, "onStart-fragment ==Tag== " + fragments.get(i).getTag());
+            Log.d(TAG, "onStart-fragment  ==toString==: " + fragments.get(i).toString());
+        }
+        Log.d(TAG, "---------------------------------- ");
+        Log.d(TAG, "onStart: ");
+        fragmentTransaction.commit();
+        addFragemntToShow(HomeFragment.newInstant("s"));
+        super.onStart();
     }
 
 
@@ -210,11 +226,11 @@ public class HomeActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
-
     }
     @Override
     protected void onRestart() {
         super.onRestart();
+
         Log.d(TAG, "onRestart: ");
     }
 

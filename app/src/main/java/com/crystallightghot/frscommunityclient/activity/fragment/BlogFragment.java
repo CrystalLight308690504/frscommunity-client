@@ -1,7 +1,6 @@
 package com.crystallightghot.frscommunityclient.activity.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class BlogFragment extends Fragment {
 
-    String[] s = {"Blog1", "Blog2", "Blog3", "Blog4", "tab4", "tab4", "tab4", "tab4", "tab4", "tab4", "tab4"};
+    String[] tabTitles ;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -38,7 +37,7 @@ public class BlogFragment extends Fragment {
 
     static  BlogFragment blogFragment;
     AppCompatActivity activity;
-    private List<TabFragment> fragments;
+    private List<HomeViewPagerItemFragment> fragments;
 
     public BlogFragment() {
         // Required empty public constructor
@@ -51,9 +50,47 @@ public class BlogFragment extends Fragment {
             Bundle args = new Bundle();
             args.putString(ARG_PARAM1, param1);
             blogFragment.setArguments(args);
-
         }
         return blogFragment;
+    }
+
+    private void init() {
+        activity = (AppCompatActivity) getActivity();
+
+        tabTitles = activity.getResources().getStringArray(R.array.tags_values);
+        fragments = new ArrayList<>();
+        int i = 0;
+        while (i < tabTitles.length) {
+            blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
+            fragments.add(new HomeViewPagerItemFragment(tabTitles[i],null));
+            i++;
+        }
+        setViewPages(null);
+    }
+    /**
+     * @param views
+     */
+    private void setViewPages(List<View> views) {
+
+        blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+            @NonNull
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
+
+            @Nullable
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return tabTitles[position];
+            }
+        });
+        blogTabs.setupWithViewPager(blogViewPager);
     }
 
     @Override
@@ -80,43 +117,5 @@ public class BlogFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         bind.unbind();
-    }
-
-    private void init() {
-        activity = (AppCompatActivity) getActivity();
-        fragments = new ArrayList<>();
-        int i = 0;
-        while (i < s.length) {
-            blogTabs.addTab(blogTabs.newTab().setText(s[i]));
-            fragments.add(TabFragment.newInstance(s[i]));
-            i++;
-        }
-        setViewPages(null);
-        Log.d("调试", "fragments: " +fragments.size());
-    }
-    /**
-     * @param views
-     */
-    private void setViewPages(List<View> views) {
-
-        blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.size();
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return s[position];
-            }
-        });
-        blogTabs.setupWithViewPager(blogViewPager);
     }
 }

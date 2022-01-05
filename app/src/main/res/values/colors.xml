@@ -2,7 +2,6 @@
 <resources>
     <color name="applicationMainTheme">#299EE3</color>
     <color name="topBar_while">#FFFFFF</color>
-    <color name="textDefault">#0A0A0A</color>
 
     <!--  输入框样式  -->
     <color name="input_box_background">#EDEDED</color>
@@ -11,6 +10,7 @@
     <!--默认显示字体样式-->
 
     <color name="default_displayed_font_color">#838383</color>
+    <color name="default_displayed_title">#000000</color>
 
 
     <color name="ib_gray_no_focused">#A2A2A2</color>

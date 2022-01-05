@@ -2,11 +2,17 @@
 <resources>
     <!--标签-->
     <string-array name="tags_values">
-        <item>平花</item>
+        <item>花式绕柱</item>
         <item>速滑</item>
         <item>极限轮滑</item>
-        <item>花式刹车</item>
+        <item>花式刹停</item>
         <item>轮舞</item>
+        <item>轮滑球</item>
+        <item>即兴轮滑</item>
+        <item>速桩</item>
+        <item>速降轮滑</item>
+        <item>极限轮滑</item>
+        <item>日常刷街</item>
 
     </string-array>
 </resources>
