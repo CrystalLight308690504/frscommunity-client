@@ -2,12 +2,14 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.crystallightghot.frscommunityclient.widget.EditSpinnerDialog;
 
 /**
@@ -26,8 +28,8 @@ public class ResultSearchedFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Activity activity;
-
+    AppCompatActivity activity;
+static ResultSearchedFragment fragment;
     public ResultSearchedFragment() {
         // Required empty public constructor
     }
@@ -41,10 +43,13 @@ public class ResultSearchedFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static ResultSearchedFragment newInstance(String param1) {
-        ResultSearchedFragment fragment = new ResultSearchedFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
+
+        if (null == fragment) {
+            fragment = ResultSearchedFragment.newInstance("dd");
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            fragment.setArguments(args);
+        }
         return fragment;
     }
 
@@ -59,7 +64,7 @@ public class ResultSearchedFragment extends Fragment {
     }
 
     private void init() {
-        activity = getActivity();
+        activity = (AppCompatActivity) getActivity();
         String[] s = {"dfasf","sfsdf"};
     }
 
@@ -80,10 +85,14 @@ public class ResultSearchedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_result_searched, container, false);
         ButterKnife.bind(view);
         return view;
     }
 
+    @Override
+    public void onStop() {
+        ActivityUtile.hideFragment(activity,this);
+        super.onStop();
+    }
 }

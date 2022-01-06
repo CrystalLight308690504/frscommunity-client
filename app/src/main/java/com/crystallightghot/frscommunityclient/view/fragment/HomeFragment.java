@@ -21,6 +21,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.AllSkatingCategoryActivity;
 import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

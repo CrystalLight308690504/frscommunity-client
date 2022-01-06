@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -104,6 +105,8 @@ public class BlogFragment extends Fragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, inflate);
+
+        ActivityUtile.showFragment(activity,this);
         return inflate;
     }
 
@@ -114,8 +117,14 @@ public class BlogFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
     public void onDestroy() {
-        super.onDestroy();
         bind.unbind();
+        super.onDestroy();
     }
 }

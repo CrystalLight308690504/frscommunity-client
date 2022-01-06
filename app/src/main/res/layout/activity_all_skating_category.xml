@@ -36,7 +36,7 @@
                   android:layout_gravity="bottom"
                   android:layout_marginLeft="@dimen/margin_small"
                   android:gravity="bottom"
-                  android:textColor="@color/default_displayed_font_color"
+                  android:textColor="@color/default_displayed_font_gray_color"
                   android:text="我的分类"
         />
     </LinearLayout>
@@ -63,7 +63,7 @@
                   android:layout_height="32dp"
                   android:layout_gravity="bottom"
                   android:gravity="bottom"
-                  android:textColor="@color/default_displayed_font_color"
+                  android:textColor="@color/default_displayed_font_gray_color"
                   android:text="更多分类"/>
     </LinearLayout>
 

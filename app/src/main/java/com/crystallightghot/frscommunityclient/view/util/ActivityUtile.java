@@ -20,17 +20,49 @@ import java.util.List;
  */
 public class ActivityUtile {
 
+
+    /**
+     * 清楚原来fragment里现有的fragment
+     */
+    public static void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
+
+        if (null == fragmentsNeededHidden) {
+            return;
+        }
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int i = 0; i < fragmentsNeededHidden.size(); i++) {
+            fragmentTransaction.remove(fragmentsNeededHidden.get(i));
+        }
+        fragmentTransaction.commit();
+    }
+
+    /**
+     * 隐藏所有已加入的fragment
+     */
+    public static void hideFragment(AppCompatActivity activity, Fragment fragment) {
+
+        if (null == fragment) { //没有就不需要清理
+            return;
+        }
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.hide(fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+
     /**
      * 显示fragment
      *
      * @param
      */
 
-    public static  void showFragment(Fragment showedFragment, AppCompatActivity activity,List<Fragment> yourFragments, int viewId) {
+    public static void showFragment(Fragment showedFragment, AppCompatActivity activity, List<Fragment> fragmentsNeededHidden, int viewId) {
 
         // 隐藏所有fragment
-        if (null != yourFragments){
-            setAllFragmentsHidden(activity,yourFragments);
+        if (null != fragmentsNeededHidden || fragmentsNeededHidden.size() == 0) {
+            setAllFragmentsHidden(activity, fragmentsNeededHidden);
         }
 
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -39,33 +71,35 @@ public class ActivityUtile {
         if (showedFragment.isAdded()) {
             transaction.show(showedFragment);
         } else { // 新加入的fragment 添加到回退栈
-            transaction.add(viewId,showedFragment);
+            transaction.add(viewId, showedFragment);
+            // 加入到fragments
+            fragmentsNeededHidden.add(showedFragment);
             transaction.addToBackStack(null);
         }
 
         transaction.commit();
     }
+    /**
+     * 隐藏所有已加入的fragment
+     */
+    public static void showFragment(AppCompatActivity activity, Fragment fragment) {
 
-    /** 清楚原来fragment里现有的fragment*/
-    public static void removeAllFragments(AppCompatActivity activity,List<Fragment> yourFragments) {
-
-        if(null == yourFragments){
+        if (null == fragment) { //没有就不需要清理
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int i = 0; i < yourFragments.size(); i++) {
-            fragmentTransaction.remove(yourFragments.get(i));
-        }
-        fragmentTransaction.commit();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.show(fragment);
+        transaction.commitAllowingStateLoss();
     }
+
 
     /**
      * 隐藏所有已加入的fragment
      */
-    public static void setAllFragmentsHidden(AppCompatActivity activity,List<Fragment> yourFragments) {
+    public static void setAllFragmentsHidden(AppCompatActivity activity, List<Fragment> yourFragments) {
 
-        if (null == yourFragments){ //没有就不需要清理
+        if (null == yourFragments) { //没有就不需要清理
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();

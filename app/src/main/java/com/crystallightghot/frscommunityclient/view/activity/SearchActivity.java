@@ -15,7 +15,8 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
 
-    List<Fragment> fragments = new LinkedList<>();
+
+   private List<Fragment> fragments = new LinkedList<>();
     Unbinder bind;
 
     private void init() {
@@ -36,4 +37,9 @@ public class SearchActivity extends AppCompatActivity {
         super.onDestroy();
         bind.unbind();
     }
+
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
+
 }

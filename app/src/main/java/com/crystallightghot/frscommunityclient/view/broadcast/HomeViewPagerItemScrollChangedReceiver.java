@@ -29,6 +29,9 @@ public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
         boolean isScrollUpward = (boolean) extras.get("isScrollUpward");
 //        Log.d("测试", "onReceive: 接受广播 是否下滑" + isScrollUpward);
 
+        if (null == null){
+            return;
+        }
         if (isScrollUpward) {
             activity.addIconIsShowed(false);
             activity.bottomItemIsVisible(false);

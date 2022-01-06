@@ -33,7 +33,7 @@
             android:text="搜索"
             android:textSize="15dp"
             app:layout_constraintBaseline_toBaselineOf="@id/input_box"
-            android:textColor="@color/default_displayed_font_color"
+            android:textColor="@color/default_displayed_font_gray_color"
     />
     <TextView
             android:id="@+id/tv_host_search"

@@ -39,7 +39,7 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
     @NotNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_view_home_item_list, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_view_item_article_lists, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
