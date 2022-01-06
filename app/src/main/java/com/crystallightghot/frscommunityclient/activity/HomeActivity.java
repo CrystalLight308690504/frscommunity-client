@@ -18,6 +18,7 @@ import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.activity.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -144,14 +145,13 @@ public class HomeActivity extends BaseActivity {
      * 设置底部栏可见
      */
 
-    public  void  bottomItemIsVisible(boolean isShowed){
-        if(isShowed){
+    public void bottomItemIsVisible(boolean isShowed) {
+        if (isShowed) {
             bottomItem.setVisibility(View.VISIBLE);
-        }else {
-            bottomItem.setVisibility(View.INVISIBLE);
+        } else {
+            bottomItem.setVisibility(View.GONE);
         }
     }
-
 
     /**
      * 获取
@@ -233,6 +233,7 @@ public class HomeActivity extends BaseActivity {
         super.onStop();
         Log.d(TAG, "onStop: ");
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();

@@ -13,6 +13,10 @@
             android:roundIcon="@mipmap/icon_application_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".activity.OtherActivities"
+                android:exported="true"/>
+
         <receiver
                 android:name=".activity.broadcast.HomeViewPagerItemScrollChangedReceiver"
                 android:enabled="true"
@@ -35,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AccessActivity">
+        <activity android:name=".activity.AccessActivity">
         </activity>
     </application>
 

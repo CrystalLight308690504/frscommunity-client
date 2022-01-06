@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
     QMUIRadiusImageView2 homeIvAdd;
     HomeViewPagerItemScrollChangedReceiver receiver;
 
-    private List<HomeRecycleViewInViewPagerItemFragment> pagerFragments = new ArrayList<>();
+    private List<HomeViewInViewPagerItemFragment> pagerFragments = new ArrayList<>();
 
     String[] tabTitles;
 
@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
 
         int i = 0;
         while (i < tabTitles.length) {
-            pagerFragments.add(new HomeRecycleViewInViewPagerItemFragment(tabTitles[i], null));
+            pagerFragments.add(new HomeViewInViewPagerItemFragment(tabTitles[i], null));
             i++;
         }
         viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));

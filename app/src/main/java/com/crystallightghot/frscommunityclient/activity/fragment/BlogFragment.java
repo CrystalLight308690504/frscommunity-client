@@ -37,7 +37,7 @@ public class BlogFragment extends Fragment {
 
     static  BlogFragment blogFragment;
     AppCompatActivity activity;
-    private List<HomeRecycleViewInViewPagerItemFragment> fragments;
+    private List<HomeViewInViewPagerItemFragment> fragments;
 
     public BlogFragment() {
         // Required empty public constructor
@@ -62,7 +62,7 @@ public class BlogFragment extends Fragment {
         int i = 0;
         while (i < tabTitles.length) {
             blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
-            fragments.add(new HomeRecycleViewInViewPagerItemFragment(tabTitles[i],null));
+            fragments.add(new HomeViewInViewPagerItemFragment(tabTitles[i],null));
             i++;
         }
         setViewPages(null);

@@ -1,8 +1,9 @@
-package com.crystallightghot.frscommunityclient;
+package com.crystallightghot.frscommunityclient.activity;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.activity.HomeActivity;
 
 public class AccessActivity extends AppCompatActivity {
