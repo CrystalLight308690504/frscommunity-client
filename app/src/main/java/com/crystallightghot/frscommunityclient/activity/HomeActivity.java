@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,7 +16,7 @@ import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.activity.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
+import com.crystallightghot.frscommunityclient.activity.util.ActivityUtile;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -56,44 +54,10 @@ public class HomeActivity extends BaseActivity {
     Unbinder bind;
     String TAG = "调试";
 
-    /**
-     * 替换中间的fragment
-     *
-     * @param addedFragment
-     */
-    void addFragemntToShow(Fragment addedFragment) {
-        if (null == addedFragment) {
-            return;
-        }
-        // 隐藏所有fragment
-        setAllFragmentToHideen();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        // 已经添加fragment
-        if (addedFragment.isAdded()) {
-            transaction.show(addedFragment);
-        } else { // 新加入的fragment
-            transaction.add(R.id.homeFragment, addedFragment);
-            fragments.add(addedFragment);
-        }
-        transaction.commit();
-    }
-
-    /**
-     * 隐藏所有已加入的fragment
-     */
-    private void setAllFragmentToHideen() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        for (int i = 0; i < fragments.size(); i++) {
-            Fragment fragment = fragments.get(i);
-            transaction.hide(fragment);
-        }
-        transaction.commitAllowingStateLoss();
-    }
 
 
-    public void toDefaultState() {
+
+    public void allBottomIconBeenDefaultState() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_no_clicked));
         ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_no_clicked));
         ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_no_clicked));
@@ -110,29 +74,29 @@ public class HomeActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibtnHome:
-                toDefaultState();
+                allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                addFragemntToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()));
+                ActivityUtile.addFragmentToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments);
                 break;
             case R.id.ibtnBlog:
-                toDefaultState();
+                allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                addFragemntToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()));
+                ActivityUtile.addFragmentToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()),this,fragments);
                 break;
             case R.id.ibtnFounded:
-                toDefaultState();
+                allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
                 break;
             case R.id.ibtnAnswer:
-                toDefaultState();
+                allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
                 break;
             case R.id.ibtnSelf:
-                toDefaultState();
+                allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
                 break;
@@ -184,9 +148,14 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
+        init();
 
+    }
+
+    private void init() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
+        ActivityUtile.addFragmentToShow(HomeFragment.newInstant("homeFragment"),this,fragments);
     }
 
     @Override
@@ -198,24 +167,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onStart() {
-
-        Log.d(TAG, "---------------------------------- ");
-
-        /** 清楚原来fragment里现有的fragment修复重叠BUG */
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        List<Fragment> fragments = fragmentManager.getFragments();
-        Log.d(TAG, "onStart-fragmentManager栈里的数量: " + fragmentManager.getFragments().size());
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int i = 0; i < fragments.size(); i++) {
-            fragmentTransaction.remove(fragments.get(i));
-            Log.d(TAG, "onStart-fragment ==Tag== " + fragments.get(i).getTag());
-            Log.d(TAG, "onStart-fragment  ==toString==: " + fragments.get(i).toString());
-        }
-        Log.d(TAG, "---------------------------------- ");
-        Log.d(TAG, "onStart: ");
-        fragmentTransaction.commit();
-        addFragemntToShow(HomeFragment.newInstant("s"));
+        ActivityUtile.removeFragments(this);
         super.onStart();
     }
 
