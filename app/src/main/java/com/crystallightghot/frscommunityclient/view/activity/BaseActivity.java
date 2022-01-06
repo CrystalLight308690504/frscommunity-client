@@ -27,7 +27,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.getBackStackEntryCount() == 1) { // 剩下的只有空的activity
+        // 剩下的只有空的activity
+        if (fragmentManager.getBackStackEntryCount() == 1) {
             finish();
         } else {
             fragmentManager.popBackStack();
