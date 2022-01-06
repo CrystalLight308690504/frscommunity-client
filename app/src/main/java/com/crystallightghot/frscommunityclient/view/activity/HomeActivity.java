@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.activity;
+package com.crystallightghot.frscommunityclient.view.activity;
 
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
@@ -15,10 +15,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.activity.broadcast.HomeViewPagerItemScrollChangedReceiver;
-import com.crystallightghot.frscommunityclient.activity.fragment.BlogFragment;
-import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
-import com.crystallightghot.frscommunityclient.activity.util.ActivityUtile;
+import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
+import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
+import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 import java.util.LinkedList;
@@ -56,10 +56,11 @@ public class HomeActivity extends BaseActivity {
     QMUIRadiusImageView2 homeIvAdd;
 
     List<Fragment> fragments = new LinkedList<>();
+    HomeFragment fragmentLater;
     Unbinder bind;
     String TAG = "调试";
     HomeViewPagerItemScrollChangedReceiver receiver;
-
+    final  int FRAGMENTCONTAINERID = R.id.homeFragment;
 
 
     public void allBottomIconBeenDefaultState() {
@@ -82,13 +83,13 @@ public class HomeActivity extends BaseActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.addFragmentToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()), this, fragments);
+                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments, FRAGMENTCONTAINERID);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                ActivityUtile.addFragmentToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, fragments);
+                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this,fragments, FRAGMENTCONTAINERID);
                 break;
             case R.id.ibtnFounded:
                 allBottomIconBeenDefaultState();
@@ -149,7 +150,10 @@ public class HomeActivity extends BaseActivity {
     private void init() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
-        ActivityUtile.addFragmentToShow(HomeFragment.newInstant("homeFragment"), this, fragments);
+
+        // 添加fragment
+       fragmentLater =  HomeFragment.newInstant("homeFragment");
+        ActivityUtile.showFragment(fragmentLater, this, fragments, FRAGMENTCONTAINERID);
 
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
@@ -166,7 +170,6 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
         init();
-
     }
 
     /**
@@ -189,10 +192,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onStart() {
-        ActivityUtile.removeFragments(this);
         super.onStart();
+        ActivityUtile.showFragment(fragmentLater,this,fragments, FRAGMENTCONTAINERID);
     }
-
 
     @Override
     protected void onPause() {
@@ -200,7 +202,6 @@ public class HomeActivity extends BaseActivity {
         Log.d(TAG, "onPause: ");
 
     }
-
 
     @Override
     protected void onStop() {
@@ -211,19 +212,18 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-
         Log.d(TAG, "onRestart: ");
     }
 
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onRestart: ");
-
         super.onDestroy();
         if (bind != null) {
             bind.unbind();
         }
         unregisterReceiver(receiver);
+
     }
 }
 

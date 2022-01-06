@@ -14,11 +14,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".activity.FullFragmentActivities"
-                android:exported="true"/>
+                android:name=".view.activity.SearchActivity"
+                android:exported="true">
 
+        </activity>
         <receiver
-                android:name=".activity.broadcast.HomeViewPagerItemScrollChangedReceiver"
+                android:name=".view.broadcast.HomeViewPagerItemScrollChangedReceiver"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -26,12 +27,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.BaseActivity">
+        <activity android:name=".view.activity.BaseActivity">
         </activity>
-        <activity android:name=".activity.AllSkatingCategoryActivity">
+        <activity android:name=".view.activity.AllSkatingCategoryActivity">
         </activity>
         <activity
-                android:name=".activity.HomeActivity"
+                android:name=".view.activity.HomeActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,7 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AccessActivity">
+        <activity android:name=".view.activity.AccessActivity">
         </activity>
     </application>
 

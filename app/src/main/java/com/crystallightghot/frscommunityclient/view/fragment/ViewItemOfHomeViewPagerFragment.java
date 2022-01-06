@@ -1,9 +1,8 @@
-package com.crystallightghot.frscommunityclient.activity.fragment;
+package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.activity.adapter.HomeViewPagerRecyclerAdapter;
-import org.jetbrains.annotations.NotNull;
+import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerRecyclerAdapter;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -34,20 +32,20 @@ import java.util.List;
  * @Date 2022/1/2 19:00
  * @Created by CrystalLightGhost
  */
-public class HomeViewInViewPagerItemFragment extends Fragment {
+public class ViewItemOfHomeViewPagerFragment extends Fragment {
 
     @BindView(R.id.rv_lists)
     RecyclerView rvLists;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    public HomeViewInViewPagerItemFragment() {
+    public ViewItemOfHomeViewPagerFragment() {
     }
 
 
     List<HashMap<Object, Object>> dataAll;
 
-    public HomeViewInViewPagerItemFragment(String label, List<HashMap<Object, Object>> dataAll) {
+    public ViewItemOfHomeViewPagerFragment(String label, List<HashMap<Object, Object>> dataAll) {
         this.dataAll = dataAll;
         Bundle args = new Bundle();
         args.putString("label", label);

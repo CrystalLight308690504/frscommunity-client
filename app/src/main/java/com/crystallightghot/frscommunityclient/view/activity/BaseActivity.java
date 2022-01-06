@@ -1,11 +1,10 @@
-package com.crystallightghot.frscommunityclient.activity;
+package com.crystallightghot.frscommunityclient.view.activity;
 
 import android.app.Application;
 import android.content.Context;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.crystallightghot.frscommunityclient.R;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.xuexiang.xui.XUI;
 
 public class BaseActivity extends AppCompatActivity {

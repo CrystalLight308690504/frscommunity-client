@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.activity.adapter;
+package com.crystallightghot.frscommunityclient.view.adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

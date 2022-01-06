@@ -1,7 +1,6 @@
-package com.crystallightghot.frscommunityclient.activity.fragment;
+package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +18,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.activity.AllSkatingCategoryActivity;
-import com.crystallightghot.frscommunityclient.activity.adapter.HomeViewPagerAdapter;
-import com.crystallightghot.frscommunityclient.activity.broadcast.HomeViewPagerItemScrollChangedReceiver;
+import com.crystallightghot.frscommunityclient.view.activity.AllSkatingCategoryActivity;
+import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
+import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +34,8 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
 
-    @BindView(R.id.home_search_input_box)
-    TextView homeSearchInputBox;
+    @BindView(R.id.search_input_box)
+    TextView searchInputBox;
     @BindView(R.id.imageButton)
     ImageButton imageButton;
     @BindView(R.id.pager)
@@ -53,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     static HomeFragment homeFragment;
 
-    private List<HomeViewInViewPagerItemFragment> pagerFragments = new ArrayList<>();
+    private List<ViewItemOfHomeViewPagerFragment> pagerFragments = new ArrayList<>();
 
     String[] tabTitles;
 
@@ -92,21 +90,25 @@ public class HomeFragment extends Fragment {
 
         int i = 0;
         while (i < tabTitles.length) {
-            pagerFragments.add(new HomeViewInViewPagerItemFragment(tabTitles[i], null));
+            pagerFragments.add(new ViewItemOfHomeViewPagerFragment(tabTitles[i], null));
             i++;
         }
         viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
         tabs.setupWithViewPager(viewPager);
     }
 
-    @OnClick(R.id.blog_more_list)
+    @OnClick({R.id.blog_more_list,R.id.search_input_box})
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.blog_more_list:
-                Intent intent = new Intent(activity, AllSkatingCategoryActivity.class);
+                intent = new Intent(activity, AllSkatingCategoryActivity.class);
                 activity.startActivity(intent);
                 break;
-
+                case R.id.search_input_box:
+                intent = new Intent(activity, SearchActivity.class);
+                activity.startActivity(intent);
+                break;
         }
     }
 

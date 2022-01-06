@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.activity.fragment;
+package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,7 +37,7 @@ public class BlogFragment extends Fragment {
 
     static  BlogFragment blogFragment;
     AppCompatActivity activity;
-    private List<HomeViewInViewPagerItemFragment> fragments;
+    private List<ViewItemOfHomeViewPagerFragment> fragments;
 
     public BlogFragment() {
         // Required empty public constructor
@@ -62,7 +62,7 @@ public class BlogFragment extends Fragment {
         int i = 0;
         while (i < tabTitles.length) {
             blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
-            fragments.add(new HomeViewInViewPagerItemFragment(tabTitles[i],null));
+            fragments.add(new ViewItemOfHomeViewPagerFragment(tabTitles[i],null));
             i++;
         }
         setViewPages(null);

@@ -1,13 +1,10 @@
-package com.crystallightghot.frscommunityclient.activity.broadcast;
+package com.crystallightghot.frscommunityclient.view.broadcast;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import androidx.appcompat.app.AppCompatActivity;
-import com.crystallightghot.frscommunityclient.activity.HomeActivity;
-import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
+import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
 
 public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
 

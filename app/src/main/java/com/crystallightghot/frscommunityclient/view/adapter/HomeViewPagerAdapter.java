@@ -1,11 +1,11 @@
-package com.crystallightghot.frscommunityclient.activity.adapter;
+package com.crystallightghot.frscommunityclient.view.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.crystallightghot.frscommunityclient.activity.fragment.HomeViewInViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.ViewItemOfHomeViewPagerFragment;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class HomeViewPagerAdapter extends FragmentPagerAdapter {
 
-    List<HomeViewInViewPagerItemFragment> fragments;
+    List<ViewItemOfHomeViewPagerFragment> fragments;
     String[] titles;
-    public HomeViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior, List<HomeViewInViewPagerItemFragment> fragments, String[] titles) {
+    public HomeViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior, List<ViewItemOfHomeViewPagerFragment> fragments, String[] titles) {
         super(fm, behavior);
         this.titles = titles;
         this.fragments = fragments;

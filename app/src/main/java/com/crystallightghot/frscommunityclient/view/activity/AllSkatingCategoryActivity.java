@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.activity;
+package com.crystallightghot.frscommunityclient.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,9 +36,6 @@ public class AllSkatingCategoryActivity extends BaseActivity {
         initMultiFlowTagLayout(allCategoriesFtlMy, strings);
         initMultiFlowTagLayout(allCategoriesFtlMore, strings);
         titlebar.setLeftClickListener(view -> finish());
-
-
-
 
     }
 

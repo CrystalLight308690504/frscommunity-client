@@ -7,21 +7,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
-            android:id="@+id/home_search_input_box"
+            android:id="@+id/search_input_box"
             android:layout_width="350dp"
             android:layout_height="38dp"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginLeft="@dimen/margin_small"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@drawable/home_search_background"
+            android:background="@drawable/backgroud_input_radiou"
     />
     <ImageButton android:layout_width="32dp" android:layout_height="32dp"
                  app:layout_constraintRight_toRightOf="parent"
-                 app:layout_constraintBottom_toBottomOf="@id/home_search_input_box"
+                 app:layout_constraintBottom_toBottomOf="@id/search_input_box"
                  android:layout_marginRight="@dimen/margin_small"
                  android:background="@drawable/home_scan_code"
-                 android:id="@+id/imageButton" app:layout_constraintTop_toTopOf="@+id/home_search_input_box"/>
+                 android:id="@+id/imageButton" app:layout_constraintTop_toTopOf="@+id/search_input_box"/>
 
 
     <com.google.android.material.tabs.TabLayout
@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/margin_small"
             android:layout_width="350dp" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/home_search_input_box"
+            app:layout_constraintTop_toBottomOf="@id/search_input_box"
             app:tabTextColor="@color/color_gray_5"
             app:tabSelectedTextColor="@color/applicationMainTheme"
     />
