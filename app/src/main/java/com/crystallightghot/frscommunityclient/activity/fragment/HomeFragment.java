@@ -49,10 +49,9 @@ public class HomeFragment extends Fragment {
 
     AppCompatActivity activity;
     Unbinder bind;
+
+
     static HomeFragment homeFragment;
-    @BindView(R.id.home_iv_add)
-    QMUIRadiusImageView2 homeIvAdd;
-    HomeViewPagerItemScrollChangedReceiver receiver;
 
     private List<HomeViewInViewPagerItemFragment> pagerFragments = new ArrayList<>();
 
@@ -79,21 +78,7 @@ public class HomeFragment extends Fragment {
         activity = (AppCompatActivity) getActivity();
         tabTitles = activity.getResources().getStringArray(R.array.tags_values);
 
-        // 注册广播
-        IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
-        receiver = new HomeViewPagerItemScrollChangedReceiver(this);
-        activity.registerReceiver(receiver, intentFilter);
-    }
 
-    /**
-     * 显示添加图标
-     */
-    public void addIconIsShowed(boolean isShowed){
-        if(isShowed){
-            homeIvAdd.setVisibility(View.VISIBLE);
-        }else {
-            homeIvAdd.setVisibility(View.INVISIBLE);
-        }
     }
 
     /**
@@ -142,6 +127,6 @@ public class HomeFragment extends Fragment {
         if (bind != null) {
             bind.unbind();
         }
-        activity.unregisterReceiver(receiver);
+
     }
 }

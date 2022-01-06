@@ -5,26 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.appcompat.app.AppCompatActivity;
 import com.crystallightghot.frscommunityclient.activity.HomeActivity;
 import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
 
 public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
 
-    HomeFragment homeFragment;
+    HomeActivity activity;
 
     public HomeViewPagerItemScrollChangedReceiver() {
     }
 
     ;
 
-    public HomeViewPagerItemScrollChangedReceiver(HomeFragment homeFragment) {
-        this.homeFragment = homeFragment;
+    public HomeViewPagerItemScrollChangedReceiver( HomeActivity activity) {
+        this.activity = activity;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle extras = intent.getExtras();
-        HomeActivity activity = (HomeActivity) homeFragment.getActivity();
         if (null == extras) { // 表示未滑动 不改变状态
             return;
         }
@@ -33,10 +33,10 @@ public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
 //        Log.d("测试", "onReceive: 接受广播 是否下滑" + isScrollUpward);
 
         if (isScrollUpward) {
-            homeFragment.addIconIsShowed(false);
+            activity.addIconIsShowed(false);
             activity.bottomItemIsVisible(false);
         } else {
-            homeFragment.addIconIsShowed(true);
+            activity.addIconIsShowed(true);
             activity.bottomItemIsVisible(true);
         }
     }

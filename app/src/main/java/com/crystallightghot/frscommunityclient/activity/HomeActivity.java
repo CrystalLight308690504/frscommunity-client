@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.activity;
 
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,9 +15,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.activity.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.activity.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.activity.fragment.HomeFragment;
 import com.crystallightghot.frscommunityclient.activity.util.ActivityUtile;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -49,11 +52,13 @@ public class HomeActivity extends BaseActivity {
     TextView tvSelf;
     @BindView(R.id.bottomItem)
     LinearLayout bottomItem;
+    @BindView(R.id.home_iv_add)
+    QMUIRadiusImageView2 homeIvAdd;
 
     List<Fragment> fragments = new LinkedList<>();
     Unbinder bind;
     String TAG = "调试";
-
+    HomeViewPagerItemScrollChangedReceiver receiver;
 
 
 
@@ -77,13 +82,13 @@ public class HomeActivity extends BaseActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.addFragmentToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments);
+                ActivityUtile.addFragmentToShow(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()), this, fragments);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                ActivityUtile.addFragmentToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()),this,fragments);
+                ActivityUtile.addFragmentToShow(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, fragments);
                 break;
             case R.id.ibtnFounded:
                 allBottomIconBeenDefaultState();
@@ -141,6 +146,18 @@ public class HomeActivity extends BaseActivity {
     }
 
 
+    private void init() {
+        ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
+        setItemTextColorClicked(tvHome);
+        ActivityUtile.addFragmentToShow(HomeFragment.newInstant("homeFragment"), this, fragments);
+
+        // 注册广播
+        IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
+        receiver = new HomeViewPagerItemScrollChangedReceiver(this);
+        registerReceiver(receiver, intentFilter);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -152,10 +169,15 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    private void init() {
-        ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
-        setItemTextColorClicked(tvHome);
-        ActivityUtile.addFragmentToShow(HomeFragment.newInstant("homeFragment"),this,fragments);
+    /**
+     * 显示添加图标
+     */
+    public void addIconIsShowed(boolean isShowed) {
+        if (isShowed) {
+            homeIvAdd.setVisibility(View.VISIBLE);
+        } else {
+            homeIvAdd.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -201,7 +223,7 @@ public class HomeActivity extends BaseActivity {
         if (bind != null) {
             bind.unbind();
         }
+        unregisterReceiver(receiver);
     }
-
 }
 
