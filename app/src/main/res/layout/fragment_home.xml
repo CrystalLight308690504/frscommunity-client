@@ -49,11 +49,10 @@
 
 
     <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager"
+            android:id="@+id/type_container_pager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabs"
-            android:layout_marginBottom="10dp"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

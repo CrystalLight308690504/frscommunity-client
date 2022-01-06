@@ -21,7 +21,6 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.AllSkatingCategoryActivity;
 import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ public class HomeFragment extends Fragment {
     TextView searchInputBox;
     @BindView(R.id.imageButton)
     ImageButton imageButton;
-    @BindView(R.id.pager)
-    ViewPager viewPager;
+    @BindView(R.id.type_container_pager)
+    ViewPager typeContentContainer;
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.blog_more_list)
@@ -94,8 +93,8 @@ public class HomeFragment extends Fragment {
             pagerFragments.add(new ViewItemOfHomeViewPagerFragment(tabTitles[i], null));
             i++;
         }
-        viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
-        tabs.setupWithViewPager(viewPager);
+        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
+        tabs.setupWithViewPager(typeContentContainer);
     }
 
     @OnClick({R.id.blog_more_list,R.id.search_input_box})

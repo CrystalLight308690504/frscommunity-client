@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.tabs.TabLayout;
 
@@ -37,7 +38,7 @@ public class BlogFragment extends Fragment {
     ViewPager blogViewPager;
 
     static  BlogFragment blogFragment;
-    AppCompatActivity activity;
+    HomeActivity activity;
     private List<ViewItemOfHomeViewPagerFragment> fragments;
 
     public BlogFragment() {
@@ -56,8 +57,7 @@ public class BlogFragment extends Fragment {
     }
 
     private void init() {
-        activity = (AppCompatActivity) getActivity();
-
+        activity = (HomeActivity) getActivity();
         tabTitles = activity.getResources().getStringArray(R.array.tags_values);
         fragments = new ArrayList<>();
         int i = 0;
@@ -105,15 +105,15 @@ public class BlogFragment extends Fragment {
         // Inflate the layout for this fragment
         View inflate = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, inflate);
-
-        ActivityUtile.showFragment(activity,this);
+        init();
+        ActivityUtile.showFragment(BlogFragment.newInstance("blog"),activity,activity.getFragments(),activity.getFRAGMENTCONTAINERID());
         return inflate;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        init();
+
     }
 
     @Override

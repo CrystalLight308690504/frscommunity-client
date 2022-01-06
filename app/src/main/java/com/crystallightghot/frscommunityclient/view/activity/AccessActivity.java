@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
 
-public class AccessActivity extends AppCompatActivity {
+public class AccessActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

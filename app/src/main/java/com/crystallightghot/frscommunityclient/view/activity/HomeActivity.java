@@ -60,8 +60,18 @@ public class HomeActivity extends BaseActivity {
     Unbinder bind;
     String TAG = "调试";
     HomeViewPagerItemScrollChangedReceiver receiver;
+
+
+
     final  int FRAGMENTCONTAINERID = R.id.homeFragment;
 
+
+    public List<Fragment> getFragments() {
+        return fragments;
+    }
+    public int getFRAGMENTCONTAINERID() {
+        return FRAGMENTCONTAINERID;
+    }
 
     public void allBottomIconBeenDefaultState() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_no_clicked));
@@ -178,8 +188,10 @@ public class HomeActivity extends BaseActivity {
     public void addIconIsShowed(boolean isShowed) {
         if (isShowed) {
             homeIvAdd.setVisibility(View.VISIBLE);
+            bottomItem.setVisibility(View.VISIBLE);
         } else {
-            homeIvAdd.setVisibility(View.INVISIBLE);
+            homeIvAdd.setVisibility(View.GONE);
+            bottomItem.setVisibility(View.GONE);
         }
     }
 
@@ -206,6 +218,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        ActivityUtile.setFragmentsHidden(this,fragments);
         Log.d(TAG, "onStop: ");
     }
 
@@ -223,7 +236,6 @@ public class HomeActivity extends BaseActivity {
             bind.unbind();
         }
         unregisterReceiver(receiver);
-
     }
 }
 

@@ -26,7 +26,6 @@ public class ResultSearchedFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
 
     AppCompatActivity activity;
 static ResultSearchedFragment fragment;
@@ -34,14 +33,6 @@ static ResultSearchedFragment fragment;
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment ResultSearchedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ResultSearchedFragment newInstance(String param1) {
 
         if (null == fragment) {
@@ -59,13 +50,11 @@ static ResultSearchedFragment fragment;
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
-
         init();
     }
 
     private void init() {
         activity = (AppCompatActivity) getActivity();
-        String[] s = {"dfasf","sfsdf"};
     }
 
     private void showResultArrangementWayDialog(String[] s) {
@@ -92,7 +81,6 @@ static ResultSearchedFragment fragment;
 
     @Override
     public void onStop() {
-        ActivityUtile.hideFragment(activity,this);
         super.onStop();
     }
 }

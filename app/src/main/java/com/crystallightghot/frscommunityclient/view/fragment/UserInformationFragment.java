@@ -9,12 +9,12 @@ import com.crystallightghot.frscommunityclient.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link userInformationFragment#newInstance} factory method to
+ * Use the {@link UserInformationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class userInformationFragment extends Fragment {
+public class UserInformationFragment extends Fragment {
 
-   static userInformationFragment fragment;
+   static UserInformationFragment fragment;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +23,7 @@ public class userInformationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
 
-    public userInformationFragment() {
+    public UserInformationFragment() {
         // Required empty public constructor
     }
 
@@ -35,9 +35,9 @@ public class userInformationFragment extends Fragment {
      * @return A new instance of fragment UserIformationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static userInformationFragment newInstance(String param1) {
+    public static UserInformationFragment newInstance(String param1) {
         if (null == fragment) {
-            fragment = userInformationFragment.newInstance("dfj");
+            fragment = UserInformationFragment.newInstance("dfj");
             Bundle args = new Bundle();
             args.putString(ARG_PARAM1, param1);
             fragment.setArguments(args);

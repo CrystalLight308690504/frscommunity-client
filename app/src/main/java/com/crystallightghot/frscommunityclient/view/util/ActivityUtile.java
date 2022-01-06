@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,7 +25,7 @@ public class ActivityUtile {
     /**
      * 清楚原来fragment里现有的fragment
      */
-    public static void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
+    public  void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
 
         if (null == fragmentsNeededHidden) {
             return;
@@ -62,7 +63,7 @@ public class ActivityUtile {
 
         // 隐藏所有fragment
         if (null != fragmentsNeededHidden || fragmentsNeededHidden.size() == 0) {
-            setAllFragmentsHidden(activity, fragmentsNeededHidden);
+            setFragmentsHidden(activity, fragmentsNeededHidden);
         }
 
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -71,33 +72,27 @@ public class ActivityUtile {
         if (showedFragment.isAdded()) {
             transaction.show(showedFragment);
         } else { // 新加入的fragment 添加到回退栈
-            transaction.add(viewId, showedFragment);
+            transaction.add(viewId, showedFragment,showedFragment.getClass().getSimpleName());
             // 加入到fragments
             fragmentsNeededHidden.add(showedFragment);
             transaction.addToBackStack(null);
         }
-
         transaction.commit();
-    }
-    /**
-     * 隐藏所有已加入的fragment
-     */
-    public static void showFragment(AppCompatActivity activity, Fragment fragment) {
+        List<Fragment> fragments = fragmentManager.getFragments();
 
-        if (null == fragment) { //没有就不需要清理
-            return;
+        Log.d("栈测试", "============================ " );
+        Log.d("栈测试", "fragment的数量: " + fragments.size());
+        for (int i = 0; i < fragments.size(); i++) {
+            Log.d("栈测试", "栈的内容1 : " + fragments.get(i).toString());
         }
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.show(fragment);
-        transaction.commitAllowingStateLoss();
-    }
+        Log.d("栈测试", "============================ " );
 
+    }
 
     /**
      * 隐藏所有已加入的fragment
      */
-    public static void setAllFragmentsHidden(AppCompatActivity activity, List<Fragment> yourFragments) {
+    public static void setFragmentsHidden(AppCompatActivity activity, List<Fragment> yourFragments) {
 
         if (null == yourFragments) { //没有就不需要清理
             return;

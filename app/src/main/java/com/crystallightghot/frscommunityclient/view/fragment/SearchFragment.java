@@ -8,18 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -48,11 +45,10 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.hot_searches)
     QMUIFloatLayout hotSearches;
 
-    final int FRAGMENTCONTERID = R.id.fragment_container;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    List<Fragment> fragments ;
+    List<Fragment> fragments;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -78,17 +74,9 @@ public class SearchFragment extends Fragment {
         topBarBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                Log.d("数量", "回退栈数量: " + fragmentManager.getBackStackEntryCount());
-                if (fragmentManager.getBackStackEntryCount() == 1) { // 剩下的只有空的activity
-                    getActivity().finish();
-                } else {
-                    fragmentManager.popBackStack();
-                }
-                Log.d("数量", "回退栈数量 退栈后: " + fragmentManager.getBackStackEntryCount());
+                activity.onBackPressed();
             }
         });
-
     }
 
     public void setSearchHistories() {
@@ -125,8 +113,11 @@ public class SearchFragment extends Fragment {
 
     @OnClick(R.id.btn_search)
     public void onClick(View view) {
-        ResultSearchedFragment resultSearchedFragment = new ResultSearchedFragment();
-        ActivityUtile.showFragment(resultSearchedFragment, activity,fragments,FRAGMENTCONTERID);
+        switch (view.getId()) {
+            case R.id.btn_search:
+//                ActivityUtile.showFragment(ResultSearchedFragment.newInstance("s"), activity, fragments, FRAGMENTCONTERID);
+                break;
+        }
     }
 
 }

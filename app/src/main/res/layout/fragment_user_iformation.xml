@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".view.fragment.userInformationFragment">
+        tools:context=".view.fragment.UserInformationFragment">
 
     <ImageView
             android:id="@+id/user_information_background"
@@ -108,7 +108,7 @@
         <ImageView
                 android:id="@+id/search_article"
                 android:layout_marginRight="@dimen/margin_normal"
-                android:layout_width="32dp" android:layout_height="32dp"
+                android:layout_width="26dp" android:layout_height="26dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:src="@drawable/search"
                 app:layout_constraintTop_toTopOf="parent"
