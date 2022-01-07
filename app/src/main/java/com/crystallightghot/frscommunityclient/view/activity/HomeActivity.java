@@ -21,6 +21,7 @@ import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.home_iv_add)
     QMUIRadiusImageView2 homeIvAdd;
 
-    List<Fragment> fragments = new LinkedList<>();
+    List<Fragment> fragments = new ArrayList<>();
     HomeFragment fragmentLater;
     Unbinder bind;
     String TAG = "调试";
@@ -160,26 +161,13 @@ public class HomeActivity extends BaseActivity {
     private void init() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
-
-        // 添加fragment
-       fragmentLater =  HomeFragment.newInstant("homeFragment");
-        ActivityUtile.showFragment(fragmentLater, this, fragments, FRAGMENTCONTAINERID);
+        fragmentLater =  HomeFragment.newInstant("homeFragment");
 
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
         receiver = new HomeViewPagerItemScrollChangedReceiver(this);
         registerReceiver(receiver, intentFilter);
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate: ");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        bind = ButterKnife.bind(this);
-        init();
     }
 
     /**
@@ -196,6 +184,16 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        Log.d(TAG, "onCreate: ");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        bind = ButterKnife.bind(this);
+        init();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: ");
@@ -205,6 +203,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // 添加fragment 到页面
         ActivityUtile.showFragment(fragmentLater,this,fragments, FRAGMENTCONTAINERID);
     }
 

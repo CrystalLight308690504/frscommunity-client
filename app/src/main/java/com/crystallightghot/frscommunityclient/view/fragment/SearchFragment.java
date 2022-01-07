@@ -87,7 +87,7 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("调试", "Fragment  onCreate: ");
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -98,7 +98,6 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("调试", "Fragment  onCreateView: ");
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -107,7 +106,6 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onStop() {
-        Log.d("调试", "Fragment onStop: ");
         super.onStop();
     }
 

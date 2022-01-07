@@ -2,12 +2,15 @@ package com.crystallightghot.frscommunityclient.view.activity;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 import android.view.KeyEvent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
 import com.xuexiang.xui.XUI;
 
@@ -27,13 +30,28 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        // 剩下的只有空的activity
-        if (fragmentManager.getBackStackEntryCount() == 1) {
-            finish();
-        } else {
-            fragmentManager.popBackStack();
+
+        Log.d("onBackPressed", "========================================");
+        Log.d("onBackPressed", "栈一共数量" + fragmentManager.getBackStackEntryCount());
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+            Log.d("onBackPressed", "BackStackEntryCount" + i +" "+ fragmentManager.getBackStackEntryAt(i).getName());
         }
-        super.onBackPressed();
+        fragmentManager.popBackStack();
+        int stackEntryCount = fragmentManager.getBackStackEntryCount();
+        // 如果返回栈里还有Fragment 就显示出来
+        if ( stackEntryCount> 0 ) {
+            FragmentManager.BackStackEntry entryAt = fragmentManager.getBackStackEntryAt(stackEntryCount - 1);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            Log.d("onBackPressed", "entryAt instanceof Fragment" + (entryAt instanceof Fragment));
+            if (entryAt instanceof Fragment){
+                transaction.show((Fragment)entryAt);
+            }
+            transaction .commit();
+            Log.d("onBackPressed", " ");
+            Log.d("onBackPressed", "========================================");
+        }else { // 如果返回栈里没有Fragment 就直接销毁activity
+            finish();
+        }
     }
 
 }

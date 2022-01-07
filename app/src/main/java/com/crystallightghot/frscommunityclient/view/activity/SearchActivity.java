@@ -11,6 +11,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.SearchFragment;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class SearchActivity extends BaseActivity {
 
 
 
-   private List<Fragment> fragments = new LinkedList<>();
+   private List<Fragment> fragments =  new ArrayList<>();
     Unbinder bind;
 
     final int CONTAINERFRAGMENTAID = R.id.fragment_container ;

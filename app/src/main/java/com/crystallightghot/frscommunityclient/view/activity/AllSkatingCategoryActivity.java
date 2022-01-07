@@ -16,7 +16,6 @@ public class AllSkatingCategoryActivity extends BaseActivity {
 
     @BindView(R.id.all_categories_ftl_my)
     FlowTagLayout allCategoriesFtlMy;
-
     @BindView(R.id.all_categories_ftl_more)
     FlowTagLayout allCategoriesFtlMore;
     @BindView(R.id.titlebar)

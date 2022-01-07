@@ -1,6 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
-import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,7 +24,7 @@ public class ActivityUtile {
     /**
      * 清楚原来fragment里现有的fragment
      */
-    public  void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
+    public void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
 
         if (null == fragmentsNeededHidden) {
             return;
@@ -53,16 +52,23 @@ public class ActivityUtile {
     }
 
 
-    /**
-     * 显示fragment
-     *
-     * @param
-     */
-
     public static void showFragment(Fragment showedFragment, AppCompatActivity activity, List<Fragment> fragmentsNeededHidden, int viewId) {
+        showFragment(showedFragment, activity, fragmentsNeededHidden, viewId, false);
+    }
+
+    /**
+     * 添加fragment
+     *
+     * @param showedFragment        要添加的fragment
+     * @param activity              使用此方法的activity
+     * @param fragmentsNeededHidden 为null 时表示不需要隐藏
+     * @param viewId                把fragment添加到的View的id
+     * @param isAddedToBackStack    是否将显示的fragment添加到返回栈
+     */
+    public static void showFragment(Fragment showedFragment, AppCompatActivity activity, List<Fragment> fragmentsNeededHidden, int viewId, boolean isAddedToBackStack) {
 
         // 隐藏所有fragment
-        if (null != fragmentsNeededHidden || fragmentsNeededHidden.size() == 0) {
+        if (null != fragmentsNeededHidden || fragmentsNeededHidden.size() != 0) {
             setFragmentsHidden(activity, fragmentsNeededHidden);
         }
 
@@ -71,22 +77,16 @@ public class ActivityUtile {
         // 已经添加fragment 显示
         if (showedFragment.isAdded()) {
             transaction.show(showedFragment);
-        } else { // 新加入的fragment 添加到回退栈
-            transaction.add(viewId, showedFragment,showedFragment.getClass().getSimpleName());
-            // 加入到fragments
+        } else {
+            // 添加fragment
+            transaction.add(viewId, showedFragment, showedFragment.getClass().getSimpleName());
             fragmentsNeededHidden.add(showedFragment);
-            transaction.addToBackStack(null);
+            // 新加入的fragment 添加到回退栈
+            if (isAddedToBackStack) {
+                transaction.addToBackStack(showedFragment.getClass().getSimpleName());
+            }
         }
         transaction.commit();
-        List<Fragment> fragments = fragmentManager.getFragments();
-
-        Log.d("栈测试", "============================ " );
-        Log.d("栈测试", "fragment的数量: " + fragments.size());
-        for (int i = 0; i < fragments.size(); i++) {
-            Log.d("栈测试", "栈的内容1 : " + fragments.get(i).toString());
-        }
-        Log.d("栈测试", "============================ " );
-
     }
 
     /**
