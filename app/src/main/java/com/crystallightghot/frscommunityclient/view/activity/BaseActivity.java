@@ -14,7 +14,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
 import com.xuexiang.xui.XUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseActivity extends AppCompatActivity {
+
+    // 加入到返回栈的fragment
+   private final List <Fragment> fragmentsAddedInStack = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +35,36 @@ public class BaseActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
+        FragmentManager fragmentManager = this.getSupportFragmentManager();
+        // 测试代码段
         Log.d("onBackPressed", "========================================");
-        Log.d("onBackPressed", "栈一共数量" + fragmentManager.getBackStackEntryCount());
+        Log.d("onBackPressed", "栈里fragment一共有  " + fragmentManager.getBackStackEntryCount());
         for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
             Log.d("onBackPressed", "BackStackEntryCount" + i +" "+ fragmentManager.getBackStackEntryAt(i).getName());
         }
-        fragmentManager.popBackStack();
+
         int stackEntryCount = fragmentManager.getBackStackEntryCount();
+        Log.d("onBackPressed", "========================================");
+
+        fragmentManager.popBackStack();
+        if (fragmentsAddedInStack.size() > 0){
+            fragmentsAddedInStack.remove(fragmentsAddedInStack.size()-1);
+        }
+
         // 如果返回栈里还有Fragment 就显示出来
         if ( stackEntryCount> 0 ) {
-            FragmentManager.BackStackEntry entryAt = fragmentManager.getBackStackEntryAt(stackEntryCount - 1);
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            Log.d("onBackPressed", "entryAt instanceof Fragment" + (entryAt instanceof Fragment));
-            if (entryAt instanceof Fragment){
-                transaction.show((Fragment)entryAt);
-            }
+            transaction.show(fragmentsAddedInStack.get(stackEntryCount-1));
             transaction .commit();
-            Log.d("onBackPressed", " ");
-            Log.d("onBackPressed", "========================================");
         }else { // 如果返回栈里没有Fragment 就直接销毁activity
             finish();
         }
     }
+
+    public List<Fragment> getFragmentsAddedInStack() {
+        return fragmentsAddedInStack;
+    }
+
 
 }

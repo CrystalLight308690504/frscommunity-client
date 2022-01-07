@@ -21,13 +21,12 @@ public class SearchActivity extends BaseActivity {
 
    private List<Fragment> fragments =  new ArrayList<>();
     Unbinder bind;
-
+    SearchFragment defaultFragment;
     final int CONTAINERFRAGMENTAID = R.id.fragment_container ;
+
     private void init() {
-
+      defaultFragment =   SearchFragment.newInstance("search");
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ActivityUtile.showFragment(SearchFragment.newInstance("search"), this,fragments,CONTAINERFRAGMENTAID );
+        ActivityUtile.showFragment(defaultFragment, this,fragments,CONTAINERFRAGMENTAID,false);
     }
 
     @Override

@@ -94,13 +94,13 @@ public class HomeActivity extends BaseActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments, FRAGMENTCONTAINERID);
+                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments, FRAGMENTCONTAINERID,false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this,fragments, FRAGMENTCONTAINERID);
+                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this,fragments, FRAGMENTCONTAINERID,false);
                 break;
             case R.id.ibtnFounded:
                 allBottomIconBeenDefaultState();
@@ -204,7 +204,7 @@ public class HomeActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // 添加fragment 到页面
-        ActivityUtile.showFragment(fragmentLater,this,fragments, FRAGMENTCONTAINERID);
+        ActivityUtile.showFragment(fragmentLater,this,fragments, FRAGMENTCONTAINERID,false);
     }
 
     @Override
