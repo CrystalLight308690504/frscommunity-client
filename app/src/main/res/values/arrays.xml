@@ -13,6 +13,13 @@
         <item>速降轮滑</item>
         <item>极限轮滑</item>
         <item>日常刷街</item>
-
     </string-array>
+    <!--标签-->
+    <string-array name="searchResultType">
+        <item>全部</item>
+        <item>博客</item>
+        <item>求助</item>
+        <item>用户</item>
+    </string-array>
+
 </resources>

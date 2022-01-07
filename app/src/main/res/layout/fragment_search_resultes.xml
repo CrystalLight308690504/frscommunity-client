@@ -5,7 +5,7 @@
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:padding="@dimen/margin_normal"
-                                                   tools:context=".view.fragment.ResultSearchedFragment">
+                                                   tools:context=".view.fragment.SearchResultsFragment">
 
     <ImageButton
             android:id="@+id/top_bar_back"
@@ -35,15 +35,18 @@
             app:layout_constraintBaseline_toBaselineOf="@id/input_box"
             android:textColor="@color/default_displayed_font_gray_color"
     />
-    <TableLayout
-            android:id="@+id/tl_types"
-            android:layout_width="280dp" android:layout_height="30dp"
+    <com.google.android.material.tabs.TabLayout
+            android:id="@+id/searchResultType"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            app:tabMode="scrollable"
+            app:tabIndicatorFullWidth="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_box"
             android:layout_marginTop="@dimen/margin_normal"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="时间"
-              app:layout_constraintTop_toTopOf="@id/tl_types"
+              app:layout_constraintTop_toTopOf="@id/searchResultType"
               app:layout_constraintRight_toLeftOf="@id/ib"
     />
 
@@ -53,13 +56,13 @@
             android:src="@drawable/icon_list_opened"
             android:scaleType="fitCenter"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tl_types"
+            app:layout_constraintTop_toTopOf="@id/searchResultType"
     />
 
     <androidx.viewpager.widget.ViewPager
-            android:id="@+id/all_results"
+            android:id="@+id/viewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tl_types"
+            app:layout_constraintTop_toBottomOf="@id/searchResultType"
             android:layout_marginTop="@dimen/margin_normal"/>
 
 

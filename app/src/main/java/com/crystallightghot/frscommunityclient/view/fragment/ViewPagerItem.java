@@ -32,20 +32,20 @@ import java.util.List;
  * @Date 2022/1/2 19:00
  * @Created by CrystalLightGhost
  */
-public class ViewItemOfHomeViewPagerFragment extends Fragment {
+public class ViewPagerItem extends Fragment {
 
     @BindView(R.id.rv_lists)
     RecyclerView rvLists;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    public ViewItemOfHomeViewPagerFragment() {
+    public ViewPagerItem() {
     }
 
 
     List<HashMap<Object, Object>> dataAll;
 
-    public ViewItemOfHomeViewPagerFragment(String label, List<HashMap<Object, Object>> dataAll) {
+    public ViewPagerItem(String label, List<HashMap<Object, Object>> dataAll) {
         this.dataAll = dataAll;
         Bundle args = new Bundle();
         args.putString("label", label);
@@ -64,17 +64,7 @@ public class ViewItemOfHomeViewPagerFragment extends Fragment {
     private void init() {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.xui_config_color_main_theme);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                },2000);
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false),2000));
 
         rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
         if (null == dataAll) {

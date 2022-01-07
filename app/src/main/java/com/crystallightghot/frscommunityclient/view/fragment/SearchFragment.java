@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
+import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
 
@@ -25,10 +26,8 @@ import java.util.List;
  */
 public class SearchFragment extends Fragment {
     static SearchFragment fragment;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -44,9 +43,8 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.hot_searches)
     QMUIFloatLayout hotSearches;
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
-    private String mParam2;
     List<Fragment> fragments;
 
     public SearchFragment() {
@@ -64,24 +62,10 @@ public class SearchFragment extends Fragment {
         return fragment;
     }
 
-
     private void init() {
         activity = (SearchActivity) getActivity();
-        fragments = activity.getAllFragmentAdded();
 
-        setSearchHistories();
-        topBarBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.onBackPressed();
-            }
-        });
-    }
-
-    public void setSearchHistories() {
-        TextView textView = new TextView(activity);
-        textView.setText("轮滑");
-        hotSearches.addView(textView);
+        topBarBack.setOnClickListener( view -> activity.onBackPressed());
     }
 
     @Override
@@ -112,7 +96,7 @@ public class SearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-//                ActivityUtile.showFragment(ResultSearchedFragment.newInstance("s"), activity, fragments, FRAGMENTCONTERID);
+                ActivityUtile.showFragment(SearchResultsFragment.newInstance("SearchResultsFragment"), activity);
                 break;
         }
     }

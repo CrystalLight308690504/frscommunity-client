@@ -11,11 +11,10 @@ public class SearchActivity extends BaseActivity {
 
 
     Unbinder bind;
-    SearchFragment defaultFragment;
 
     private void init() {
         setFragmentContainerId(R.id.fragment_container);
-        defaultFragment = SearchFragment.newInstance("search");
+        setDefaultFragment( SearchFragment.newInstance("search"));
     }
 
     @Override
@@ -29,7 +28,7 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ActivityUtile.showFragment(defaultFragment, this, false);
+        ActivityUtile.showFragment(getDefaultFragment(), this, false);
     }
 
     @Override
@@ -37,5 +36,4 @@ public class SearchActivity extends BaseActivity {
         super.onDestroy();
         bind.unbind();
     }
-
 }

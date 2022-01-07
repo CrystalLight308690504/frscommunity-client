@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.type_container_pager)
     ViewPager typeContentContainer;
     @BindView(R.id.tabs)
-    TabLayout tabs;
+    TabLayout tl_types;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
 
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     static HomeFragment homeFragment;
 
-    private List<ViewItemOfHomeViewPagerFragment> pagerFragments = new ArrayList<>();
+    private List<ViewPagerItem> viewPagerItem = new ArrayList<>();
 
     String[] tabTitles;
 
@@ -75,26 +75,21 @@ public class HomeFragment extends Fragment {
     private void init() {
         activity = (AppCompatActivity) getActivity();
         tabTitles = activity.getResources().getStringArray(R.array.tags_values);
-
-
     }
 
     /**
      * @param views
      */
     private void setViewPages(List<View> views) {
-        if (null != pagerFragments) {
-            pagerFragments.clear();
-            tabs.removeAllTabs();
-        }
 
+        // 添加测试数据
         int i = 0;
         while (i < tabTitles.length) {
-            pagerFragments.add(new ViewItemOfHomeViewPagerFragment(tabTitles[i], null));
+            viewPagerItem.add(new ViewPagerItem(tabTitles[i], null));
             i++;
         }
-        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
-        tabs.setupWithViewPager(typeContentContainer);
+        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, viewPagerItem, tabTitles));
+        tl_types.setupWithViewPager(typeContentContainer);
     }
 
     @OnClick({R.id.blog_more_list,R.id.search_input_box})

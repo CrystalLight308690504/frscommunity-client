@@ -1,11 +1,12 @@
 package com.crystallightghot.frscommunityclient.view.adapter;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.crystallightghot.frscommunityclient.view.fragment.ViewItemOfHomeViewPagerFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.ViewPagerItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,9 +24,9 @@ import java.util.List;
  */
 public class HomeViewPagerAdapter extends FragmentPagerAdapter {
 
-    List<ViewItemOfHomeViewPagerFragment> fragments;
+    List<ViewPagerItem> fragments;
     String[] titles;
-    public HomeViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior, List<ViewItemOfHomeViewPagerFragment> fragments, String[] titles) {
+    public HomeViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior, List<ViewPagerItem> fragments, String[] titles) {
         super(fm, behavior);
         this.titles = titles;
         this.fragments = fragments;
@@ -46,6 +47,8 @@ public class HomeViewPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+        if (position >= titles.length)
+            return "超过";
         return  titles[position];
     }
 }

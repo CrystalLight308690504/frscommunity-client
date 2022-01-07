@@ -51,7 +51,6 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.home_iv_add)
     QMUIRadiusImageView2 homeIvAdd;
 
-    HomeFragment fragmentLater;
     Unbinder bind;
     String TAG = "调试";
     HomeViewPagerItemScrollChangedReceiver receiver;
@@ -83,12 +82,11 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
-
         setFragmentContainerId(R.id.homeFragment);
 
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
-        fragmentLater =  HomeFragment.newInstant("homeFragment");
+        setDefaultFragment(HomeFragment.newInstant("homeFragment"));
 
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
@@ -190,7 +188,7 @@ public class HomeActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // 添加fragment 到页面
-        ActivityUtile.showFragment(fragmentLater,this,false);
+        ActivityUtile.showFragment(getDefaultFragment(),this,false);
     }
 
     @Override

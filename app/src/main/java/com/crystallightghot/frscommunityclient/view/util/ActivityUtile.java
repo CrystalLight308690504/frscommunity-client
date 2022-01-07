@@ -24,7 +24,7 @@ public class ActivityUtile {
     /**
      * 清楚原来fragment里现有的fragment
      */
-    public void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
+    public static void removeAllFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
 
         if (null == fragmentsNeededHidden) {
             return;
@@ -51,7 +51,7 @@ public class ActivityUtile {
         transaction.commitAllowingStateLoss();
     }
 
-    public static void showFragment(Fragment showedFragment, BaseActivity activity, List<Fragment> fragmentsNeededHidden) {
+    public static void showFragment(Fragment showedFragment, BaseActivity activity) {
         showFragment(showedFragment, activity,  true);
     }
 
