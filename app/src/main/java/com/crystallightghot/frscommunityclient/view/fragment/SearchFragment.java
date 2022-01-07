@@ -1,7 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class SearchFragment extends Fragment {
 
     private void init() {
         activity = (SearchActivity) getActivity();
-        fragments = activity.getFragments();
+        fragments = activity.getAllFragmentAdded();
 
         setSearchHistories();
         topBarBack.setOnClickListener(new View.OnClickListener() {

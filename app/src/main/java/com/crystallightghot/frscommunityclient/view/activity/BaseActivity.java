@@ -3,9 +3,6 @@ package com.crystallightghot.frscommunityclient.view.activity;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-import android.view.KeyEvent;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -20,8 +17,14 @@ import java.util.List;
 public class BaseActivity extends AppCompatActivity {
 
     // 加入到返回栈的fragment
-   private final List <Fragment> fragmentsAddedInStack = new ArrayList<>();
+   private  List <Fragment> fragmentsAddedInStack = new ArrayList<>();
 
+    // 添加到activity的fragment
+    private  List<Fragment> allFragmentAdded =  new ArrayList<>();
+
+
+    // 用来替换fragment的布局的ID
+    private int fragmentContainerId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,5 +69,16 @@ public class BaseActivity extends AppCompatActivity {
         return fragmentsAddedInStack;
     }
 
+    public   List<Fragment> getAllFragmentAdded() {
+        return allFragmentAdded;
+    }
+
+    public int getFragmentContainerId() {
+        return fragmentContainerId;
+    }
+
+    public void setFragmentContainerId(int fragmentContainerId) {
+        this.fragmentContainerId = fragmentContainerId;
+    }
 
 }

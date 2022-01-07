@@ -51,8 +51,8 @@ public class ActivityUtile {
         transaction.commitAllowingStateLoss();
     }
 
-    public static void showFragment(Fragment showedFragment, BaseActivity activity, List<Fragment> fragmentsNeededHidden, int viewId) {
-        showFragment(showedFragment, activity, fragmentsNeededHidden, viewId, true);
+    public static void showFragment(Fragment showedFragment, BaseActivity activity, List<Fragment> fragmentsNeededHidden) {
+        showFragment(showedFragment, activity,  true);
     }
 
     /**
@@ -60,13 +60,14 @@ public class ActivityUtile {
      *
      * @param showedFragment        要添加的fragment
      * @param activity              使用此方法的activity
-     * @param fragmentsNeededHidden 为null 时表示不需要隐藏fragment
-     * @param viewId                把fragment添加到的View的id
      * @param isAddedToBackStack    是否将显示的fragment添加到返回栈
      *                              一般只把activity默认的加载的fragment(也就是第一个fragment)设为false 不加入退回栈中
      */
-    public static void showFragment(Fragment showedFragment, BaseActivity activity, List<Fragment> fragmentsNeededHidden, int viewId, boolean isAddedToBackStack) {
-
+    public static void showFragment(Fragment showedFragment, BaseActivity activity, boolean isAddedToBackStack) {
+        //获取隐藏fragment
+        List<Fragment> fragmentsNeededHidden = activity.getAllFragmentAdded();
+        // 替换fragment的控件的ID
+        int viewId = activity.getFragmentContainerId();
         // 隐藏所有fragment
         if (null != fragmentsNeededHidden && fragmentsNeededHidden.size() != 0) {
             setFragmentsHidden(activity, fragmentsNeededHidden);

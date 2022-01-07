@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,10 +19,6 @@ import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author crystallight
@@ -56,23 +51,10 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.home_iv_add)
     QMUIRadiusImageView2 homeIvAdd;
 
-    List<Fragment> fragments = new ArrayList<>();
     HomeFragment fragmentLater;
     Unbinder bind;
     String TAG = "调试";
     HomeViewPagerItemScrollChangedReceiver receiver;
-
-
-
-    final  int FRAGMENTCONTAINERID = R.id.homeFragment;
-
-
-    public List<Fragment> getFragments() {
-        return fragments;
-    }
-    public int getFRAGMENTCONTAINERID() {
-        return FRAGMENTCONTAINERID;
-    }
 
     public void allBottomIconBeenDefaultState() {
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_no_clicked));
@@ -87,6 +69,35 @@ public class HomeActivity extends BaseActivity {
         setItemTextColorNoClicked(tvSelf);
     }
 
+    /**
+     * 显示添加图标
+     */
+    public void addIconIsShowed(boolean isShowed) {
+        if (isShowed) {
+            homeIvAdd.setVisibility(View.VISIBLE);
+            bottomItem.setVisibility(View.VISIBLE);
+        } else {
+            homeIvAdd.setVisibility(View.GONE);
+            bottomItem.setVisibility(View.GONE);
+        }
+    }
+
+    private void init() {
+
+        setFragmentContainerId(R.id.homeFragment);
+
+        ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
+        setItemTextColorClicked(tvHome);
+        fragmentLater =  HomeFragment.newInstant("homeFragment");
+
+        // 注册广播
+        IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
+        receiver = new HomeViewPagerItemScrollChangedReceiver(this);
+        registerReceiver(receiver, intentFilter);
+
+    }
+
+
     @OnClick({R.id.ibtnHome, R.id.ibtnBlog, R.id.ibtnFounded, R.id.ibtnAnswer, R.id.ibtnSelf})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -94,13 +105,13 @@ public class HomeActivity extends BaseActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,fragments, FRAGMENTCONTAINERID,false);
+                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this,fragments, FRAGMENTCONTAINERID,false);
+                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnFounded:
                 allBottomIconBeenDefaultState();
@@ -158,31 +169,6 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-    private void init() {
-        ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
-        setItemTextColorClicked(tvHome);
-        fragmentLater =  HomeFragment.newInstant("homeFragment");
-
-        // 注册广播
-        IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
-        receiver = new HomeViewPagerItemScrollChangedReceiver(this);
-        registerReceiver(receiver, intentFilter);
-
-    }
-
-    /**
-     * 显示添加图标
-     */
-    public void addIconIsShowed(boolean isShowed) {
-        if (isShowed) {
-            homeIvAdd.setVisibility(View.VISIBLE);
-            bottomItem.setVisibility(View.VISIBLE);
-        } else {
-            homeIvAdd.setVisibility(View.GONE);
-            bottomItem.setVisibility(View.GONE);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -204,7 +190,7 @@ public class HomeActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // 添加fragment 到页面
-        ActivityUtile.showFragment(fragmentLater,this,fragments, FRAGMENTCONTAINERID,false);
+        ActivityUtile.showFragment(fragmentLater,this,false);
     }
 
     @Override
@@ -217,7 +203,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ActivityUtile.setFragmentsHidden(this,fragments);
         Log.d(TAG, "onStop: ");
     }
 

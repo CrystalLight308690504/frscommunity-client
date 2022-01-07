@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -106,7 +105,7 @@ public class BlogFragment extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, inflate);
         init();
-        ActivityUtile.showFragment(BlogFragment.newInstance("blog"),activity,activity.getFragments(),activity.getFRAGMENTCONTAINERID());
+        ActivityUtile.showFragment(BlogFragment.newInstance("blog"),activity,false);
         return inflate;
     }
 
