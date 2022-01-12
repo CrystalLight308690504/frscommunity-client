@@ -13,8 +13,6 @@ public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
     public HomeViewPagerItemScrollChangedReceiver() {
     }
 
-    ;
-
     public HomeViewPagerItemScrollChangedReceiver( HomeActivity activity) {
         this.activity = activity;
     }

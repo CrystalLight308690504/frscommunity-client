@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
+        android:background="@color/color_white"
         android:layout_height="match_parent"
         tools:context=".view.activity.AccessActivity">
 
@@ -11,6 +12,6 @@
                                                   android:layout_height="wrap_content"
                                                   app:layout_constraintTop_toTopOf="parent"
                                                   app:layout_constraintLeft_toLeftOf="parent"
-                                                  android:src="@drawable/icon"/>
+                                                  android:src="@drawable/access"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

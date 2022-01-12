@@ -26,7 +26,6 @@ public class BlogFragment extends Fragment {
 
     String[] tabTitles ;
 
-
     private static final String ARG_PARAM1 = "param1";
     Unbinder bind;
     @BindView(R.id.blog_tabs)
@@ -67,9 +66,8 @@ public class BlogFragment extends Fragment {
         }
         setViewPages(null);
     }
-    /**
-     * @param views
-     */
+
+
     private void setViewPages(List<View> views) {
 
         blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

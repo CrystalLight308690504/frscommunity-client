@@ -1,10 +1,8 @@
 package com.crystallightghot.frscommunityclient.view.activity;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
 
 public class AccessActivity extends BaseActivity {
 
@@ -20,6 +18,6 @@ public class AccessActivity extends BaseActivity {
         super.onStart();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-
     }
+
 }

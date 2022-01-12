@@ -18,7 +18,7 @@
     <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
             android:id="@+id/home_iv_add"
             android:layout_width="50dp" android:layout_height="50dp"
-            android:src="@drawable/home_add_icon"
+            android:src="@drawable/ic_add"
             app:qmui_corner_radius="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -133,7 +133,7 @@
                     android:id="@+id/ibtnSelf"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/home_self_no_clicked"
+                    android:background="@drawable/ic_home_self_no_clicked"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

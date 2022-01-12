@@ -21,7 +21,7 @@
             android:singleLine="true"
             android:lines="1"
             android:maxLength="60"
-            android:background="@drawable/backgroud_input_radiou"
+            android:background="@drawable/bkd_round_radiou_solid_while_stroke_blue"
             app:layout_constraintLeft_toRightOf="@id/top_bar_back"
             app:layout_constraintTop_toTopOf="parent"
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_box"
-            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_max"
     />
     <com.qmuiteam.qmui.widget.QMUIFloatLayout
             android:id="@+id/hot_searches"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hot_searches"
-            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_max"
     />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
+import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpefiedFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
@@ -23,7 +24,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 /**
  * @author crystallight
  */
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends FragmentNeededActivity {
 
 
     @BindView(R.id.ibtnHome)
@@ -60,7 +61,7 @@ public class HomeActivity extends BaseActivity {
         ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_no_clicked));
         ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_no_clicked));
         ibtnAnswer.setBackground(getResourceDrawable(R.drawable.home_answer_no_clicked));
-        ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_no_clicked));
+        ibtnSelf.setBackground(getResourceDrawable(R.drawable.ic_home_self_no_clicked));
         setItemTextColorNoClicked(tvHome);
         setItemTextColorNoClicked(tvAnswer);
         setItemTextColorNoClicked(tvBlog);
@@ -82,11 +83,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void init() {
-        setFragmentContainerId(R.id.homeFragment);
 
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
-        setDefaultFragment(HomeFragment.newInstant("homeFragment"));
 
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
@@ -103,7 +102,7 @@ public class HomeActivity extends BaseActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.showFragment(HomeFragment.newInstant("TAG:" + System.currentTimeMillis()),this,false);
+                ActivityUtile.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()),this,false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
@@ -177,6 +176,8 @@ public class HomeActivity extends BaseActivity {
         init();
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -187,8 +188,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // 添加fragment 到页面
-        ActivityUtile.showFragment(getDefaultFragment(),this,false);
     }
 
     @Override
@@ -218,6 +217,16 @@ public class HomeActivity extends BaseActivity {
             bind.unbind();
         }
         unregisterReceiver(receiver);
+    }
+
+    @Override
+    void setContainerId() {
+        setFragmentContainerId(R.id.homeFragment);
+    }
+
+    @Override
+    void setDefaultFragment() {
+        setDefaultFragment(ArticleContentSpefiedFragment.newInstance("homeFragment"));
     }
 }
 

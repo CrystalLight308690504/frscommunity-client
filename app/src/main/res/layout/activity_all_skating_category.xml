@@ -28,7 +28,7 @@
            >
         <ImageView android:layout_width="20dp" android:layout_height="20dp"
                    android:layout_gravity="bottom"
-                   android:src="@drawable/all_category"
+                   android:src="@drawable/icon_all_category"
 
         />
         <TextView android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             app:layout_constraintLeft_toLeftOf="parent">
         <ImageView android:layout_width="20dp" android:layout_height="20dp"
                    android:layout_gravity="bottom"
-                   android:src="@drawable/all_category_more_icon"/>
+                   android:src="@drawable/icon_all_category_more"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_marginLeft="@dimen/margin_small"
                   android:layout_height="32dp"

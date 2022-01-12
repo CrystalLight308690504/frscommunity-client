@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstant(String str) {
+    public static HomeFragment newInstance(String str) {
         if (null == homeFragment) {
             Bundle bundle = new Bundle();
             homeFragment = new HomeFragment();

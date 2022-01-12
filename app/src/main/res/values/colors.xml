@@ -4,8 +4,9 @@
     <color name="topBar_while">#FFFFFF</color>
 
     <!--  输入框样式  -->
-    <color name="input_box_background">#EDEDED</color>
-    <color name="input_box_background_gray1">#8a8a8a</color>
+    <color name="input_box_background">#FFFFFF</color>
+    <color name="input_box_background_text_gray1">#8a8a8a</color>
+    <color name="input_box_background_no_enable">#9E9E9E</color>
 
     <!--默认显示字体样式-->
 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="@dimen/margin_normal"
+        tools:context=".view.fragment.ArticleContentSpefiedFragment">
+
+    <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+            android:id="@+id/profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@mipmap/icon_application"
+            app:qmui_corner_radius="20dp"
+    />
+
+    <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:text="CrystalLightGhost"
+            android:textSize="12dp"
+            android:textColor="@color/default_displayed_font_gray_color"
+            app:layout_constraintLeft_toRightOf="@id/profile"
+            app:layout_constraintTop_toTopOf="@id/profile"/>
+    <TextView
+            android:id="@+id/articleDateCreated"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/userName"
+            app:layout_constraintTop_toBottomOf="@id/userName"
+            android:text="2020-10-5"
+            android:layout_marginTop="@dimen/margin_normal"
+    />
+    <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/profile"
+            app:layout_constraintBottom_toBottomOf="@id/profile"
+            android:text="关注"
+            android:textColor="@drawable/btn_text_color"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/btn_back_round"/>
+    <TextView
+            android:id="@+id/articleType"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/profile"
+            app:layout_constraintLeft_toLeftOf="@id/profile"
+            android:text="博文贴"
+            android:textSize="12dp"
+            android:layout_marginTop="@dimen/margin_small"/>
+    <TextView
+            android:id="@+id/articleTitle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/color_black"
+            android:text="标题" app:layout_constraintTop_toBottomOf="@+id/articleType"/>
+    <ImageButton android:layout_width="32dp" android:layout_height="32dp"
+                 app:layout_constraintRight_toRightOf="parent"
+                 app:layout_constraintTop_toTopOf="@id/articleTitle"
+                 app:layout_constraintBottom_toBottomOf="@id/articleTitle"
+                 android:background="@drawable/btn_collection"
+    />
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/articleTitle"
+            android:layout_marginTop="@dimen/margin_max"
+    >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/articleContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+            />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            >
+                <TextView
+                        android:id="@+id/report"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:text="举报"/>
+                <androidx.appcompat.widget.AppCompatButton android:layout_width="20dp"
+                                                           android:layout_height="20dp"
+                                                           android:background="@drawable/btn_applause"
+                                                           app:layout_constraintRight_toRightOf="parent"
+                                                           app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/articleComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            />
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

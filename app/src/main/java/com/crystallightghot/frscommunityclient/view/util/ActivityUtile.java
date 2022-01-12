@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.activity.FragmentNeededActivity;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class ActivityUtile {
         transaction.commitAllowingStateLoss();
     }
 
-    public static void showFragment(Fragment showedFragment, BaseActivity activity) {
+    public static void showFragment(Fragment showedFragment, FragmentNeededActivity activity) {
         showFragment(showedFragment, activity,  true);
     }
 
@@ -63,7 +63,7 @@ public class ActivityUtile {
      * @param isAddedToBackStack    是否将显示的fragment添加到返回栈
      *                              一般只把activity默认的加载的fragment(也就是第一个fragment)设为false 不加入退回栈中
      */
-    public static void showFragment(Fragment showedFragment, BaseActivity activity, boolean isAddedToBackStack) {
+    public static void showFragment(Fragment showedFragment, FragmentNeededActivity activity, boolean isAddedToBackStack) {
         //获取隐藏fragment
         List<Fragment> fragmentsNeededHidden = activity.getAllFragmentAdded();
         // 替换fragment的控件的ID

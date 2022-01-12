@@ -31,7 +31,6 @@ public class AllSkatingCategoryActivity extends BaseActivity {
 
     private void initView() {
         String[] strings = ResUtils.getStringArray(R.array.tags_values);
-
         initMultiFlowTagLayout(allCategoriesFtlMy, strings);
         initMultiFlowTagLayout(allCategoriesFtlMore, strings);
         titlebar.setLeftClickListener(view -> finish());

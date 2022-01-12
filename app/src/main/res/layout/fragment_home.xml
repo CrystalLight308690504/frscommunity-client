@@ -6,15 +6,31 @@
         android:padding="@dimen/margin_small"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <TextView
             android:id="@+id/search_input_box"
-            android:layout_width="350dp"
+            android:layout_width="150dp"
             android:layout_height="38dp"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginLeft="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textColor="@color/input_box_background_text_gray1"
+            android:paddingLeft="35dp"
+            android:text="轮滑"
+            android:ellipsize="end"
+            android:maxLength="10"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@drawable/backgroud_input_radiou"
+            android:background="@drawable/bkd_round_radiou_solid_while_stroke_blue"
+    />
+    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+               android:src="@drawable/search"
+               app:layout_constraintTop_toTopOf="@id/search_input_box"
+               app:layout_constraintBottom_toBottomOf="@id/search_input_box"
+               app:layout_constraintLeft_toLeftOf="@id/search_input_box"
+               android:layout_marginLeft="@dimen/margin_normal"
+
     />
     <ImageButton android:layout_width="32dp" android:layout_height="32dp"
                  app:layout_constraintRight_toRightOf="parent"
@@ -42,7 +58,7 @@
             android:id="@+id/blog_more_list"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            android:src="@drawable/more"
+            android:src="@drawable/icon_more"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/tabs"
             app:layout_constraintTop_toTopOf="@+id/tabs"/>

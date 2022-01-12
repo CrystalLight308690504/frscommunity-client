@@ -5,16 +5,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.SearchFragment;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends FragmentNeededActivity {
 
 
     Unbinder bind;
 
     private void init() {
-        setFragmentContainerId(R.id.fragment_container);
-        setDefaultFragment( SearchFragment.newInstance("search"));
     }
 
     @Override
@@ -28,7 +25,7 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ActivityUtile.showFragment(getDefaultFragment(), this, false);
+//        ActivityUtile.showFragment(getDefaultFragment(), this, false);
     }
 
     @Override
@@ -36,4 +33,15 @@ public class SearchActivity extends BaseActivity {
         super.onDestroy();
         bind.unbind();
     }
+
+    @Override
+    void setContainerId() {
+        setFragmentContainerId(R.id.fragment_container);
+    }
+
+    @Override
+    void setDefaultFragment() {
+        setDefaultFragment( SearchFragment.newInstance("search"));
+    }
+
 }

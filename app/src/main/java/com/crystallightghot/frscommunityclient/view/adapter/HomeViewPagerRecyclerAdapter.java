@@ -39,7 +39,7 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
     @NotNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_view_item_article_lists, parent, false);
+        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_item_article_lists, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
@@ -70,7 +70,7 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
             userProfile = itemView.findViewById(R.id.profile);
             userNameTV = itemView.findViewById(R.id.user_name);
             putDateTV = itemView.findViewById(R.id.put_date);
-            articleStyle = itemView.findViewById(R.id.article_type);
+            articleStyle = itemView.findViewById(R.id.articleType);
             articleTitleTV = itemView.findViewById(R.id.article_title);
             articleContentTV = itemView.findViewById(R.id.article_content);
             imageView1IV = itemView.findViewById(R.id.image1);

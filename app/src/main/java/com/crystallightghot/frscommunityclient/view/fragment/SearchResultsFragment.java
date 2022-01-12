@@ -12,15 +12,13 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.activity.FragmentNeededActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
-
-;
 
 
 public class SearchResultsFragment extends Fragment {
@@ -37,7 +35,7 @@ public class SearchResultsFragment extends Fragment {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-    BaseActivity activity;
+    FragmentNeededActivity activity;
 
     public SearchResultsFragment() {
         // Required empty public constructor
@@ -69,7 +67,7 @@ public class SearchResultsFragment extends Fragment {
     }
 
     private void init() {
-        activity = (BaseActivity) getActivity();
+        activity = (FragmentNeededActivity) getActivity();
         topBarBack.setOnClickListener(view -> activity.onBackPressed());
 
         // CS
