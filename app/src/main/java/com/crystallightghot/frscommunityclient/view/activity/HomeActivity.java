@@ -15,9 +15,9 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
-import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpefiedFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.SomethingFoundFragment;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
@@ -72,13 +72,14 @@ public class HomeActivity extends FragmentNeededActivity {
     /**
      * 显示添加图标
      */
-    public void addIconIsShowed(boolean isShowed) {
+    public void bottomNavigationAndAddIconState(boolean isShowed) {
         if (isShowed) {
-            homeIvAdd.setVisibility(View.VISIBLE);
-            bottomItem.setVisibility(View.VISIBLE);
+            bottomItemIsVisible(true);
+            addIconIsVisible(true);
         } else {
-            homeIvAdd.setVisibility(View.GONE);
-            bottomItem.setVisibility(View.GONE);
+            addIconIsVisible(false);
+            bottomItemIsVisible(false);
+
         }
     }
 
@@ -111,9 +112,12 @@ public class HomeActivity extends FragmentNeededActivity {
                 ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnFounded:
+                addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
+                
+                ActivityUtile.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnAnswer:
                 allBottomIconBeenDefaultState();
@@ -139,6 +143,18 @@ public class HomeActivity extends FragmentNeededActivity {
             bottomItem.setVisibility(View.VISIBLE);
         } else {
             bottomItem.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 添加按钮是否可见
+     */
+
+    public void addIconIsVisible(boolean isShowed) {
+        if (isShowed) {
+            homeIvAdd.setVisibility(View.VISIBLE);
+        } else {
+            homeIvAdd.setVisibility(View.GONE);
         }
     }
 
@@ -220,13 +236,8 @@ public class HomeActivity extends FragmentNeededActivity {
     }
 
     @Override
-    void setContainerId() {
-        setFragmentContainerId(R.id.homeFragment);
-    }
-
-    @Override
     void setDefaultFragment() {
-        setDefaultFragment(ArticleContentSpefiedFragment.newInstance("homeFragment"));
+        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
     }
 }
 

@@ -33,7 +33,7 @@
             android:text="搜索"
             android:textSize="15dp"
             app:layout_constraintBaseline_toBaselineOf="@id/input_box"
-            android:textColor="@color/default_displayed_font_gray_color"
+            android:textColor="@color/default_displayed_text_gray"
     />
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/searchResultType"

@@ -5,7 +5,9 @@
           package="com.crystallightghot.frscommunityclient">
 
     <dist:module dist:instant="true"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name = "android.permission.INTERNET" />
     <application
             android:allowBackup="true"
             android:icon="@mipmap/icon_application"
@@ -14,13 +16,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".view.activity.OnlyOneFragmentShowedActivity"
+                android:exported="true"/>
+        <activity
                 android:name=".view.activity.LoginAndRegisterActivity"
                 android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
                 android:name=".view.activity.SearchActivity"
@@ -42,6 +49,8 @@
         </activity>
         <activity
                 android:name=".view.activity.HomeActivity"
+                android:configChanges="screenSize"
+                android:screenOrientation="portrait"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

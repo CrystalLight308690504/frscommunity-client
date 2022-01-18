@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerRecyclerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.HomeRecyclerViewAdapter;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -27,63 +28,32 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-/*
- * @Description TODO
- * @Date 2022/1/2 19:00
- * @Created by CrystalLightGhost
- */
-public class ViewPagerItem extends Fragment {
+public class HomeViewPagerItem extends Fragment {
 
     @BindView(R.id.rv_lists)
     RecyclerView rvLists;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    public ViewPagerItem() {
+    public HomeViewPagerItem() {
     }
 
 
     List<HashMap<Object, Object>> dataAll;
 
-    public ViewPagerItem(String label, List<HashMap<Object, Object>> dataAll) {
+    public HomeViewPagerItem(String label, List<HashMap<Object, Object>> dataAll) {
         this.dataAll = dataAll;
         Bundle args = new Bundle();
         args.putString("label", label);
         setArguments(args);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_view_page_item, container, false);
-        ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
-
-    private void init() {
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.xui_config_color_main_theme);
-        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false),2000));
-
-        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (null == dataAll) {
-            dataAll = new LinkedList<>();
-        }
-
-        for (int i = 0; i < 20; i++) {
-            HashMap<Object, Object> data = new HashMap();
-            data.put("userName", "crystallightghost");
-            data.put("putDate", "2020-10-3");
-            data.put("articleStyle", "博客");
-            data.put("articleTitle", "轮滑");
-            data.put("articleContent", "轮滑的地方轮滑的地方轮滑的地方轮滑的地方轮滑的地方");
-            dataAll.add(data);
-        }
-        rvLists.setAdapter(new HomeViewPagerRecyclerAdapter(getActivity(), dataAll));
-        rvLists.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+    private void addRecycleViewScrolledListent() {
+        /**
+         * 多recycleView 滑动事件监听
+         */
+        rvLists.setOnScrollChangeListener(new OnScrollChangeListener() {
             int lastScrolledInstance = 0;
-
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int scrolledInstance) {
 
@@ -100,9 +70,44 @@ public class ViewPagerItem extends Fragment {
         });
     }
 
-
+    @Nullable
     @Override
-    public void onStart() {
-        super.onStart();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home_view_page_item, container, false);
+        ButterKnife.bind(this, view);
+        init();
+        return view;
     }
+
+    private void init() {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.xui_config_color_main_theme);
+        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false),2000));
+
+        addRecycleViewScrolledListent();
+        putDataToRV(dataAll);
+
+    }
+
+    /**
+     * 将数据加入到RecycleView中
+     */
+    public void putDataToRV(List dataAll) {
+        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if (null == dataAll) {
+            dataAll = new LinkedList<>();
+        }
+
+        for (int i = 0; i < 20; i++) {
+            HashMap<Object, Object> data = new HashMap();
+            data.put("userName", "crystallightghost");
+            data.put("putDate", "2020-10-3");
+            data.put("articleStyle", "博客");
+            data.put("articleTitle", "轮滑" + i);
+            data.put("articleContent", "轮滑的地方轮滑的地方轮滑的地方轮滑的地方轮滑的地方"+i);
+            dataAll.add(data);
+        }
+        rvLists.setAdapter(new HomeRecyclerViewAdapter(getActivity(), dataAll));
+    }
+
 }

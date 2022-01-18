@@ -21,17 +21,12 @@ import java.util.Map;
  * @Version: 1.0
  * description：
  */
-/*
- * @Description TODO
- * @Date 2022/1/5 10:20
- * @Created by CrystalLightGhost
- */
-public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewPagerRecyclerAdapter.MyViewHolder> {
+public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.MyViewHolder> {
 
     Activity activity;
     List<HashMap<Object,Object>>  datas;
 
-    public HomeViewPagerRecyclerAdapter(Activity activity, List<HashMap<Object,Object>>  datas) {
+    public HomeRecyclerViewAdapter(Activity activity, List<HashMap<Object,Object>>  datas) {
         this.activity = activity;
         this.datas = datas;
     }
@@ -64,9 +59,11 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
         TextView articleTitleTV;
         TextView articleContentTV;
         QMUIRadiusImageView2 imageView1IV;
+        View itemView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             userProfile = itemView.findViewById(R.id.profile);
             userNameTV = itemView.findViewById(R.id.user_name);
             putDateTV = itemView.findViewById(R.id.put_date);
@@ -74,6 +71,9 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
             articleTitleTV = itemView.findViewById(R.id.article_title);
             articleContentTV = itemView.findViewById(R.id.article_content);
             imageView1IV = itemView.findViewById(R.id.image1);
+
+            itemView.setOnClickListener(view -> {
+            });
         }
 
         public void setData(Map<Object,Object> data) {
@@ -86,8 +86,5 @@ public class HomeViewPagerRecyclerAdapter extends RecyclerView.Adapter<HomeViewP
             articleTitleTV.setText(data.get("articleTitle").toString());
             articleContentTV.setText(data.get("articleContent").toString());
         }
-
-
     }
-
 }

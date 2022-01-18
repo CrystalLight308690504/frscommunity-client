@@ -27,10 +27,10 @@ public class HomeViewPagerItemScrollChangedReceiver extends BroadcastReceiver {
         boolean isScrollUpward = (boolean) extras.get("isScrollUpward");
 
         if (isScrollUpward) {
-            activity.addIconIsShowed(false);
+            activity.bottomNavigationAndAddIconState(false);
             activity.bottomItemIsVisible(false);
         } else {
-            activity.addIconIsShowed(true);
+            activity.bottomNavigationAndAddIconState(true);
             activity.bottomItemIsVisible(true);
         }
     }

@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="@dimen/margin_normal"
-        tools:context=".view.fragment.ArticleContentSpefiedFragment">
+        tools:context=".view.fragment.ArticleContentSpecifiedFragment">
 
     <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
             android:id="@+id/profile"
@@ -24,7 +24,7 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:text="CrystalLightGhost"
             android:textSize="12dp"
-            android:textColor="@color/default_displayed_font_gray_color"
+            android:textColor="@color/default_displayed_text_gray"
             app:layout_constraintLeft_toRightOf="@id/profile"
             app:layout_constraintTop_toTopOf="@id/profile"/>
     <TextView

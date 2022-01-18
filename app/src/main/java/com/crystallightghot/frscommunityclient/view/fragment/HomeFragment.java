@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     static HomeFragment homeFragment;
 
-    private List<ViewPagerItem> viewPagerItem = new ArrayList<>();
+    private List<HomeViewPagerItem> homeViewPagerItems = new ArrayList<>();
 
     String[] tabTitles;
 
@@ -80,15 +80,20 @@ public class HomeFragment extends Fragment {
     /**
      * @param views
      */
-    private void setViewPages(List<View> views) {
+    private void setViewPageItems(List<View> views) {
 
-        // 添加测试数据
+        /**
+         *         测试数据
+          */
+        // 给每个ViewPager添加Item测试数据
         int i = 0;
         while (i < tabTitles.length) {
-            viewPagerItem.add(new ViewPagerItem(tabTitles[i], null));
+            homeViewPagerItems.add(new HomeViewPagerItem(tabTitles[i], null));
             i++;
         }
-        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, viewPagerItem, tabTitles));
+
+
+        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, homeViewPagerItems, tabTitles));
         tl_types.setupWithViewPager(typeContentContainer);
     }
 
@@ -114,7 +119,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bind = ButterKnife.bind(this, view);
         init();
-        setViewPages(null);
+        setViewPageItems(null);
         return view;
     }
 
@@ -124,6 +129,5 @@ public class HomeFragment extends Fragment {
         if (bind != null) {
             bind.unbind();
         }
-
     }
 }

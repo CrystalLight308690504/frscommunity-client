@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.view.activity;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.EditeHelpAcquiredFragment;
 
 public class LoginAndRegisterActivity extends FragmentNeededActivity {
 
@@ -16,13 +16,8 @@ public class LoginAndRegisterActivity extends FragmentNeededActivity {
     }
 
     @Override
-    void setContainerId() {
-        setFragmentContainerId(R.id.fragmentContainer);
-    }
-
-    @Override
     void setDefaultFragment() {
-        setDefaultFragment(LoginFragment.newInstance("LoginFragment"));
+        setDefaultFragment(EditeHelpAcquiredFragment.newInstance("LoginFragment"));
     }
 
     private void init() {

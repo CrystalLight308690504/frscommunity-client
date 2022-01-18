@@ -74,6 +74,9 @@ public class ActivityUtile {
         }
 
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
+
+        List<Fragment> fragments = fragmentManager.getFragments();
+
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         // 已经添加fragment 直接显示出来
         if (showedFragment.isAdded()) {

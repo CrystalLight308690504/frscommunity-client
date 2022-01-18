@@ -35,11 +35,6 @@ public class SearchActivity extends FragmentNeededActivity {
     }
 
     @Override
-    void setContainerId() {
-        setFragmentContainerId(R.id.fragment_container);
-    }
-
-    @Override
     void setDefaultFragment() {
         setDefaultFragment( SearchFragment.newInstance("search"));
     }

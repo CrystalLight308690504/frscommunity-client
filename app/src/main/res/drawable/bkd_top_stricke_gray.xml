@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/color_gray_8"/>
+    </item>
+    <item android:top="1dp">
+        <color android:color="@color/color_gray_7"/>
+    </item>
+    <item android:top="2dp">
+        <color android:color="@color/default_displayed_text_gray"/>
+    </item>
+    <item android:top="3dp">
+        <color android:color="@color/color_white" />
+    </item>
+</layer-list>
