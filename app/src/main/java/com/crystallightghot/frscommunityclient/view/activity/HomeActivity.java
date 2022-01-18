@@ -116,7 +116,6 @@ public class HomeActivity extends FragmentNeededActivity {
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                
                 ActivityUtile.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnAnswer:

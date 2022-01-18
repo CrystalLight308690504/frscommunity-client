@@ -62,6 +62,9 @@ public class DemoObjectFragment extends Fragment {
     public void startVideo() {
         videoView.start();
     }
+    public void releaseVideo() {
+        videoView.release();;
+    }
 
     @Override
     public void onPause() {

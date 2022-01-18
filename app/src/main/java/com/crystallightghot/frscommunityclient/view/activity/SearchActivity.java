@@ -25,7 +25,7 @@ public class SearchActivity extends FragmentNeededActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        ActivityUtile.showFragment(getDefaultFragment(), this, false);
+
     }
 
     @Override

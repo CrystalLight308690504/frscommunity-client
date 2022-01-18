@@ -1,6 +1,7 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.FragmentNeededActivity;
+import com.crystallightghot.frscommunityclient.view.messageEvent.VerifyCodeMessageEvent;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
 import com.google.android.material.textfield.TextInputEditText;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +53,7 @@ public class LoginFragment extends Fragment {
             Bundle args = new Bundle();
             loginFragment.setArguments(args);
         }
+
         return loginFragment;
     }
 
@@ -55,13 +64,23 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    public void init() {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
+
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @OnClick({R.id.phoneName, R.id.codVerified, R.id.sendVerifyCode, R.id.login, R.id.register})
@@ -69,13 +88,62 @@ public class LoginFragment extends Fragment {
         switch (view.getId()) {
 
             case R.id.sendVerifyCode:
+                setSendVerifyCodeState(false);
+
                 break;
             case R.id.login:
                 break;
             case R.id.register:
                 ActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (FragmentNeededActivity) getActivity());
-                Toast.makeText(getActivity(),"点击； 注册",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "点击； 注册", Toast.LENGTH_LONG).show();
                 break;
         }
+    }
+
+    private void setSendVerifyCodeState(boolean enable) {
+        sendVerifyCode.setEnabled(enable);
+        if (enable) {
+            sendVerifyCode.setText("发送验证码");
+        } else {
+            sendVerifyCode.setText("0");
+            ThreadPoolExecutor poolExecutor = ThreadPoolUtil.getThreadPoolExecutor();
+            Runnable runnable = new Runnable() {
+                int i = 60;
+                @Override
+                public void run() {
+
+                    try {
+                        while (i-- >0){
+                            Thread.sleep(1000);
+                            EventBus.getDefault().post(new VerifyCodeMessageEvent(i));
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            poolExecutor.execute(runnable);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(VerifyCodeMessageEvent message) {
+        int time = message.getTime();
+        Log.d("TAG", "onGetMessage: " + time );
+
+        // 修改按钮显示字体
+        sendVerifyCode.setText(time+"");
+        if (time == 0){
+            sendVerifyCode.setEnabled(true);
+            sendVerifyCode.setText("发送验证码");
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }
