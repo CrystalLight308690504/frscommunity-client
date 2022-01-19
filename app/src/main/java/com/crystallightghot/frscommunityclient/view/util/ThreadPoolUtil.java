@@ -18,4 +18,7 @@ public class ThreadPoolUtil {
     public static  ThreadPoolExecutor getThreadPoolExecutor(){
         return threadPoolExecutor;
     }
+    public static final void  executeThread(Runnable runnable){
+        threadPoolExecutor.execute(runnable);
+    }
 }

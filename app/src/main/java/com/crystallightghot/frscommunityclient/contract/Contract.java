@@ -1,8 +1,8 @@
 package com.crystallightghot.frscommunityclient.contract;
 
 /**
- * @author crystallightghost
- * @date 2022/1/2
+ * @Date 2022/1/19
+ * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */

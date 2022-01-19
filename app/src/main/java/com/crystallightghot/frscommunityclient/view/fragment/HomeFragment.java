@@ -19,7 +19,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.AllSkatingCategoryActivity;
-import com.crystallightghot.frscommunityclient.view.activity.SearchActivity;
+import com.crystallightghot.frscommunityclient.view.activity.SearchActivityAbstract;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
                 activity.startActivity(intent);
                 break;
                 case R.id.search_input_box:
-                intent = new Intent(activity, SearchActivity.class);
+                intent = new Intent(activity, SearchActivityAbstract.class);
                 activity.startActivity(intent);
                 break;
         }

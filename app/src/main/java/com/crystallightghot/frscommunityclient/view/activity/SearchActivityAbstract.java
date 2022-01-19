@@ -6,7 +6,7 @@ import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.SearchFragment;
 
-public class SearchActivity extends FragmentNeededActivity {
+public class SearchActivityAbstract extends AbstractFragmentNeededActivity {
 
 
     Unbinder bind;

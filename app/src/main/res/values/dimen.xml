@@ -4,15 +4,22 @@
     <dimen name="default_btn_back_size">28dp</dimen>
     <dimen name="default_btn_icon_size">32dp</dimen>
     <dimen name="icon_default">38dp</dimen>
+
     <dimen name="padding_small">5dp</dimen>
     <dimen name="padding_normal">10dp</dimen>
     <dimen name="padding_big">15dp</dimen>
+
     <dimen name="margin_small">5dp</dimen>
     <dimen name="margin_normal">10dp</dimen>
     <dimen name="margin_max">15dp</dimen>
     <dimen name="margin_max1">20dp</dimen>
     <dimen name="margin_max2">25dp</dimen>
+    <dimen name="margin_max3">30dp</dimen>
+    <dimen name="margin_max4">35dp</dimen>
+    <dimen name="margin_max5">40dp</dimen>
+
     <dimen name="ib_radius">10dp</dimen>
+
     <dimen name="user_login_text_size">16dp</dimen>
     <dimen name="user_login_et_padding">10dp</dimen>
     <dimen name="user_login_et_radius">20dp</dimen>
@@ -24,4 +31,7 @@
     <dimen name="application_navigation_bar_margin_size">5dp</dimen>
     <dimen name="application_navigation_bar_height">40dp</dimen>
     <dimen name="application_navigation_ibtn_bar_back__size">32dp</dimen>
+
+    <dimen name="registerPasswordLength">20</dimen>
+
 </resources>

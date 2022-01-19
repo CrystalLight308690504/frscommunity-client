@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.messageEvent;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,11 +10,12 @@ import lombok.Getter;
  * description：
  */
 @Getter
-public class VerifyCodeMessageEvent {
+@AllArgsConstructor
+public class TimeMessage {
     int time;
+    int code;
 
-    public VerifyCodeMessageEvent(int time) {
-        this.time = time;
+    public static TimeMessage getInstance(int time, int code) {
+        return new TimeMessage(time,code);
     }
-
 }

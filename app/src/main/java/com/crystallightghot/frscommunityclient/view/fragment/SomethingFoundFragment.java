@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
+import com.crystallightghot.frscommunityclient.view.activity.HomeActivityAbstract;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class SomethingFoundFragment extends Fragment {
     static SomethingFoundFragment fragment;
     private static final String ARG_PARAM1 = "param1";
 
-    HomeActivity activity;
+    HomeActivityAbstract activity;
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
 
@@ -62,7 +62,7 @@ public class SomethingFoundFragment extends Fragment {
     }
 
     private void init() {
-        activity = (HomeActivity) getActivity();
+        activity = (HomeActivityAbstract) getActivity();
         DemoCollectionAdapter demoCollectionAdapter = new DemoCollectionAdapter(this);
         viewPager.setAdapter(demoCollectionAdapter);
         if (fragments.size() > 0)

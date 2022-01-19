@@ -5,4 +5,5 @@
             <item name="android:textColor">@color/default_displayed_text_gray</item>
     </style>
 
+
 </resources>

@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.activity.LoginAndRegisterActivity">
+        tools:context=".view.activity.LoginAndRegisterActivityAbstract">
 
     <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:id="@+id/log"
@@ -19,9 +19,11 @@
     />
 
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneName"
-            android:layout_width="300dp"
+            android:id="@+id/phoneNumber"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/margin_max4"
+            android:layout_marginRight="@dimen/margin_max4"
             android:layout_marginTop="@dimen/margin_max"
             app:layout_constraintTop_toBottomOf="@id/log"
             android:inputType="number"
@@ -32,26 +34,19 @@
             android:background="@drawable/bkd_round_radiou_solid_while_stroke_blue"
     />
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/codVerified"
-            android:layout_width="150dp"
+            android:id="@+id/iePassword"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/margin_normal"
-            app:layout_constraintTop_toBottomOf="@id/phoneName"
-            android:inputType="number"
-            android:maxLength="6"
-            android:hint="请输入6位验证码"
+            android:layout_marginLeft="@dimen/margin_max4"
+            android:layout_marginRight="@dimen/margin_max4"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+            android:inputType="textPassword"
+            android:maxLength="18"
+            android:hint="请输入密码"
             android:background="@drawable/bkd_round_radiou_solid_while_stroke_blue"
-            app:layout_constraintStart_toStartOf="@+id/phoneName"/>
+            app:layout_constraintStart_toStartOf="@+id/phoneNumber"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/sendVerifyCode"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:padding="@dimen/margin_normal"
-            app:layout_constraintLeft_toRightOf="@id/codVerified"
-            android:background="@drawable/btn_round_state_blue_to_grey"
-            app:layout_constraintTop_toTopOf="@id/codVerified"
-            android:layout_marginLeft="@dimen/margin_max1"
-            android:text="发送验证码"/>
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login"
             android:layout_width="300dp" android:layout_height="wrap_content"
@@ -61,7 +56,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:background="@drawable/btn_round_state_blue_to_grey"
             android:text="登入"
-            app:layout_constraintTop_toBottomOf="@+id/codVerified"
+            app:layout_constraintTop_toBottomOf="@+id/iePassword"
     />
 
     <androidx.appcompat.widget.AppCompatButton

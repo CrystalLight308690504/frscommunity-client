@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 
-public class OnlyOneFragmentShowedActivity extends FragmentNeededActivity {
+public class OnlyOneAbstractFragmentShowedActivity extends AbstractFragmentNeededActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

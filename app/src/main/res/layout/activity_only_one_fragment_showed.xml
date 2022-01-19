@@ -3,6 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:padding="@dimen/margin_normal"
-        tools:context=".view.activity.SearchActivity"
+        tools:context=".view.activity.SearchActivityAbstract"
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent" android:layout_height="match_parent"/>

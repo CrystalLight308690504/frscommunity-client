@@ -4,9 +4,8 @@ import android.os.Bundle;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
-import org.greenrobot.eventbus.EventBus;
 
-public class LoginAndRegisterActivity extends FragmentNeededActivity {
+public class LoginAndRegisterActivityAbstract extends AbstractFragmentNeededActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,8 +21,6 @@ public class LoginAndRegisterActivity extends FragmentNeededActivity {
     }
 
     public void init() {
-
-
     }
 
 }
