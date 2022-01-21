@@ -1,16 +1,18 @@
 package com.crystallightghot.frscommunityclient.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.messageEvent.TimeMessage;
 import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
+import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import static com.crystallightghot.frscommunityclient.view.util.IntentUtil.IntentToSingleFragmentActivity;
 
 public class AccessActivity extends BaseActivity {
 
@@ -59,9 +61,10 @@ public class AccessActivity extends BaseActivity {
         tvTime.setText(time+"");
 
         if (time == 0){
-            Intent intent = new Intent(this, LoginAndRegisterActivity.class);
-            startActivity(intent);
+            IntentToSingleFragmentActivity(this,LoginFragment.newInstance("login"));
             finish();
         }
     }
+
+
 }

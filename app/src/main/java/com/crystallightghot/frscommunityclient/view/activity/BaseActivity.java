@@ -8,5 +8,5 @@ import androidx.appcompat.app.AppCompatActivity;
  * @Version: 1.0
  * description：
  */
-public class BaseActivity  extends AppCompatActivity {
+public abstract class BaseActivity  extends AppCompatActivity {
 }

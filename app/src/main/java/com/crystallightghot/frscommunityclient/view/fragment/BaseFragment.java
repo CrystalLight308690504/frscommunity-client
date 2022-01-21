@@ -34,4 +34,11 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
     public void hideLoadingDialog() {
         loadingDialog.dismiss();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        loadingDialog.dismiss();
+        loadingDialog = null;
+    }
 }

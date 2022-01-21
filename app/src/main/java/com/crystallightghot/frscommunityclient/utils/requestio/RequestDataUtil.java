@@ -14,7 +14,7 @@ import java.io.IOException;
  * @Version: 1.0
  * description：
  */
-public class RequestUtil {
+public class RequestDataUtil {
     public static void postRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");

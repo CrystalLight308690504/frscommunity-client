@@ -2,7 +2,6 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,13 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.presenter.RegisterPresenter;
+import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.utils.VerifyCodeUtil;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
-import com.crystallightghot.frscommunityclient.view.messageEvent.RegisterMessage;
-import com.crystallightghot.frscommunityclient.view.messageEvent.TimeMessage;
+import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
+import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -67,7 +66,6 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register_user, container, false);
         ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         init();
         return view;
     }
@@ -135,9 +133,6 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
         user.setPassword(password);
         presenter = new RegisterPresenter(this, user);
         presenter.loadData();
-
-        // 使验证码失效
-        verifyCode = null;
     }
 
     private void setSendVerifyCodeState(boolean enable) {
@@ -163,17 +158,28 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(RegisterMessage message) {
+        if (!message.isSuccess()){
+            XToastUtils.error(message.getMessage());
+        }else {
+            // 使验证码失效
+            verifyCode = null;
+            tvCodVerified.setText("");
+            XToastUtils.success(message.getMessage());
+            activity.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RegisterMessage message) {
-        Log.d("TAG", "RegisterUserFragment getMessage: " + message);
-        XToastUtils.success(message.getMessage());
-        activity.onBackPressed();
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_button_text_size">20dp</dimen>
-    <dimen name="default_btn_back_size">28dp</dimen>
+    <!--  topBar的返回按钮的大小-->
+    <dimen name="ic_btn_top_bar_back_size">28dp</dimen>
     <dimen name="default_btn_icon_size">32dp</dimen>
     <dimen name="icon_default">38dp</dimen>
 
@@ -27,6 +28,7 @@
     <dimen name="user_login_btn_margin_size">40dp</dimen>
     <dimen name="application_text_size">15dp</dimen>
     <dimen name="application_margin_size_public">5dp</dimen>
+
     <dimen name="application_navigation_bar_padding_size">5dp</dimen>
     <dimen name="application_navigation_bar_margin_size">5dp</dimen>
     <dimen name="application_navigation_bar_height">40dp</dimen>

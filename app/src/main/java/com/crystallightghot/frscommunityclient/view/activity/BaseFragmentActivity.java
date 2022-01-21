@@ -15,6 +15,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 在activity中需要使用到单个fragment进行页面跳转的
+ */
 @Getter
 public abstract class BaseFragmentActivity extends BaseActivity {
 
@@ -22,17 +25,14 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     private final List<Fragment> fragmentsAddedInStack = new ArrayList<>();
     // 添加到activity的fragment
     private final List<Fragment> allFragmentAdded = new ArrayList<>();
-    // 用来替换fragment的布局的ID 默认为R.id.fragmentContainer
-    @Setter
-    private int fragmentContainerId = R.id.fragmentContainer;
 
+
+    @Setter
+    // 用来替换fragment的布局的ID 默认为R.id.fragmentContainer
+    private int fragmentContainerId = R.id.fragmentContainer;
 
     // 默认在activity显示的fragment并且不加入到返回栈的fragment
     Fragment defaultFragment;
-
-    public BaseFragmentActivity() {
-        setDefaultFragment();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         List<Fragment> fragments = fragmentManager.getFragments();
         ActivityUtile.removeAllFragments(this, fragments);
     }
+
 
     @Override
     protected void onStart() {
@@ -80,12 +81,11 @@ public abstract class BaseFragmentActivity extends BaseActivity {
      */
     public void setDefaultFragment(Fragment defaultFragment) {
         // 将默认加载的fragment加入到自定义的回退栈中
+        if (fragmentsAddedInStack.size() > 0){
+            fragmentsAddedInStack.clear();
+        }
         fragmentsAddedInStack.add(defaultFragment);
         this.defaultFragment = defaultFragment;
     }
 
-    /**
-     * 设置默认加载的fragment
-     */
-    abstract void setDefaultFragment();
 }

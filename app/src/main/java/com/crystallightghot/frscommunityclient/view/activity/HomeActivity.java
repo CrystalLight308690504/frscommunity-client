@@ -24,7 +24,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 /**
  * @author crystallight
  */
-public class HomeActivityAbstract extends BaseFragmentActivity {
+public class HomeActivity extends BaseFragmentActivity {
 
 
     @BindView(R.id.ibtnHome)
@@ -84,6 +84,9 @@ public class HomeActivityAbstract extends BaseFragmentActivity {
     }
 
     private void init() {
+
+        // 设置默认fragment
+        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
 
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
@@ -201,7 +204,7 @@ public class HomeActivityAbstract extends BaseFragmentActivity {
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
     }
 
@@ -213,7 +216,7 @@ public class HomeActivityAbstract extends BaseFragmentActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         Log.d(TAG, "onStop: ");
     }
@@ -232,11 +235,6 @@ public class HomeActivityAbstract extends BaseFragmentActivity {
             bind.unbind();
         }
         unregisterReceiver(receiver);
-    }
-
-    @Override
-    void setDefaultFragment() {
-        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
     }
 }
 

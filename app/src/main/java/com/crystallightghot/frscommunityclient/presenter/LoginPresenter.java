@@ -4,7 +4,7 @@ import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
 import com.crystallightghot.frscommunityclient.utils.requestio.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.messageEvent.UIChangeMessage;
+import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 import org.greenrobot.eventbus.EventBus;
@@ -43,7 +43,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
 
         Gson gson = new Gson();
         User user = gson.fromJson(gson.toJson(respondData), User.class);
-        UIChangeMessage<User> message = new UIChangeMessage();
+        RequestMessage<User> message = new RequestMessage();
         message.setMessage(respondMessage);
         message.setData(user);
         message.setCode(view.getMessageCode());
@@ -58,7 +58,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
     @Override
     public void failure(String failureMessage) {
         view.hideLoadingDialog();
-        UIChangeMessage message = new UIChangeMessage();
+        RequestMessage message = new RequestMessage();
         message.setMessage(failureMessage);
         message.setCode(view.getMessageCode());
         message.setSuccess(false);

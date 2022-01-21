@@ -18,7 +18,7 @@
             android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".view.activity.OnlyOneAbstractFragmentShowedActivity"
+                android:name=".view.activity.SingleFragmentActivity"
                 android:exported="true"/>
         <activity
                 android:name=".view.activity.LoginAndRegisterActivity"
@@ -42,10 +42,10 @@
 
         <activity android:name=".view.activity.BaseFragmentActivity">
         </activity>
-        <activity android:name=".view.activity.AllSkatingCategoryActivity">
+        <activity android:name=".view.fragment.HomeSkatingTypeFragment">
         </activity>
         <activity
-                android:name=".view.activity.HomeActivityAbstract"
+                android:name=".view.activity.HomeActivity"
                 android:configChanges="screenSize"
                 android:screenOrientation="portrait"
                 android:exported="true"/>
