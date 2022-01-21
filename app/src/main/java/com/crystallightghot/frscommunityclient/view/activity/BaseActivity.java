@@ -12,7 +12,6 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
  * description：
  */
 public abstract class BaseActivity  extends AppCompatActivity {
-
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

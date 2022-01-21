@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
+
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
@@ -66,6 +67,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
         // 将获取的数据转化为User实体类
         Gson gson = new Gson();
         User user = gson.fromJson(gson.toJson(respondData), User.class);
+
         // 创建消息
         RequestMessage<User> message = new RequestMessage();
         message.setMessage(respondMessage);

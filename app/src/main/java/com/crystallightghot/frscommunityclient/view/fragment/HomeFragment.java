@@ -28,6 +28,7 @@ import java.util.List;
 
 import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.IntentToSingleFragmentActivity;
 
+
 /**
  * @author crystallightghost
  * @date 2022/1/2
