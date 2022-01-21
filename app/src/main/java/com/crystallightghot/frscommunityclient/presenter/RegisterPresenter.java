@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.model.RegisterModel;
-import com.crystallightghot.frscommunityclient.view.messageEvent.RegisterMessage;
+import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;
 import org.greenrobot.eventbus.EventBus;
@@ -42,12 +42,18 @@ public class RegisterPresenter implements RegisterContract.Presenter, RespondCal
     public void success(String message,Object respondData) {
         view.hideLoadingDialog();
         RegisterMessage registerMessage = new RegisterMessage();
+        registerMessage.setPhoneNumber(user.getPhoneNumber());
+        registerMessage.setPassword(user.getPassword());
         registerMessage.setMessage("注册成功");
         EventBus.getDefault().post(registerMessage);
     }
 
     @Override
-    public void failure(String m) {
+    public void failure(String failMessage) {
         view.hideLoadingDialog();
+        RegisterMessage registerMessage = new RegisterMessage();
+        registerMessage.setMessage(failMessage);
+        registerMessage.setSuccess(false);
+        EventBus.getDefault().post(registerMessage);
     }
 }

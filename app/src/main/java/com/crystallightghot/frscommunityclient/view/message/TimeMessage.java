@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.view.messageEvent;
+package com.crystallightghot.frscommunityclient.view.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

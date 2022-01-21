@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.SearchActivityAbstract;
+import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.rv_search_history)
     RecyclerView lvSearchHistory;
 
-    SearchActivityAbstract activity;
+    SingleFragmentActivity activity;
     @BindView(R.id.hot_searches)
     QMUIFloatLayout hotSearches;
 
@@ -63,7 +63,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void init() {
-        activity = (SearchActivityAbstract) getActivity();
+        activity = (SingleFragmentActivity) getActivity();
 
         topBarBack.setOnClickListener( view -> activity.onBackPressed());
     }

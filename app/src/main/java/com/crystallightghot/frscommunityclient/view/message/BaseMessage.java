@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.view.messageEvent;
+package com.crystallightghot.frscommunityclient.view.message;
 
 import lombok.Data;
 
@@ -9,6 +9,8 @@ import lombok.Data;
  * description：
  */
 @Data
-public class UIChangeMessage<T> extends BaseMessage<T> {
+public class BaseMessage {
+    // 唯一标识符
     int code;
+    String message;
 }

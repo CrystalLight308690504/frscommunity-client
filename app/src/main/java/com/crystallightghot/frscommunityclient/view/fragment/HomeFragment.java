@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -18,13 +17,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.AllSkatingCategoryActivity;
-import com.crystallightghot.frscommunityclient.view.activity.SearchActivityAbstract;
+import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.crystallightghot.frscommunityclient.view.util.IntentUtil.IntentToSingleFragmentActivity;
 
 /**
  * @author crystallightghost
@@ -32,7 +34,7 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.search_input_box)
     TextView searchInputBox;
@@ -102,12 +104,15 @@ public class HomeFragment extends Fragment {
         Intent intent;
         switch (view.getId()) {
             case R.id.blog_more_list:
-                intent = new Intent(activity, AllSkatingCategoryActivity.class);
-                activity.startActivity(intent);
+                intent = new Intent(activity, SingleFragmentActivity.class);
+                startActivity(intent);
+                FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
+                fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
+                fragmentChangeMessage.setDefaultFragment(HomeSkatingTypeFragment.newInstance("login"));
+                EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
                 case R.id.search_input_box:
-                intent = new Intent(activity, SearchActivityAbstract.class);
-                activity.startActivity(intent);
+                    IntentToSingleFragmentActivity(activity,SearchFragment.newInstance("login"));
                 break;
         }
     }

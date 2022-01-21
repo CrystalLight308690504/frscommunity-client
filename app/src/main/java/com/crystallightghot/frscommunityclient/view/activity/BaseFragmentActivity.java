@@ -30,10 +30,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     // 默认在activity显示的fragment并且不加入到返回栈的fragment
     Fragment defaultFragment;
 
-    public BaseFragmentActivity() {
-        setDefaultFragment();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +40,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         List<Fragment> fragments = fragmentManager.getFragments();
         ActivityUtile.removeAllFragments(this, fragments);
     }
+
 
     @Override
     protected void onStart() {
@@ -80,12 +77,11 @@ public abstract class BaseFragmentActivity extends BaseActivity {
      */
     public void setDefaultFragment(Fragment defaultFragment) {
         // 将默认加载的fragment加入到自定义的回退栈中
+        if (fragmentsAddedInStack.size() > 0){
+            fragmentsAddedInStack.clear();
+        }
         fragmentsAddedInStack.add(defaultFragment);
         this.defaultFragment = defaultFragment;
     }
 
-    /**
-     * 设置默认加载的fragment
-     */
-    abstract void setDefaultFragment();
 }

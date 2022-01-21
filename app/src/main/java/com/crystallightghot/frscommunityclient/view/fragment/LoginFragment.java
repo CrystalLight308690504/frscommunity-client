@@ -16,10 +16,11 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
-import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
-import com.crystallightghot.frscommunityclient.view.activity.HomeActivityAbstract;
-import com.crystallightghot.frscommunityclient.view.messageEvent.UIChangeMessage;
+import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
+import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
+import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
@@ -59,20 +60,35 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(UIChangeMessage message) {
+    public void getMessage(RequestMessage message) {
         Log.d("TAG", "UIChangeMessage: " + message.getMessage());
-        if (message.getCode() != MESSAGE_CODE){
+        if (message.getCode() != MESSAGE_CODE){// 只收有关本fragment的消息
             return;
         }
+        // 登陆失败
         if ( !message.isSuccess()){
             XToastUtils.error(message.getMessage());
             return;
         }
 
-        Intent intent = new Intent(activity, HomeActivityAbstract.class);
+        Intent intent = new Intent(activity, HomeActivity.class);
         startActivity(intent);
         activity.finish();
     }
+
+    /**
+     * 注册账号消息
+     * @param message
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(RegisterMessage message) {
+        // 注册账号成功 将账号消息填入
+        if (message.isSuccess()){
+            phoneName.setText(message.getPhoneNumber());
+            iePassword.setText(message.getPassword());
+        }
+    }
+
 
     private void loginAction() {
         String passwordInput = iePassword.getText().toString();
@@ -101,15 +117,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         init();
         return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
     }
 
     @OnClick({R.id.phoneNumber, R.id.iePassword, R.id.login, R.id.register})
@@ -129,11 +138,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
+
 
     /**
      * 发送验证码
@@ -146,4 +151,17 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public int getMessageCode() {
         return MESSAGE_CODE;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
 }
