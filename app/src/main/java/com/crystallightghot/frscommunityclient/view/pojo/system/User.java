@@ -1,12 +1,12 @@
 package com.crystallightghot.frscommunityclient.view.pojo.system;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.Date;
 
 /**
  * @Date 2022/1/10
@@ -16,11 +16,10 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-@NoArgsConstructor
-
-public class User  implements Serializable {
-
-    private long userId;
+@Entity
+public class User {
+    @Id
+    private Long userId;
 
     private String sessionId;
 
@@ -40,42 +39,175 @@ public class User  implements Serializable {
 
     private Boolean gender;
 
-    private Timestamp createdTime;
+    private Date createdTime;
 
-    private Timestamp lastLoginTime;
+    private Date lastLoginTime;
 
-    private Timestamp loginTime;
+    private Date loginTime;
 
     private String profession;
 
-    private byte[] description;
+    private String description;
 
     private String addressIp;
 
+    @Generated(hash = 89215729)
+    public User(Long userId, String sessionId, String userName, String email,
+            String password, String phoneNumber, String profile, String introduce,
+            Long credit, Boolean gender, Date createdTime, Date lastLoginTime,
+            Date loginTime, String profession, String description,
+            String addressIp) {
+        this.userId = userId;
+        this.sessionId = sessionId;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.profile = profile;
+        this.introduce = introduce;
+        this.credit = credit;
+        this.gender = gender;
+        this.createdTime = createdTime;
+        this.lastLoginTime = lastLoginTime;
+        this.loginTime = loginTime;
+        this.profession = profession;
+        this.description = description;
+        this.addressIp = addressIp;
+    }
+
+    @Generated(hash = 586692638)
+    public User() {
+    }
+
     public static User getInstance() {
-        return new User();
-    }
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+      return   new User();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber);
+    public Long getUserId() {
+        return this.userId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, userName, email, password, phoneNumber);
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getSessionId() {
+        return this.sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getProfile() {
+        return this.profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
+    public String getIntroduce() {
+        return this.introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public Long getCredit() {
+        return this.credit;
+    }
+
+    public void setCredit(Long credit) {
+        this.credit = credit;
+    }
+
+    public Boolean getGender() {
+        return this.gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public Date getCreatedTime() {
+        return this.createdTime;
+    }
+
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Date getLastLoginTime() {
+        return this.lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Date getLoginTime() {
+        return this.loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public String getProfession() {
+        return this.profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAddressIp() {
+        return this.addressIp;
+    }
+
+    public void setAddressIp(String addressIp) {
+        this.addressIp = addressIp;
     }
 }

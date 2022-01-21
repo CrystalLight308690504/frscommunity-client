@@ -13,7 +13,7 @@ import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessag
  * @Version: 1.0
  * description：
  */
-public class IntentUtil {
+public class FRSCIntentUtil {
 
     public static final void IntentToSingleFragmentActivity(Activity activity, Fragment defaultFragment) {
         Intent intent = new Intent(activity, SingleFragmentActivity.class);

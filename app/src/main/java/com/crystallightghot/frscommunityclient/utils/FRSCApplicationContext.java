@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.utils.requestio;
+package com.crystallightghot.frscommunityclient.utils;
 
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;

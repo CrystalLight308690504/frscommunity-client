@@ -3,7 +3,6 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,7 +33,6 @@ import org.greenrobot.eventbus.ThreadMode;
  * create an instance of this fragment.
  */
 public class LoginFragment extends BaseFragment implements LoginContract.View {
-    static LoginFragment loginFragment;
     @BindView(R.id.phoneNumber)
     TextInputEditText phoneName;
     @BindView(R.id.iePassword)
@@ -46,9 +44,15 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     AppCompatButton register;
 
     LoginPresenter presenter;
+
     BaseActivity activity;
-    User user  = new User();
-    final  int MESSAGE_CODE = 1001;
+    User user = new User();
+    final int MESSAGE_CODE = 1001;
+
+
+    public LoginFragment() {
+        presenter = LoginPresenter.getInstance(this);
+    }
 
     public static LoginFragment newInstance(String param1) {
 
@@ -57,16 +61,23 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private void init() {
         activity = (BaseActivity) getActivity();
+        presenter.checkUserLoginState();
     }
 
+
+
+    /**
+     * 登入消息
+     *
+     * @param message
+     */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RequestMessage message) {
-        Log.d("TAG", "UIChangeMessage: " + message.getMessage());
-        if (message.getCode() != MESSAGE_CODE){// 只收有关本fragment的消息
+    public void getMessage(RequestMessage<User> message) {
+        if (message.getCode() != MESSAGE_CODE) {// 只收有关本fragment的消息
             return;
         }
         // 登陆失败
-        if ( !message.isSuccess()){
+        if (!message.isSuccess()) {
             XToastUtils.error(message.getMessage());
             return;
         }
@@ -78,12 +89,13 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     /**
      * 注册账号消息
+     *
      * @param message
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RegisterMessage message) {
         // 注册账号成功 将账号消息填入
-        if (message.isSuccess()){
+        if (message.isSuccess()) {
             phoneName.setText(message.getPhoneNumber());
             iePassword.setText(message.getPassword());
         }
@@ -99,14 +111,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
             XToastUtils.error("请输入正确手机号");
             return;
         }
-        if (null == passwordInput ) {
+        if (null == passwordInput) {
             XToastUtils.error("请输入密码");
             return;
         }
 
         user.setPhoneNumber(phoneNameText.toString());
         user.setPassword(passwordInput);
-        presenter = LoginPresenter.getInstance(this);
+
         presenter.loadData(user);
     }
 
@@ -114,7 +126,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -132,12 +143,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 loginAction();
                 break;
             case R.id.register:
-                ActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity());
+                FRSCActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity());
                 break;
         }
     }
-
-
 
 
     /**
@@ -151,6 +160,14 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public int getMessageCode() {
         return MESSAGE_CODE;
     }
+
+    @Override
+    public void stateToLogin() {
+        Intent intent = new Intent(activity, HomeActivity.class);
+        startActivity(intent);
+        activity.finish();
+    }
+
 
     @Override
     public void onStart() {

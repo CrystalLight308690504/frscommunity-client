@@ -12,7 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.crystallightghot.frscommunityclient.view.util.IntentUtil.IntentToSingleFragmentActivity;
+import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.IntentToSingleFragmentActivity;
 
 public class AccessActivity extends BaseActivity {
 

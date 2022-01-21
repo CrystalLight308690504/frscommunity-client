@@ -26,7 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.crystallightghot.frscommunityclient.view.util.IntentUtil.IntentToSingleFragmentActivity;
+import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.IntentToSingleFragmentActivity;
 
 /**
  * @author crystallightghost

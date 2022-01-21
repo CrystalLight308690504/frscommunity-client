@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2022/1/6 11:20
  * @Created by CrystalLightGhost
  */
-public class ActivityUtile {
+public class FRSCActivityUtile {
 
     /**
      * 清楚原来fragment里现有的fragment

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
 import com.xuexiang.xui.XUI;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +42,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        ActivityUtile.removeAllFragments(this, fragments);
+        FRSCActivityUtile.removeAllFragments(this, fragments);
     }
 
 
@@ -50,7 +50,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // 添加默认fragment 到页面
-        ActivityUtile.showFragment(getDefaultFragment(), this, false);
+        FRSCActivityUtile.showFragment(getDefaultFragment(), this, false);
     }
 
     /**

@@ -18,7 +18,7 @@ import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemS
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.SomethingFoundFragment;
-import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 /**
@@ -106,20 +106,20 @@ public class HomeActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                ActivityUtile.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()),this,false);
+                FRSCActivityUtile.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()),this,false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.drawable.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                ActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.drawable.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                ActivityUtile.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCActivityUtile.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnAnswer:
                 allBottomIconBeenDefaultState();

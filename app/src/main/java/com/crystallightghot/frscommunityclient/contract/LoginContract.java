@@ -14,6 +14,7 @@ public interface LoginContract  {
 
     interface View extends BaseContract.View {
         int getMessageCode();
+        void stateToLogin();
     }
 
     interface Presenter extends BaseContract.Presenter {
