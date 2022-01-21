@@ -44,7 +44,7 @@
             android:text="关注"
             android:textColor="@drawable/btn_text_color"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/btn_back_round"/>
+            android:background="@drawable/bkd_btn_back_round"/>
     <TextView
             android:id="@+id/articleType"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                  app:layout_constraintRight_toRightOf="parent"
                  app:layout_constraintTop_toTopOf="@id/articleTitle"
                  app:layout_constraintBottom_toBottomOf="@id/articleTitle"
-                 android:background="@drawable/btn_collection"
+                 android:background="@drawable/ic_collection_stated"
     />
     <ScrollView
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                         android:text="举报"/>
                 <androidx.appcompat.widget.AppCompatButton android:layout_width="20dp"
                                                            android:layout_height="20dp"
-                                                           android:background="@drawable/btn_applause"
+                                                           android:background="@drawable/ic_applause_stated"
                                                            app:layout_constraintRight_toRightOf="parent"
                                                            app:layout_constraintTop_toTopOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>

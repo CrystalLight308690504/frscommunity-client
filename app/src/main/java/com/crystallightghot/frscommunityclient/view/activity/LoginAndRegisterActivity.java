@@ -5,7 +5,7 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
 
-public class LoginAndRegisterActivityAbstract extends AbstractFragmentNeededActivity {
+public class LoginAndRegisterActivity extends BaseFragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

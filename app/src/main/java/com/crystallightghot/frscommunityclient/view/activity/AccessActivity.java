@@ -7,7 +7,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.messageEvent.TimeMessage;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -59,8 +59,9 @@ public class AccessActivity extends BaseActivity {
         tvTime.setText(time+"");
 
         if (time == 0){
-            Intent intent = new Intent(this, LoginAndRegisterActivityAbstract.class);
+            Intent intent = new Intent(this, LoginAndRegisterActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

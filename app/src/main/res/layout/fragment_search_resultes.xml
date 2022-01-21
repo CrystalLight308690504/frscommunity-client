@@ -21,7 +21,7 @@
             android:singleLine="true"
             android:lines="1"
             android:maxLength="60"
-            android:background="@drawable/bkd_round_radiou_solid_while_stroke_blue"
+            android:background="@drawable/bkd_round_solid_while_stroke_blue"
             app:layout_constraintLeft_toRightOf="@id/top_bar_back"
             app:layout_constraintTop_toTopOf="parent"
 

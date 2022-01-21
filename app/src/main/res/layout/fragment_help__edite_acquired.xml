@@ -32,7 +32,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/btn_back"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
-            android:background="@drawable/btn_back_round"
+            android:background="@drawable/bkd_btn_back_round"
             android:text="发送"
     />
     <com.google.android.material.textfield.TextInputEditText

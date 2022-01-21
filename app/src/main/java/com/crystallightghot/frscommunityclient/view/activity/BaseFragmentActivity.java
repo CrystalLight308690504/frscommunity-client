@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public abstract class AbstractFragmentNeededActivity extends BaseActivity {
+public abstract class BaseFragmentActivity extends BaseActivity {
 
     // 加入到返回栈的fragment 默认加载到activity的fragment为栈底 模拟返回栈的内容
     private final List<Fragment> fragmentsAddedInStack = new ArrayList<>();
@@ -30,7 +30,7 @@ public abstract class AbstractFragmentNeededActivity extends BaseActivity {
     // 默认在activity显示的fragment并且不加入到返回栈的fragment
     Fragment defaultFragment;
 
-    public AbstractFragmentNeededActivity() {
+    public BaseFragmentActivity() {
         setDefaultFragment();
     }
 

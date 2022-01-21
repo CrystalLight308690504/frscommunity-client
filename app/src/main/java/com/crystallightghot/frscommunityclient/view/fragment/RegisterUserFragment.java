@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.contract.IRegisterContract;
+import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.presenter.RegisterPresenter;
 import com.crystallightghot.frscommunityclient.utils.VerifyCodeUtil;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
@@ -20,10 +20,8 @@ import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.messageEvent.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.messageEvent.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.google.android.material.textfield.TextInputEditText;
-import com.xuexiang.xui.utils.WidgetUtils;
-import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -33,7 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Use the {@link RegisterUserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RegisterUserFragment extends Fragment implements IRegisterContract.View {
+public class RegisterUserFragment extends BaseFragment implements RegisterContract.View {
 
     @BindView(R.id.phoneNumber)
     TextInputEditText phoneName;
@@ -51,7 +49,6 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
     BaseActivity activity;
     RegisterPresenter presenter;
 
-    LoadingDialog loadingDialog;
 
     public RegisterUserFragment() {
         // Required empty public constructor
@@ -77,9 +74,7 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
 
     private void init() {
         activity = (BaseActivity) getActivity();
-        loadingDialog = WidgetUtils.getLoadingDialog(getContext())
-                .setIconScale(0.4F)
-                .setLoadingSpeed(8);
+
     }
 
 
@@ -87,7 +82,7 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSendVerifyCode:
-                if(btnSendVerifyCode.isEnabled()){
+                if (btnSendVerifyCode.isEnabled()) {
                     setSendVerifyCodeState(false);
                 }
                 break;
@@ -106,6 +101,7 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
         int time = message.getTime();
         // 修改按钮显示字体
         btnSendVerifyCode.setText(time + "");
+        btnSendVerifyCode.setEnabled(false);
         if (time == 0) {
             btnSendVerifyCode.setEnabled(true);
             btnSendVerifyCode.setText("发送验证码");
@@ -119,31 +115,34 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
         int length = phoneNameText.length();
 
         if (length != 11) {
-            XToastUtils.error( "请输入正确手机号");
+            XToastUtils.error("请输入正确手机号");
             return;
         }
-        if (verifyCodeInput == null) {
-            XToastUtils.error( "请输入验证码");
+        if (null == verifyCode || verifyCodeInput.equals("")) {
+            XToastUtils.error("请输入验证码");
             return;
         }
-        if (null == password || password.equals("")) {
-            XToastUtils.error( "请输入密码");
+        if (password.equals("")) {
+            XToastUtils.error("请输入密码");
             return;
         }
         if (!verifyCodeInput.equals(verifyCode)) {
-            XToastUtils.error( "验证码错误");
+            XToastUtils.error("验证码错误");
             return;
         }
         User user = User.getInstance();
-            user.setPhoneNumber(phoneNameText.toString());
-            user.setPassword(password);
-        presenter = new RegisterPresenter(this,user);
+        user.setPhoneNumber(phoneNameText.toString());
+        user.setPassword(password);
+        presenter = new RegisterPresenter(this, user);
         presenter.loadData();
+
+        // 使验证码失效
+        verifyCode = null;
     }
 
     private void setSendVerifyCodeState(boolean enable) {
         verifyCode = VerifyCodeUtil.getVerifyCode();
-        XToastUtils.info( "验证码：" + verifyCode);
+        XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(enable);
         if (enable) {
             btnSendVerifyCode.setText("发送验证码");
@@ -170,25 +169,11 @@ public class RegisterUserFragment extends Fragment implements IRegisterContract.
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void showRegisterStateMessage(String registerMessage) {
-    }
-
-    @Override
-    public void showLoadingDialog() {
-        loadingDialog.show();
-    }
-
-    @Override
-    public void hideLoadingDialog() {
-        loadingDialog.dismiss();
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RegisterMessage message){
-        Log.d("TAG", "RegisterUserFragment getMessage: " +message);
+    public void getMessage(RegisterMessage message) {
+        Log.d("TAG", "RegisterUserFragment getMessage: " + message);
         XToastUtils.success(message.getMessage());
         activity.onBackPressed();
     }
-
 }

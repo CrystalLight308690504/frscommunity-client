@@ -13,11 +13,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.contract.LoginContract;
+import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
-import com.crystallightghot.frscommunityclient.view.activity.AbstractFragmentNeededActivity;
+import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.HomeActivityAbstract;
-import com.crystallightghot.frscommunityclient.view.messageEvent.RegisterMessage;
+import com.crystallightghot.frscommunityclient.view.messageEvent.UIChangeMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.ActivityUtile;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +32,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment implements LoginContract.View {
     static LoginFragment loginFragment;
     @BindView(R.id.phoneNumber)
     TextInputEditText phoneName;
@@ -41,25 +44,56 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.register)
     AppCompatButton register;
 
-    private String mParam1;
-
+    LoginPresenter presenter;
     BaseActivity activity;
-
-    public LoginFragment() {
-
-    }
+    User user  = new User();
+    final  int MESSAGE_CODE = 1001;
 
     public static LoginFragment newInstance(String param1) {
 
         return new LoginFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+    private void init() {
+        activity = (BaseActivity) getActivity();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(UIChangeMessage message) {
+        Log.d("TAG", "UIChangeMessage: " + message.getMessage());
+        if (message.getCode() != MESSAGE_CODE){
+            return;
+        }
+        if ( !message.isSuccess()){
+            XToastUtils.error(message.getMessage());
+            return;
+        }
+
+        Intent intent = new Intent(activity, HomeActivityAbstract.class);
+        startActivity(intent);
+        activity.finish();
+    }
+
+    private void loginAction() {
+        String passwordInput = iePassword.getText().toString();
+        Editable phoneNameText = phoneName.getText();
+        int length = phoneNameText.length();
+
+        if (length != 11) {
+            XToastUtils.error("请输入正确手机号");
+            return;
+        }
+        if (null == passwordInput ) {
+            XToastUtils.error("请输入密码");
+            return;
+        }
+
+        user.setPhoneNumber(phoneNameText.toString());
+        user.setPassword(passwordInput);
+        presenter = LoginPresenter.getInstance(this);
+        presenter.loadData(user);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,13 +101,9 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         init();
-        EventBus.getDefault().unregister(this);
         return view;
-    }
-
-    private void init() {
-        activity = (BaseActivity) getActivity();
     }
 
     @Override
@@ -87,51 +117,33 @@ public class LoginFragment extends Fragment {
         switch (view.getId()) {
 
             case R.id.btnSendVerifyCode:
-                sendVerifyCode();
+                sendVerifyCodeAction();
                 break;
             case R.id.login:
-                login();
-
+                loginAction();
                 break;
             case R.id.register:
-                ActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (AbstractFragmentNeededActivity) getActivity());
+                ActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity());
                 break;
         }
-    }
-
-    /**
-     * 发送验证码
-     */
-    private void sendVerifyCode() {
-
-    }
-
-    private void login() {
-        String codeInput = iePassword.getText().toString();
-        Editable phoneNameText = phoneName.getText();
-        int length = phoneNameText.length();
-
-        if (length != 11 || codeInput == null) {
-            XToastUtils.error( "请输入正确手机号");
-            return;
-        }
-
-        Intent intent = new Intent(activity, HomeActivityAbstract.class);
-        startActivity(intent);
-
     }
 
 
     @Override
     public void onStop() {
         super.onStop();
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RegisterMessage message){
-        Log.d("TAG", "Login getMessage: " +message);
-        phoneName.setText(message.getPhoneNumber());
-        iePassword.setText(message.getPassword());
+    /**
+     * 发送验证码
+     */
+    private void sendVerifyCodeAction() {
+
+    }
+
+    @Override
+    public int getMessageCode() {
+        return MESSAGE_CODE;
     }
 }

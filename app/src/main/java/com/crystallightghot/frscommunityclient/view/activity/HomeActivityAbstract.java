@@ -24,7 +24,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 /**
  * @author crystallight
  */
-public class HomeActivityAbstract extends AbstractFragmentNeededActivity {
+public class HomeActivityAbstract extends BaseFragmentActivity {
 
 
     @BindView(R.id.ibtnHome)

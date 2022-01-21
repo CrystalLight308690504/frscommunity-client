@@ -1,11 +1,10 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
-import com.crystallightghot.frscommunityclient.contract.IRegisterContract;
+import com.crystallightghot.frscommunityclient.contract.RegisterContract;
+import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.model.RegisterModel;
 import com.crystallightghot.frscommunityclient.view.messageEvent.RegisterMessage;
-import com.crystallightghot.frscommunityclient.view.pojo.system.Result;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.google.gson.Gson;
 import lombok.Data;
 import org.greenrobot.eventbus.EventBus;
 
@@ -17,13 +16,17 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 @Data
-public class RegisterPresenter implements IRegisterContract.Presenter, IRegisterContract.LoadDataCallBack {
+public class RegisterPresenter implements RegisterContract.Presenter, RespondCallBck {
 
-    IRegisterContract.Model model;
-    IRegisterContract.View view;
+    RegisterContract.Model model;
+    RegisterContract.View view;
     User user;
 
-    public RegisterPresenter(IRegisterContract.View view, User user) {
+    public static RegisterPresenter getInstance(RegisterContract.View view, User user) {
+        return new RegisterPresenter(view,user);
+    }
+
+    public RegisterPresenter(RegisterContract.View view, User user) {
         this.view = view;
         model = new RegisterModel();
         this.user = user;
@@ -36,21 +39,15 @@ public class RegisterPresenter implements IRegisterContract.Presenter, IRegister
     }
 
     @Override
-    public void success(String message) {
+    public void success(String message,Object respondData) {
         view.hideLoadingDialog();
-        view.showRegisterStateMessage(message);
-
-        Gson gson = new Gson();
-        Result result = gson.fromJson(message, Result.class);
         RegisterMessage registerMessage = new RegisterMessage();
-        registerMessage.setPhoneNumber(user.getPhoneNumber());
-        registerMessage.setPassword(user.getPassword());
-        registerMessage.setMessage(result.getMessage());
+        registerMessage.setMessage("注册成功");
         EventBus.getDefault().post(registerMessage);
     }
 
     @Override
-    public void failure() {
+    public void failure(String m) {
         view.hideLoadingDialog();
     }
 }
