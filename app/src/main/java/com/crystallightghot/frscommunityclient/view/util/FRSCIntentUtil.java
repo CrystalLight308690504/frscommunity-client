@@ -21,6 +21,8 @@ public class FRSCIntentUtil {
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
         fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
         fragmentChangeMessage.setDefaultFragment(defaultFragment);
+
+        // 发送默认activity消息
         EventBusUtil.sendStickMessage(fragmentChangeMessage);
     }
 }

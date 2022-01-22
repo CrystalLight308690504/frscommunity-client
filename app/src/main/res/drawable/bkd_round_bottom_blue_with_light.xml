@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 相当于padding -->
+    <item android:bottom="1dp">
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#ADF1F1F1"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
+    <item android:bottom="2dp">
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#1A299EE3"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
+    <item android:bottom="3dp" >
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#33299EE3"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+    <item android:bottom="4dp" >
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#4D299EE3"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+    <item android:bottom="5dp" >
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#73299EE3"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+    <item android:bottom="6dp" >
+        <shape>
+            <!-- 指定圆角矩形的4个圆角的半径 -->
+            <solid android:color="#FFFFFF"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+</layer-list>
+

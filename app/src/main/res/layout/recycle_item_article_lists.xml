@@ -6,7 +6,7 @@
                                                    android:layout_height="wrap_content"
                                                    android:background="@drawable/bkd_round_solid_while_stroke_bottom_right_bule_gray"
                                                    android:layout_marginBottom="@dimen/margin_small"
-                                                   android:padding="@dimen/margin_small">
+                                                   android:padding="@dimen/margin_normal">
     <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
             android:id="@+id/profile"
             android:layout_width="40dp"
