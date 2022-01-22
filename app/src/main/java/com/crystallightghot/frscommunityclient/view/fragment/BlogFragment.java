@@ -37,7 +37,7 @@ public class BlogFragment extends BaseFragment{
 
     static  BlogFragment blogFragment;
     HomeActivity activity;
-    private List<HomeViewPagerItem> fragments;
+    private List<HomeViewPagerItemFragment> fragments;
 
     public BlogFragment() {
         // Required empty public constructor
@@ -61,7 +61,7 @@ public class BlogFragment extends BaseFragment{
         int i = 0;
         while (i < tabTitles.length) {
             blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
-            fragments.add(new HomeViewPagerItem(tabTitles[i],null));
+            fragments.add(new HomeViewPagerItemFragment(tabTitles[i],null));
             i++;
         }
         setViewPages(null);

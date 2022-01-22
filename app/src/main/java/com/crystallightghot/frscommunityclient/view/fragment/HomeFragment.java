@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment {
 
     static HomeFragment homeFragment;
 
-    private List<HomeViewPagerItem> homeViewPagerItems = new ArrayList<>();
+    private List<HomeViewPagerItemFragment> homeViewPagerItemFragments = new ArrayList<>();
 
     String[] tabTitles;
 
@@ -91,12 +91,12 @@ public class HomeFragment extends BaseFragment {
         // 给每个ViewPager添加Item测试数据
         int i = 0;
         while (i < tabTitles.length) {
-            homeViewPagerItems.add(new HomeViewPagerItem(tabTitles[i], null));
+            homeViewPagerItemFragments.add(new HomeViewPagerItemFragment(tabTitles[i], null));
             i++;
         }
 
 
-        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, homeViewPagerItems, tabTitles));
+        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, homeViewPagerItemFragments, tabTitles));
         tl_types.setupWithViewPager(typeContentContainer);
     }
 

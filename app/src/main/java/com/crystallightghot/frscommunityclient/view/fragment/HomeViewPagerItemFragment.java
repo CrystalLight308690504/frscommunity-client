@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnScrollChangeListener;
@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
@@ -28,27 +27,25 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class HomeViewPagerItem extends Fragment {
+public class HomeViewPagerItemFragment extends Fragment {
 
     @BindView(R.id.rv_lists)
     RecyclerView rvLists;
-    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
 
-    public HomeViewPagerItem() {
+    public HomeViewPagerItemFragment() {
     }
 
 
     List<HashMap<Object, Object>> dataAll;
 
-    public HomeViewPagerItem(String label, List<HashMap<Object, Object>> dataAll) {
+    public HomeViewPagerItemFragment(String label, List<HashMap<Object, Object>> dataAll) {
         this.dataAll = dataAll;
         Bundle args = new Bundle();
         args.putString("label", label);
         setArguments(args);
     }
 
-    private void addRecycleViewScrolledListent() {
+    private void addRecycleViewScrolledListener() {
         /**
          * 多recycleView 滑动事件监听
          */
@@ -57,6 +54,9 @@ public class HomeViewPagerItem extends Fragment {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int scrolledInstance) {
 
+                Log.d("computeVerticalScrollExtent", "onScrollChange  computeVerticalScrollOffset ========" +rvLists.computeVerticalScrollOffset());
+                Log.d("computeVerticalScrollExtent", "onScrollChange  computeVerticalScrollRange ========" +rvLists.computeVerticalScrollRange());
+                Log.d("computeVerticalScrollExtent", "onScrollChange  computeVerticalScrollExtent ========" +rvLists.computeVerticalScrollExtent());
                 // 当 lastScrolledInstance 和 scrolledInstance 都为 0 表示为滑动停止 所以保持原来的状态（）
                 Intent intent = new Intent("HomeViewPagerItemScrollChangedReceiver");
                 if (lastScrolledInstance < 0 && scrolledInstance <= 0) { // 如果是向下划屏幕
@@ -80,11 +80,7 @@ public class HomeViewPagerItem extends Fragment {
     }
 
     private void init() {
-
-        swipeRefreshLayout.setColorSchemeResources(R.color.xui_config_color_main_theme);
-        swipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> swipeRefreshLayout.setRefreshing(false),2000));
-
-        addRecycleViewScrolledListent();
+        addRecycleViewScrolledListener();
         putDataToRV(dataAll);
 
     }

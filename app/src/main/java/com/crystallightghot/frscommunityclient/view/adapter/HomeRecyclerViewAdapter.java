@@ -72,8 +72,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             articleContentTV = itemView.findViewById(R.id.article_content);
             imageView1IV = itemView.findViewById(R.id.image1);
 
-            itemView.setOnClickListener(view -> {
-            });
         }
 
         public void setData(Map<Object,Object> data) {

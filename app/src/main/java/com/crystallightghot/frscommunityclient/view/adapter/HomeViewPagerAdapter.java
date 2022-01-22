@@ -5,8 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeViewPagerItem;
-import org.jetbrains.annotations.NotNull;
+import com.crystallightghot.frscommunityclient.view.fragment.HomeViewPagerItemFragment;
 
 import java.util.List;
 
@@ -23,9 +22,9 @@ import java.util.List;
  */
 public class HomeViewPagerAdapter extends FragmentPagerAdapter {
 
-    List<HomeViewPagerItem> fragments;
+    List<HomeViewPagerItemFragment> fragments;
     String[] titles;
-    public HomeViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior, List<HomeViewPagerItem> fragments, String[] titles) {
+    public HomeViewPagerAdapter(@NonNull FragmentManager fm, int behavior, List<HomeViewPagerItemFragment> fragments, String[] titles) {
         super(fm, behavior);
         this.titles = titles;
         this.fragments = fragments;

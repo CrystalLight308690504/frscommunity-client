@@ -46,7 +46,6 @@
             app:tabMode="scrollable"
             app:tabIndicatorFullWidth="false"
             app:tabRippleColor="@color/applicationMainTheme"
-            android:layout_marginTop="@dimen/margin_small"
             android:layout_width="350dp" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_input_box"

@@ -81,7 +81,7 @@ public class SearchResultsFragment extends Fragment {
     public void addData() {
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
         // 添加测试数据
-        List<HomeViewPagerItem> pagerFragments = new ArrayList<>();
+        List<HomeViewPagerItemFragment> pagerFragments = new ArrayList<>();
 
         viewPager.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, pagerFragments, tabTitles));
         searchResultType.setupWithViewPager(viewPager);
