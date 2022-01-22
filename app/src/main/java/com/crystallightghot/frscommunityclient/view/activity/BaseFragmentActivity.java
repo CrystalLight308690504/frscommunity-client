@@ -76,4 +76,11 @@ public abstract class BaseFragmentActivity extends BaseActivity {
             finish();
         }
     }
+    /**
+     *
+     * @param defaultFragment 默认加载、、绑定在activity并且不加入系统回退栈的fragment
+     */
+    public void setDefaultFragment(Fragment defaultFragment) {
+        this.defaultFragment = defaultFragment;
+    }
 }
