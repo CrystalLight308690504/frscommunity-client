@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+                                              xmlns:tools="http://schemas.android.com/tools"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="match_parent"
+                                              android:orientation="vertical"
+                                              xmlns:app="http://schemas.android.com/apk/res-auto"
+                                              tools:context=".view.fragment.MineFragment"
+>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bkd_round_bottom_blue_with_light"
+            android:padding="@dimen/margin_normal"
+    >
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView2 android:layout_width="64dp" android:layout_height="64dp"
+                                                       android:src="@mipmap/icon_application"
+                                                       app:qmui_corner_radius="32dp"
+                                                       app:layout_constraintLeft_toLeftOf="parent"
+                                                       app:layout_constraintTop_toTopOf="parent"
+                                                       android:id="@+id/userProfile"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="@id/userProfile"
+                  app:layout_constraintLeft_toRightOf="@id/userProfile"
+                  android:text="FRC"
+                  android:textColor="@color/default_displayed_text_black"
+                  android:id="@+id/userName"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@id/userName"
+                  app:layout_constraintLeft_toRightOf="@id/userProfile"
+                  android:layout_marginTop="@dimen/margin_normal"
+                  android:textSize="10dp"
+                  android:text="FRC"
+                  android:id="@+id/userDescription"
+        />
+        <ImageView android:layout_width="20dp"
+                   android:layout_height="20dp"
+                   app:layout_constraintRight_toRightOf="parent"
+                   app:layout_constraintTop_toTopOf="@id/userProfile"
+                   app:layout_constraintBottom_toBottomOf="@id/userProfile"
+                   android:layout_marginRight="@dimen/margin_normal"
+                   android:src="@drawable/ic_arrow_right"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="关注"
+                  android:textColor="@color/color_gray_3"
+                  app:layout_constraintTop_toBottomOf="@id/userProfile"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  android:layout_marginTop="@dimen/margin_max1"
+                  app:layout_constraintRight_toLeftOf="@id/tvicFan"
+                  android:id="@+id/tvicFllowed"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="20"
+                  android:textColor="@color/default_displayed_text_gray"
+                  app:layout_constraintTop_toBottomOf="@id/tvicFllowed"
+                  app:layout_constraintLeft_toLeftOf="@id/tvicFllowed"
+                  app:layout_constraintRight_toRightOf="@id/tvicFllowed"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/tviFllowed"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="粉丝"
+                  android:textColor="@color/color_gray_3"
+                  app:layout_constraintTop_toBottomOf="@id/userProfile"
+                  app:layout_constraintLeft_toRightOf="@id/tvicFllowed"
+                  android:layout_marginTop="@dimen/margin_max1"
+                  app:layout_constraintRight_toLeftOf="@id/tvicScanded"
+                  android:id="@+id/tvicFan"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="20"
+                  android:textColor="@color/default_displayed_text_gray"
+                  app:layout_constraintTop_toBottomOf="@id/tvicFan"
+                  app:layout_constraintLeft_toLeftOf="@id/tvicFan"
+                  app:layout_constraintRight_toRightOf="@id/tvicFan"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/tvFan"
+        />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="访问"
+                  android:textColor="@color/color_gray_3"
+                  app:layout_constraintTop_toBottomOf="@id/userProfile"
+                  app:layout_constraintLeft_toRightOf="@id/tvFan"
+                  app:layout_constraintRight_toLeftOf="@id/tvicArticleCreated"
+                  android:layout_marginTop="@dimen/margin_max1"
+                  android:id="@+id/tvicScanded"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="20"
+                  android:textColor="@color/default_displayed_text_gray"
+                  app:layout_constraintTop_toBottomOf="@id/tvicScanded"
+                  app:layout_constraintLeft_toLeftOf="@id/tvicScanded"
+                  app:layout_constraintRight_toRightOf="@id/tvicScanded"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/tvArticleBrowed"
+
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="原创"
+                  android:textColor="@color/color_gray_3"
+                  app:layout_constraintTop_toBottomOf="@id/userProfile"
+                  app:layout_constraintLeft_toRightOf="@id/tvArticleBrowed"
+                  app:layout_constraintRight_toRightOf="parent"
+                  android:layout_marginTop="@dimen/margin_max1"
+                  android:id="@+id/tvicArticleCreated"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="20"
+                  android:textColor="@color/default_displayed_text_gray"
+                  app:layout_constraintTop_toBottomOf="@id/tvicArticleCreated"
+                  app:layout_constraintLeft_toLeftOf="@id/tvicArticleCreated"
+                  app:layout_constraintRight_toRightOf="@id/tvicArticleCreated"
+                  android:layout_marginTop="@dimen/margin_small"
+                  android:id="@+id/tvArticleCreated"
+
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:padding="@dimen/margin_max2"
+                                                       android:layout_marginTop="@dimen/margin_small"
+                                                       android:background="@drawable/bkd_round_bottom_blue_with_light"
+
+    >
+        <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
+                                                      android:scaleType="fitStart"
+                                                      android:src="@drawable/ic_article"
+                                                      app:layout_constraintLeft_toLeftOf="@id/ivicBlog"
+                                                      app:layout_constraintRight_toRightOf="@+id/ivicBlog"
+                                                      android:id="@+id/ivBlog"
+                                                      app:layout_constraintBottom_toTopOf="@+id/ivicBlog"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="我的博客"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintTop_toBottomOf="@id/ivBlog"
+                  app:layout_constraintRight_toLeftOf="@id/ivicAnswer"
+                  android:layout_marginTop="@dimen/margin_normal"
+                  android:id="@+id/ivicBlog"
+        />
+        <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
+                                                      android:src="@drawable/ic_answer"
+                                                      app:layout_constraintLeft_toLeftOf="@id/ivicAnswer"
+                                                      app:layout_constraintRight_toRightOf="@+id/ivicAnswer"
+                                                      app:layout_constraintBottom_toTopOf="@+id/ivicAnswer"
+                                                      android:id="@+id/ivAnswer"
+
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="我的回答"
+                  app:layout_constraintLeft_toRightOf="@+id/ivicBlog"
+                  app:layout_constraintTop_toBottomOf="@+id/ivAnswer"
+                  app:layout_constraintRight_toLeftOf="@id/ivicCllection"
+                  android:layout_marginTop="@dimen/margin_normal"
+                  android:id="@+id/ivicAnswer"
+        />
+        <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
+                                                      android:src="@drawable/ic_cllection"
+                                                      app:layout_constraintLeft_toLeftOf="@id/ivicCllection"
+                                                      app:layout_constraintRight_toRightOf="@id/ivicCllection"
+                                                      android:id="@+id/ivCllection"
+                                                      app:layout_constraintBottom_toTopOf="@id/ivicCllection"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="我的收藏"
+                  app:layout_constraintLeft_toRightOf="@+id/ivicAnswer"
+                  app:layout_constraintTop_toBottomOf="@+id/ivCllection"
+                  app:layout_constraintRight_toRightOf="parent"
+                  android:layout_marginTop="@dimen/margin_normal"
+                  android:id="@+id/ivicCllection"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="wrap_content"
+                                                       android:layout_marginTop="@dimen/margin_max2"
+                                                       android:background="@color/color_white"
+    >
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"
+                   android:src="@drawable/ic_setting"
+                   app:layout_constraintLeft_toLeftOf="parent"
+                   android:padding="@dimen/margin_small"
+                   app:layout_constraintTop_toTopOf="parent"
+                   android:id="@+id/icivSetting"
+        />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintLeft_toRightOf="@id/icivSetting"
+                  app:layout_constraintTop_toTopOf="@id/icivSetting"
+                  app:layout_constraintBottom_toBottomOf="@id/icivSetting"
+                  android:text="设置"
+                  android:layout_marginLeft="@dimen/margin_normal"/>
+        <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                   android:src="@drawable/ic_arrow_right"
+                   app:layout_constraintRight_toRightOf="parent"
+                   app:layout_constraintTop_toTopOf="@id/icivSetting"
+                   app:layout_constraintBottom_toBottomOf="@id/icivSetting"
+                   android:layout_marginRight="@dimen/margin_max"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

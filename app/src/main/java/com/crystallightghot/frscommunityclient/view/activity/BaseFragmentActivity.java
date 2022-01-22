@@ -21,11 +21,10 @@ import java.util.List;
 @Getter
 public abstract class BaseFragmentActivity extends BaseActivity {
 
-    // 加入到返回栈的fragment 默认加载到activity的fragment为栈底 模拟返回栈的内容
-    private final List<Fragment> fragmentsAddedInStack = new ArrayList<>();
-    // 添加到activity的fragment
-    private final List<Fragment> allFragmentAdded = new ArrayList<>();
-
+    // 存储加入到返回栈的fragment 默认加载到activity的fragment为栈底 模拟返回栈的内容
+    private final List<Fragment> fragmentsAddedInBackStack = new ArrayList<>();
+    // 存储添加到activity的不添加到返回栈的同等显示的fragment 例如：HomeFragment和BlogFragment 但都在在activity中显示（都不加入到返回栈中）
+    private final List<Fragment> fragmentsNoInBackStack = new ArrayList<>();
 
     @Setter
     // 用来替换fragment的布局的ID 默认为R.id.fragmentContainer
@@ -39,7 +38,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Context context = XUI.getContext();
         XUI.init((Application) context);
-
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         FRSCActivityUtile.removeAllFragments(this, fragments);
@@ -58,7 +56,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
-
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         int stackEntryCount = fragmentManager.getBackStackEntryCount();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -66,9 +63,9 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         if (stackEntryCount >= 1) {// 返回栈里还有添加到栈里的fragment
             fragmentManager.popBackStack();
             // 推出栈顶的fragment
-            fragmentsAddedInStack.remove(fragmentsAddedInStack.size() - 1);
+            fragmentsAddedInBackStack.remove(fragmentsAddedInBackStack.size() - 1);
             // 将退栈后 栈的栈顶的fragment显示出来
-            transaction.show(fragmentsAddedInStack.get(fragmentsAddedInStack.size() - 1));
+            transaction.show(fragmentsAddedInBackStack.get(fragmentsAddedInBackStack.size() - 1));
             transaction.commit();
         } else if (stackEntryCount == 0) { // 如果返回栈里没有Fragment 就直接销毁activity
             finish();
@@ -80,11 +77,6 @@ public abstract class BaseFragmentActivity extends BaseActivity {
      * @param defaultFragment 默认加载、、绑定在activity并且不加入系统回退栈的fragment
      */
     public void setDefaultFragment(Fragment defaultFragment) {
-        // 将默认加载的fragment加入到自定义的回退栈中
-        if (fragmentsAddedInStack.size() > 0){
-            fragmentsAddedInStack.clear();
-        }
-        fragmentsAddedInStack.add(defaultFragment);
         this.defaultFragment = defaultFragment;
     }
 

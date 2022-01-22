@@ -11,10 +11,12 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_btn_collection.xml" value="0.2574074074074074" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_btn_round_state_blue_to_grey.xml" value="0.19444444444444445" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_input_edit_text.xml" value="0.17222222222222222" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_bottom_blue_with_light.xml" value="0.264" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_radiou_solid_while_stroke_blue.xml" value="0.40923076923076923" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_solid_while.xml" value="0.19444444444444445" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_solid_while_stroke_blue.xml" value="0.415625" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_solid_while_stroke_bottom_right_bule_gray.xml" value="0.40923076923076923" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_round_solid_while_stroke_gray.xml" value="0.2296875" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_top_strick_graye.xml" value="0.265625" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/bkd_top_stricke_gray.xml" value="0.17222222222222222" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/drawable/btn_applause.xml" value="0.40923076923076923" />
@@ -51,10 +53,13 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_blog__edite_acquired.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_blog_acquired.xml" value="0.22083333333333333" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_help_acquired.xml" value="0.264" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_help__edite_acquired.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_home_view_page.xml" value="0.21145833333333333" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_home_view_page_item.xml" value="0.3734375" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_login.xml" value="0.33642691415313225" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_mine.xml" value="0.264" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_mine_blog.xml" value="0.2" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_refresh_status_layout.xml" value="0.271875" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_register_user.xml" value="0.264" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_result_searched.xml" value="0.25" />
@@ -71,6 +76,11 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/login_dialog_custom_layout.xml" value="0.1279128672745694" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/login_dialog_customlayout.xml" value="0.1279128672745694" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_article_comment.xml" value="0.4109375" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_article_lists.xml" value="0.19427558257345492" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_list.xml" value="0.19427558257345492" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_my_package.xml" value="0.12470023980815348" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_package.xml" value="0.264" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_search_user.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_video.xml" value="0.23645833333333333" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_view_home_item_list.xml" value="0.33" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_view_home_item_list_view.xml" value="0.2375" />

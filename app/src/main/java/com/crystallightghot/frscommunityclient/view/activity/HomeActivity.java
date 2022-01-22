@@ -17,6 +17,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.MineFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.SomethingFoundFragment;
 import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
@@ -84,10 +85,6 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     private void init() {
-
-        // 设置默认fragment
-        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
-
         ibtnHome.setBackground(getResourceDrawable(R.drawable.home_home_clicked));
         setItemTextColorClicked(tvHome);
 
@@ -127,9 +124,11 @@ public class HomeActivity extends BaseFragmentActivity {
                 setItemTextColorClicked(tvAnswer);
                 break;
             case R.id.ibtnSelf:
+                addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.drawable.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
+                FRSCActivityUtile.showFragment(MineFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             default:
                 break;
@@ -186,8 +185,8 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Log.d(TAG, "onCreate: ");
+        // 设置默认fragment
+        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
@@ -200,7 +199,6 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: ");
-
     }
 
     @Override
@@ -212,7 +210,6 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause: ");
-
     }
 
     @Override

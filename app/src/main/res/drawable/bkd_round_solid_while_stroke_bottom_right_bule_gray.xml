@@ -3,27 +3,42 @@
     <item android:state_pressed="false">
         <layer-list>
             <!-- 相当于padding -->
-            <item android:bottom="1dp" >
+            <item>
                 <shape>
                     <!-- 指定圆角矩形的4个圆角的半径 -->
-                    <solid android:color="#AFAFAF" />
-                    <corners android:radius="6dp" />
+                    <solid android:color="#1A299EE3"/>
+                    <corners android:radius="10dp"/>
+                </shape>
+            </item>
+            <!-- 相当于padding -->
+            <item android:bottom="1dp">
+                <shape>
+                    <!-- 指定圆角矩形的4个圆角的半径 -->
+                    <solid android:color="#33299EE3"/>
+                    <corners android:radius="10dp"/>
                 </shape>
             </item>
 
-            <item android:bottom="2dp" android:right="2dp" >
+            <item android:bottom="2dp" android:right="2dp">
                 <shape>
                     <!-- 指定圆角矩形的4个圆角的半径 -->
-                    <solid android:color="#03A9F4" />
-                    <corners android:radius="6dp" />
+                    <solid android:color="#4D299EE3"/>
+                    <corners android:radius="10dp"/>
                 </shape>
             </item>
-
             <item android:bottom="4dp" android:right="4dp">
                 <shape>
                     <!-- 指定圆角矩形的4个圆角的半径 -->
-                    <solid android:color="#FFFFFF" />
-                    <corners android:radius="6dp" />
+                    <solid android:color="#66299EE3"/>
+                    <corners android:radius="10dp"/>
+                </shape>
+            </item>
+
+            <item android:bottom="5dp" android:right="5dp">
+                <shape>
+                    <!-- 指定圆角矩形的4个圆角的半径 -->
+                    <solid android:color="#FFFFFF"/>
+                    <corners android:radius="10dp"/>
                 </shape>
             </item>
         </layer-list>

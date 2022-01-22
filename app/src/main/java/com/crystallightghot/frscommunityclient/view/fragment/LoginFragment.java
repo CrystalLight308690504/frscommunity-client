@@ -78,7 +78,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         }
         // 登陆失败
         if (!message.isSuccess()) {
-
             XToastUtils.error(message.getMessage());
             return;
         }
@@ -96,7 +95,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void getMessage(RegisterMessage message) {
         // 注册账号成功 将账号消息填入
         if (message.isSuccess()) {
-
             phoneName.setText(message.getPhoneNumber());
             iePassword.setText(message.getPassword());
         }

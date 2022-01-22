@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_button_text_size">20dp</dimen>
+    <dimen name="TitleText">16dp</dimen>
+
     <!--  topBar的返回按钮的大小-->
     <dimen name="ic_btn_top_bar_back_size">28dp</dimen>
-    <dimen name="default_btn_icon_size">32dp</dimen>
+    <dimen name="btn_icon_size">32dp</dimen>
     <dimen name="icon_default">38dp</dimen>
+    <dimen name="icon_arrow">20dp</dimen>
+
+    <dimen name="ic_btn_default">38dp</dimen>
 
     <dimen name="padding_small">5dp</dimen>
     <dimen name="padding_normal">10dp</dimen>
