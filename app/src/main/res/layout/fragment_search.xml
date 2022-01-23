@@ -14,7 +14,7 @@
             app:layout_constraintTop_toTopOf="@id/input_box"
             app:layout_constraintBottom_toBottomOf="@id/input_box"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_top_bar_back_blue"/>
+            android:src="@mipmap/icon_top_bar_back_blue"/>
     <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_box"
             android:layout_width="280dp"

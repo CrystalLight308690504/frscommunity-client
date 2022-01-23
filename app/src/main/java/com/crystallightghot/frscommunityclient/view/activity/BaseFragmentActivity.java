@@ -1,14 +1,11 @@
 package com.crystallightghot.frscommunityclient.view.activity;
 
-import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
-import com.xuexiang.xui.XUI;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,8 +38,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Context context = XUI.getContext();
-        XUI.init((Application) context);
+
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
         FRSCActivityUtile.removeAllFragments(this, fragments);
@@ -75,12 +71,5 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         } else if (stackEntryCount == 0) { // 如果返回栈里没有Fragment 就直接销毁activity
             finish();
         }
-    }
-    /**
-     *
-     * @param defaultFragment 默认加载、、绑定在activity并且不加入系统回退栈的fragment
-     */
-    public void setDefaultFragment(Fragment defaultFragment) {
-        this.defaultFragment = defaultFragment;
     }
 }

@@ -25,7 +25,7 @@
               android:id="@+id/tvPrivilege"/>
     <ImageView android:layout_width="@dimen/icon_arrow" android:layout_height="@dimen/icon_arrow"
                app:layout_constraintRight_toRightOf="parent"
-               android:src="@drawable/ic_arrow_right"
+               android:src="@mipmap/ic_arrow_right"
                app:layout_constraintTop_toTopOf="@id/tvPackageName"
                app:layout_constraintBottom_toBottomOf="@id/tvTotal"
                android:id="@+id/arrow"

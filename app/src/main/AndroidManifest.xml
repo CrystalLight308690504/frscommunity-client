@@ -4,6 +4,7 @@
           package="com.crystallightghot.frscommunityclient">
 
     <dist:module dist:instant="true"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -15,21 +16,11 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/icon_application_round"
             android:supportsRtl="true"
-            android:usesCleartextTraffic="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
         <activity
                 android:name=".view.activity.SingleFragmentActivity"
                 android:exported="true"/>
-        <activity
-                android:name=".view.activity.LoginAndRegisterActivity"
-                android:exported="true">
-
-
-        </activity>
-        <activity
-                android:name=".view.activity.SearchActivityAbstract"
-                android:exported="true">
-        </activity>
 
         <receiver
                 android:name=".view.broadcast.HomeViewPagerItemScrollChangedReceiver"
@@ -42,15 +33,14 @@
 
         <activity android:name=".view.activity.BaseFragmentActivity">
         </activity>
-        <activity android:name=".view.fragment.HomeSkatingTypeFragment">
-        </activity>
         <activity
-                android:name=".view.activity.HomeActivity"
+                android:name=".view.activity.MainActivity"
                 android:configChanges="screenSize"
-                android:screenOrientation="portrait"
-                android:exported="true"/>
-
-        <activity android:name=".view.activity.AccessActivity" android:exported="true">
+                android:exported="true"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".view.activity.AccessActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

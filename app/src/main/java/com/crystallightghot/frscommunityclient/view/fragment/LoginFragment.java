@@ -17,7 +17,7 @@ import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
+import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -82,7 +82,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
             return;
         }
 
-        Intent intent = new Intent(activity, HomeActivity.class);
+        Intent intent = new Intent(activity, MainActivity.class);
         startActivity(intent);
         activity.finish();
     }
@@ -161,7 +161,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @Override
     public void stateToLogin() {
-        Intent intent = new Intent(activity, HomeActivity.class);
+        Intent intent = new Intent(activity, MainActivity.class);
         startActivity(intent);
         activity.finish();
     }

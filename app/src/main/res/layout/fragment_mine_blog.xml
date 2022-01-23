@@ -9,7 +9,7 @@
 
     <ImageView android:layout_width="@dimen/ic_btn_top_bar_back_size"
                android:layout_height="@dimen/ic_btn_top_bar_back_size"
-               android:src="@drawable/icon_top_bar_back_blue"
+               android:src="@mipmap/icon_top_bar_back_blue"
                android:id="@+id/btnBack"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintTop_toTopOf="parent"

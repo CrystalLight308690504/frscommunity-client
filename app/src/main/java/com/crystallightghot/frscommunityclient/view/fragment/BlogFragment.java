@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.HomeActivity;
+import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
 import com.google.android.material.tabs.TabLayout;
 
@@ -36,7 +36,7 @@ public class BlogFragment extends BaseFragment{
     ViewPager blogViewPager;
 
     static  BlogFragment blogFragment;
-    HomeActivity activity;
+    MainActivity activity;
     private List<HomeViewPagerItemFragment> fragments;
 
     public BlogFragment() {
@@ -55,7 +55,7 @@ public class BlogFragment extends BaseFragment{
     }
 
     private void init() {
-        activity = (HomeActivity) getActivity();
+        activity = (MainActivity) getActivity();
         tabTitles = activity.getResources().getStringArray(R.array.tags_values);
         fragments = new ArrayList<>();
         int i = 0;

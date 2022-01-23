@@ -15,8 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:scaleType="fitStart"
-            android:src="@drawable/user_background"
-
     />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,7 +108,7 @@
                 android:layout_marginRight="@dimen/margin_normal"
                 android:layout_width="20dp" android:layout_height="26dp"
                 app:layout_constraintRight_toRightOf="parent"
-                android:src="@drawable/search"
+                android:src="@mipmap/search"
         />
 
         <androidx.viewpager.widget.ViewPager
