@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.view.activity;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.xuexiang.xui.XUI;
 
 /**
@@ -16,10 +16,7 @@ public abstract class BaseActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        XUI.init(getApplication());
-        XUI.debug(true);
-
-        FRSCDataBaseUtil.activity = this;
+        XUI.initTheme(this);
+        FRSCApplicationContext.activity = this;
     }
 }

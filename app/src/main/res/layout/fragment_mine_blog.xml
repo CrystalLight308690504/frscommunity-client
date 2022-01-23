@@ -5,7 +5,7 @@
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:padding="@dimen/margin_normal"
-                                                   tools:context=".view.fragment.MineBlogFragment">
+                                                   tools:context=".view.fragment.MyBlogFragment">
 
     <ImageView android:layout_width="@dimen/ic_btn_top_bar_back_size"
                android:layout_height="@dimen/ic_btn_top_bar_back_size"
@@ -21,7 +21,9 @@
               app:layout_constraintTop_toTopOf="@id/btnBack"
               app:layout_constraintBottom_toBottomOf="@id/btnBack"
               app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toRightOf="parent"/>
+              app:layout_constraintRight_toRightOf="parent"
+              android:id="@+id/tvTitle"
+    />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:background="@drawable/bkd_btn_back_round"
               android:padding="@dimen/margin_normal"
@@ -31,13 +33,14 @@
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               android:id="@+id/btnAddPackage"
-              />
+    />
     <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent" android:layout_height="wrap_content"
                                                app:layout_constraintLeft_toLeftOf="parent"
                                                app:layout_constraintTop_toBottomOf="@id/btnBack"
                                                android:layout_marginTop="@dimen/margin_normal"
                                                android:id="@+id/rvMyBlogs"
-                                               />
+                                               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

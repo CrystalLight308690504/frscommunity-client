@@ -19,7 +19,7 @@ import java.util.List;
  * @Date 2022/1/6 11:20
  * @Created by CrystalLightGhost
  */
-public class FRSCActivityUtile {
+public class FRSCShowFragmentToActivityUtil {
 
     /**
      * 删除加入到activity的在FragmentManager的fragment

@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class BlogFragment extends BaseFragment{
         View inflate = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, inflate);
         init();
-        FRSCActivityUtile.showFragment(BlogFragment.newInstance("blog"),activity,false);
+        FRSCShowFragmentToActivityUtil.showFragment(BlogFragment.newInstance("blog"),activity,false);
         return inflate;
     }
 

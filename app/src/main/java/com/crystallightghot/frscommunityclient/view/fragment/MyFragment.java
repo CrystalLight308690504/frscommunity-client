@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,10 +19,10 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MineFragment#newInstance} factory method to
+ * Use the {@link MyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment {
+public class MyFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -62,18 +63,20 @@ public class MineFragment extends Fragment {
     TextView ivicCllection;
     @BindView(R.id.icivSetting)
     ImageView icivSetting;
+    @BindView(R.id.clUser)
+    ConstraintLayout clUser;
 
     private String mParam1;
 
     BaseActivity activity;
 
-    public MineFragment() {
+    public MyFragment() {
         // Required empty public constructor
     }
 
 
-    public static MineFragment newInstance(String param1) {
-        MineFragment fragment = new MineFragment();
+    public static MyFragment newInstance(String param1) {
+        MyFragment fragment = new MyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -103,10 +106,11 @@ public class MineFragment extends Fragment {
         activity = (BaseActivity) getActivity();
     }
 
-    @OnClick({R.id.userProfile, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection})
+    @OnClick({R.id.clUser, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.userProfile:
+            case R.id.clUser:
+                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, UserInformationFragment.newInstance("UserInformationFragment"));
                 break;
             case R.id.tviFllowed:
                 break;
@@ -117,12 +121,18 @@ public class MineFragment extends Fragment {
             case R.id.tvArticleCreated:
                 break;
             case R.id.ivBlog:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(activity,MineBlogFragment.newInstance(""));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, MyBlogFragment.newInstance(""));
                 break;
             case R.id.ivAnswer:
+                FRSCIntentUtil.IntentToSingleFragmentActivity(activity,MyAnswerFragment.newInstance("MyAnswerFragment"));
                 break;
             case R.id.ivCllection:
+                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, MyCollectionFragment.newInstance("MyCollectionFragment"));
                 break;
         }
+    }
+
+    @OnClick()
+    public void onClick() {
     }
 }

@@ -21,7 +21,7 @@ import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -142,7 +142,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 loginAction();
                 break;
             case R.id.register:
-                FRSCActivityUtile.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity());
+                FRSCShowFragmentToActivityUtil.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity());
                 break;
         }
     }

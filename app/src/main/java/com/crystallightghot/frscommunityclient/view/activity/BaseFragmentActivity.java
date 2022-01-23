@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +14,10 @@ import java.util.List;
 
 /**
  * 在activity中需要使用到单个fragment进行页面跳转的
- *  所有继承此类的activity都要在 OnStart()前的生命周期使用 {@link setDefaultFragment(Fragment defaultFragment)} 方法传入默认加载的Fragmgent
+ *  所有继承此类的activity都要在 Activity的OnStart()前的生命周期使用 setDefaultFragment(Fragment defaultFragment) 方法传入默认加载的Fragmgent
  *  替换fragment的布局的ID 默认为R.id.fragmentContainer 将要替换fragment的容器 可以在OnStart()前的生命周期重新设置
  *
- *  搭配 {@link FRSCActivityUtile }工具类使用
+ *  搭配 {@link FRSCShowFragmentToActivityUtil }工具类使用
  */
 @Getter
 public abstract class BaseFragmentActivity extends BaseActivity {
@@ -41,7 +41,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        FRSCActivityUtile.removeAllFragments(this, fragments);
+        FRSCShowFragmentToActivityUtil.removeAllFragments(this, fragments);
     }
 
 
@@ -49,7 +49,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         // 添加默认fragment 到页面
-        FRSCActivityUtile.showFragment(getDefaultFragment(), this, false);
+        FRSCShowFragmentToActivityUtil.showFragment(getDefaultFragment(), this, false);
     }
 
     /**
@@ -65,8 +65,14 @@ public abstract class BaseFragmentActivity extends BaseActivity {
             fragmentManager.popBackStack();
             // 推出栈顶的fragment
             fragmentsAddedInBackStack.remove(fragmentsAddedInBackStack.size() - 1);
+
             // 将退栈后 栈的栈顶的fragment显示出来
-            transaction.show(fragmentsAddedInBackStack.get(fragmentsAddedInBackStack.size() - 1));
+            // 如果fragment返回栈里还有fragment
+            if(fragmentsAddedInBackStack.size() > 0){
+                transaction.show(fragmentsAddedInBackStack.get(fragmentsAddedInBackStack.size() - 1));
+            }else {// fragment返回栈里没有fragment了 则显示加载到activity的默认fragment
+                transaction.show(fragmentsNoInBackStack.get(fragmentsNoInBackStack.size() - 1));
+            }
             transaction.commit();
         } else if (stackEntryCount == 0) { // 如果返回栈里没有Fragment 就直接销毁activity
             finish();

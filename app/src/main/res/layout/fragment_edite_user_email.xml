@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   tools:context=".view.fragment.EditeUserNameFragment">
+
+    <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/log"
+            android:layout_width="120dp" android:layout_height="120dp"
+            android:src="@mipmap/icon_application"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:qmui_corner_radius="60dp"
+            android:layout_marginTop="80dp"
+    />
+<com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
+                                                         android:layout_height="wrap_content"
+                                                         android:padding="@dimen/margin_normal"
+                                                         app:layout_constraintLeft_toLeftOf="parent"
+                                                         app:layout_constraintTop_toBottomOf="@id/log"
+                                                         android:layout_marginTop="@dimen/margin_max2"
+                                                         android:layout_marginLeft="@dimen/margin_max"
+                                                         android:layout_marginRight="@dimen/margin_max"
+                                                         android:hint="输入修改的用邮箱"
+                                                         android:background="@drawable/bkd_input_edit_text"
+                                                         android:id="@+id/ieUserName"
+                                                         />
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="确认修改"
+            android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+            app:layout_constraintTop_toBottomOf="@id/ieUserName"
+            android:layout_marginLeft="@dimen/margin_max4"
+            android:layout_marginRight="@dimen/margin_max4"
+            android:layout_marginTop="@dimen/margin_max2"
+            android:id="@+id/btnModify"
+            />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

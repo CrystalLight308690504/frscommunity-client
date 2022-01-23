@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
 
@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCActivityUtile.showFragment(SearchResultsFragment.newInstance("SearchResultsFragment"), activity);
+                FRSCShowFragmentToActivityUtil.showFragment(SearchResultsFragment.newInstance("SearchResultsFragment"), activity);
                 break;
         }
     }

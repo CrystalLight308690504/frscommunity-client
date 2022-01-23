@@ -14,15 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeRecyclerViewAdapter;
-import com.crystallightghot.frscommunityclient.view.adapter.SimpleRecyclerAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,8 +38,6 @@ public class HomeViewPagerItemFragment extends Fragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
-
-    SimpleRecyclerAdapter mAdapter;
 
     public HomeViewPagerItemFragment() {
     }
@@ -63,7 +58,6 @@ public class HomeViewPagerItemFragment extends Fragment {
          */
         rvLists.setOnScrollChangeListener(new OnScrollChangeListener() {
             int lastScrolledInstance = 0;
-
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int scrolledInstance) {
 
@@ -116,14 +110,12 @@ public class HomeViewPagerItemFragment extends Fragment {
 
         rvLists.setAdapter(new HomeRecyclerViewAdapter(getActivity(), dataAll));
         WidgetUtils.initRecyclerView(rvLists);
-
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
             Status status = getRefreshStatus();
             switch (status) {
                 case SUCCESS:
-
                     refreshLayout.resetNoMoreData();//setNoMoreData(false);
                     llStateful.showContent();
                     refreshLayout.setEnableLoadMore(true);
@@ -142,17 +134,11 @@ public class HomeViewPagerItemFragment extends Fragment {
                     break;
             }
             refreshLayout.finishRefresh();
-
         }, 2000));
         //上拉加载
         refreshLayout.setOnLoadMoreListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
-            if (mAdapter.getItemCount() > 30) {
-                XToastUtils.toast("数据全部加载完毕");
-                refreshLayout.finishLoadMoreWithNoMoreData();//将不会再次触发加载更多事件
-            } else {
-                mAdapter.loadMore(Arrays.asList("5", "5", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
-                refreshLayout.finishLoadMore();
-            }
+            refreshLayout.finishLoadMore();
+
         }, 2000));
         refreshLayout.autoRefresh();//第一次进入触发自动刷新，演示效果
     }

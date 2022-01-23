@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.utils;
 
+import android.app.Activity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;
 
@@ -12,6 +13,8 @@ import lombok.Data;
 
 @Data
 public class FRSCApplicationContext {
+    // 当前使用的activity
+    public static Activity activity;
     static FRSCApplicationContext applicationContext;
     User user;
 

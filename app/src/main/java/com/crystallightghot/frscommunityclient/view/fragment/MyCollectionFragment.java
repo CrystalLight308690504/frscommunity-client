@@ -7,42 +7,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import org.jetbrains.annotations.NotNull;
+import com.crystallightghot.frscommunityclient.view.adapter.MyClassificationRecycleViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MineBlogFragment#newInstance} factory method to
+ * Use the {@link MyCollectionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineBlogFragment extends Fragment {
+public class MyCollectionFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
+
+    Activity activity;
     @BindView(R.id.btnBack)
     ImageView btnBack;
     @BindView(R.id.btnAddPackage)
     TextView btnAddPackage;
     @BindView(R.id.rvMyBlogs)
     RecyclerView rvMyBlogs;
-
-    Activity activity;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
 
-    public MineBlogFragment() {
+    public MyCollectionFragment() {
         // Required empty public constructor
     }
 
-    public static MineBlogFragment newInstance(String param1) {
-        MineBlogFragment fragment = new MineBlogFragment();
+    public static MyCollectionFragment newInstance(String param1) {
+        MyCollectionFragment fragment = new MyCollectionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -70,10 +70,9 @@ public class MineBlogFragment extends Fragment {
     private void init() {
         activity = getActivity();
 
-        LinearLayoutManager layoutCompat = new LinearLayoutManager(activity);
-        rvMyBlogs.setLayoutManager(layoutCompat);
+        tvTitle.setText("我的收藏");
 
-        BlogsPackageAdapter adapter = new BlogsPackageAdapter();
+        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
         rvMyBlogs.setAdapter(adapter);
     }
 
@@ -84,48 +83,11 @@ public class MineBlogFragment extends Fragment {
                 activity.onBackPressed();
                 break;
             case R.id.btnAddPackage:
+                AddClassificationDialogFragment dialogFragment = new AddClassificationDialogFragment();
+                dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
                 break;
         }
     }
 
-    class BlogsPackageAdapter extends RecyclerView.Adapter<BlogsPackageAdapter.ViewHolder> {
 
-
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(activity).inflate(R.layout.recycle_item_my_package,parent,false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 20;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            @BindView(R.id.tvPackageName)
-            TextView tvPackageName;
-            @BindView(R.id.tvTotal)
-            TextView tvTotal;
-            @BindView(R.id.tvPrivilege)
-            TextView tvPrivilege;
-            @BindView(R.id.arrow)
-            ImageView arrow;
-            @BindView(R.id.rvLists)
-            RecyclerView rvLists;
-            public ViewHolder(@NonNull @NotNull View itemView) {
-                super(itemView);
-                ButterKnife.bind(this, itemView);
-                tvPackageName.setText("589746645645656");
-            }
-        }
-    }
 }

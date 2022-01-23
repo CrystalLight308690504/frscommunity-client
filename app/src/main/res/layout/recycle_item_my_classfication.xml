@@ -28,12 +28,14 @@
                android:src="@mipmap/ic_arrow_right"
                app:layout_constraintTop_toTopOf="@id/tvPackageName"
                app:layout_constraintBottom_toBottomOf="@id/tvTotal"
-               android:id="@+id/arrow"
+               android:id="@+id/ivArrow"
     />
     <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent" android:layout_height="wrap_content"
                                                app:layout_constraintTop_toBottomOf="@id/tvTotal"
                                                android:layout_marginTop="@dimen/margin_normal"
                                                android:id="@+id/rvLists"
+                                               android:visibility="gone"
+                                               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                                />
 
 

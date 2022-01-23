@@ -17,9 +17,9 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.MineFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.MyFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.SomethingFoundFragment;
-import com.crystallightghot.frscommunityclient.view.util.FRSCActivityUtile;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
 /**
@@ -103,20 +103,20 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                FRSCActivityUtile.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                FRSCActivityUtile.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                FRSCActivityUtile.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             case R.id.ibtnAnswer:
                 allBottomIconBeenDefaultState();
@@ -128,7 +128,7 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                FRSCActivityUtile.showFragment(MineFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragment(MyFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
                 break;
             default:
                 break;
