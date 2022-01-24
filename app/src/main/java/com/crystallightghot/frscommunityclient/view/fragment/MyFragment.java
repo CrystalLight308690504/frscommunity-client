@@ -13,7 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
@@ -30,8 +32,6 @@ public class MyFragment extends Fragment {
     QMUIRadiusImageView2 userProfile;
     @BindView(R.id.userName)
     TextView userName;
-    @BindView(R.id.userDescription)
-    TextView userDescription;
 
     @BindView(R.id.tviFllowed)
     TextView tviFllowed;
@@ -63,12 +63,15 @@ public class MyFragment extends Fragment {
     TextView ivicCllection;
     @BindView(R.id.icivSetting)
     ImageView icivSetting;
-    @BindView(R.id.clUser)
-    ConstraintLayout clUser;
+
     @BindView(R.id.ivMyHelp)
     AppCompatImageView ivMyHelp;
     @BindView(R.id.btnSetting)
     ConstraintLayout btnSetting;
+    @BindView(R.id.btnArrowRight)
+    ImageView btnArrowRight;
+    @BindView(R.id.ivicMyHelp)
+    TextView ivicMyHelp;
 
     private String mParam1;
 
@@ -108,12 +111,16 @@ public class MyFragment extends Fragment {
 
     private void init() {
         activity = (BaseActivity) getActivity();
+        User user = FRSCApplicationContext.getUser();
+        if (null != user) {
+            userName.setText(user.getUserName());
+        }
     }
 
-    @OnClick({R.id.clUser, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp,R.id.btnSetting})
+    @OnClick({R.id.btnArrowRight, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.clUser:
+            case R.id.btnArrowRight:
                 FRSCIntentUtil.IntentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
                 break;
             case R.id.ivBlog:

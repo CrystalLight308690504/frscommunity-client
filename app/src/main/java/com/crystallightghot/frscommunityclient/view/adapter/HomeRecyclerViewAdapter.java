@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
-import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 import org.jetbrains.annotations.NotNull;
 
@@ -76,7 +76,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
+                    FRSCIntentUtil.IntentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(""));
                 }
             });
         }

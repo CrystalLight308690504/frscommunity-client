@@ -74,12 +74,9 @@ public class MainActivity extends BaseFragmentActivity {
      */
     public void bottomNavigationAndAddIconState(boolean isShowed) {
         if (isShowed) {
-            bottomItemIsVisible(true);
             addIconIsVisible(true);
         } else {
             addIconIsVisible(false);
-            bottomItemIsVisible(false);
-
         }
     }
 

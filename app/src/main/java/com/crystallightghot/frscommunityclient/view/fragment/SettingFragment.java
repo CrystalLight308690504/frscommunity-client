@@ -72,6 +72,7 @@ public class SettingFragment extends Fragment {
                     FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditUserEmailFragment.newInstance(""));
                 }else if("密码".equals(text)){
                     FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserPasswordByOldPasswordFragment.newInstance(""));
+                }else if("注销".equals(text)){
                 }
                 XToastUtils.toast(text + " is Clicked");
             }

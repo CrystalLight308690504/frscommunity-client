@@ -12,7 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bkd_round_bottom_blue_with_light"
-            android:id="@+id/clUser"
             android:padding="@dimen/margin_normal"
     >
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView2 android:layout_width="64dp" android:layout_height="64dp"
@@ -25,17 +24,11 @@
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   app:layout_constraintTop_toTopOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/userProfile"
+                  app:layout_constraintBottom_toBottomOf="@id/userProfile"
                   android:text="FRC"
                   android:textColor="@color/default_displayed_text_black"
                   android:id="@+id/userName"
         />
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@id/userName"
-                  app:layout_constraintLeft_toRightOf="@id/userProfile"
-                  android:layout_marginTop="@dimen/margin_normal"
-                  android:textSize="10dp"
-                  android:text="FRC"
-                  android:id="@+id/userDescription"
         />
         <ImageView android:layout_width="20dp"
                    android:layout_height="20dp"
@@ -44,6 +37,7 @@
                    app:layout_constraintBottom_toBottomOf="@id/userProfile"
                    android:layout_marginRight="@dimen/margin_normal"
                    android:src="@mipmap/ic_arrow_right"
+                   android:id="@+id/btnArrowRight"
         />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:text="关注"
