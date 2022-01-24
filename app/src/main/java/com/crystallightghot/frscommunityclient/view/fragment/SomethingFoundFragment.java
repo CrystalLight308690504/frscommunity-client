@@ -1,7 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +31,8 @@ public class SomethingFoundFragment extends Fragment {
     ViewPager2 viewPager;
 
     @Getter
-    List<DemoObjectFragment> fragments = new ArrayList<>();
-    DemoObjectFragment lastFragment;
+    List<ViewVideoObjectFragment> fragments = new ArrayList<>();
+    ViewVideoObjectFragment lastFragment;
 
     private String mParam1;
 
@@ -78,8 +77,7 @@ public class SomethingFoundFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                Log.d("TAG", "====onPageSelected ====     position >> " +position);
-                DemoObjectFragment fragment = fragments.get(position);
+                ViewVideoObjectFragment fragment = fragments.get(position);
                 fragment.startVideo();
                 if (null != lastFragment){
                     lastFragment.pauseVideo();
@@ -114,10 +112,10 @@ public class SomethingFoundFragment extends Fragment {
         @Override
         public Fragment createFragment(int position) {
             // Return a NEW fragment instance in createFragment(int)
-            DemoObjectFragment fragment = new DemoObjectFragment(position);
+            ViewVideoObjectFragment fragment = new ViewVideoObjectFragment(position);
             Bundle args = new Bundle();
             // Our object is just an integer :-P
-            args.putInt(DemoObjectFragment.ARG_OBJECT, position + 1);
+            args.putInt(ViewVideoObjectFragment.ARG_OBJECT, position + 1);
             fragment.setArguments(args);
             fragments.add(fragment);
             return fragment;

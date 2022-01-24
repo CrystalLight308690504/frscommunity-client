@@ -21,14 +21,14 @@ import xyz.doikki.videoplayer.player.VideoView;
  */
 // Instances of this class are fragments representing a single
 // object in our collection.
-public class DemoObjectFragment extends Fragment {
+public class ViewVideoObjectFragment extends Fragment {
 
     String path = "http://42.194.211.199/video/";
     int i ;
     VideoView videoView;
     public static final String ARG_OBJECT = "object";
 
-    public DemoObjectFragment(int i) {
+    public ViewVideoObjectFragment(int i) {
         this.i = i;
     }
 

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="@dimen/margin_normal"
-        tools:context=".view.fragment.SearchFragment">
+        tools:context=".view.fragment.AllSearchFragment">
 
     <ImageButton
             android:id="@+id/top_bar_back"

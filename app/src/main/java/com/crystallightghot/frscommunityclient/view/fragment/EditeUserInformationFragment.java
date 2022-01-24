@@ -4,33 +4,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
-import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
+import com.xuexiang.xui.widget.picker.widget.OptionsPickerView;
+import com.xuexiang.xui.widget.picker.widget.builder.OptionsPickerBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EditeUserInformationFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * @author 30869
  */
 public class EditeUserInformationFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.groupListView)
-    XUIGroupListView mGroupListView;
+    XUIGroupListView groupListView;
 
     private String mParam1;
     private String mParam2;
-
-    BaseFragmentActivity activity;
 
     public EditeUserInformationFragment() {
         // Required empty public constructor
@@ -56,23 +56,21 @@ public class EditeUserInformationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edite_user_information, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_user_information, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
+
     private void initView() {
-        activity = (BaseFragmentActivity) getActivity();
         View.OnClickListener onClickListener = v -> {
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
-                if ("用户名".equals(text)) {
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserNameFragment.newInstance(""));
-                }else if("邮箱".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditUserEmailFragment.newInstance(""));
-                }else if("密码".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserPasswordByOldPasswordFragment.newInstance(""));
+                if ("性别".equals(text)) {
+                    showSexPickerView();
+                } else if ("自我介绍".equals(text)) {
+                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditMyDescriptionFragment.newInstance("EditMyDescriptionFragment"));
                 }
                 XToastUtils.toast(text + " is Clicked");
             }
@@ -83,28 +81,15 @@ public class EditeUserInformationFragment extends Fragment {
                 .setTitle("用户信息")
                 .setDescription("点击对应标签修改信息")
                 .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(getItem(R.mipmap.icon_application,"头像:", ""), onClickListener)
-                .addItemView(getItem("用户名", "crystalLight"), onClickListener)
-                .addItemView(getItem("邮箱", "308690504@qq.com"), onClickListener)
-                .addItemView(getItem("密码", ""), onClickListener)
+                .addItemView(getItem("性别", "男"), onClickListener)
+                .addItemView(getItem("自我介绍", "程序员"), onClickListener)
 
-                .addTo(mGroupListView);
+                .addTo(groupListView);
 
     }
 
-    private XUICommonListItemView getItem(int pictureId, String titleText, String detailText) {
-        XUICommonListItemView item = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(),pictureId),
-                titleText,
-                detailText,
-                XUICommonListItemView.HORIZONTAL,
-                XUICommonListItemView.ACCESSORY_TYPE_NONE);
-        item.setAccessoryType(XUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
-        return item;
-    }
-
-    private XUICommonListItemView getItem( String titleText, String detailText) {
-        XUICommonListItemView item = mGroupListView.createItemView(
+    private XUICommonListItemView getItem(String titleText, String detailText) {
+        XUICommonListItemView item = groupListView.createItemView(
                 null,
                 titleText,
                 detailText,
@@ -113,4 +98,23 @@ public class EditeUserInformationFragment extends Fragment {
         item.setAccessoryType(XUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
         return item;
     }
+
+    int sexChose;
+    /**
+     * 性别选择
+     */
+    private void showSexPickerView() {
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(getContext(), (v, options1, options2, options3) -> {
+            XToastUtils.toast(options1 + " ========");
+            sexChose = options1;
+            return false;
+        })
+                .setTitleText("性别选择")
+                .setSelectOptions(sexChose)
+                .build();
+        String[] sex = {"男", "女"};
+        pvOptions.setPicker(sex);
+        pvOptions.show();
+    }
+
 }

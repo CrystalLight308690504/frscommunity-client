@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.adapter.MyClassificationRecycleViewAdapter;
+import com.crystallightghot.frscommunityclient.view.dialog.AddClassificationDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.

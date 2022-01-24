@@ -65,6 +65,10 @@ public class MyFragment extends Fragment {
     ImageView icivSetting;
     @BindView(R.id.clUser)
     ConstraintLayout clUser;
+    @BindView(R.id.ivMyHelp)
+    AppCompatImageView ivMyHelp;
+    @BindView(R.id.btnSetting)
+    ConstraintLayout btnSetting;
 
     private String mParam1;
 
@@ -106,22 +110,14 @@ public class MyFragment extends Fragment {
         activity = (BaseActivity) getActivity();
     }
 
-    @OnClick({R.id.clUser, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection})
+    @OnClick({R.id.clUser, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp,R.id.btnSetting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clUser:
                 FRSCIntentUtil.IntentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
                 break;
-            case R.id.tviFllowed:
-                break;
-            case R.id.tvFan:
-                break;
-            case R.id.tvArticleBrowed:
-                break;
-            case R.id.tvArticleCreated:
-                break;
             case R.id.ivBlog:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(MyBlogFragment.newInstance(""));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(MyBlogFragment.newInstance("MyBlogFragment"));
                 break;
             case R.id.ivAnswer:
                 FRSCIntentUtil.IntentToSingleFragmentActivity(MyAnswerFragment.newInstance("MyAnswerFragment"));
@@ -129,10 +125,16 @@ public class MyFragment extends Fragment {
             case R.id.ivCllection:
                 FRSCIntentUtil.IntentToSingleFragmentActivity(MyCollectionFragment.newInstance("MyCollectionFragment"));
                 break;
+            case R.id.ivMyHelp:
+                FRSCIntentUtil.IntentToSingleFragmentActivity(MyQuestionFragment.newInstance("MyHelpQuestionedFragment"));
+                break;
+            case R.id.btnSetting:
+                FRSCIntentUtil.IntentToSingleFragmentActivity(SettingFragment.newInstance("MyHelpQuestionedFragment"));
+                break;
+            default:
+                break;
         }
     }
-
-    @OnClick()
-    public void onClick() {
-    }
 }
+
+

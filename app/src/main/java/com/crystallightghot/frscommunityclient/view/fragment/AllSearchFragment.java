@@ -21,11 +21,11 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link AllSearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
-    static SearchFragment fragment;
+public class AllSearchFragment extends Fragment {
+    static AllSearchFragment fragment;
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.top_bar_back)
@@ -47,14 +47,14 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     List<Fragment> fragments;
 
-    public SearchFragment() {
+    public AllSearchFragment() {
         // Required empty public constructor
     }
 
 
-    public static SearchFragment newInstance(String string) {
+    public static AllSearchFragment newInstance(String string) {
         if (null == fragment) {
-            fragment = new SearchFragment();
+            fragment = new AllSearchFragment();
             Bundle args = new Bundle();
             args.putString(ARG_PARAM1, string);
             fragment.setArguments(args);
@@ -70,7 +70,6 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -96,7 +95,7 @@ public class SearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(SearchResultsFragment.newInstance("SearchResultsFragment"));
+                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(AllSearchResultsFragment.newInstance("SearchResultsFragment"));
                 break;
         }
     }

@@ -135,7 +135,8 @@
                                                       app:layout_constraintLeft_toLeftOf="@id/ivicBlog"
                                                       app:layout_constraintRight_toRightOf="@+id/ivicBlog"
                                                       android:id="@+id/ivBlog"
-                                                      app:layout_constraintBottom_toTopOf="@+id/ivicBlog"/>
+                                                      app:layout_constraintBottom_toTopOf="@+id/ivicBlog"
+                                                      app:layout_constraintTop_toTopOf="parent"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:text="我的博客"
                   app:layout_constraintLeft_toLeftOf="parent"
@@ -151,7 +152,7 @@
                                                       app:layout_constraintBottom_toTopOf="@+id/ivicAnswer"
                                                       android:id="@+id/ivAnswer"
 
-        />
+                                                      app:layout_constraintTop_toTopOf="parent"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:text="我的回答"
                   app:layout_constraintLeft_toRightOf="@+id/ivicBlog"
@@ -166,7 +167,7 @@
                                                       app:layout_constraintRight_toRightOf="@id/ivicCllection"
                                                       android:id="@+id/ivCllection"
                                                       app:layout_constraintBottom_toTopOf="@id/ivicCllection"
-        />
+                                                      app:layout_constraintTop_toTopOf="parent"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:text="我的收藏"
                   app:layout_constraintLeft_toRightOf="@+id/ivicAnswer"
@@ -175,12 +176,29 @@
                   android:layout_marginTop="@dimen/margin_normal"
                   android:id="@+id/ivicCllection"
         />
+        <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
+                                                      android:src="@mipmap/ic_help"
+                                                      app:layout_constraintTop_toBottomOf="@id/ivicBlog"
+                                                      android:layout_marginTop="@dimen/margin_max2"
+                                                      app:layout_constraintLeft_toLeftOf="@id/ivicMyHelp"
+                                                      app:layout_constraintRight_toRightOf="@id/ivicMyHelp"
+                                                      android:id="@+id/ivMyHelp"
+                                                      />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="我的求助"
+                  app:layout_constraintTop_toBottomOf="@+id/ivMyHelp"
+                  app:layout_constraintRight_toRightOf="@id/ivicBlog"
+                  app:layout_constraintLeft_toLeftOf="@id/ivicBlog"
+                  android:layout_marginTop="@dimen/margin_normal"
+                  android:id="@+id/ivicMyHelp"
+        />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                        android:layout_height="wrap_content"
                                                        android:layout_marginTop="@dimen/margin_max2"
+                                                       android:id="@+id/btnSetting"
                                                        android:background="@color/color_white"
     >
         <ImageView android:layout_width="30dp" android:layout_height="30dp"

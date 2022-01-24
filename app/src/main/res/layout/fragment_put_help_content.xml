@@ -21,7 +21,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:textSize="16dp"
-            android:text="发表博文"
+            android:text="寻求帮助"
             app:layout_constraintTop_toTopOf="@id/btn_back"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
             android:textColor="@color/default_displayed_text_black"
@@ -33,8 +33,8 @@
             app:layout_constraintTop_toTopOf="@id/btn_back"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
             android:background="@drawable/bkd_btn_back_round"
-            android:id="@+id/btnPosition"
             android:text="发送"
+            android:id="@+id/btnPosition"
     />
     <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleAcquired"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/titleAcquired"
             android:gravity="start"
-            android:hint="内容"
+            android:hint="具体问题"
             android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="5dp"/>
     <LinearLayout

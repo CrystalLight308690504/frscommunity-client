@@ -39,7 +39,7 @@ public class MainActivity extends BaseFragmentActivity {
     ImageButton ibtnFounded;
     @BindView(R.id.tvFounded)
     TextView tvFounded;
-    @BindView(R.id.ibtnAnswer)
+    @BindView(R.id.btnHelpNeeded)
     ImageButton ibtnAnswer;
     @BindView(R.id.tvAnswer)
     TextView tvAnswer;
@@ -95,39 +95,40 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
 
-    @OnClick({R.id.ibtnHome, R.id.ibtnBlog, R.id.ibtnFounded, R.id.ibtnAnswer, R.id.ibtnSelf})
+    @OnClick({R.id.ibtnHome, R.id.ibtnBlog, R.id.ibtnFounded, R.id.btnHelpNeeded, R.id.ibtnSelf})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ibtnHome:
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                FRSCShowFragmentToActivityUtil.showFragment(HomeFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(HomeFragment.newInstance("TAG:" ));
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                FRSCShowFragmentToActivityUtil.showFragment(BlogFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(BlogFragment.newInstance("TAG:" ));
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                FRSCShowFragmentToActivityUtil.showFragment(SomethingFoundFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(SomethingFoundFragment.newInstance("TAG:"));
                 break;
-            case R.id.ibtnAnswer:
+            case R.id.btnHelpNeeded:
                 allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.mipmap.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(HelpNeededFragment.newInstance("HelpNeededFragment"));
                 break;
             case R.id.ibtnSelf:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                FRSCShowFragmentToActivityUtil.showFragment(MyFragment.newInstance("TAG:" + System.currentTimeMillis()), this, false);
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(MyFragment.newInstance("TAG:" ));
                 break;
             default:
                 break;
@@ -189,12 +190,12 @@ public class MainActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
+        init();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        init();
     }
 
     @Override
@@ -221,13 +222,15 @@ public class MainActivity extends BaseFragmentActivity {
                 .addItem("求助","求助")
                 .setIsCenter(true)
                 .setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
-//                    XToastUtils.info(""+position);
                     dialog.dismiss();
                     switch (position){
                         case 0:
-                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutBlogFragment.newInstance(""));
+                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutBlogContentFragment.newInstance(""));
                             break;
                         case 1 :
+                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutHelpContentFragment.newInstance(""));
+                            break;
+                        default:
                             break;
                     }
                 })

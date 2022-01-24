@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.crystallightghot.frscommunityclient.R;
 
 
-public class EditeHelpAcquiredFragment extends Fragment {
+public class PutQuestionFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
@@ -18,7 +18,7 @@ public class EditeHelpAcquiredFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public EditeHelpAcquiredFragment() {
+    public PutQuestionFragment() {
         // Required empty public constructor
     }
 
@@ -27,8 +27,8 @@ public class EditeHelpAcquiredFragment extends Fragment {
      * @return A new instance of fragment EditeHelpAcquiredFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditeHelpAcquiredFragment newInstance(String param1) {
-        EditeHelpAcquiredFragment fragment = new EditeHelpAcquiredFragment();
+    public static PutQuestionFragment newInstance(String param1) {
+        PutQuestionFragment fragment = new PutQuestionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);

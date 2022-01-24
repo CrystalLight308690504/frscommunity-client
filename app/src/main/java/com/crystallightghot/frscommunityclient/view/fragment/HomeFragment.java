@@ -108,11 +108,13 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent);
                 FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
                 fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
-                fragmentChangeMessage.setDefaultFragment(HomeSkatingTypeFragment.newInstance("login"));
+                fragmentChangeMessage.setDefaultFragment(HomeSkatingTypeFragment.newInstance("HomeSkatingTypeFragment"));
                 EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
                 case R.id.search_input_box:
-                    IntentToSingleFragmentActivity(SearchFragment.newInstance("login"));
+                    IntentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
+                break;
+            default:
                 break;
         }
     }

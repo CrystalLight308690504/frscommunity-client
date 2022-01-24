@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
+import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 import org.jetbrains.annotations.NotNull;
 
@@ -71,7 +73,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             articleTitleTV = itemView.findViewById(R.id.article_title);
             articleContentTV = itemView.findViewById(R.id.article_content);
             imageView1IV = itemView.findViewById(R.id.image1);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
+                }
+            });
         }
 
         public void setData(Map<Object,Object> data) {

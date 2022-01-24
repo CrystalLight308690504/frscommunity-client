@@ -51,6 +51,7 @@
     <color name="color_pressed">#EEEEF0</color>
     <color name="color_pure_black">#000000</color>
     <color name="color_red">#FA3A3A</color>
+    <color name="color_black_red">#A81C1C</color>
     <color name="color_separator">#DEE0E2</color>
     <color name="color_separator_darken">#D4D6D8</color>
     <color name="color_transparent">#00000000</color>

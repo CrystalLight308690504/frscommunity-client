@@ -5,7 +5,7 @@
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:padding="@dimen/margin_normal"
-                                                   tools:context=".view.fragment.SearchResultsFragment">
+                                                   tools:context=".view.fragment.AllSearchResultsFragment">
 
     <ImageButton
             android:id="@+id/top_bar_back"
@@ -21,7 +21,7 @@
             android:singleLine="true"
             android:lines="1"
             android:maxLength="60"
-            android:background="@drawable/bkd_round_solid_while_stroke_blue"
+            android:background="@drawable/bkd_input_edit_text"
             app:layout_constraintLeft_toRightOf="@id/top_bar_back"
             app:layout_constraintTop_toTopOf="parent"
 

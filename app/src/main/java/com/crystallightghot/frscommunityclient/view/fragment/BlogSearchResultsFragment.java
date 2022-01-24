@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchResultsFragment extends Fragment {
+public class BlogSearchResultsFragment extends Fragment {
 
-    static SearchResultsFragment searchResultsFragment;
+    static BlogSearchResultsFragment allSearchResultsFragment;
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -37,18 +37,18 @@ public class SearchResultsFragment extends Fragment {
 
     BaseFragmentActivity activity;
 
-    public SearchResultsFragment() {
+    public BlogSearchResultsFragment() {
         // Required empty public constructor
     }
 
-    public static SearchResultsFragment newInstance(String param1) {
+    public static BlogSearchResultsFragment newInstance(String param1) {
 
-        if (null == searchResultsFragment) {
-            searchResultsFragment = new SearchResultsFragment();
+        if (null == allSearchResultsFragment) {
+            allSearchResultsFragment = new BlogSearchResultsFragment();
             Bundle args = new Bundle();
-            searchResultsFragment.setArguments(args);
+            allSearchResultsFragment.setArguments(args);
         }
-        return searchResultsFragment;
+        return allSearchResultsFragment;
     }
 
     @Override

@@ -35,7 +35,7 @@
                                                               app:layout_constraintLeft_toRightOf="@id/icPrivilege"
                                                               app:layout_constraintTop_toTopOf="@id/icPrivilege"
                                                               android:layout_marginLeft="@dimen/margin_normal"
-                                                              android:id="@+id/sbOpened"
+                                                              android:id="@+id/btnOpened"
     />
 
     <Button android:layout_width="wrap_content"
