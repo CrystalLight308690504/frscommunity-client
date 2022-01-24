@@ -29,23 +29,35 @@ import java.util.List;
  */
 public class HelpNeededFragment extends Fragment {
 
+    String[] tabTitles;
     private static final String ARG_PARAM1 = "param1";
+    Unbinder bind;
     @BindView(R.id.blog_tabs)
     TabLayout blogTabs;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
-    @BindView(R.id.btnSearch)
-    ImageButton btnSearch;
     @BindView(R.id.blog_viewPager)
     ViewPager blogViewPager;
 
-    private String mParam1;
+    static HelpNeededFragment blogFragment;
     MainActivity activity;
+    @BindView(R.id.btnSearch)
+    ImageButton btnSearch;
     private List<HomeViewPagerItemFragment> fragments;
-    String[] tabTitles;
-    Unbinder bind;
+
     public HelpNeededFragment() {
         // Required empty public constructor
+    }
+
+    public static HelpNeededFragment newInstance(String param1) {
+
+        if (null == blogFragment) {
+            blogFragment = new HelpNeededFragment();
+            Bundle args = new Bundle();
+            args.putString(ARG_PARAM1, param1);
+            blogFragment.setArguments(args);
+        }
+        return blogFragment;
     }
 
     private void init() {
@@ -60,6 +72,8 @@ public class HelpNeededFragment extends Fragment {
         }
         setViewPages(null);
     }
+
+
     private void setViewPages(List<View> views) {
 
         blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -83,31 +97,23 @@ public class HelpNeededFragment extends Fragment {
         blogTabs.setupWithViewPager(blogViewPager);
     }
 
-    public static HelpNeededFragment newInstance(String param1) {
-        HelpNeededFragment fragment = new HelpNeededFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_help_needed, container, false);
+        View view = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, view);
         init();
         return view;
     }
+
+    @Override
+    public void onDestroy() {
+        bind.unbind();
+        super.onDestroy();
+    }
+
+
 
     @OnClick({R.id.blog_more_list, R.id.btnSearch})
     public void onClick(View view) {
@@ -122,11 +128,4 @@ public class HelpNeededFragment extends Fragment {
                 break;
         }
     }
-
-    @Override
-    public void onDestroy() {
-        bind.unbind();
-        super.onDestroy();
-    }
-
 }
