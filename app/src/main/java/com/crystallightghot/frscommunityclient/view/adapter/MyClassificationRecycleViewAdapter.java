@@ -24,7 +24,7 @@ public  class MyClassificationRecycleViewAdapter extends RecyclerView.Adapter<My
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(FRSCApplicationContext.activity).inflate(R.layout.recycle_item_my_classfication, parent, false);
+        View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_my_classfication, parent, false);
         ButterKnife.bind(this, view);
         return new ViewHolder(view);
     }

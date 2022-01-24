@@ -68,11 +68,11 @@ public class EditeUserInformationFragment extends Fragment {
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSCShowFragmentToActivityUtil.showFragment(EditeUserNameFragment.newInstance(""),activity);
+                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserNameFragment.newInstance(""));
                 }else if("邮箱".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragment(EditeUserEmailFragment.newInstance(""),activity);
+                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditUserEmailFragment.newInstance(""));
                 }else if("密码".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity);
+                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserPasswordByOldPasswordFragment.newInstance(""));
                 }
                 XToastUtils.toast(text + " is Clicked");
             }

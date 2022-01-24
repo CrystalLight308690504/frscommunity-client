@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import androidx.fragment.app.Fragment;
 import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
 
@@ -12,10 +13,12 @@ import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessag
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
+ *  跳转到 SingleFragmentActivity 的 工具类  SingleFragmentActivity要注册接收DefaultFragment 的Event事件 ${SingleFragmentActivity.getMessage()}
  */
 public class FRSCIntentUtil {
 
-    public static final void IntentToSingleFragmentActivity(Activity activity, Fragment defaultFragment) {
+    public static final void IntentToSingleFragmentActivity(Fragment defaultFragment) {
+        Activity activity = FRSCApplicationContext.getActivity();
         Intent intent = new Intent(activity, SingleFragmentActivity.class);
         activity.startActivity(intent);
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();

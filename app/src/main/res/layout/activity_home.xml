@@ -16,7 +16,7 @@
     />
 
     <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
-            android:id="@+id/home_iv_add"
+            android:id="@+id/btnAdd"
             android:layout_width="50dp" android:layout_height="50dp"
             android:src="@mipmap/ic_add"
             app:qmui_corner_radius="20dp"

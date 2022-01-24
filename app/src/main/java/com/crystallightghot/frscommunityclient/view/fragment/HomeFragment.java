@@ -95,7 +95,6 @@ public class HomeFragment extends BaseFragment {
             i++;
         }
 
-
         typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, homeViewPagerItemFragments, tabTitles));
         tl_types.setupWithViewPager(typeContentContainer);
     }
@@ -113,7 +112,7 @@ public class HomeFragment extends BaseFragment {
                 EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
                 case R.id.search_input_box:
-                    IntentToSingleFragmentActivity(activity,SearchFragment.newInstance("login"));
+                    IntentToSingleFragmentActivity(SearchFragment.newInstance("login"));
                 break;
         }
     }

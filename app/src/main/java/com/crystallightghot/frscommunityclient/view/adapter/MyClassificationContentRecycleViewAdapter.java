@@ -21,7 +21,7 @@ public class MyClassificationContentRecycleViewAdapter extends RecyclerView.Adap
     @NotNull
     @Override
     public MyClassificationContentRecycleViewAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(FRSCApplicationContext.activity).inflate(R.layout.recycle_item_my_classsification_content, parent, false);
+        View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_my_classsification_content, parent, false);
         MyClassificationContentRecycleViewAdapter.ViewHolder viewHolder = new MyClassificationContentRecycleViewAdapter.ViewHolder(view);
         return viewHolder;
     }

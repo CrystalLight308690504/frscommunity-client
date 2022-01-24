@@ -13,7 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
@@ -89,7 +88,7 @@ public class UserInformationFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnEditeUserInformation:
-                FRSCShowFragmentToActivityUtil.showFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity());
+                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserInformationFragment.newInstance(""));
                 break;
         }
     }

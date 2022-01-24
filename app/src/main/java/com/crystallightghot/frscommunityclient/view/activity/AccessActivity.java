@@ -61,7 +61,7 @@ public class AccessActivity extends BaseActivity {
         tvTime.setText(time+"");
 
         if (time == 0){
-            IntentToSingleFragmentActivity(this,LoginFragment.newInstance("login"));
+            IntentToSingleFragmentActivity(LoginFragment.newInstance("login"));
             finish();
         }
     }

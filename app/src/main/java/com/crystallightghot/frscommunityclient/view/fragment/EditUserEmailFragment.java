@@ -9,21 +9,21 @@ import com.crystallightghot.frscommunityclient.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EditeUserEmailFragment#newInstance} factory method to
+ * Use the {@link EditUserEmailFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author 30869
  */
-public class EditeUserEmailFragment extends Fragment {
+public class EditUserEmailFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-
     private String mParam1;
 
-    public EditeUserEmailFragment() {
+    public EditUserEmailFragment() {
         // Required empty public constructor
     }
 
-    public static EditeUserEmailFragment newInstance(String param1) {
-        EditeUserEmailFragment fragment = new EditeUserEmailFragment();
+    public static EditUserEmailFragment newInstance(String param1) {
+        EditUserEmailFragment fragment = new EditUserEmailFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -41,6 +41,6 @@ public class EditeUserEmailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edite_user_name, container, false);
+        return inflater.inflate(R.layout.fragment_edite_user_email, container, false);
     }
 }

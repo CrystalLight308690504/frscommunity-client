@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCShowFragmentToActivityUtil.showFragment(SearchResultsFragment.newInstance("SearchResultsFragment"), activity);
+                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(SearchResultsFragment.newInstance("SearchResultsFragment"));
                 break;
         }
     }

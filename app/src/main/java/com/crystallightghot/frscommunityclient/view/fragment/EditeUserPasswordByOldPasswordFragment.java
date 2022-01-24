@@ -77,7 +77,7 @@ public class EditeUserPasswordByOldPasswordFragment extends Fragment {
             case R.id.btnModify:
                 break;
             case R.id.btnOldPasswordForgot:
-                FRSCShowFragmentToActivityUtil.showFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""),activity);
+                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserPasswordByPhoneNumberFragment.newInstance(""));
                 break;
         }
     }

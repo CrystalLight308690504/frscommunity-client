@@ -15,12 +15,11 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
-import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.MyFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.SomethingFoundFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.*;
+import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
 
 /**
  * @author crystallight
@@ -50,8 +49,8 @@ public class MainActivity extends BaseFragmentActivity {
     TextView tvSelf;
     @BindView(R.id.bottomItem)
     LinearLayout bottomItem;
-    @BindView(R.id.home_iv_add)
-    QMUIRadiusImageView2 homeIvAdd;
+    @BindView(R.id.btnAdd)
+    QMUIRadiusImageView2 btnAdd;
 
     Unbinder bind;
     String TAG = "调试";
@@ -153,9 +152,9 @@ public class MainActivity extends BaseFragmentActivity {
 
     public void addIconIsVisible(boolean isShowed) {
         if (isShowed) {
-            homeIvAdd.setVisibility(View.VISIBLE);
+            btnAdd.setVisibility(View.VISIBLE);
         } else {
-            homeIvAdd.setVisibility(View.GONE);
+            btnAdd.setVisibility(View.GONE);
         }
     }
 
@@ -190,37 +189,12 @@ public class MainActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);
-        init();
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: ");
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart: ");
+        init();
     }
 
     @Override
@@ -231,6 +205,34 @@ public class MainActivity extends BaseFragmentActivity {
             bind.unbind();
         }
         unregisterReceiver(receiver);
+    }
+
+    @OnClick(R.id.btnAdd)
+    public void onClick() {
+        showSimpleBottomSheetList();
+
+    }
+
+    // ================================ 生成不同类型的BottomSheet
+    private void showSimpleBottomSheetList() {
+        new BottomSheet.BottomListSheetBuilder(this)
+                .setTitle("添加")
+                .addItem("博客","博客")
+                .addItem("求助","求助")
+                .setIsCenter(true)
+                .setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
+//                    XToastUtils.info(""+position);
+                    dialog.dismiss();
+                    switch (position){
+                        case 0:
+                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutBlogFragment.newInstance(""));
+                            break;
+                        case 1 :
+                            break;
+                    }
+                })
+                .build()
+                .show();
     }
 }
 

@@ -110,7 +110,7 @@ public class MyFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clUser:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, UserInformationFragment.newInstance("UserInformationFragment"));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
                 break;
             case R.id.tviFllowed:
                 break;
@@ -121,13 +121,13 @@ public class MyFragment extends Fragment {
             case R.id.tvArticleCreated:
                 break;
             case R.id.ivBlog:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, MyBlogFragment.newInstance(""));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(MyBlogFragment.newInstance(""));
                 break;
             case R.id.ivAnswer:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(activity,MyAnswerFragment.newInstance("MyAnswerFragment"));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(MyAnswerFragment.newInstance("MyAnswerFragment"));
                 break;
             case R.id.ivCllection:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(activity, MyCollectionFragment.newInstance("MyCollectionFragment"));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(MyCollectionFragment.newInstance("MyCollectionFragment"));
                 break;
         }
     }

@@ -54,7 +54,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
                     .where(UserDao.Properties.UserId.eq(information.getUserId()))
                     .build()
                     .unique();
-            FRSCApplicationContext.getInstance().setUser(user);
+            FRSCApplicationContext.setUser(user);
 
             // 转化为登陆状态
             view.stateToLogin();
@@ -75,7 +75,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
         message.setCode(view.getMessageCode());
 
         // 存储User信息到全局中
-        FRSCApplicationContext.getInstance().setUser(user);
+        FRSCApplicationContext.setUser(user);
 
         DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
         UserDao userDao = daoSession.getUserDao();

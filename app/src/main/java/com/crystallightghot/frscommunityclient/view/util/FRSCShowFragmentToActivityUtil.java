@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 
 import java.util.List;
@@ -42,7 +43,8 @@ public class FRSCShowFragmentToActivityUtil {
      */
     public static void hideFragment(AppCompatActivity activity, Fragment fragment) {
 
-        if (null == fragment) { //没有就不需要清理
+            //没有就不需要隐藏
+        if (null == fragment) {
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -51,21 +53,25 @@ public class FRSCShowFragmentToActivityUtil {
         transaction.commitAllowingStateLoss();
     }
 
-    public static void showFragment(Fragment showedFragment, BaseFragmentActivity activity) {
-        showFragment(showedFragment, activity,  true);
+    public static void showFragmentAddedToBackStack(Fragment showedFragment) {
+        showFragment(showedFragment,FRSCApplicationContext.getBaseFragmentActivity(), true);
+    }
+
+    public static void showFragmentNoAddedToBackStack(Fragment showedFragment){
+        showFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), false);
     }
 
     /**
      * 添加fragment
      *
-     * @param showedFragment        要添加的fragment
-     * @param activity              使用此方法的activity
-     * @param addedToBackStack    是否将显示的fragment添加到返回栈
-     *                              一般只把activity默认的加载的fragment(也就是第一个fragment)设为false 不加入退回栈中
+     * @param showedFragment   要添加的fragment
+     * @param activity         使用此方法的activity
+     * @param addedToBackStack 是否将显示的fragment添加到返回栈
+     *                         一般只把activity默认的加载的fragment(也就是第一个fragment)设为false 不加入退回栈中
      */
     public static void showFragment(Fragment showedFragment, BaseFragmentActivity activity, boolean addedToBackStack) {
 
-        if(null == showedFragment){
+        if (null == showedFragment) {
             return;
         }
         // 隐藏前面显示的的fragment
@@ -94,14 +100,14 @@ public class FRSCShowFragmentToActivityUtil {
                 transaction.addToBackStack(showedFragment.getClass().getSimpleName());
                 // 记录加入到返回栈的fragment
                 fragmentsAddedInBackStack.add(showedFragment);
-            }else { // 不加入到fragment放回栈 作为默认加载fragment
+            } else { // 不加入到fragment放回栈 作为默认加载fragment
                 // 将fragment加入存储不返回的栈的list
                 fragmentsNoInBackStack.add(showedFragment);
             }
         }
 
         // 不添加到回退栈则作为默认fragment
-        if (!addedToBackStack){
+        if (!addedToBackStack) {
             activity.setDefaultFragment(showedFragment);
         }
         transaction.commit();
@@ -119,7 +125,7 @@ public class FRSCShowFragmentToActivityUtil {
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         for (int i = 0; i < yourFragments.size(); i++) {
             Fragment fragment = yourFragments.get(i);
-            if (!fragment.isHidden()){
+            if (!fragment.isHidden()) {
                 transaction.hide(fragment);
             }
         }

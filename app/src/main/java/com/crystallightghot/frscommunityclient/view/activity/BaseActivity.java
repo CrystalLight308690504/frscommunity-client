@@ -17,6 +17,11 @@ public abstract class BaseActivity  extends AppCompatActivity {
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         XUI.initTheme(this);
-        FRSCApplicationContext.activity = this;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FRSCApplicationContext.setActivity(this);
     }
 }
