@@ -32,12 +32,12 @@
 
             android:id="@+id/btnSearch"
             android:src="@mipmap/search"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="fitCenter"
             app:layout_constraintRight_toLeftOf="@id/blog_more_list"
             app:layout_constraintBottom_toBottomOf="@+id/blog_tabs"
-            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginRight="@dimen/margin_max"
             app:layout_constraintEnd_toStartOf="@+id/blog_more_list" app:layout_constraintTop_toTopOf="@+id/blog_tabs"/>
 
 

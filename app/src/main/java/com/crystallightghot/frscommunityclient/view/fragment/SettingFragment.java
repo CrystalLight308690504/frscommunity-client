@@ -28,7 +28,6 @@ public class SettingFragment extends Fragment {
     XUIGroupListView mGroupListView;
 
     private String mParam1;
-    private String mParam2;
 
     BaseFragmentActivity activity;
 

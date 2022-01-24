@@ -5,21 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,13 +30,13 @@ public class HelpNeededFragment extends Fragment {
     TabLayout blogTabs;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
-    @BindView(R.id.blog_viewPager)
-    ViewPager blogViewPager;
 
     static HelpNeededFragment blogFragment;
     MainActivity activity;
     @BindView(R.id.btnSearch)
     ImageButton btnSearch;
+    @BindView(R.id.blog_viewPager)
+    ViewPager2 viewPager;
     private List<HomeViewPagerItemFragment> fragments;
 
     public HelpNeededFragment() {
@@ -60,72 +54,13 @@ public class HelpNeededFragment extends Fragment {
         return blogFragment;
     }
 
-    private void init() {
-        activity = (MainActivity) getActivity();
-        tabTitles = activity.getResources().getStringArray(R.array.tags_values);
-        fragments = new ArrayList<>();
-        int i = 0;
-        while (i < tabTitles.length) {
-            blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
-            fragments.add(new HomeViewPagerItemFragment(tabTitles[i], null));
-            i++;
-        }
-        setViewPages(null);
-    }
-
-
-    private void setViewPages(List<View> views) {
-
-        blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.size();
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return tabTitles[position];
-            }
-        });
-        blogTabs.setupWithViewPager(blogViewPager);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_blog, container, false);
+        View view = inflater.inflate(R.layout.fragment_help_needed, container, false);
         bind = ButterKnife.bind(this, view);
-        init();
         return view;
-    }
-
-    @Override
-    public void onDestroy() {
-        bind.unbind();
-        super.onDestroy();
-    }
-
-
-
-    @OnClick({R.id.blog_more_list, R.id.btnSearch})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.blog_more_list:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(HomeSkatingTypeFragment.newInstance(""));
-                break;
-            case R.id.btnSearch:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));
-                break;
-            default:
-                break;
-        }
     }
 }

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:background="@color/color_white"
-            android:padding="5dp"
+            android:padding="@dimen/margin_normal"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
