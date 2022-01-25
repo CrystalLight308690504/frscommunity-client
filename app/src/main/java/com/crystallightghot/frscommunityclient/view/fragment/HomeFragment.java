@@ -20,13 +20,12 @@ import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
+import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.IntentToSingleFragmentActivity;
 
 
 /**
@@ -100,7 +99,7 @@ public class HomeFragment extends BaseFragment {
                 EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
             case R.id.search_input_box:
-                IntentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
                 break;
             default:
                 break;

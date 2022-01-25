@@ -1,27 +1,26 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
-import com.crystallightghot.frscommunityclient.utils.requestio.RequestIOE;
+import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.utils.requestio.OKHttpRequestUtil;
+import com.crystallightghot.frscommunityclient.utils.requestio.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 
 /**
- * @Date 2022/1/19
+ * @Date 2022/1/25
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class RegisterModel implements RegisterContract.Model {
+public class SettingModel implements SettingContract.Model {
 
 
-    @Override
-    public void registerUser(User user, final RespondCallBck callback) {
-
+    public void unLoginUser(User user, final RespondCallBck callback) {
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
-        String url = RequestIOE.USER_Register.getRequestIO();
-        OKHttpRequestUtil.postRequestWithBodyJson(url,userJson,callback);
+        String url = RequestIOE.USER_UNLOGIN.getRequestIO();
+        OKHttpRequestUtil.deleteWithBodyJson(url,userJson,callback);
     }
+
 }

@@ -8,8 +8,9 @@ package com.crystallightghot.frscommunityclient.utils.requestio;
  */
 public enum RequestIOE {
 
-    USER_Login("user/login","9002"),
-    USER_Register("user/register","9002");
+    USER_Login("/user/login","9002"),
+    USER_Register("/user/register","9002"),
+    USER_UNLOGIN("/user/logout","9002");
 
     private String host = "http://42.194.211.199:";
     private String port;
@@ -21,7 +22,7 @@ public enum RequestIOE {
     }
 
     public String getRequestIO() {
-        return host + port + "/" + requestInterface;
+        return host + port  + requestInterface;
     }
 
 

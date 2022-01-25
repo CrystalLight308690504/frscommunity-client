@@ -90,8 +90,6 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
         // 记录当前用户登陆状态
         LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
         LoginInformation loginInformation = new LoginInformation(null,user.getUserId(),1);
-//        loginInformation.setUserId(user.getUserId());
-//        loginInformation.setLogin(true);
         loginInformationDao.insert(loginInformation);
 
         EventBus.getDefault().post(message);

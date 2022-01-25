@@ -76,7 +76,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCIntentUtil.IntentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(""));
+                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(""));
                 }
             });
         }

@@ -21,7 +21,13 @@ public abstract class BaseActivity  extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        super.onStart();
         FRSCApplicationContext.setActivity(this);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        FRSCApplicationContext.setActivity(null);
     }
 }

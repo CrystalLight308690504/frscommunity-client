@@ -12,7 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.IntentToSingleFragmentActivity;
+import static com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil.intentToSingleFragmentActivity;
 
 public class AccessActivity extends BaseActivity {
 
@@ -61,7 +61,7 @@ public class AccessActivity extends BaseActivity {
         tvTime.setText(time+"");
 
         if (time == 0){
-            IntentToSingleFragmentActivity(LoginFragment.newInstance("login"));
+            intentToSingleFragmentActivity(LoginFragment.newInstance("login"));
             finish();
         }
     }

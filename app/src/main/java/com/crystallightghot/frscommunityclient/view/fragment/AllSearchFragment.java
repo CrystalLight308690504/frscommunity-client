@@ -12,7 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
@@ -39,7 +40,7 @@ public class AllSearchFragment extends Fragment {
     @BindView(R.id.rv_search_history)
     RecyclerView lvSearchHistory;
 
-    SingleFragmentActivity activity;
+    BaseActivity activity;
     @BindView(R.id.hot_searches)
     QMUIFloatLayout hotSearches;
 
@@ -63,7 +64,7 @@ public class AllSearchFragment extends Fragment {
     }
 
     private void init() {
-        activity = (SingleFragmentActivity) getActivity();
+        activity = (BaseActivity) getActivity();
 
         topBarBack.setOnClickListener( view -> activity.onBackPressed());
     }
@@ -95,7 +96,7 @@ public class AllSearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(AllSearchResultsFragment.newInstance("SearchResultsFragment"));
+                FRSCShowFragmentToActivityUtil.showFragment(AllSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
     }

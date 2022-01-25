@@ -15,11 +15,6 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-/*
- * @Description TODO
- * @Date 2022/1/6 11:20
- * @Created by CrystalLightGhost
- */
 public class FRSCShowFragmentToActivityUtil {
 
     /**
@@ -54,7 +49,7 @@ public class FRSCShowFragmentToActivityUtil {
     }
 
     public static void showFragmentAddedToBackStack(Fragment showedFragment) {
-        showFragment(showedFragment,FRSCApplicationContext.getBaseFragmentActivity(), true);
+        showFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), true);
     }
 
     public static void showFragmentNoAddedToBackStack(Fragment showedFragment){
@@ -71,19 +66,24 @@ public class FRSCShowFragmentToActivityUtil {
      */
     public static void showFragment(Fragment showedFragment, BaseFragmentActivity activity, boolean addedToBackStack) {
 
-        if (null == showedFragment) {
+        if (null == showedFragment || null == activity) {
             return;
         }
+        List<Fragment> fragmentsNoInBackStack = activity.getFragmentsNoInBackStack();
+        List<Fragment> fragmentsAddedInBackStack = activity.getFragmentsAddedInBackStack();
         // 隐藏前面显示的的fragment
         // 将不添加到返回栈的fragment隐藏
-        List<Fragment> fragmentsNoInBackStack = activity.getFragmentsNoInBackStack();
         if (null != fragmentsNoInBackStack && fragmentsNoInBackStack.size() != 0) {
             setFragmentsHidden(activity, fragmentsNoInBackStack);
         }
-        // 将添加到返回栈的fragment隐藏
-        List<Fragment> fragmentsAddedInBackStack = activity.getFragmentsAddedInBackStack();
-        if (null != fragmentsAddedInBackStack && fragmentsAddedInBackStack.size() != 0) {
-            setFragmentsHidden(activity, fragmentsAddedInBackStack);
+
+        if (addedToBackStack){
+            // 将添加到返回栈的fragment隐藏
+            if (null != fragmentsAddedInBackStack && fragmentsAddedInBackStack.size() != 0) {
+                setFragmentsHidden(activity, fragmentsAddedInBackStack);
+            }
+        }else { // 不加入fragment回退栈 将这个fragment当作第一个显示的view 将回退栈里的fragment给全部清除回退栈
+            removeAllFragments(activity,fragmentsAddedInBackStack);
         }
 
         FragmentManager fragmentManager = activity.getSupportFragmentManager();

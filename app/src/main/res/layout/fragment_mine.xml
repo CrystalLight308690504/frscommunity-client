@@ -25,10 +25,10 @@
                   app:layout_constraintTop_toTopOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/userProfile"
                   app:layout_constraintBottom_toBottomOf="@id/userProfile"
-                  android:text="FRC"
+                  android:layout_marginLeft="@dimen/margin_normal"
                   android:textColor="@color/default_displayed_text_black"
+                  android:textSize="20dp"
                   android:id="@+id/userName"
-        />
         />
         <ImageView android:layout_width="20dp"
                    android:layout_height="20dp"

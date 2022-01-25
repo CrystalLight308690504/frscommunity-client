@@ -99,33 +99,33 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(HomeFragment.newInstance("TAG:" ));
+                FRSCShowFragmentToActivityUtil.showFragment(HomeFragment.newInstance("TAG:" ),this,false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(BlogFragment.newInstance("TAG:" ));
+                FRSCShowFragmentToActivityUtil.showFragment(BlogFragment.newInstance("TAG:" ),this,false);
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(SomethingFoundFragment.newInstance("TAG:"));
+                FRSCShowFragmentToActivityUtil.showFragment(SomethingFoundFragment.newInstance("TAG:"),this,false);
                 break;
             case R.id.btnHelpNeeded:
                 allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.mipmap.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(RequireHelpFragment.newInstance("HelpNeededFragment"));
+                FRSCShowFragmentToActivityUtil.showFragment(RequireHelpFragment.newInstance("HelpNeededFragment"),this,false);
                 break;
             case R.id.ibtnSelf:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(MyFragment.newInstance("TAG:" ));
+                FRSCShowFragmentToActivityUtil.showFragment(MyFragment.newInstance("TAG:" ),this,false);
                 break;
             default:
                 break;
@@ -222,10 +222,10 @@ public class MainActivity extends BaseFragmentActivity {
                     dialog.dismiss();
                     switch (position){
                         case 0:
-                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutBlogContentFragment.newInstance(""));
+                            FRSCIntentUtil.intentToSingleFragmentActivity(PutBlogContentFragment.newInstance(""));
                             break;
                         case 1 :
-                            FRSCIntentUtil.IntentToSingleFragmentActivity(PutHelpContentFragment.newInstance(""));
+                            FRSCIntentUtil.intentToSingleFragmentActivity(PutHelpContentFragment.newInstance(""));
                             break;
                         default:
                             break;

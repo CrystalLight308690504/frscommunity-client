@@ -87,10 +87,10 @@ public class BlogFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blog_more_list:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
+                FRSCIntentUtil.intentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
                 break;
             case R.id.btnSearch:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));
+                FRSCIntentUtil.intentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));
                 break;
             default:
                 break;

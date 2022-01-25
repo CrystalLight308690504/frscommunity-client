@@ -32,21 +32,21 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 public class RegisterUserFragment extends BaseFragment implements RegisterContract.View {
 
-    @BindView(R.id.phoneNumber)
-    TextInputEditText phoneName;
-    @BindView(R.id.iePassword)
-    TextInputEditText tvCodVerified;
-    @BindView(R.id.btnSendVerifyCode)
-    AppCompatButton btnSendVerifyCode;
-    @BindView(R.id.register)
-    AppCompatButton register;
-    @BindView(R.id.password)
-    TextInputEditText ietPassword;
 
     // 发送的验证码
     String verifyCode;
     BaseActivity activity;
     RegisterPresenter presenter;
+    @BindView(R.id.iePhoneNumber)
+    TextInputEditText iePhoneNumber;
+    @BindView(R.id.iePassword)
+    TextInputEditText iePassword;
+    @BindView(R.id.ieVerifyCode)
+    TextInputEditText ieVerifyCode;
+    @BindView(R.id.btnSendVerifyCode)
+    AppCompatButton btnSendVerifyCode;
+    @BindView(R.id.register)
+    AppCompatButton register;
 
 
     public RegisterUserFragment() {
@@ -76,7 +76,7 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
     }
 
 
-    @OnClick({R.id.phoneNumber, R.id.iePassword, R.id.btnSendVerifyCode, R.id.register})
+    @OnClick({ R.id.btnSendVerifyCode, R.id.register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSendVerifyCode:
@@ -107,9 +107,9 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
     }
 
     private void registerAction() {
-        String verifyCodeInput = tvCodVerified.getText().toString();
-        Editable phoneNameText = phoneName.getText();
-        String password = ietPassword.getText().toString();
+        String verifyCodeInput = ieVerifyCode.getText().toString();
+        Editable phoneNameText = iePhoneNumber.getText();
+        String password = iePassword.getText().toString();
         int length = phoneNameText.length();
 
         if (length != 11) {
@@ -160,12 +160,12 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RegisterMessage message) {
-        if (!message.isSuccess()){
+        if (!message.isSuccess()) {
             XToastUtils.error(message.getMessage());
-        }else {
+        } else {
             // 使验证码失效
             verifyCode = null;
-            tvCodVerified.setText("");
+            ieVerifyCode.setText("");
             XToastUtils.success(message.getMessage());
             activity.onBackPressed();
         }

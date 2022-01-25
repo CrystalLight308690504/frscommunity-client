@@ -17,9 +17,10 @@ import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessag
  */
 public class FRSCIntentUtil {
 
-    public static final void IntentToSingleFragmentActivity(Fragment defaultFragment) {
+    public static final void intentToSingleFragmentActivity(Fragment defaultFragment) {
+
         Activity activity = FRSCApplicationContext.getActivity();
-        Intent intent = new Intent(activity, SingleFragmentActivity.class);
+        Intent intent = new Intent(activity,SingleFragmentActivity.class);
         activity.startActivity(intent);
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
         fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);

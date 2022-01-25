@@ -21,7 +21,7 @@
     />
 
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneNumber"
+            android:id="@+id/iePhoneNumber"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/margin_max"
@@ -34,11 +34,11 @@
             android:background="@drawable/bkd_input_edit_text"
     />
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/iePassword"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/margin_max"
-            app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+            app:layout_constraintTop_toBottomOf="@id/iePhoneNumber"
             android:inputType="textPassword"
             android:maxLength="20"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -51,12 +51,12 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginTop="@dimen/margin_normal"
-            app:layout_constraintTop_toBottomOf="@id/password"
+            app:layout_constraintTop_toBottomOf="@id/iePassword"
             android:inputType="number"
             android:maxLength="6"
             android:hint="请输入6位验证码"
             android:background="@drawable/bkd_input_edit_text"
-            app:layout_constraintStart_toStartOf="@+id/phoneNumber"/>
+            app:layout_constraintStart_toStartOf="@+id/iePhoneNumber"/>
 
     <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSendVerifyCode"

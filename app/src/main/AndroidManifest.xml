@@ -21,7 +21,14 @@
             android:usesCleartextTraffic="true">
         <activity
                 android:name=".view.activity.SingleFragmentActivity"
-                android:exported="true"/>
+                android:exported="true"
+        >
+            <intent-filter>
+                <action android:name="SingleFragmentActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
 
         <receiver
                 android:name=".view.broadcast.HomeViewPagerItemScrollChangedReceiver"

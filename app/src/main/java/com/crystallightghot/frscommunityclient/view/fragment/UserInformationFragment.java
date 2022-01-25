@@ -1,6 +1,9 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
@@ -81,7 +86,22 @@ public class UserInformationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_information, container, false);
         ButterKnife.bind(this,view);
+        initView();
         return view;
+    }
+
+    private void initView() {
+        User user = FRSCApplicationContext.getUser();
+        if (null != user){
+
+            userName.setText(user.getUserName());
+
+            String userProfileBase64 = user.getProfile();
+            byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            userProfile.setImageBitmap(decodedByte);
+        }
+
     }
 
     @OnClick({R.id.followers, R.id.btnEditeUserInformation})

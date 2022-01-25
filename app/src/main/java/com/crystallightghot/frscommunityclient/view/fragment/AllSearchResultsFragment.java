@@ -20,7 +20,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class AllSearchResultsFragment extends Fragment {
 
-    static AllSearchResultsFragment allSearchResultsFragment;
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -40,12 +39,7 @@ public class AllSearchResultsFragment extends Fragment {
 
     public static AllSearchResultsFragment newInstance(String param1) {
 
-        if (null == allSearchResultsFragment) {
-            allSearchResultsFragment = new AllSearchResultsFragment();
-            Bundle args = new Bundle();
-            allSearchResultsFragment.setArguments(args);
-        }
-        return allSearchResultsFragment;
+        return  new AllSearchResultsFragment();
     }
 
     @Override

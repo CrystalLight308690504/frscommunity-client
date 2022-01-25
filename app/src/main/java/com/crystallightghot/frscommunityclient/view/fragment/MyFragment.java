@@ -1,6 +1,9 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +117,10 @@ public class MyFragment extends Fragment {
         User user = FRSCApplicationContext.getUser();
         if (null != user) {
             userName.setText(user.getUserName());
+            String userProfile = user.getProfile();
+            byte[] decodedString = Base64.decode(userProfile, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            this.userProfile.setImageBitmap(decodedByte);
         }
     }
 
@@ -121,22 +128,22 @@ public class MyFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnArrowRight:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
                 break;
             case R.id.ivBlog:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(MyBlogFragment.newInstance("MyBlogFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyBlogFragment.newInstance("MyBlogFragment"));
                 break;
             case R.id.ivAnswer:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(MyAnswerFragment.newInstance("MyAnswerFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyAnswerFragment.newInstance("MyAnswerFragment"));
                 break;
             case R.id.ivCllection:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(MyCollectionFragment.newInstance("MyCollectionFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyCollectionFragment.newInstance("MyCollectionFragment"));
                 break;
             case R.id.ivMyHelp:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(MyQuestionFragment.newInstance("MyHelpQuestionedFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyQuestionFragment.newInstance("MyHelpQuestionedFragment"));
                 break;
             case R.id.btnSetting:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(SettingFragment.newInstance("MyHelpQuestionedFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(SettingFragment.newInstance("MyHelpQuestionedFragment"));
                 break;
             default:
                 break;
