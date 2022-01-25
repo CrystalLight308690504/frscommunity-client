@@ -1,62 +1,79 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.HelpRecycleViewOfContentAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * @author crystallightghost
- * @date 2022/1/2
- * @Version: 1.0
- * description：
+ * A simple {@link Fragment} subclass.
+ * Use the {@link HelpViewPagerItemFragment#newInstance} factory method to
+ * create an instance of this fragment.
  */
-public class HomeViewPagerItemFragment extends Fragment {
+public class HelpViewPagerItemFragment extends Fragment {
 
-    @BindView(R.id.rv_lists)
-    RecyclerView rvLists;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
+    private static final String ARG_PARAM1 = "param1";
+    @BindView(R.id.rlContents)
+    RecyclerView rlContents;
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
-    public HomeViewPagerItemFragment() {
+    private String mParam1;
+
+    public HelpViewPagerItemFragment() {
+        // Required empty public constructor
     }
 
-
-    List<HashMap> dataAll;
-
-    public HomeViewPagerItemFragment(String label, List<HashMap> dataAll) {
-        this.dataAll = dataAll;
+    /**
+     * @param param1 Parameter 1.
+     * @return A new instance of fragment HelpViewPagerItemFragment.
+     */
+    public static HelpViewPagerItemFragment newInstance(String param1) {
+        HelpViewPagerItemFragment fragment = new HelpViewPagerItemFragment();
         Bundle args = new Bundle();
-        args.putString("label", label);
-        setArguments(args);
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
     }
 
-    private void addRecycleViewScrolledListener() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_help_view_pager_item, container, false);
+        ButterKnife.bind(this, view);
+        initView();
+        return view;
+    }
+
+    private void initView() {
+        rlContents.setAdapter(new HelpRecycleViewOfContentAdapter());
         /**
          * 多recycleView 滑动事件监听
          */
-        rvLists.setOnScrollChangeListener(new OnScrollChangeListener() {
+        rlContents.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             int lastScrolledInstance = 0;
+
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int scrolledInstance) {
 
@@ -71,49 +88,12 @@ public class HomeViewPagerItemFragment extends Fragment {
                 getActivity().sendBroadcast(intent);
             }
         });
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_view_page_item, container, false);
-        ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
-
-    private void init() {
-        addRecycleViewScrolledListener();
-        putDataToRV(dataAll);
-
-    }
-
-    /**
-     * 将数据加入到RecycleView中
-     */
-    public void putDataToRV(List dataAll) {
-        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (null == dataAll) {
-            dataAll = new LinkedList<>();
-        }
-
-        for (int i = 0; i < 20; i++) {
-            HashMap<Object, Object> data = new HashMap();
-            data.put("userName", "crystallightghost");
-            data.put("putDate", "2020-10-3");
-            data.put("articleStyle", "博客");
-            data.put("articleTitle", "轮滑" + i);
-            data.put("articleContent", "轮滑的地方轮滑的地方轮滑的地方轮滑的地方轮滑的地方" + i);
-            dataAll.add(data);
-        }
-
-        rvLists.setAdapter(new HomeRecyclerViewAdapter(getActivity(), dataAll));
 
 
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
-            Status status = getRefreshStatus();
+            HomeViewPagerItemFragment.Status status = getRefreshStatus();
             switch (status) {
                 case SUCCESS:
                     refreshLayout.resetNoMoreData();//setNoMoreData(false);
@@ -140,7 +120,7 @@ public class HomeViewPagerItemFragment extends Fragment {
             refreshLayout.finishLoadMore();
 
         }, 2000));
-//        refreshLayout.autoRefresh();//第一次进入触发自动刷新，演示效果
+        refreshLayout.autoRefresh();//第一次进入触发自动刷新，演示效果
     }
 
     private void showOffline() {
@@ -153,15 +133,15 @@ public class HomeViewPagerItemFragment extends Fragment {
         refreshLayout.setEnableLoadMore(false);
     }
 
-    public enum Status {
+    private enum Status {
         SUCCESS,
         EMPTY,
         ERROR,
         NO_NET,
     }
 
-    private Status getRefreshStatus() {
-        return Status.SUCCESS;
+    private HomeViewPagerItemFragment.Status getRefreshStatus() {
+        return HomeViewPagerItemFragment.Status.SUCCESS;
 //        int status = (int) (Math.random() * 10);
 //        if (status % 2 == 0) {
 //        } else if (status % 3 == 0) {
