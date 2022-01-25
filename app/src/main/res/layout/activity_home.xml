@@ -33,6 +33,7 @@
             android:background="@color/color_white"
             android:padding="@dimen/margin_normal"
             android:gravity="center"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
     >
