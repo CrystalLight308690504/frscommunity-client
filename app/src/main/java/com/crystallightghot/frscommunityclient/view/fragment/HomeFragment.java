@@ -61,14 +61,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     public static HomeFragment newInstance(String str) {
-        if (null == homeFragment) {
-            Bundle bundle = new Bundle();
-            homeFragment = new HomeFragment();
-            bundle.putString("label", str);
-            homeFragment.setArguments(bundle);
-        }
 
-        return homeFragment;
+        return new HomeFragment();
     }
 
 

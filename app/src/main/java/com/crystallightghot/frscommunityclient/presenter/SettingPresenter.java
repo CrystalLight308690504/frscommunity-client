@@ -6,10 +6,7 @@ import com.crystallightghot.frscommunityclient.model.SettingModel;
 import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
-import com.crystallightghot.frscommunityclient.view.pojo.system.DaoSession;
-import com.crystallightghot.frscommunityclient.view.pojo.system.LoginInformation;
-import com.crystallightghot.frscommunityclient.view.pojo.system.LoginInformationDao;
-import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.pojo.system.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
 
 /**
@@ -39,12 +36,24 @@ public class SettingPresenter implements SettingContract.Presenter , RespondCall
 
         // 将登陆状态信息删除
         User user = FRSCApplicationContext.getUser();
+
         DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
         LoginInformationDao informationDao = daoSession.getLoginInformationDao();
         LoginInformation loginInformation = informationDao.queryBuilder()
                 .where(LoginInformationDao.Properties.UserId.eq(user.getUserId()))
                 .build().unique();
         daoSession.delete(loginInformation);
+
+        // 删除用户
+        UserDao userDao = daoSession.getUserDao();
+        User user1 = userDao.queryBuilder()
+                .where(UserDao.Properties.UserId.eq(user.getUserId()))
+                .build().unique();
+        if (null != user1){
+            userDao.delete(user1);
+        }
+
+        FRSCApplicationContext.setUser(null);
 
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(respondMessage);
