@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--标签-->
-    <string-array name="tags_values">
+    <string-array name="skattingType">
         <item>花式绕柱</item>
         <item>速滑</item>
         <item>极限轮滑</item>

@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,6 +21,7 @@ import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActiv
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +41,17 @@ public class HomeFragment extends BaseFragment {
     TextView searchInputBox;
     @BindView(R.id.imageButton)
     ImageButton imageButton;
-    @BindView(R.id.type_container_pager)
-    ViewPager typeContentContainer;
+
     @BindView(R.id.tabs)
-    TabLayout tl_types;
+    TabLayout tbSkatingType;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
 
     AppCompatActivity activity;
     Unbinder bind;
-
-
     static HomeFragment homeFragment;
+    @BindView(R.id.contentViewPager)
+    ViewPager2 contentViewPager;
 
     private List<HomeViewPagerItemFragment> homeViewPagerItemFragments = new ArrayList<>();
 
@@ -74,32 +73,21 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-
     private void init() {
         activity = (AppCompatActivity) getActivity();
-        tabTitles = activity.getResources().getStringArray(R.array.tags_values);
+        tabTitles = activity.getResources().getStringArray(R.array.skattingType);
     }
 
     /**
      * @param views
      */
-    private void setViewPageItems(List<View> views) {
-
-        /**
-         *         测试数据
-          */
-        // 给每个ViewPager添加Item测试数据
-        int i = 0;
-        while (i < tabTitles.length) {
-            homeViewPagerItemFragments.add(new HomeViewPagerItemFragment(tabTitles[i], null));
-            i++;
-        }
-
-        typeContentContainer.setAdapter(new HomeViewPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, homeViewPagerItemFragments, tabTitles));
-        tl_types.setupWithViewPager(typeContentContainer);
+    private void addDateToViewPager(List<View> views) {
+        contentViewPager.setAdapter(new HomeViewPagerAdapter(this));
+        new TabLayoutMediator(tbSkatingType, contentViewPager, (tab, position) -> tab.setText(tabTitles[position])
+        ).attach();
     }
 
-    @OnClick({R.id.blog_more_list,R.id.search_input_box})
+    @OnClick({R.id.blog_more_list, R.id.search_input_box})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -108,11 +96,11 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent);
                 FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
                 fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
-                fragmentChangeMessage.setDefaultFragment(HomeSkatingTypeFragment.newInstance("HomeSkatingTypeFragment"));
+                fragmentChangeMessage.setDefaultFragment(SkatingTypeFragment.newInstance("HomeSkatingTypeFragment"));
                 EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
-                case R.id.search_input_box:
-                    IntentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
+            case R.id.search_input_box:
+                IntentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
                 break;
             default:
                 break;
@@ -126,7 +114,7 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bind = ButterKnife.bind(this, view);
         init();
-        setViewPageItems(null);
+        addDateToViewPager(null);
         return view;
     }
 

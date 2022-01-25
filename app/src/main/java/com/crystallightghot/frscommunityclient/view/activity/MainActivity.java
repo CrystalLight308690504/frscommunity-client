@@ -118,7 +118,7 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.mipmap.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(HelpNeededFragment.newInstance("HelpNeededFragment"));
+                FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(RequireHelpFragment.newInstance("HelpNeededFragment"));
                 break;
             case R.id.ibtnSelf:
                 addIconIsVisible(false);

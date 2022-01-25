@@ -64,8 +64,8 @@
             app:layout_constraintTop_toTopOf="@+id/tabs"/>
 
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/type_container_pager"
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/contentViewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabs"

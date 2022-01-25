@@ -17,7 +17,7 @@ import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.flowlayout.BaseTagAdapter;
 import com.xuexiang.xui.widget.flowlayout.FlowTagLayout;
 
-public class HomeSkatingTypeFragment extends BaseFragment {
+public class SkatingTypeFragment extends BaseFragment {
 
     BaseActivity activity;
     @BindView(R.id.titlebar)
@@ -32,7 +32,7 @@ public class HomeSkatingTypeFragment extends BaseFragment {
     FlowTagLayout allCategoriesFtlMore;
 
     public static Fragment newInstance(String login) {
-        return new HomeSkatingTypeFragment();
+        return new SkatingTypeFragment();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class HomeSkatingTypeFragment extends BaseFragment {
 
     private void initView() {
         activity = (BaseActivity) getActivity();
-        String[] strings = ResUtils.getStringArray(R.array.tags_values);
+        String[] strings = ResUtils.getStringArray(R.array.skattingType);
         initMultiFlowTagLayout(allCategoriesFtlMy, strings);
         initMultiFlowTagLayout(allCategoriesFtlMore, strings);
         titlebar.setLeftClickListener(view -> activity.finish());

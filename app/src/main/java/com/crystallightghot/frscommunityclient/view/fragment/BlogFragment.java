@@ -5,21 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
+import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,17 +25,17 @@ public class BlogFragment extends BaseFragment {
     String[] tabTitles;
     private static final String ARG_PARAM1 = "param1";
     Unbinder bind;
-    @BindView(R.id.blog_tabs)
-    TabLayout blogTabs;
+    @BindView(R.id.tbSkatingTypes)
+    TabLayout tbSkatingTypes;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
-    @BindView(R.id.blog_viewPager)
-    ViewPager blogViewPager;
 
     static BlogFragment blogFragment;
     MainActivity activity;
     @BindView(R.id.btnSearch)
     ImageButton btnSearch;
+    @BindView(R.id.contentViewPager)
+    ViewPager2 contentViewPager;
     private List<HomeViewPagerItemFragment> fragments;
 
     public BlogFragment() {
@@ -57,40 +54,16 @@ public class BlogFragment extends BaseFragment {
     }
 
     private void init() {
-        activity = (MainActivity) getActivity();
-        tabTitles = activity.getResources().getStringArray(R.array.tags_values);
-        fragments = new ArrayList<>();
-        int i = 0;
-        while (i < tabTitles.length) {
-            blogTabs.addTab(blogTabs.newTab().setText(tabTitles[i]));
-            fragments.add(new HomeViewPagerItemFragment(tabTitles[i], null));
-            i++;
-        }
+        tabTitles = getResources().getStringArray(R.array.skattingType);
         setViewPages(null);
     }
 
 
     private void setViewPages(List<View> views) {
+        contentViewPager.setAdapter(new HomeViewPagerAdapter(this));
+        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(tabTitles[position])
+        ).attach();
 
-        blogViewPager.setAdapter(new FragmentPagerAdapter(activity.getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                return fragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return fragments.size();
-            }
-
-            @Nullable
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return tabTitles[position];
-            }
-        });
-        blogTabs.setupWithViewPager(blogViewPager);
     }
 
     @Override
@@ -110,12 +83,11 @@ public class BlogFragment extends BaseFragment {
     }
 
 
-
     @OnClick({R.id.blog_more_list, R.id.btnSearch})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blog_more_list:
-                FRSCIntentUtil.IntentToSingleFragmentActivity(HomeSkatingTypeFragment.newInstance(""));
+                FRSCIntentUtil.IntentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
                 break;
             case R.id.btnSearch:
                 FRSCIntentUtil.IntentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));

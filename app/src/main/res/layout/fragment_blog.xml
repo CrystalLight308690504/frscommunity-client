@@ -5,7 +5,7 @@
         android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-            android:id="@+id/blog_tabs"
+            android:id="@+id/tbSkatingTypes"
             app:tabMode="scrollable"
             app:tabIndicatorFullWidth="false"
             app:tabRippleColor="@color/applicationMainTheme"
@@ -25,7 +25,7 @@
             android:layout_height="32dp"
             android:src="@mipmap/icon_more"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/blog_tabs"
+            app:layout_constraintBottom_toBottomOf="@+id/tbSkatingTypes"
             android:layout_marginRight="@dimen/margin_small"
             app:layout_constraintTop_toTopOf="parent"/>
     <ImageButton
@@ -36,16 +36,16 @@
             android:layout_height="20dp"
             android:scaleType="fitCenter"
             app:layout_constraintRight_toLeftOf="@id/blog_more_list"
-            app:layout_constraintBottom_toBottomOf="@+id/blog_tabs"
+            app:layout_constraintBottom_toBottomOf="@+id/tbSkatingTypes"
             android:layout_marginRight="@dimen/margin_max"
-            app:layout_constraintEnd_toStartOf="@+id/blog_more_list" app:layout_constraintTop_toTopOf="@+id/blog_tabs"/>
+            app:layout_constraintEnd_toStartOf="@+id/blog_more_list" app:layout_constraintTop_toTopOf="@+id/tbSkatingTypes"/>
 
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/blog_viewPager"
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/contentViewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
-            app:layout_constraintTop_toBottomOf="@id/blog_tabs"
+            app:layout_constraintTop_toBottomOf="@id/tbSkatingTypes"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
 
