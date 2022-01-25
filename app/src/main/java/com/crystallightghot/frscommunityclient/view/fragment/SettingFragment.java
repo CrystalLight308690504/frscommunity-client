@@ -82,11 +82,11 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditUserNameFragment.newInstance(""));
+                    FRSCShowFragmentToActivityUtil.showFragment(EditUserNameFragment.newInstance(""),activity,true);
                 }else if("邮箱".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditUserEmailFragment.newInstance(""));
+                    FRSCShowFragmentToActivityUtil.showFragment(EditUserEmailFragment.newInstance(""),activity,true);
                 }else if("密码".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(EditeUserPasswordByOldPasswordFragment.newInstance(""));
+                    FRSCShowFragmentToActivityUtil.showFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
                 }else if("退出登陆".equals(text)){
                     presenter.unLogin();
 
@@ -166,7 +166,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         }
         XToastUtils.success(message.getMessage());
 
-        FRSCShowFragmentToActivityUtil.showFragmentNoAddedToBackStack(LoginFragment.newInstance(""));
+        FRSCShowFragmentToActivityUtil.showFragment(LoginFragment.newInstance(""),activity,true);
     }
 
 }

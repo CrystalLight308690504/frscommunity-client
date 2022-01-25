@@ -16,6 +16,7 @@ import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
@@ -141,7 +142,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 loginAction();
                 break;
             case R.id.register:
-                FRSCShowFragmentToActivityUtil.showFragmentAddedToBackStack(RegisterUserFragment.newInstance("RegisterUserFragment"));
+                FRSCShowFragmentToActivityUtil.showFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
     }

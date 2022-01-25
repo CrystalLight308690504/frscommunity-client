@@ -10,6 +10,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
+import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 import org.jetbrains.annotations.NotNull;
 
@@ -60,6 +62,12 @@ public class HelpRecycleViewOfContentAdapter extends RecyclerView.Adapter<HelpRe
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance("ArticleContentSpecifiedFragment"));
+                }
+            });
         }
     }
 }

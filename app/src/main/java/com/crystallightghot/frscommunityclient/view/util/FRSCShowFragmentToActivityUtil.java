@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 
 import java.util.List;
@@ -48,6 +47,7 @@ public class FRSCShowFragmentToActivityUtil {
         transaction.commitAllowingStateLoss();
     }
 
+/*
     public static void showFragmentAddedToBackStack(Fragment showedFragment) {
         showFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), true);
     }
@@ -55,6 +55,7 @@ public class FRSCShowFragmentToActivityUtil {
     public static void showFragmentNoAddedToBackStack(Fragment showedFragment){
         showFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), false);
     }
+*/
 
     /**
      * 添加fragment

@@ -43,13 +43,7 @@ public class RequireHelpFragment extends Fragment {
 
     public static RequireHelpFragment newInstance(String param1) {
 
-        if (null == blogFragment) {
-            blogFragment = new RequireHelpFragment();
-            Bundle args = new Bundle();
-            args.putString(ARG_PARAM1, param1);
-            blogFragment.setArguments(args);
-        }
-        return blogFragment;
+        return new RequireHelpFragment();
     }
 
 
