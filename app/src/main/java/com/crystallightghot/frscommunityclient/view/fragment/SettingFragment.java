@@ -20,7 +20,7 @@ import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
@@ -82,11 +82,11 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSCShowFragmentToActivityUtil.showFragment(EditUserNameFragment.newInstance(""),activity,true);
+                    FRSFragmentManageUtil.intentToFragment(EditUserNameFragment.newInstance(""),activity,true);
                 }else if("邮箱".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragment(EditUserEmailFragment.newInstance(""),activity,true);
+                    FRSFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""),activity,true);
                 }else if("密码".equals(text)){
-                    FRSCShowFragmentToActivityUtil.showFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
+                    FRSFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
                 }else if("退出登陆".equals(text)){
                     presenter.unLogin();
 
@@ -166,7 +166,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         }
         XToastUtils.success(message.getMessage());
 
-        FRSCShowFragmentToActivityUtil.showFragment(LoginFragment.newInstance(""),activity,true);
+        FRSFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,true);
     }
 
 }

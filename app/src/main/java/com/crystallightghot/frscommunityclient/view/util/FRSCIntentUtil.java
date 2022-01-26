@@ -17,16 +17,20 @@ import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessag
  */
 public class FRSCIntentUtil {
 
-    public static final void intentToSingleFragmentActivity(Fragment defaultFragment) {
+    public static final void intentToSingleFragmentActivity(Fragment defaultFragment,Activity activity) {
 
-        Activity activity = FRSCApplicationContext.getActivity();
         Intent intent = new Intent(activity,SingleFragmentActivity.class);
         activity.startActivity(intent);
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
         fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
         fragmentChangeMessage.setDefaultFragment(defaultFragment);
 
-        // 发送默认activity消息
+        // 发送默认EventBus消息
         EventBusUtil.sendStickMessage(fragmentChangeMessage);
+    }
+
+    public static final void intentToSingleFragmentActivity(Fragment defaultFragment) {
+        Activity activity = FRSCApplicationContext.getActivity();
+        intentToSingleFragmentActivity( defaultFragment, activity);
     }
 }

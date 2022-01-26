@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * 所有继承此类的activity都要在 Activity的OnStart()前的生命周期使用 setDefaultFragment(Fragment defaultFragment) 方法传入默认加载的Fragmgent
  * 替换fragment的布局的ID 默认为R.id.fragmentContainer 将要替换fragment的容器 可以在OnStart()前的生命周期重新设置
  * <p>
- * 搭配 {@link FRSCShowFragmentToActivityUtil }工具类使用
+ * 搭配 {@link FRSFragmentManageUtil }工具类使用
  */
 @Getter
 public abstract class BaseFragmentActivity extends BaseActivity {
@@ -41,7 +41,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        FRSCShowFragmentToActivityUtil.removeAllFragments(this, fragments);
+        FRSFragmentManageUtil.removeFragments(this, fragments);
     }
 
 
@@ -50,7 +50,7 @@ public abstract class BaseFragmentActivity extends BaseActivity {
         FRSCApplicationContext.setBaseFragmentActivity(this);
         super.onStart();
         // 添加默认fragment 到页面
-        FRSCShowFragmentToActivityUtil.showFragment(getDefaultFragment(),this,false);
+        FRSFragmentManageUtil.intentToFragment(getDefaultFragment(),this,false);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.view.activity;
 import android.os.Bundle;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
-import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -27,7 +27,7 @@ public class SingleFragmentActivity extends BaseFragmentActivity {
         // 设置默认加载Fragment
         setDefaultFragment(message.getDefaultFragment());
         // 显示fragment
-        FRSCShowFragmentToActivityUtil.showFragment(getDefaultFragment(),this,false);
+        FRSFragmentManageUtil.intentToFragment(getDefaultFragment(),this,false);
     }
 
     @Override

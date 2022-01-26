@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCShowFragmentToActivityUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
 
@@ -96,7 +96,7 @@ public class AllSearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCShowFragmentToActivityUtil.showFragment(AllSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity(),true);
+                FRSFragmentManageUtil.intentToFragment(AllSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
     }
