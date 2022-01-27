@@ -20,7 +20,7 @@ import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
@@ -82,11 +82,11 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSFragmentManageUtil.intentToFragment(EditUserNameFragment.newInstance(""),activity,true);
+                    FRSCFragmentManageUtil.intentToFragment(EditUserNameFragment.newInstance(""),activity,true);
                 }else if("邮箱".equals(text)){
-                    FRSFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""),activity,true);
+                    FRSCFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""),activity,true);
                 }else if("密码".equals(text)){
-                    FRSFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
+                    FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
                 }else if("退出登陆".equals(text)){
                     presenter.unLogin();
 
@@ -162,11 +162,12 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         // 注销失败
         if (!message.isSuccess()) {
             XToastUtils.error(message.getMessage());
+
             return;
         }
         XToastUtils.success(message.getMessage());
 
-        FRSFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,true);
+        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,true);
     }
 
 }

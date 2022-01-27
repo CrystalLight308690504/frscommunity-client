@@ -7,14 +7,14 @@
                                                    android:background="@drawable/bkd_round_solid_while_stroke_bottom_right_bule_gray"
                                                    android:layout_marginBottom="@dimen/margin_small"
                                                    android:padding="@dimen/margin_normal">
-    <com.qmuiteam.qmui.widget.QMUIRadiusImageView2
+    <com.xuexiang.xui.widget.imageview.RadiusImageView
             android:id="@+id/profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@mipmap/icon_application"
-            app:qmui_corner_radius="20dp"
+            app:riv_corner_radius="20dp"
     />
 
     <TextView

@@ -18,9 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class BlogSearchResultsFragment extends Fragment {
+public class HomeSearchResultsFragment extends Fragment {
 
-    static BlogSearchResultsFragment allSearchResultsFragment;
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -34,13 +33,13 @@ public class BlogSearchResultsFragment extends Fragment {
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
 
-    public BlogSearchResultsFragment() {
+    public HomeSearchResultsFragment() {
         // Required empty public constructor
     }
 
-    public static BlogSearchResultsFragment newInstance(String param1) {
+    public static HomeSearchResultsFragment newInstance(String param1) {
 
-        return new BlogSearchResultsFragment();
+        return  new HomeSearchResultsFragment();
     }
 
     @Override
@@ -63,16 +62,11 @@ public class BlogSearchResultsFragment extends Fragment {
         topBarBack.setOnClickListener(view -> activity.onBackPressed());
 
         // CS
-        addData();
+        initView();
     }
 
-    /**
-     * 数据翻倍增加BUG
-     * 每次编译器应用改变后 会重新调用 会重新createView()方法  而对象this 不会重新创建 所以pagerFragments 的内容成倍数增加
-     */
-    public void addData() {
+    public void initView() {
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
-
         // 添加测试数据
         viewPager.setAdapter(new HomeSearchResultViewPagerAdapter(this));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])

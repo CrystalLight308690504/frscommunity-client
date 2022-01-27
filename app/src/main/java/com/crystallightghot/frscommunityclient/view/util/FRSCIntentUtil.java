@@ -13,13 +13,13 @@ import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessag
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
- *  跳转到 SingleFragmentActivity 的 工具类  SingleFragmentActivity要注册接收DefaultFragment 的Event事件 ${SingleFragmentActivity.getMessage()}
+ * 跳转到 SingleFragmentActivity 的 工具类  SingleFragmentActivity要注册接收DefaultFragment 的Event事件 ${SingleFragmentActivity.getMessage()}
  */
 public class FRSCIntentUtil {
 
-    public static final void intentToSingleFragmentActivity(Fragment defaultFragment,Activity activity) {
+    public static final void intentToSingleFragmentActivity(Fragment defaultFragment, Activity activity) {
 
-        Intent intent = new Intent(activity,SingleFragmentActivity.class);
+        Intent intent = new Intent(activity, SingleFragmentActivity.class);
         activity.startActivity(intent);
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
         fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
@@ -31,6 +31,7 @@ public class FRSCIntentUtil {
 
     public static final void intentToSingleFragmentActivity(Fragment defaultFragment) {
         Activity activity = FRSCApplicationContext.getActivity();
-        intentToSingleFragmentActivity( defaultFragment, activity);
+        intentToSingleFragmentActivity(defaultFragment, activity);
     }
+
 }

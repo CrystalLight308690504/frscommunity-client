@@ -14,20 +14,17 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
-import com.qmuiteam.qmui.widget.QMUIFloatLayout;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AllSearchFragment#newInstance} factory method to
+ * Use the {@link HomeSearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AllSearchFragment extends Fragment {
-    static AllSearchFragment fragment;
-
+public class HomeSearchFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
@@ -41,26 +38,19 @@ public class AllSearchFragment extends Fragment {
     RecyclerView lvSearchHistory;
 
     BaseActivity activity;
-    @BindView(R.id.hot_searches)
-    QMUIFloatLayout hotSearches;
 
 
     private String mParam1;
     List<Fragment> fragments;
 
-    public AllSearchFragment() {
+    public HomeSearchFragment() {
         // Required empty public constructor
     }
 
 
-    public static AllSearchFragment newInstance(String string) {
-        if (null == fragment) {
-            fragment = new AllSearchFragment();
-            Bundle args = new Bundle();
-            args.putString(ARG_PARAM1, string);
-            fragment.setArguments(args);
-        }
-        return fragment;
+    public static HomeSearchFragment newInstance(String string) {
+
+        return new HomeSearchFragment();
     }
 
     private void init() {
@@ -96,7 +86,9 @@ public class AllSearchFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSFragmentManageUtil.intentToFragment(AllSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(HomeSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity());
+                break;
+            default:
                 break;
         }
     }

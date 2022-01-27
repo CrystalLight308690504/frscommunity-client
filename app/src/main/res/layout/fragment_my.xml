@@ -14,9 +14,10 @@
             android:background="@drawable/bkd_round_bottom_blue_with_light"
             android:padding="@dimen/margin_normal"
     >
-        <com.qmuiteam.qmui.widget.QMUIRadiusImageView2 android:layout_width="64dp" android:layout_height="64dp"
+        <com.xuexiang.xui.widget.imageview.RadiusImageView
+                android:layout_width="64dp" android:layout_height="64dp"
                                                        android:src="@mipmap/icon_application"
-                                                       app:qmui_corner_radius="32dp"
+                                                       app:riv_corner_radius="32dp"
                                                        app:layout_constraintLeft_toLeftOf="parent"
                                                        app:layout_constraintTop_toTopOf="parent"
                                                        android:id="@+id/userProfile"

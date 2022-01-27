@@ -16,7 +16,7 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class FRSFragmentManageUtil {
+public class FRSCFragmentManageUtil {
 
     /**
      * 删除加入到activity的在FragmentManager的fragment
@@ -56,31 +56,16 @@ public class FRSFragmentManageUtil {
         transaction.commitAllowingStateLoss();
     }
 
-    /**
-     * 隐藏所有已加入的fragment
-     */
-    public static void showSingleFragment(AppCompatActivity activity, Fragment fragment) {
-
-        //没有就不执行
-        if (null == fragment || null == activity) {
-            return;
-        }
-
-        if (fragment.getActivity() != activity) {
-            Log.d("FRSCShowFragmentToActivityUtil", "=====showSingleFragment: 加入的fragment 不属于此 activity======");
-        }
-        FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.show(fragment);
-        transaction.commitAllowingStateLoss();
-    }
-
-    public static void showFragmentAddedToBackStack(Fragment showedFragment) {
+    public static void intentToFragmentAddedToBackStack(Fragment showedFragment) {
         intentToFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), true);
     }
 
-    public static void showFragmentNoAddedToBackStack(Fragment showedFragment) {
-        intentToFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), false);
+    public static void intentToFragmentAddedToBackStack(Fragment showedFragment, BaseFragmentActivity activity) {
+        intentToFragment(showedFragment, activity, true);
+    }
+
+    public static void intentToFragmentNoAddedToBackStack(Fragment showedFragment, BaseFragmentActivity activity) {
+        intentToFragment(showedFragment, activity, false);
     }
 
     /**

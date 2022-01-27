@@ -13,21 +13,22 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.adapter.HelpViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RequireHelpFragment#newInstance} factory method to
+ * Use the {@link HelpFragment#newInstance} factory method to
  * create an instance of this fragment.
  * @author 30869
  */
-public class RequireHelpFragment extends Fragment {
+public class HelpFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     Unbinder bind;
 
-    static RequireHelpFragment blogFragment;
+    static HelpFragment blogFragment;
     @BindView(R.id.tbSkatingTypes)
     TabLayout tbSkatingTypes;
     @BindView(R.id.more_list)
@@ -37,20 +38,20 @@ public class RequireHelpFragment extends Fragment {
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
 
-    public RequireHelpFragment() {
+    public HelpFragment() {
         // Required empty public constructor
     }
 
-    public static RequireHelpFragment newInstance(String param1) {
+    public static HelpFragment newInstance(String param1) {
 
-        return new RequireHelpFragment();
+        return new HelpFragment();
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_help_needed, container, false);
         bind = ButterKnife.bind(this, view);
         init();
@@ -58,7 +59,7 @@ public class RequireHelpFragment extends Fragment {
     }
 
     private void init() {
-        String[] types = getResources().getStringArray(R.array.skattingType);
+        String[] types = getResources().getStringArray(R.array.skatingType);
         viewPager.setAdapter(new HelpViewPagerAdapter(this));
         new TabLayoutMediator(tbSkatingTypes, viewPager, (tab, position) -> tab.setText(types[position])).attach();
     }
@@ -67,8 +68,10 @@ public class RequireHelpFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.more_list:
+                FRSCIntentUtil.intentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
                 break;
             case R.id.btnSearch:
+                FRSCIntentUtil.intentToSingleFragmentActivity(HelpSearchFragment.newInstance(""));
                 break;
             default:
                 break;

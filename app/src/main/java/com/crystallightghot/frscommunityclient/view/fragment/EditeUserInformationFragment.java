@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
@@ -71,7 +71,7 @@ public class EditeUserInformationFragment extends Fragment {
                 if ("性别".equals(text)) {
                     showSexPickerView();
                 } else if ("自我介绍".equals(text)) {
-                    FRSFragmentManageUtil.intentToFragment(EditMyDescriptionFragment.newInstance("EditMyDescriptionFragment"), (BaseFragmentActivity) getActivity(),true);
+                    FRSCFragmentManageUtil.intentToFragment(EditMyDescriptionFragment.newInstance("EditMyDescriptionFragment"), (BaseFragmentActivity) getActivity(),true);
                 }
                 XToastUtils.toast(text + " is Clicked");
             }

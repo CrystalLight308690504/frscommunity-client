@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
     }
 
     @Override
-    public void loadData(User user) {
+    public void login(User user) {
         view.showLoadingDialog();
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
@@ -54,8 +54,6 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
                     .where(UserDao.Properties.UserId.eq(information.getUserId()))
                     .build()
                     .unique();
-            FRSCApplicationContext.setUser(user);
-
             // 转化为登陆状态
             view.stateToLogin();
         }

@@ -18,6 +18,6 @@ public interface LoginContract  {
     }
 
     interface Presenter extends BaseContract.Presenter {
-        void loadData(User user);
+        void login(User user);
     }
 }

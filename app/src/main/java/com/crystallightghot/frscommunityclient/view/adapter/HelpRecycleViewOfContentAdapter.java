@@ -12,7 +12,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,7 +30,7 @@ public class HelpRecycleViewOfContentAdapter extends RecyclerView.Adapter<HelpRe
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.fragment_help_recycle_view_question_item, parent, false);
+        View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_view_help_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -47,8 +47,6 @@ public class HelpRecycleViewOfContentAdapter extends RecyclerView.Adapter<HelpRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.profile)
-        QMUIRadiusImageView2 profile;
         @BindView(R.id.userName)
         TextView userName;
         @BindView(R.id.dateCreated)
@@ -59,6 +57,9 @@ public class HelpRecycleViewOfContentAdapter extends RecyclerView.Adapter<HelpRe
         TextView title;
         @BindView(R.id.content)
         TextView content;
+        @BindView(R.id.profile)
+        RadiusImageView profile;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

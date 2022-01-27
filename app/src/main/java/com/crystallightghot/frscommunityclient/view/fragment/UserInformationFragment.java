@@ -19,8 +19,8 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +32,7 @@ public class UserInformationFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.user_information_background)
     ImageView userInformationBackground;
-    @BindView(R.id.user_profile)
-    QMUIRadiusImageView userProfile;
+
     @BindView(R.id.user_name)
     TextView userName;
     @BindView(R.id.user_gender)
@@ -50,6 +49,8 @@ public class UserInformationFragment extends Fragment {
     TableLayout tabS;
     @BindView(R.id.search_article)
     ImageView searchArticle;
+    @BindView(R.id.user_profile)
+    RadiusImageView userProfile;
 
     private String mParam1;
 
@@ -86,14 +87,14 @@ public class UserInformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_information, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
     private void initView() {
         User user = FRSCApplicationContext.getUser();
-        if (null != user){
+        if (null != user) {
 
             userName.setText(user.getUserName());
 
@@ -109,7 +110,7 @@ public class UserInformationFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnEditeUserInformation:
-                FRSFragmentManageUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentManageUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
                 break;
         }
     }

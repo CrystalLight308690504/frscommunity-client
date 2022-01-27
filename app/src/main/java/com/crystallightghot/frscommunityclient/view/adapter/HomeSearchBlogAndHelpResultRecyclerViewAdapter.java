@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
-import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,13 +24,13 @@ import java.util.Map;
  * @Version: 1.0
  * description：
  */
-public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.MyViewHolder> {
+public class HomeSearchBlogAndHelpResultRecyclerViewAdapter extends RecyclerView.Adapter<HomeSearchBlogAndHelpResultRecyclerViewAdapter.MyViewHolder> {
 
     Activity activity;
     List<HashMap<Object, Object>> datas;
 
 
-    public HomeRecyclerViewAdapter(Activity activity, List<HashMap<Object, Object>> datas) {
+    public HomeSearchBlogAndHelpResultRecyclerViewAdapter(Activity activity, List<HashMap<Object, Object>> datas) {
         this.activity = activity;
         this.datas = datas;
     }
@@ -81,7 +81,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(""));
+                    FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
                 }
             });
         }

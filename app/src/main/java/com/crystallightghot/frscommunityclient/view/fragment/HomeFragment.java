@@ -68,7 +68,7 @@ public class HomeFragment extends BaseFragment {
 
     private void init() {
         activity = (AppCompatActivity) getActivity();
-        tabTitles = activity.getResources().getStringArray(R.array.skattingType);
+        tabTitles = activity.getResources().getStringArray(R.array.skatingType);
     }
 
     /**
@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment {
                 EventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
             case R.id.search_input_box:
-                FRSCIntentUtil.intentToSingleFragmentActivity(AllSearchFragment.newInstance("login"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(HomeSearchFragment.newInstance("login"));
                 break;
             default:
                 break;

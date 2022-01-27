@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 /**
@@ -77,7 +77,7 @@ public class EditeUserPasswordByOldPasswordFragment extends Fragment {
             case R.id.btnModify:
                 break;
             case R.id.btnOldPasswordForgot:
-                FRSFragmentManageUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
     }

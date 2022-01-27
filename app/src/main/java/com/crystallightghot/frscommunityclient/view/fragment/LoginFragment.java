@@ -21,7 +21,7 @@ import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,7 +118,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         user.setPhoneNumber(phoneNameText.toString());
         user.setPassword(passwordInput);
 
-        presenter.loadData(user);
+        presenter.login(user);
     }
 
 
@@ -135,24 +135,17 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btnSendVerifyCode:
-                sendVerifyCodeAction();
-                break;
             case R.id.login:
                 loginAction();
                 break;
             case R.id.register:
-                FRSFragmentManageUtil.intentToFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentManageUtil.intentToFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity(),true);
+                break;
+            default:
                 break;
         }
     }
 
-    /**
-     * 发送验证码
-     */
-    private void sendVerifyCodeAction() {
-
-    }
 
     @Override
     public int getMessageCode() {

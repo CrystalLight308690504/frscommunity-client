@@ -3,10 +3,8 @@ package com.crystallightghot.frscommunityclient.view.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.HomeSearchResultDefaultViewPagerItemFragment;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 /**
  * @author crystallightghost
@@ -15,24 +13,20 @@ import java.util.List;
  * description：
  */
 
-public class HomeViewPagerAdapter extends FragmentStateAdapter {
+public class HelpSearchResultViewPagerAdapter extends FragmentStateAdapter {
 
-    List<HomeViewPagerItemFragment> fragments;
-    String[] titles;
-
-    public HomeViewPagerAdapter(@NonNull @NotNull Fragment fragment) {
+    public HelpSearchResultViewPagerAdapter(@NotNull Fragment fragment) {
         super(fragment);
     }
 
     @NonNull
-    @NotNull
     @Override
     public Fragment createFragment(int position) {
-        return new  HomeViewPagerItemFragment();
+            return new HomeSearchResultDefaultViewPagerItemFragment();
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 11;
     }
 }

@@ -12,14 +12,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.HelpSearchResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class AllSearchResultsFragment extends Fragment {
+public class HelpSearchResultsFragment extends Fragment {
 
+    static HelpSearchResultsFragment allSearchResultsFragment;
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -33,13 +34,13 @@ public class AllSearchResultsFragment extends Fragment {
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
 
-    public AllSearchResultsFragment() {
+    public HelpSearchResultsFragment() {
         // Required empty public constructor
     }
 
-    public static AllSearchResultsFragment newInstance(String param1) {
+    public static HelpSearchResultsFragment newInstance(String param1) {
 
-        return  new AllSearchResultsFragment();
+        return new HelpSearchResultsFragment();
     }
 
     @Override
@@ -62,13 +63,18 @@ public class AllSearchResultsFragment extends Fragment {
         topBarBack.setOnClickListener(view -> activity.onBackPressed());
 
         // CS
-        initView();
+        addData();
     }
 
-    public void initView() {
-        String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
+    /**
+     * 数据翻倍增加BUG
+     * 每次编译器应用改变后 会重新调用 会重新createView()方法  而对象this 不会重新创建 所以pagerFragments 的内容成倍数增加
+     */
+    public void addData() {
+        String[] tabTitles = activity.getResources().getStringArray(R.array.skatingType);
+
         // 添加测试数据
-        viewPager.setAdapter(new HomeViewPagerAdapter(this));
+        viewPager.setAdapter(new HelpSearchResultViewPagerAdapter(this));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }

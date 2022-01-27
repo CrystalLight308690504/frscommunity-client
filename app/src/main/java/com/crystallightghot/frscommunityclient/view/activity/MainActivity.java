@@ -16,10 +16,10 @@ import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.*;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSFragmentManageUtil;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
  * @author crystallight
@@ -49,12 +49,12 @@ public class MainActivity extends BaseFragmentActivity {
     TextView tvSelf;
     @BindView(R.id.bottomItem)
     LinearLayout bottomItem;
-    @BindView(R.id.btnAdd)
-    QMUIRadiusImageView2 btnAdd;
 
     Unbinder bind;
     String TAG = "调试";
     HomeViewPagerItemScrollChangedReceiver receiver;
+    @BindView(R.id.btnAdd)
+    RadiusImageView btnAdd;
 
     public void allBottomIconBeenDefaultState() {
         ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_no_clicked));
@@ -99,33 +99,33 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                FRSFragmentManageUtil.intentToFragment(HomeFragment.newInstance("TAG:" ),this,false);
+                FRSCFragmentManageUtil.intentToFragment(HomeFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                FRSFragmentManageUtil.intentToFragment(BlogFragment.newInstance("TAG:" ),this,false);
+                FRSCFragmentManageUtil.intentToFragment(BlogFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                FRSFragmentManageUtil.intentToFragment(SomethingFoundFragment.newInstance("TAG:"),this,false);
+                FRSCFragmentManageUtil.intentToFragment(SomethingFoundFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.btnHelpNeeded:
                 allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.mipmap.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                FRSFragmentManageUtil.intentToFragment(RequireHelpFragment.newInstance("HelpNeededFragment"),this,false);
+                FRSCFragmentManageUtil.intentToFragment(HelpFragment.newInstance("HelpNeededFragment"), this, false);
                 break;
             case R.id.ibtnSelf:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                FRSFragmentManageUtil.intentToFragment(MyFragment.newInstance("TAG:" ),this,false);
+                FRSCFragmentManageUtil.intentToFragment(MyFragment.newInstance("TAG:"), this, false);
                 break;
             default:
                 break;
@@ -215,16 +215,16 @@ public class MainActivity extends BaseFragmentActivity {
     private void showSimpleBottomSheetList() {
         new BottomSheet.BottomListSheetBuilder(this)
                 .setTitle("添加")
-                .addItem("博客","博客")
-                .addItem("求助","求助")
+                .addItem("博客", "博客")
+                .addItem("求助", "求助")
                 .setIsCenter(true)
                 .setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
                     dialog.dismiss();
-                    switch (position){
+                    switch (position) {
                         case 0:
                             FRSCIntentUtil.intentToSingleFragmentActivity(PutBlogContentFragment.newInstance(""));
                             break;
-                        case 1 :
+                        case 1:
                             FRSCIntentUtil.intentToSingleFragmentActivity(PutHelpContentFragment.newInstance(""));
                             break;
                         default:

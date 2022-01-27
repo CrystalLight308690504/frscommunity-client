@@ -48,7 +48,7 @@ public class SkatingTypeFragment extends BaseFragment {
 
     private void initView() {
         activity = (BaseActivity) getActivity();
-        String[] strings = ResUtils.getStringArray(R.array.skattingType);
+        String[] strings = ResUtils.getStringArray(R.array.skatingType);
         initMultiFlowTagLayout(allCategoriesFtlMy, strings);
         initMultiFlowTagLayout(allCategoriesFtlMore, strings);
         titlebar.setLeftClickListener(view -> activity.finish());

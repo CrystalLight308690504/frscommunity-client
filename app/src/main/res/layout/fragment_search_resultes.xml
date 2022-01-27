@@ -5,13 +5,14 @@
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:padding="@dimen/margin_normal"
-                                                   tools:context=".view.fragment.AllSearchResultsFragment">
+                                                   tools:context=".view.fragment.HomeSearchResultsFragment">
 
     <ImageButton
             android:id="@+id/top_bar_back"
-            android:layout_width="32dp" android:layout_height="32dp"
+            android:layout_width="@dimen/ic_btn_top_bar_back_size" android:layout_height="@dimen/ic_btn_top_bar_back_size"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/input_box"
+            app:layout_constraintBottom_toBottomOf="@id/input_box"
             android:scaleType="fitCenter"
             android:src="@mipmap/icon_top_bar_back_blue"/>
     <com.google.android.material.textfield.TextInputEditText

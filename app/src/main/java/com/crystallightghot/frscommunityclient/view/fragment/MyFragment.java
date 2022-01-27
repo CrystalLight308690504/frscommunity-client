@@ -20,7 +20,7 @@ import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
-import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,8 +31,6 @@ public class MyFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.userProfile)
-    QMUIRadiusImageView2 userProfile;
     @BindView(R.id.userName)
     TextView userName;
 
@@ -75,6 +73,8 @@ public class MyFragment extends Fragment {
     ImageView btnArrowRight;
     @BindView(R.id.ivicMyHelp)
     TextView ivicMyHelp;
+    @BindView(R.id.userProfile)
+    RadiusImageView userProfile;
 
     private String mParam1;
 
@@ -106,7 +106,7 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        View view = inflater.inflate(R.layout.fragment_my, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="@dimen/margin_normal"
-        tools:context=".view.fragment.AllSearchFragment">
+        tools:context=".view.fragment.HomeSearchFragment">
 
     <ImageButton
             android:id="@+id/top_bar_back"
@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@id/input_box"
             android:layout_marginTop="@dimen/margin_max"
     />
-    <com.qmuiteam.qmui.widget.QMUIFloatLayout
+    <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
             android:id="@+id/hot_searches"
             android:layout_width="match_parent"
             android:layout_height="200dp"

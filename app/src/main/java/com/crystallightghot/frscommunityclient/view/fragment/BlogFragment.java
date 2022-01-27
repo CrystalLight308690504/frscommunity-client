@@ -54,7 +54,7 @@ public class BlogFragment extends BaseFragment {
     }
 
     private void init() {
-        tabTitles = getResources().getStringArray(R.array.skattingType);
+        tabTitles = getResources().getStringArray(R.array.skatingType);
         setViewPages(null);
     }
 

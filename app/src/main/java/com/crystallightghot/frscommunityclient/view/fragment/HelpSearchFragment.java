@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,11 +21,11 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BlogSearchFragment#newInstance} factory method to
+ * Use the {@link HelpSearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlogSearchFragment extends BaseFragment {
-    static BlogSearchFragment fragment;
+public class HelpSearchFragment extends BaseFragment {
+    static HelpSearchFragment fragment;
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.top_bar_back)
@@ -44,14 +45,14 @@ public class BlogSearchFragment extends BaseFragment {
     private String mParam1;
     List<Fragment> fragments;
 
-    public BlogSearchFragment() {
+    public HelpSearchFragment() {
         // Required empty public constructor
     }
 
 
-    public static BlogSearchFragment newInstance(String string) {
+    public static HelpSearchFragment newInstance(String string) {
 
-        return new BlogSearchFragment();
+        return new HelpSearchFragment();
     }
 
     private void init() {
@@ -67,7 +68,6 @@ public class BlogSearchFragment extends BaseFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,7 +87,7 @@ public class BlogSearchFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(BlogSearchResultsFragment.newInstance("SearchResultsFragment"));
+                FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(HelpSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity());
                 break;
             default:
                 break;
