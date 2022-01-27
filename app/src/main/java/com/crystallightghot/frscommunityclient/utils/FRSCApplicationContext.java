@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.utils;
 
 import android.app.Activity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 
 /**
@@ -15,6 +16,16 @@ public class FRSCApplicationContext {
 
     private static Activity activity;
     private static BaseFragmentActivity baseFragmentActivity;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
+    public static void setMainActivity(MainActivity mainActivity) {
+        FRSCApplicationContext.mainActivity = mainActivity;
+    }
+
+    private static MainActivity mainActivity;
     private  static User user;
 
     public static Activity getActivity() {

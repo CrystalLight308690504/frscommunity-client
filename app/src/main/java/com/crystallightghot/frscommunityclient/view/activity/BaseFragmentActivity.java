@@ -64,7 +64,7 @@ public  class BaseFragmentActivity extends BaseActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         // 如果返回栈里只有一个fragment了 退出栈顶的这个唯一一个的fragment后,显示默认绑定到activity的的fragment（默认绑定到activity的的fragment默认放到自定义的存储栈里）
         // 返回栈里还有添加到栈里的fragment
-        if (stackEntryCount >= 1) {
+        if (stackEntryCount >0 && fragmentsAddedInBackStack.size() >0) {
             // 退出栈顶的fragment
             fragmentManager.popBackStack();
             fragmentsAddedInBackStack.remove(fragmentsAddedInBackStack.size() - 1);

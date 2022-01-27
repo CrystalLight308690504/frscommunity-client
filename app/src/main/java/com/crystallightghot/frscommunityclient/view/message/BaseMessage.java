@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import lombok.Data;
 
 /**
@@ -11,6 +12,6 @@ import lombok.Data;
 @Data
 public class BaseMessage {
     // 唯一标识符
-    int code;
+    MessageCode messageCode;
     String message;
 }

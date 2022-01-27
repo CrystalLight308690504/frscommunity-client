@@ -22,18 +22,19 @@ public class RegisterPresenter implements RegisterContract.Presenter, RespondCal
     RegisterContract.View view;
     User user;
 
-    public static RegisterPresenter getInstance(RegisterContract.View view, User user) {
-        return new RegisterPresenter(view,user);
+    public static RegisterPresenter getInstance(RegisterContract.View view) {
+        return new RegisterPresenter(view);
     }
 
-    public RegisterPresenter(RegisterContract.View view, User user) {
+    public RegisterPresenter(RegisterContract.View view) {
         this.view = view;
         model = new RegisterModel();
         this.user = user;
     }
 
     @Override
-    public void loadData() {
+    public void loadData(User user) {
+        this.user = user;
         view.showLoadingDialog();
         model.registerUser(user,this);
     }

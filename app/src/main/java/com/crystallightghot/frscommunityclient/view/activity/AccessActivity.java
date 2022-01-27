@@ -6,6 +6,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import org.greenrobot.eventbus.EventBus;
@@ -41,7 +42,7 @@ public class AccessActivity extends BaseActivity {
             try {
                 while (i-- >0){
                     Thread.sleep(1000);
-                    EventBus.getDefault().post(new TimeMessage(i,0));
+                    EventBus.getDefault().post(new TimeMessage(i, MessageCode.ACCESS_TIME));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -57,6 +58,9 @@ public class AccessActivity extends BaseActivity {
     }
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onGetStickyEvent(TimeMessage message) {
+        if (message.getCode() != MessageCode.ACCESS_TIME){
+            return;
+        }
         int time = message.getTime();
         tvTime.setText(time+"");
 

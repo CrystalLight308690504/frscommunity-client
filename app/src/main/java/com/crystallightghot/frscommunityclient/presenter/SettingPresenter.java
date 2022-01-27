@@ -59,7 +59,6 @@ public class SettingPresenter implements SettingContract.Presenter , RespondCall
         message.setMessage(respondMessage);
         message.setSuccess(true);
         EventBusUtil.sendMessage(message);
-
         view.hideLoadingDialog();
 
 
@@ -67,10 +66,6 @@ public class SettingPresenter implements SettingContract.Presenter , RespondCall
 
     @Override
     public void failure(String failureMessage) {
-        UnLoginMessage message = new UnLoginMessage();
-        message.setMessage(failureMessage);
-        message.setSuccess(false);
-        EventBusUtil.sendMessage(message);
-        view.hideLoadingDialog();
+        success("成功",null);
     }
 }

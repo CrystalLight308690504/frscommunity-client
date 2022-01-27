@@ -8,5 +8,8 @@ package com.crystallightghot.frscommunityclient.view.enums;
  */
 public enum MessageCode {
 
-
+    REGISTER_BUTTON_NO_ENABLE_TIME,
+    ACCESS_TIME,
+    EDITE_EMAIL_SEND_COD_BUTTON_NO_ENABLE_TIME,
+    EDITE_PASSWD_SEND_COD_BUTTON_NO_ENABLE_TIME
 }

@@ -21,14 +21,14 @@ public class FRSCFragmentManageUtil {
     /**
      * 删除加入到activity的在FragmentManager的fragment
      */
-    public static void removeFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededHidden) {
-        if (null == fragmentsNeededHidden || fragmentsNeededHidden.size() == 0) {
+    public static void removeFragments(AppCompatActivity activity, List<Fragment> fragmentsNeededRemove) {
+        if (null == fragmentsNeededRemove || fragmentsNeededRemove.size() == 0) {
             return;
         }
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int i = 0; i < fragmentsNeededHidden.size(); i++) {
-            Fragment fragment = fragmentsNeededHidden.get(i);
+        for (int i = 0; i < fragmentsNeededRemove.size(); i++) {
+            Fragment fragment = fragmentsNeededRemove.get(i);
             if (fragment.getActivity() != activity) {
                 Log.d("FRSCShowFragmentToActivityUtil", "=====removeFragments: 加入的fragment 不属于此 activity======");
             } else {
@@ -36,6 +36,7 @@ public class FRSCFragmentManageUtil {
             }
         }
         fragmentTransaction.commit();
+        fragmentsNeededRemove.clear();
     }
 
     /**
@@ -117,7 +118,7 @@ public class FRSCFragmentManageUtil {
                 // 记录加入到返回栈的fragment
                 fragmentsAddedInBackStack.add(fragmentIntended);
             } else { // 不加入到fragment放回栈 作为默认加载fragment
-                // 将fragment加入存储不返回的栈的list
+                // 将fragment加入存储不返回的栈
                 fragmentsNoInBackStack.add(fragmentIntended);
             }
         }

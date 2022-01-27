@@ -16,8 +16,8 @@ import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.presenter.SettingPresenter;
 import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
@@ -157,16 +157,11 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(UnLoginMessage message) {
-
-        // 注销失败
-        if (!message.isSuccess()) {
-            XToastUtils.error(message.getMessage());
-
-            return;
+        MainActivity mainActivity = FRSCApplicationContext.getMainActivity();
+        if (null != mainActivity ){
+            mainActivity.finish();
         }
-        XToastUtils.success(message.getMessage());
-
-        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,true);
+        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,false);
     }
 
 }

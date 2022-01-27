@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,9 +14,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TimeMessage {
     int time;
-    int code;
+    MessageCode code;
 
-    public static TimeMessage getInstance(int time, int code) {
+    public static TimeMessage getInstance(int time, MessageCode code) {
         return new TimeMessage(time,code);
     }
 }

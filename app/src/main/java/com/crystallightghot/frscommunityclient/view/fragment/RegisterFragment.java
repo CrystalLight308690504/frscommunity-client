@@ -17,6 +17,7 @@ import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.utils.VerifyCodeUtil;
 import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -72,16 +73,17 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
 
     private void init() {
         activity = (BaseActivity) getActivity();
+        presenter = new RegisterPresenter(this);
 
     }
 
 
-    @OnClick({ R.id.btnSendVerifyCode, R.id.register})
+    @OnClick({R.id.btnSendVerifyCode, R.id.register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSendVerifyCode:
                 if (btnSendVerifyCode.isEnabled()) {
-                    setSendVerifyCodeState(false);
+                    SendVerifyCodeStateAction();
                 }
                 break;
             case R.id.register:
@@ -93,7 +95,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetMessage(TimeMessage message) {
-        if (message.getCode() != 1) {
+        if (message.getCode() != MessageCode.REGISTER_BUTTON_NO_ENABLE_TIME) {
             return;
         }
         int time = message.getTime();
@@ -131,31 +133,29 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
         User user = User.getInstance();
         user.setPhoneNumber(phoneNameText.toString());
         user.setPassword(password);
-        presenter = new RegisterPresenter(this, user);
-        presenter.loadData();
+
+        presenter.loadData(user);
     }
 
-    private void setSendVerifyCodeState(boolean enable) {
+    private void SendVerifyCodeStateAction() {
+        // 随机获取验证码
         verifyCode = VerifyCodeUtil.getVerifyCode();
         XToastUtils.info("验证码：" + verifyCode);
-        btnSendVerifyCode.setEnabled(enable);
-        if (enable) {
-            btnSendVerifyCode.setText("发送验证码");
-        } else {
-            Runnable runnable = () -> {
-                int i = 60;
-                try {
-                    while (i-- > 0) {
-                        Thread.sleep(1000);
-                        EventBus.getDefault().post(new TimeMessage(i, 1));
-                    }
+        btnSendVerifyCode.setEnabled(false);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        Runnable runnable = () -> {
+            int i = 60;
+            try {
+                while (i-- > 0) {
+                    Thread.sleep(1000);
+                    EventBus.getDefault().post(new TimeMessage(i, MessageCode.REGISTER_BUTTON_NO_ENABLE_TIME));
                 }
-            };
-            ThreadPoolUtil.executeThread(runnable);
-        }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+        ThreadPoolUtil.executeThread(runnable);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -10,7 +10,8 @@ public enum RequestIOE {
 
     USER_Login("/user/login","9002"),
     USER_Register("/user/register","9002"),
-    USER_UNLOGIN("/user/logout","9002");
+    USER_UNLOGIN("/user/logout","9002"),
+    MODIFY_USERNAME("/user/modifyUserName","9002");
 
     private String host = "http://42.194.211.199:";
     private String port;

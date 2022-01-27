@@ -13,11 +13,15 @@ public interface BaseContract {
 
     interface View {
         void showLoadingDialog();
-
         void hideLoadingDialog();
     }
 
     interface Presenter {
+    }
+
+    interface RespondCallBck {
+        void success(String respondMessage,Object respondData);
+        void failure(String failureMessage);
     }
 }
 

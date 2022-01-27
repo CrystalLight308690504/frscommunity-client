@@ -18,7 +18,7 @@ public interface RegisterContract {
 
     interface Presenter extends BaseContract.Presenter {
 
-        void loadData();
+        void loadData(User user);
     }
 
 }

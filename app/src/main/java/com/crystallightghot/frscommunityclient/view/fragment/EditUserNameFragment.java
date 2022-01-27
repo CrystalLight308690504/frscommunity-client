@@ -10,8 +10,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.google.android.material.textfield.TextInputEditText;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +45,11 @@ public class EditUserNameFragment extends Fragment {
         return fragment;
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(RegisterMessage message) {
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +64,22 @@ public class EditUserNameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edite_user_name, container, false);
         ButterKnife.bind(this, view);
         initView();
+        EventBusUtil.register(this);
         return view;
     }
 
     private void initView() {
         ieUserName.setText(FRSCApplicationContext.getUser().getUserName());
+
     }
 
     @OnClick(R.id.btnModify)
     public void onClick() {
-
+        String userNameInput = ieUserName.getText().toString();
+        if (userNameInput.equals("")) {
+            XToastUtils.error("请输入用户名");
+        }
     }
+
+
 }

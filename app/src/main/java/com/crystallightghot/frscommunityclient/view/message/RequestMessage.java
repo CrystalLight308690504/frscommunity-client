@@ -11,7 +11,10 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class RequestMessage<T> extends BaseMessage {
+public class RequestMessage<T>{
+    // 唯一标识符
+    int code;
+    String message;
     T data;
     boolean success = true;
 }

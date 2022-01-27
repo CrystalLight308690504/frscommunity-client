@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void init() {
+        FRSCApplicationContext.setMainActivity(this);
         ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
         setItemTextColorClicked(tvHome);
 

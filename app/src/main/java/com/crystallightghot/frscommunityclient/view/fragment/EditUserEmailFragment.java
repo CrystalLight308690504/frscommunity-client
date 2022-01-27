@@ -11,9 +11,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.utils.*;
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.android.material.textfield.TextInputEditText;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +39,8 @@ public class EditUserEmailFragment extends Fragment {
     @BindView(R.id.btnModify)
     Button btnModify;
     private String mParam1;
+
+    String verifyCode;
 
     public EditUserEmailFragment() {
         // Required empty public constructor
@@ -60,6 +67,7 @@ public class EditUserEmailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edite_user_email, container, false);
         ButterKnife.bind(this, view);
+        EventBusUtil.register(this);
         initView();
         return view;
     }
@@ -73,9 +81,46 @@ public class EditUserEmailFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSendVerifyCode:
+                clickSendVerifyBtnAction();
                 break;
             case R.id.btnModify:
                 break;
+        }
+    }
+
+    private void clickSendVerifyBtnAction() {
+        verifyCode = VerifyCodeUtil.getVerifyCode();
+        XToastUtils.info("验证码：" + verifyCode);
+        btnSendVerifyCode.setEnabled(false);
+
+        Runnable runnable = () -> {
+            int i = 60;
+            try {
+                while (i-- > 0) {
+                    Thread.sleep(1000);
+                    TimeMessage timeMessage = new TimeMessage(i, MessageCode.EDITE_EMAIL_SEND_COD_BUTTON_NO_ENABLE_TIME);
+                    EventBus.getDefault().post(timeMessage);
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+        ThreadPoolUtil.executeThread(runnable);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(TimeMessage message) {
+        if (message.getCode() != MessageCode.EDITE_EMAIL_SEND_COD_BUTTON_NO_ENABLE_TIME) {
+            return;
+        }
+        int time = message.getTime();
+        // 修改按钮显示字体
+        btnSendVerifyCode.setText(time + "");
+        btnSendVerifyCode.setEnabled(false);
+        if (time == 0) {
+            btnSendVerifyCode.setEnabled(true);
+            btnSendVerifyCode.setText("发送验证码");
         }
     }
 }
