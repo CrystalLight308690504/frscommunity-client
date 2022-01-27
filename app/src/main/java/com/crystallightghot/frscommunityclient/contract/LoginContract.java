@@ -20,4 +20,7 @@ public interface LoginContract  {
     interface Presenter extends BaseContract.Presenter {
         void login(User user);
     }
+    interface RespondCallBck{
+
+    }
 }

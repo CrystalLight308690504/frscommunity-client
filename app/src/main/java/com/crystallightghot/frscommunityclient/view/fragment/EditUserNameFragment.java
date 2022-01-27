@@ -4,9 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import androidx.fragment.app.Fragment;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +21,10 @@ import com.crystallightghot.frscommunityclient.R;
 public class EditUserNameFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
+    @BindView(R.id.ieEmail)
+    TextInputEditText ieUserName;
+    @BindView(R.id.btnModify)
+    Button btnModify;
 
     private String mParam1;
 
@@ -49,5 +58,11 @@ public class EditUserNameFragment extends Fragment {
     }
 
     private void initView() {
+        ieUserName.setText(FRSCApplicationContext.getUser().getUserName());
+    }
+
+    @OnClick(R.id.btnModify)
+    public void onClick() {
+
     }
 }

@@ -54,6 +54,8 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
                     .where(UserDao.Properties.UserId.eq(information.getUserId()))
                     .build()
                     .unique();
+
+            FRSCApplicationContext.setUser(user);
             // 转化为登陆状态
             view.stateToLogin();
         }

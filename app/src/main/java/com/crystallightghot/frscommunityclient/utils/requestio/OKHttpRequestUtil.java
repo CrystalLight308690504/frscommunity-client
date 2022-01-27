@@ -52,7 +52,7 @@ public class OKHttpRequestUtil {
         };
         ThreadPoolUtil.executeThread(runnable);
     }
-public static void deleteWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
+public static void deleteRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
         User user = FRSCApplicationContext.getUser();

@@ -1,11 +1,17 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import androidx.fragment.app.Fragment;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.google.android.material.textfield.TextInputEditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,8 +22,13 @@ public class EditMyDescriptionFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.ieDescription)
+    TextInputEditText ieDescription;
+    @BindView(R.id.btnPosition)
+    Button btnPosition;
 
     private String mParam1;
+    User user;
 
     public EditMyDescriptionFragment() {
         // Required empty public constructor
@@ -51,6 +62,14 @@ public class EditMyDescriptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_my_description, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_my_description, container, false);
+        ButterKnife.bind(this, view);
+        initView();
+        return view;
+    }
+
+    private void initView() {
+        user = FRSCApplicationContext.getUser();
+        ieDescription.setText(user.getDescription());
     }
 }

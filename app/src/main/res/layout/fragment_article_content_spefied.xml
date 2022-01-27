@@ -61,7 +61,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textColor="@color/color_black"
             android:text="标题" app:layout_constraintTop_toBottomOf="@+id/articleType"/>
-    <ImageButton android:layout_width="32dp" android:layout_height="32dp"
+    <ImageButton android:layout_width="20dp" android:layout_height="20dp"
                  app:layout_constraintRight_toRightOf="parent"
                  app:layout_constraintTop_toTopOf="@id/articleTitle"
                  app:layout_constraintBottom_toBottomOf="@id/articleTitle"

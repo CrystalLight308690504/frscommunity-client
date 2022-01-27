@@ -27,10 +27,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RegisterUserFragment#newInstance} factory method to
+ * Use the {@link RegisterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RegisterUserFragment extends BaseFragment implements RegisterContract.View {
+public class RegisterFragment extends BaseFragment implements RegisterContract.View {
 
 
     // 发送的验证码
@@ -49,12 +49,12 @@ public class RegisterUserFragment extends BaseFragment implements RegisterContra
     AppCompatButton register;
 
 
-    public RegisterUserFragment() {
+    public RegisterFragment() {
         // Required empty public constructor
     }
 
-    public static RegisterUserFragment newInstance(String param1) {
-        RegisterUserFragment fragment = new RegisterUserFragment();
+    public static RegisterFragment newInstance(String param1) {
+        RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

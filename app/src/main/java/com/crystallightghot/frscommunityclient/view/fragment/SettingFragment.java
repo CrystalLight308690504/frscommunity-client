@@ -66,7 +66,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         ButterKnife.bind(this, view);
         EventBusUtil.register(this);
@@ -89,9 +89,8 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
                     FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
                 }else if("退出登陆".equals(text)){
                     presenter.unLogin();
-
                 }
-                XToastUtils.toast(text + " is Clicked");
+
             }
         };
 

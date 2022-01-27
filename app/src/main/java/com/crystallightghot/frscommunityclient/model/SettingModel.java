@@ -20,7 +20,7 @@ public class SettingModel implements SettingContract.Model {
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         String url = RequestIOE.USER_UNLOGIN.getRequestIO();
-        OKHttpRequestUtil.deleteWithBodyJson(url,userJson,callback);
+        OKHttpRequestUtil.deleteRequestWithBodyJson(url,userJson,callback);
     }
 
 }

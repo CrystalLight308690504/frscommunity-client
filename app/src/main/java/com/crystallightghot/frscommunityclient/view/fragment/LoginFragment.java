@@ -139,7 +139,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 loginAction();
                 break;
             case R.id.register:
-                FRSCFragmentManageUtil.intentToFragment(RegisterUserFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentManageUtil.intentToFragment(RegisterFragment.newInstance("RegisterUserFragment"), (BaseFragmentActivity) getActivity(),true);
                 break;
             default:
                 break;
