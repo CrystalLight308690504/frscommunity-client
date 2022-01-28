@@ -17,6 +17,7 @@ public enum RequestIOE {
     MODIFY_USER_EMAIL("/user/modifyUserEmail","9002");
 
     private String host = "http://192.168.2.101:";
+//    private String host = "http://42.194.211.199:";
     private String port;
     private String requestInterface;
 

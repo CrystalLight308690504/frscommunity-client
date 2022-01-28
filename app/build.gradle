@@ -47,6 +47,14 @@ dependencies {
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-header:1.1.5'
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-layout:1.1.5'
 
+    // PictureSelector basic (Necessary)
+    implementation 'io.github.lucksiege:pictureselector:v3.0.3'
+    // image compress library (Not necessary)
+    implementation 'io.github.lucksiege:compress:v3.0.3'
+    // uCrop library (Not necessary)
+    implementation 'io.github.lucksiege:ucrop:v3.0.3'
+    // simple camerax library (Not necessary)
+    implementation 'io.github.lucksiege:camerax:v3.0.3'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.22'
