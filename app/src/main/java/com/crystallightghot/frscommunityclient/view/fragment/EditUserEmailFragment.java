@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.EditUserEmailPresenter;
 import com.crystallightghot.frscommunityclient.utils.*;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
@@ -27,7 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
  *
  * @author 30869
  */
-public class EditUserEmailFragment extends Fragment {
+public class EditUserEmailFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.ieEmail)
@@ -41,8 +42,10 @@ public class EditUserEmailFragment extends Fragment {
     private String mParam1;
 
     String verifyCode;
+    EditUserEmailPresenter presenter;
 
     public EditUserEmailFragment() {
+        presenter = new EditUserEmailPresenter(this);
         // Required empty public constructor
     }
 
@@ -74,7 +77,7 @@ public class EditUserEmailFragment extends Fragment {
 
     private void initView() {
         User user = FRSCApplicationContext.getUser();
-        ieEmail.setText(user.getUserName());
+        ieEmail.setText(user.getEmail());
     }
 
     @OnClick({R.id.btnSendVerifyCode, R.id.btnModify})
@@ -84,15 +87,31 @@ public class EditUserEmailFragment extends Fragment {
                 clickSendVerifyBtnAction();
                 break;
             case R.id.btnModify:
+                modifyAction();
                 break;
         }
+    }
+
+    private void modifyAction() {
+
+        String email = ieEmail.getText().toString();
+        if (!presenter.verifyEmailPattern(email)){
+            return;
+        }
+
+        String verifyCodeInput = ieVerifyCode.getText().toString();
+        if (null == verifyCode || verifyCodeInput.equals("")) {
+            XToastUtils.warning("请输入验证码");
+            return;
+        }
+
+        presenter.modifyUserEmail(email);
     }
 
     private void clickSendVerifyBtnAction() {
         verifyCode = VerifyCodeUtil.getVerifyCode();
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
-
         Runnable runnable = () -> {
             int i = 60;
             try {
@@ -123,4 +142,10 @@ public class EditUserEmailFragment extends Fragment {
             btnSendVerifyCode.setText("发送验证码");
         }
     }
+
+    public void clearDataInput(){
+        verifyCode = null;
+        ieVerifyCode.setText("");
+    }
+
 }

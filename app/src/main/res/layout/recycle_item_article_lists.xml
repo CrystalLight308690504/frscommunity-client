@@ -5,8 +5,8 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
                                                    android:background="@drawable/bkd_round_solid_while_stroke_bottom_right_bule_gray"
-                                                   android:layout_marginBottom="@dimen/margin_small"
-                                                   android:padding="@dimen/margin_normal">
+                                                   android:layout_marginBottom="@dimen/distance_small"
+                                                   android:padding="@dimen/distance_normal">
     <com.xuexiang.xui.widget.imageview.RadiusImageView
             android:id="@+id/profile"
             android:layout_width="40dp"
@@ -20,7 +20,7 @@
     <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/distance_small"
             android:text="6456"
             android:textColor="@color/default_displayed_text_gray"
             app:layout_constraintLeft_toRightOf="@id/profile"
@@ -29,17 +29,17 @@
     <TextView
             android:id="@+id/put_date"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/distance_small"
             android:text="2012-10-5"
             android:textColor="@color/default_displayed_text_gray"
-            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginRight="@dimen/distance_small"
             app:layout_constraintRight_toLeftOf="@id/articleType"
             app:layout_constraintTop_toTopOf="@id/profile"/>
     <TextView
             android:id="@+id/articleType"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginRight="@dimen/distance_small"
+            android:layout_marginLeft="@dimen/distance_small"
             android:text="发布类型"
             android:textColor="@color/default_displayed_text_gray"
             app:layout_constraintRight_toRightOf="parent"
@@ -54,7 +54,7 @@
             android:textSize="15dp"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/distance_normal"
             app:layout_constraintTop_toBottomOf="@id/profile"
             tools:ignore="MissingConstraints"/>
     <TextView
@@ -62,8 +62,8 @@
             android:maxEms="50"
             android:ellipsize="end"
             android:maxLines="2"
-            android:padding="@dimen/margin_small"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:padding="@dimen/distance_small"
+            android:layout_marginTop="@dimen/distance_normal"
             android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
             android:layout_width="280dp" android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

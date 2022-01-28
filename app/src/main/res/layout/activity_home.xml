@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:background="@color/color_white"
-            android:padding="@dimen/margin_normal"
+            android:padding="@dimen/distance_normal"
             android:gravity="center"
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"

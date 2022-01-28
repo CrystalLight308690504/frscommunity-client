@@ -53,7 +53,6 @@ public class SettingPresenter implements SettingContract.Presenter , RespondCall
             userDao.delete(user1);
         }
 
-        FRSCApplicationContext.setUser(null);
 
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(respondMessage);

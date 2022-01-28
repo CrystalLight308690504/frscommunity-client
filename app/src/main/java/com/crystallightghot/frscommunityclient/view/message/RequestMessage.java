@@ -1,7 +1,9 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @Date 2022/1/21
@@ -10,11 +12,18 @@ import lombok.EqualsAndHashCode;
  * description：
  */
 @Data
-@EqualsAndHashCode(callSuper=false)
+@NoArgsConstructor
 public class RequestMessage<T>{
-    // 唯一标识符
-    int code;
     String message;
     T data;
-    boolean success = true;
+    boolean success ;
+    MessageCode messageCode;
+
+    public RequestMessage(RequestResult requestResult, MessageCode messageCode){
+        this.message = requestResult.getMessage();
+        this.success = requestResult.isSuccess();
+        this.messageCode = messageCode;
+        this.data = (T) requestResult.getData();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.pojo.system;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,9 @@ import lombok.NoArgsConstructor;
  *    }
  */
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
-public class Result<T> {
+public class RequestResult {
 
     private boolean success;//是否成功
     private Integer code;// 返回码

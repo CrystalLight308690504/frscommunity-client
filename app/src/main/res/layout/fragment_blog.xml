@@ -9,7 +9,7 @@
             app:tabMode="scrollable"
             app:tabIndicatorFullWidth="false"
             app:tabRippleColor="@color/applicationMainTheme"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginTop="@dimen/distance_small"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -26,7 +26,7 @@
             android:src="@mipmap/icon_more"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/tbSkatingTypes"
-            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginRight="@dimen/distance_small"
             app:layout_constraintTop_toTopOf="parent"/>
     <ImageButton
 
@@ -37,14 +37,14 @@
             android:scaleType="fitCenter"
             app:layout_constraintRight_toLeftOf="@id/blog_more_list"
             app:layout_constraintBottom_toBottomOf="@+id/tbSkatingTypes"
-            android:layout_marginRight="@dimen/margin_max"
+            android:layout_marginRight="@dimen/distance_max"
             app:layout_constraintEnd_toStartOf="@+id/blog_more_list" app:layout_constraintTop_toTopOf="@+id/tbSkatingTypes"/>
 
 
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/contentViewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginTop="@dimen/distance_small"
             app:layout_constraintTop_toBottomOf="@id/tbSkatingTypes"
             app:layout_constraintLeft_toLeftOf="parent"/>
 

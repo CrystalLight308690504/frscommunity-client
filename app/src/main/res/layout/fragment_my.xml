@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bkd_round_bottom_blue_with_light"
-            android:padding="@dimen/margin_normal"
+            android:padding="@dimen/distance_normal"
     >
         <com.xuexiang.xui.widget.imageview.RadiusImageView
                 android:layout_width="64dp" android:layout_height="64dp"
@@ -26,7 +26,7 @@
                   app:layout_constraintTop_toTopOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/userProfile"
                   app:layout_constraintBottom_toBottomOf="@id/userProfile"
-                  android:layout_marginLeft="@dimen/margin_normal"
+                  android:layout_marginLeft="@dimen/distance_normal"
                   android:textColor="@color/default_displayed_text_black"
                   android:textSize="20dp"
                   android:id="@+id/userName"
@@ -36,7 +36,7 @@
                    app:layout_constraintRight_toRightOf="parent"
                    app:layout_constraintTop_toTopOf="@id/userProfile"
                    app:layout_constraintBottom_toBottomOf="@id/userProfile"
-                   android:layout_marginRight="@dimen/margin_normal"
+                   android:layout_marginRight="@dimen/distance_normal"
                    android:src="@mipmap/ic_arrow_right"
                    android:id="@+id/btnArrowRight"
         />
@@ -45,7 +45,7 @@
                   android:textColor="@color/color_gray_3"
                   app:layout_constraintTop_toBottomOf="@id/userProfile"
                   app:layout_constraintLeft_toLeftOf="parent"
-                  android:layout_marginTop="@dimen/margin_max1"
+                  android:layout_marginTop="@dimen/distance_max1"
                   app:layout_constraintRight_toLeftOf="@id/tvicFan"
                   android:id="@+id/tvicFllowed"
         />
@@ -55,7 +55,7 @@
                   app:layout_constraintTop_toBottomOf="@id/tvicFllowed"
                   app:layout_constraintLeft_toLeftOf="@id/tvicFllowed"
                   app:layout_constraintRight_toRightOf="@id/tvicFllowed"
-                  android:layout_marginTop="@dimen/margin_small"
+                  android:layout_marginTop="@dimen/distance_small"
                   android:id="@+id/tviFllowed"
         />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                   android:textColor="@color/color_gray_3"
                   app:layout_constraintTop_toBottomOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/tvicFllowed"
-                  android:layout_marginTop="@dimen/margin_max1"
+                  android:layout_marginTop="@dimen/distance_max1"
                   app:layout_constraintRight_toLeftOf="@id/tvicScanded"
                   android:id="@+id/tvicFan"
         />
@@ -73,7 +73,7 @@
                   app:layout_constraintTop_toBottomOf="@id/tvicFan"
                   app:layout_constraintLeft_toLeftOf="@id/tvicFan"
                   app:layout_constraintRight_toRightOf="@id/tvicFan"
-                  android:layout_marginTop="@dimen/margin_small"
+                  android:layout_marginTop="@dimen/distance_small"
                   android:id="@+id/tvFan"
         />
 
@@ -83,7 +83,7 @@
                   app:layout_constraintTop_toBottomOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/tvFan"
                   app:layout_constraintRight_toLeftOf="@id/tvicArticleCreated"
-                  android:layout_marginTop="@dimen/margin_max1"
+                  android:layout_marginTop="@dimen/distance_max1"
                   android:id="@+id/tvicScanded"
         />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                   app:layout_constraintTop_toBottomOf="@id/tvicScanded"
                   app:layout_constraintLeft_toLeftOf="@id/tvicScanded"
                   app:layout_constraintRight_toRightOf="@id/tvicScanded"
-                  android:layout_marginTop="@dimen/margin_small"
+                  android:layout_marginTop="@dimen/distance_small"
                   android:id="@+id/tvArticleBrowed"
 
         />
@@ -102,7 +102,7 @@
                   app:layout_constraintTop_toBottomOf="@id/userProfile"
                   app:layout_constraintLeft_toRightOf="@id/tvArticleBrowed"
                   app:layout_constraintRight_toRightOf="parent"
-                  android:layout_marginTop="@dimen/margin_max1"
+                  android:layout_marginTop="@dimen/distance_max1"
                   android:id="@+id/tvicArticleCreated"
         />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                   app:layout_constraintTop_toBottomOf="@id/tvicArticleCreated"
                   app:layout_constraintLeft_toLeftOf="@id/tvicArticleCreated"
                   app:layout_constraintRight_toRightOf="@id/tvicArticleCreated"
-                  android:layout_marginTop="@dimen/margin_small"
+                  android:layout_marginTop="@dimen/distance_small"
                   android:id="@+id/tvArticleCreated"
 
         />
@@ -119,8 +119,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                        android:layout_height="wrap_content"
-                                                       android:padding="@dimen/margin_max2"
-                                                       android:layout_marginTop="@dimen/margin_small"
+                                                       android:padding="@dimen/distance_max2"
+                                                       android:layout_marginTop="@dimen/distance_small"
                                                        android:background="@drawable/bkd_round_bottom_blue_with_light"
 
     >
@@ -137,7 +137,7 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   app:layout_constraintTop_toBottomOf="@id/ivBlog"
                   app:layout_constraintRight_toLeftOf="@id/ivicAnswer"
-                  android:layout_marginTop="@dimen/margin_normal"
+                  android:layout_marginTop="@dimen/distance_normal"
                   android:id="@+id/ivicBlog"
         />
         <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
@@ -153,7 +153,7 @@
                   app:layout_constraintLeft_toRightOf="@+id/ivicBlog"
                   app:layout_constraintTop_toBottomOf="@+id/ivAnswer"
                   app:layout_constraintRight_toLeftOf="@id/ivicCllection"
-                  android:layout_marginTop="@dimen/margin_normal"
+                  android:layout_marginTop="@dimen/distance_normal"
                   android:id="@+id/ivicAnswer"
         />
         <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
@@ -168,13 +168,13 @@
                   app:layout_constraintLeft_toRightOf="@+id/ivicAnswer"
                   app:layout_constraintTop_toBottomOf="@+id/ivCllection"
                   app:layout_constraintRight_toRightOf="parent"
-                  android:layout_marginTop="@dimen/margin_normal"
+                  android:layout_marginTop="@dimen/distance_normal"
                   android:id="@+id/ivicCllection"
         />
         <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
                                                       android:src="@mipmap/ic_help"
                                                       app:layout_constraintTop_toBottomOf="@id/ivicBlog"
-                                                      android:layout_marginTop="@dimen/margin_max2"
+                                                      android:layout_marginTop="@dimen/distance_max2"
                                                       app:layout_constraintLeft_toLeftOf="@id/ivicMyHelp"
                                                       app:layout_constraintRight_toRightOf="@id/ivicMyHelp"
                                                       android:id="@+id/ivMyHelp"
@@ -184,7 +184,7 @@
                   app:layout_constraintTop_toBottomOf="@+id/ivMyHelp"
                   app:layout_constraintRight_toRightOf="@id/ivicBlog"
                   app:layout_constraintLeft_toLeftOf="@id/ivicBlog"
-                  android:layout_marginTop="@dimen/margin_normal"
+                  android:layout_marginTop="@dimen/distance_normal"
                   android:id="@+id/ivicMyHelp"
         />
 
@@ -192,14 +192,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                        android:layout_height="wrap_content"
-                                                       android:layout_marginTop="@dimen/margin_max2"
+                                                       android:layout_marginTop="@dimen/distance_max2"
                                                        android:id="@+id/btnSetting"
                                                        android:background="@color/color_white"
     >
         <ImageView android:layout_width="30dp" android:layout_height="30dp"
                    android:src="@mipmap/ic_setting"
                    app:layout_constraintLeft_toLeftOf="parent"
-                   android:layout_margin="@dimen/margin_normal"
+                   android:layout_margin="@dimen/distance_normal"
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintBottom_toBottomOf="parent"
                    android:id="@+id/icivSetting"
@@ -209,13 +209,13 @@
                   app:layout_constraintTop_toTopOf="@id/icivSetting"
                   app:layout_constraintBottom_toBottomOf="@id/icivSetting"
                   android:text="设置"
-                  android:layout_marginLeft="@dimen/margin_normal"/>
+                  android:layout_marginLeft="@dimen/distance_normal"/>
         <ImageView android:layout_width="20dp" android:layout_height="20dp"
                    android:src="@mipmap/ic_arrow_right"
                    app:layout_constraintRight_toRightOf="parent"
                    app:layout_constraintTop_toTopOf="@id/icivSetting"
                    app:layout_constraintBottom_toBottomOf="@id/icivSetting"
-                   android:layout_marginRight="@dimen/margin_max"
+                   android:layout_marginRight="@dimen/distance_max"
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

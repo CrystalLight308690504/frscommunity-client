@@ -19,6 +19,7 @@ import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
+import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.xuexiang.xui.utils.DensityUtils;
@@ -41,7 +42,10 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     private String mParam1;
 
     BaseFragmentActivity activity;
-    SettingPresenter presenter ;
+    SettingPresenter presenter;
+    XUICommonListItemView profileItem;
+    XUICommonListItemView usernameItem;
+    XUICommonListItemView emailItem;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -76,18 +80,20 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
 
     private void initView() {
         activity = (BaseFragmentActivity) getActivity();
-        presenter = new SettingPresenter(this,FRSCApplicationContext.getUser());
+        presenter = new SettingPresenter(this, FRSCApplicationContext.getUser());
 
         View.OnClickListener onClickListener = v -> {
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSCFragmentManageUtil.intentToFragment(EditUserNameFragment.newInstance(""),activity,true);
-                }else if("邮箱".equals(text)){
-                    FRSCFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""),activity,true);
-                }else if("密码".equals(text)){
-                    FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""),activity,true);
-                }else if("退出登陆".equals(text)){
+                    FRSCFragmentManageUtil.intentToFragment(EditUsernameFragment.newInstance(""), activity, true);
+                } else if ("邮箱".equals(text)) {
+                    FRSCFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""), activity, true);
+                } else if ("头像".equals(text)) {
+                    FRSCFragmentManageUtil.intentToFragment(EditUserProfileFragment.newInstance(""), activity, true);
+                } else if ("密码".equals(text)) {
+                    FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""), activity, true);
+                } else if ("退出登陆".equals(text)) {
                     presenter.unLogin();
                 }
 
@@ -97,34 +103,34 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         int size = DensityUtils.dp2px(getContext(), 20);
 
         User user = FRSCApplicationContext.getUser();
-        if (null != user){
-
+        if (null != user) {
             String userProfileBase64 = user.getProfile();
             byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        XUIGroupListView.newSection(getContext())
-                .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(getItem(decodedByte,"头像:", ""), onClickListener)
-                .addItemView(getItem("用户名", user.getUserName()), onClickListener)
-                .addItemView(getItem("邮箱", user.getEmail()), onClickListener)
-                .addItemView(getItem("密码", "******"), onClickListener)
+            profileItem = getItem(decodedByte, "头像", "");
+            usernameItem = getItem("用户名", user.getUserName());
+            emailItem = getItem("邮箱", user.getEmail());
 
-                .addTo(mGroupListView);
+            XUIGroupListView.newSection(getContext())
+                    .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
+                    .addItemView(profileItem, onClickListener)
+                    .addItemView(usernameItem, onClickListener)
+                    .addItemView(emailItem, onClickListener)
+                    .addItemView(getItem("密码", "******"), onClickListener)
+                    .addTo(mGroupListView);
 
-
-        XUICommonListItemView unLogin = mGroupListView.createItemView(
-               null,
-                "退出登陆",
-                "",
-                XUICommonListItemView.HORIZONTAL,
-                XUICommonListItemView.ACCESSORY_TYPE_NONE);
-        XUIGroupListView.newSection(getContext())
-                .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(unLogin, onClickListener)
-                .addTo(mGroupListView);
+            XUICommonListItemView unLogin = mGroupListView.createItemView(
+                    null,
+                    "退出登陆",
+                    "",
+                    XUICommonListItemView.HORIZONTAL,
+                    XUICommonListItemView.ACCESSORY_TYPE_NONE);
+            XUIGroupListView.newSection(getContext())
+                    .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
+                    .addItemView(unLogin, onClickListener)
+                    .addTo(mGroupListView);
         }
     }
-
 
 
     private XUICommonListItemView getItem(Bitmap bitmap, String titleText, String detailText) {
@@ -139,7 +145,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         return item;
     }
 
-    private XUICommonListItemView getItem( String titleText, String detailText) {
+    private XUICommonListItemView getItem(String titleText, String detailText) {
         XUICommonListItemView item = mGroupListView.createItemView(
                 null,
                 titleText,
@@ -158,10 +164,21 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(UnLoginMessage message) {
         MainActivity mainActivity = FRSCApplicationContext.getMainActivity();
-        if (null != mainActivity ){
+        if (null != mainActivity) {
             mainActivity.finish();
         }
-        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""),activity,false);
+        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""), activity, false);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getUserChangedMessage(UserChangedMessage message) {
+        User user = FRSCApplicationContext.getUser();
+        usernameItem.setDetailText(user.getUserName());
+        String userProfileBase64 = user.getProfile();
+        byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        profileItem.setImageDrawable(new BitmapDrawable(decodedByte));
+        emailItem.setDetailText(user.getEmail());
     }
 
 }

@@ -11,6 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.EditeUserPasswordByOldPasswordPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
  * A simple {@link Fragment} subclass.
  * Use the {@link EditeUserPasswordByOldPasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author 30869
  */
 public class EditeUserPasswordByOldPasswordFragment extends Fragment {
 
@@ -38,8 +40,10 @@ public class EditeUserPasswordByOldPasswordFragment extends Fragment {
 
     BaseFragmentActivity activity;
 
+    EditeUserPasswordByOldPasswordPresenter presenter;
     public EditeUserPasswordByOldPasswordFragment() {
-        // Required empty public constructor
+
+        presenter = new EditeUserPasswordByOldPasswordPresenter(this);
     }
 
     public static EditeUserPasswordByOldPasswordFragment newInstance(String param1) {

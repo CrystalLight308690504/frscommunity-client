@@ -7,7 +7,7 @@ import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.utils.requestio.OKHttpRequestUtil;
 import com.crystallightghot.frscommunityclient.utils.requestio.RequestIOE;
-import com.crystallightghot.frscommunityclient.view.pojo.system.Result;
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
@@ -53,8 +53,8 @@ public class LoginModel implements LoginContract.Model {
                 String string = response.body().string();
                 Gson gson = new Gson();
                 // 获取返回结果信息
-                Result result = gson.fromJson(string, Result.class);
-                boolean success = result.isSuccess();
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                boolean success = requestResult.isSuccess();
                 if (success) {//如果成功
 
                 } else {// 请求失败

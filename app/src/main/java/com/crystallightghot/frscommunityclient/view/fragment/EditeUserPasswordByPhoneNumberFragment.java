@@ -1,7 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
-import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.utils.VerifyCodeUtil;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.presenter.EditUserPasswordPresenter;
+import com.crystallightghot.frscommunityclient.utils.*;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,7 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Use the {@link EditeUserPasswordByPhoneNumberFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
+public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.iePhoneNumber)
@@ -44,10 +42,13 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
     AppCompatButton btnModify;
 
     String verifyCode;
+    EditUserPasswordPresenter presenter;
 
     private String mParam1;
+    User user = FRSCApplicationContext.getUser();
 
     public EditeUserPasswordByPhoneNumberFragment() {
+        presenter = new EditUserPasswordPresenter(this);
     }
 
     public static EditeUserPasswordByPhoneNumberFragment newInstance(String param1) {
@@ -77,7 +78,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
     }
 
     private void initView() {
-
+        iePhoneNumber.setHint(user.getPhoneNumber());
     }
 
     @OnClick({R.id.btnSendVerifyCode, R.id.btnModify})
@@ -94,15 +95,9 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
 
     private void modifyAction() {
         String verifyCodeInput = ieVerifyCode.getText().toString();
-        Editable phoneNameText = iePhoneNumber.getText();
         String password = iePassword.getText().toString();
         String comfirmPassword = ieNewPassword.getText().toString();
-        int length = phoneNameText.length();
 
-        if (length != 11) {
-            XToastUtils.error("请输入正确手机号");
-            return;
-        }
         if (null == verifyCode || verifyCodeInput.equals("")) {
             XToastUtils.error("请输入验证码");
             return;
@@ -113,11 +108,16 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
             return;
         }else if (!comfirmPassword.equals(password)) {
             XToastUtils.error("两次输入密码不一致");
+            return;
         }
         if (!verifyCodeInput.equals(verifyCode)) {
             XToastUtils.error("验证码错误");
             return;
         }
+
+
+        user.setPassword(password);
+        presenter.modifyUserPasswordByPhoneNumber(user);
     }
 
     private void SendVerifyCodeStateAction() {
@@ -126,7 +126,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
         Runnable runnable = () -> {
-            int i = 60;
+            int i = 2;
             try {
                 while (i-- > 0) {
                     Thread.sleep(1000);
@@ -139,6 +139,14 @@ public class EditeUserPasswordByPhoneNumberFragment extends Fragment {
         };
         ThreadPoolUtil.executeThread(runnable);
     }
+
+    public void clearDataInput(){
+        verifyCode = null;
+        iePassword.setText("");
+        ieNewPassword.setText("");
+        ieVerifyCode.setText("");
+    }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetMessage(TimeMessage message) {

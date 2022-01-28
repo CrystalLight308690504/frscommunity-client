@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
-                                                   android:padding="@dimen/margin_normal"
-                                                   android:layout_marginStart="@dimen/margin_max"
+                                                   android:padding="@dimen/distance_normal"
+                                                   android:layout_marginStart="@dimen/distance_max"
                                                    android:background="@drawable/bkd_round_bottom_blue_with_light"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

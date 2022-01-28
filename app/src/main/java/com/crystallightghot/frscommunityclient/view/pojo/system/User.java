@@ -21,6 +21,7 @@ public class User {
     @Id
     private Long userId;
 
+    private String oldPassword;
     private String sessionId;
 
     private String userName = "";
@@ -51,13 +52,14 @@ public class User {
 
     private String addressIp;
 
-    @Generated(hash = 89215729)
-    public User(Long userId, String sessionId, String userName, String email,
-            String password, String phoneNumber, String profile, String introduce,
-            Long credit, Boolean gender, Date createdTime, Date lastLoginTime,
-            Date loginTime, String profession, String description,
-            String addressIp) {
+    @Generated(hash = 397642711)
+    public User(Long userId, String oldPassword, String sessionId, String userName,
+            String email, String password, String phoneNumber, String profile,
+            String introduce, Long credit, Boolean gender, Date createdTime,
+            Date lastLoginTime, Date loginTime, String profession,
+            String description, String addressIp) {
         this.userId = userId;
+        this.oldPassword = oldPassword;
         this.sessionId = sessionId;
         this.userName = userName;
         this.email = email;
@@ -209,5 +211,13 @@ public class User {
 
     public void setAddressIp(String addressIp) {
         this.addressIp = addressIp;
+    }
+
+    public String getOldPassword() {
+        return this.oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

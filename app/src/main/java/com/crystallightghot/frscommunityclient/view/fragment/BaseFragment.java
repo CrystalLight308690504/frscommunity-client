@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.crystallightghot.frscommunityclient.contract.BaseContract;
+import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.dialog.LoadingDialog;
 
@@ -40,5 +41,21 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
         super.onDestroy();
         loadingDialog.dismiss();
         loadingDialog = null;
+    }
+
+    public void  showInformationToast(String informationMessage) {
+        XToastUtils.info(informationMessage);
+    }
+
+    public void showErrorToast(String informationMessage) {
+        XToastUtils.error(informationMessage);
+    }
+
+    public void showSuccessToast(String informationMessage) {
+        XToastUtils.success(informationMessage);
+    }
+
+    public void showWarningToast(String informationMessage) {
+        XToastUtils.warning(informationMessage);
     }
 }

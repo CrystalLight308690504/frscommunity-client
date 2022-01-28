@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:padding="@dimen/margin_small"
+        android:padding="@dimen/distance_small"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,9 +11,9 @@
             android:id="@+id/search_input_box"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:paddingRight="@dimen/margin_max2"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginTop="@dimen/distance_small"
+            android:paddingRight="@dimen/distance_max2"
+            android:layout_marginLeft="@dimen/distance_small"
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textColor="@color/input_box_background_text_gray1"
@@ -30,13 +30,13 @@
                app:layout_constraintTop_toTopOf="@id/search_input_box"
                app:layout_constraintBottom_toBottomOf="@id/search_input_box"
                app:layout_constraintLeft_toLeftOf="@id/search_input_box"
-               android:layout_marginLeft="@dimen/margin_normal"
+               android:layout_marginLeft="@dimen/distance_normal"
 
     />
     <ImageButton android:layout_width="32dp" android:layout_height="32dp"
                  app:layout_constraintRight_toRightOf="parent"
                  app:layout_constraintBottom_toBottomOf="@id/search_input_box"
-                 android:layout_marginRight="@dimen/margin_small"
+                 android:layout_marginRight="@dimen/distance_small"
                  android:background="@mipmap/home_scan_code"
                  android:id="@+id/imageButton" app:layout_constraintTop_toTopOf="@+id/search_input_box"/>
 

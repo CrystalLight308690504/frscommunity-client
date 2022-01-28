@@ -4,7 +4,7 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   android:padding="@dimen/margin_normal"
+                                                   android:padding="@dimen/distance_normal"
                                                    tools:context=".view.fragment.HomeSearchResultsFragment">
 
     <ImageButton
@@ -44,7 +44,7 @@
             app:tabIndicatorFullWidth="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_box"
-            android:layout_marginTop="@dimen/margin_normal"/>
+            android:layout_marginTop="@dimen/distance_normal"/>
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:text="时间"
               app:layout_constraintTop_toTopOf="@id/searchResultType"
@@ -64,7 +64,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/searchResultType"
-            android:layout_marginTop="@dimen/margin_normal"/>
+            android:layout_marginTop="@dimen/distance_normal"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,7 +85,7 @@ public class MyFragment extends Fragment {
     BaseActivity activity;
 
     public MyFragment() {
-        // Required empty public constructor
+        EventBusUtil.register(this);
     }
 
 
@@ -98,7 +102,6 @@ public class MyFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-
         }
     }
 
@@ -148,6 +151,13 @@ public class MyFragment extends Fragment {
             default:
                 break;
         }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getUserChangedMessage(UserChangedMessage message) {
+        User user = FRSCApplicationContext.getUser();
+        userName.setText(user.getUserName());
     }
 }
 

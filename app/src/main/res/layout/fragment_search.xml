@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:padding="@dimen/margin_normal"
+        android:padding="@dimen/distance_normal"
         tools:context=".view.fragment.HomeSearchFragment">
 
     <ImageButton
@@ -44,14 +44,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_box"
-            android:layout_marginTop="@dimen/margin_max"
+            android:layout_marginTop="@dimen/distance_max"
     />
     <com.xuexiang.xui.widget.flowlayout.FlowTagLayout
             android:id="@+id/hot_searches"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_host_search"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/distance_normal"
    />
 
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hot_searches"
-            android:layout_marginTop="@dimen/margin_max"
+            android:layout_marginTop="@dimen/distance_max"
     />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_search_history"
-            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/distance_normal"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

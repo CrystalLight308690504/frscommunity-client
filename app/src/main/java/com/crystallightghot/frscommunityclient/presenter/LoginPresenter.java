@@ -5,6 +5,7 @@ import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
@@ -63,16 +64,17 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
 
     @Override
     public void success(String respondMessage, Object respondData) {
-
+        view.hideLoadingDialog();
         // 将获取的数据转化为User实体类
         Gson gson = new Gson();
         User user = gson.fromJson(gson.toJson(respondData), User.class);
 
         // 创建消息
         RequestMessage<User> message = new RequestMessage();
+        message.setSuccess(true);
         message.setMessage(respondMessage);
         message.setData(user);
-        message.setCode(view.getMessageCode());
+        message.setMessageCode(MessageCode.LOGIN_RESULT);
 
         // 存储User信息到全局中
         FRSCApplicationContext.setUser(user);
@@ -101,7 +103,7 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
         view.hideLoadingDialog();
         RequestMessage message = new RequestMessage();
         message.setMessage(failureMessage);
-        message.setCode(view.getMessageCode());
+        message.setMessageCode(MessageCode.LOGIN_RESULT);
         message.setSuccess(false);
         EventBus.getDefault().post(message);
     }

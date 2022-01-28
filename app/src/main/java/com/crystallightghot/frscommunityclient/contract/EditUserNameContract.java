@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.contract;
 
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 
 /**
@@ -8,7 +9,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.system.User;
  * @Version: 1.0
  * description：
  */
-public interface UserContract {
+public interface EditUserNameContract {
     interface Model {
         void modifyUsername(User user, UserRespondCallBack userRespondCallBack);
     }
@@ -20,15 +21,13 @@ public interface UserContract {
 
         /**
          * 修改用户名
-         * @param view
          * @param user
          */
-      void modifyUsername(View view , User user);
+      void modifyUsername( User user);
     }
 
     interface UserRespondCallBack {
 
-        void modifyUsernameSuccess(String message,Object data);
-        void modifyUsernameFailed(String message);
+        void modifyUsernameResult(RequestResult requestResult);
     }
 }

@@ -18,6 +18,7 @@ import com.crystallightghot.frscommunityclient.utils.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
+import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -73,7 +74,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage<User> message) {
-        if (message.getCode() != MESSAGE_CODE) {// 只收有关本fragment的消息
+        if (message.getMessageCode() != MessageCode.LOGIN_RESULT) {// 只收有关本fragment的消息
             return;
         }
         // 登陆失败

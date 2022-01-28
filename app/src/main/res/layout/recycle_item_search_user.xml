@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:padding="@dimen/margin_small"
+        android:padding="@dimen/distance_small"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -18,7 +18,7 @@
     <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/distance_small"
             android:text="FRSC"
             android:textSize="12dp"
             android:textColor="@color/default_displayed_text_gray"
@@ -50,7 +50,7 @@
             android:text="粉丝：50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginLeft="@dimen/distance_normal"
             android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@id/total_article"
             app:layout_constraintTop_toTopOf="@id/total_article"

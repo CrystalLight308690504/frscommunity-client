@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.utils.requestio;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.pojo.system.Result;
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 import okhttp3.*;
@@ -38,12 +38,12 @@ public class OKHttpRequestUtil {
                 String string = response.body().string();
                 Gson gson = new Gson();
                 // 获取返回结果信息
-                Result result = gson.fromJson(string, Result.class);
-                boolean success = result.isSuccess();
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                boolean success = requestResult.isSuccess();
                 if (success) {//如果成功
-                    callback.success(result.getMessage(), result.getData());
+                    callback.success(requestResult.getMessage(), requestResult.getData());
                 } else {// 请求失败
-                    callback.failure(result.getMessage());
+                    callback.failure(requestResult.getMessage());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -74,12 +74,12 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 String string = response.body().string();
                 Gson gson = new Gson();
                 // 获取返回结果信息
-                Result result = gson.fromJson(string, Result.class);
-                boolean success = result.isSuccess();
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                boolean success = requestResult.isSuccess();
                 if (success) {//如果成功
-                    callback.success(result.getMessage(), result.getData());
+                    callback.success(requestResult.getMessage(), requestResult.getData());
                 } else {// 请求失败
-                    callback.failure(result.getMessage());
+                    callback.failure(requestResult.getMessage());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -113,12 +113,12 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 String string = response.body().string();
                 Gson gson = new Gson();
                 // 获取返回结果信息
-                Result result = gson.fromJson(string, Result.class);
-                boolean success = result.isSuccess();
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                boolean success = requestResult.isSuccess();
                 if (success) {//如果成功
-                    callback.success(result.getMessage(), result.getData());
+                    callback.success(requestResult.getMessage(), requestResult.getData());
                 } else {// 请求失败
-                    callback.failure(result.getMessage());
+                    callback.failure(requestResult.getMessage());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

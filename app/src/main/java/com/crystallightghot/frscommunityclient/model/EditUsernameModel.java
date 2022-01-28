@@ -1,9 +1,9 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.contract.UserContract;
+import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.utils.requestio.RequestIOE;
-import com.crystallightghot.frscommunityclient.view.pojo.system.Result;
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 import okhttp3.*;
@@ -16,10 +16,10 @@ import java.io.IOException;
  * @Version: 1.0
  * description：
  */
-public class UserModel implements UserContract.Model {
+public class EditUsernameModel implements EditUserNameContract.Model {
 
     @Override
-    public void modifyUsername(User user, UserContract.UserRespondCallBack userRespondCallBack) {
+    public void modifyUsername(User user, EditUserNameContract.UserRespondCallBack userRespondCallBack) {
         Gson gson = new Gson();
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -33,26 +33,22 @@ public class UserModel implements UserContract.Model {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .post(requestBody)
+                .put(requestBody)
                 .addHeader("Authorization","FRSC"+head)
                 .url(url)
                 .build();
         Runnable runnable = () -> {
+
+            RequestResult requestResult;
             try {
                 Response response = client.newCall(request).execute();
                 String string = response.body().string();
-
                 // 获取返回结果信息
-                Result result = gson.fromJson(string, Result.class);
-                boolean success = result.isSuccess();
-                if (success) {//如果成功
-                    userRespondCallBack.modifyUsernameSuccess(result.getMessage(), result.getData());
-                } else {// 请求失败
-                    userRespondCallBack.modifyUsernameFailed(result.getMessage());
-                }
+                requestResult = gson.fromJson(string, RequestResult.class);
+                userRespondCallBack.modifyUsernameResult(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                userRespondCallBack.modifyUsernameFailed("失败");
+                userRespondCallBack.modifyUsernameResult(new RequestResult(false, null,"请求失败",null));
             }
         };
         ThreadPoolUtil.executeThread(runnable);
