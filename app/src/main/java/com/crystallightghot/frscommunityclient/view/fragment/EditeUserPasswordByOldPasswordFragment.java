@@ -11,8 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.presenter.EditeUserPasswordByOldPasswordPresenter;
+import com.crystallightghot.frscommunityclient.presenter.EditUserPasswordPresenter;
+import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -22,7 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
  * create an instance of this fragment.
  * @author 30869
  */
-public class EditeUserPasswordByOldPasswordFragment extends Fragment {
+public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.ieOldPassword)
@@ -40,10 +42,9 @@ public class EditeUserPasswordByOldPasswordFragment extends Fragment {
 
     BaseFragmentActivity activity;
 
-    EditeUserPasswordByOldPasswordPresenter presenter;
+    EditUserPasswordPresenter presenter;
     public EditeUserPasswordByOldPasswordFragment() {
-
-        presenter = new EditeUserPasswordByOldPasswordPresenter(this);
+        presenter = new EditUserPasswordPresenter(this);
     }
 
     public static EditeUserPasswordByOldPasswordFragment newInstance(String param1) {
@@ -79,10 +80,43 @@ public class EditeUserPasswordByOldPasswordFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnModify:
+                modifyAction();
                 break;
             case R.id.btnOldPasswordForgot:
                 FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
+    }
+
+    private void modifyAction() {
+        User user = FRSCApplicationContext.getUser();
+        String oldPassword = ieOldPassword.getText().toString();
+
+        String newPassword = idNewPassword.getText().toString();
+        String confirmPassword = ieConfirmPassword.getText().toString();
+
+        if (oldPassword.equals("")) {
+            showWarningToast("请输入修改的密码");
+            return;
+        }else if (newPassword.equals("")) {
+            showWarningToast("请再次输入密码");
+            return;
+        }else if (confirmPassword.equals("")) {
+            showWarningToast("请再次输入密码");
+            return;
+        }else if (!newPassword.equals(confirmPassword)) {
+            showWarningToast("两次密码不一致");
+            return;
+        }
+
+        user.setOldPassword(oldPassword);
+        user.setPassword(newPassword);
+        presenter.modifyUserPasswordByOldPassword(user);
+    }
+
+    public void clearDataInput() {
+        ieOldPassword.setText("");
+        idNewPassword.setText("");
+        ieConfirmPassword.setText("");
     }
 }

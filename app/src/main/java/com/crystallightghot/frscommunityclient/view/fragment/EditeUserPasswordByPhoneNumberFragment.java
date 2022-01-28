@@ -48,6 +48,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
     User user = FRSCApplicationContext.getUser();
 
     public EditeUserPasswordByPhoneNumberFragment() {
+        super();
         presenter = new EditUserPasswordPresenter(this);
     }
 

@@ -25,13 +25,9 @@ public class EditUserPasswordPresenter implements EditUserPasswordContract.Prese
     EditeUserPasswordByPhoneNumberFragment editeUserPasswordByPhoneNumberFragment;
     EditeUserPasswordByOldPasswordFragment editeUserPasswordByOldPasswordFragment;
 
-    public EditUserPasswordPresenter() {
-    }
-
     public EditUserPasswordPresenter(EditeUserPasswordByOldPasswordFragment editeUserPasswordByOldPasswordFragment) {
         EventBusUtil.register(this);
         model = new EditUserPasswordModel();
-        EventBusUtil.register(this);
         this.editeUserPasswordByOldPasswordFragment = editeUserPasswordByOldPasswordFragment;
     }
 
@@ -46,6 +42,11 @@ public class EditUserPasswordPresenter implements EditUserPasswordContract.Prese
         model.modifyUserPasswordByPhoneNumber(user, this);
     }
 
+ public void modifyUserPasswordByOldPassword(User user) {
+     editeUserPasswordByOldPasswordFragment.showLoadingDialog();
+        model.modifyUserPasswordByOldPassword(user, this);
+    }
+
 
     @Override
     public void modifyUserPasswordByPhoneResult(RequestResult requestResult) {
@@ -53,18 +54,30 @@ public class EditUserPasswordPresenter implements EditUserPasswordContract.Prese
         EventBusUtil.sendMessage(message);
     }
 
+    @Override
+    public void modifyUserPasswordByOldPasswordResult(RequestResult requestResult) {
+        RequestMessage message = new RequestMessage(requestResult, MessageCode.MODIFY_PASSWD_BY_OLD_PASSWORD_RESULT);
+        EventBusUtil.sendMessage(message);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
-        editeUserPasswordByPhoneNumberFragment.hideLoadingDialog();
-        if (message.getMessageCode() != MessageCode.MODIFY_PASSWD_BY_PHONE_NUMBER_RESULT) {
-            return;
-        }
-
-        if (message.isSuccess()){
-            XToastUtils.success("修改成功");
-            editeUserPasswordByPhoneNumberFragment.clearDataInput();
-        }else {
-            XToastUtils.error(message.getMessage());
+        if (message.getMessageCode() == MessageCode.MODIFY_PASSWD_BY_PHONE_NUMBER_RESULT) {
+            editeUserPasswordByPhoneNumberFragment.hideLoadingDialog();
+            if (message.isSuccess()){
+                XToastUtils.success("修改成功");
+                editeUserPasswordByPhoneNumberFragment.clearDataInput();
+            }else {
+                XToastUtils.error(message.getMessage());
+            }
+        }else if(message.getMessageCode() == MessageCode.MODIFY_PASSWD_BY_OLD_PASSWORD_RESULT) {
+            editeUserPasswordByOldPasswordFragment.hideLoadingDialog();
+            if (message.isSuccess()){
+                XToastUtils.success("修改成功");
+                editeUserPasswordByOldPasswordFragment.clearDataInput();
+            }else {
+                XToastUtils.error(message.getMessage());
+            }
         }
 
     }

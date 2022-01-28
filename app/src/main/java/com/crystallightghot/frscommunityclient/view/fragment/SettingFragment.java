@@ -93,7 +93,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
                     FRSCFragmentManageUtil.intentToFragment(EditUserProfileFragment.newInstance(""), activity, true);
                 } else if ("密码".equals(text)) {
                     FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""), activity, true);
-                } else if ("退出登陆".equals(text)) {
+                } else if ("退出登录".equals(text)) {
                     presenter.unLogin();
                 }
 
@@ -121,7 +121,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
 
             XUICommonListItemView unLogin = mGroupListView.createItemView(
                     null,
-                    "退出登陆",
+                    "退出登录",
                     "",
                     XUICommonListItemView.HORIZONTAL,
                     XUICommonListItemView.ACCESSORY_TYPE_NONE);

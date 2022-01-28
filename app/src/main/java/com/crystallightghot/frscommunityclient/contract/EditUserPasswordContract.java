@@ -21,5 +21,7 @@ public interface EditUserPasswordContract {
     interface EditUserPasswordCallBack {
 
         void modifyUserPasswordByPhoneResult(RequestResult requestResult);
+
+        void modifyUserPasswordByOldPasswordResult(RequestResult requestResult);
     }
 }
