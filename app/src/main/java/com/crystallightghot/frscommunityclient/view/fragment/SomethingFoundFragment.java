@@ -64,8 +64,9 @@ public class SomethingFoundFragment extends Fragment {
         activity = (MainActivity) getActivity();
         DemoCollectionAdapter demoCollectionAdapter = new DemoCollectionAdapter(this);
         viewPager.setAdapter(demoCollectionAdapter);
-        if (fragments.size() > 0)
-             lastFragment = fragments.get(0);
+        if (fragments.size() > 0){
+            lastFragment = fragments.get(0);
+        }
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             int lastScrolledInstance = 0;
             @Override

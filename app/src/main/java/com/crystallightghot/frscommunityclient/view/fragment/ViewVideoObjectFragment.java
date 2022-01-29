@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import xyz.doikki.videocontroller.StandardVideoController;
-import xyz.doikki.videoplayer.ijk.IjkPlayerFactory;
+import xyz.doikki.videoplayer.exo.ExoMediaPlayerFactory;
 import xyz.doikki.videoplayer.player.VideoView;
 
 /**
@@ -49,8 +49,9 @@ public class ViewVideoObjectFragment extends Fragment {
         StandardVideoController controller = new StandardVideoController(getActivity());
         controller.addDefaultControlComponent("标题", false);
         //使用IjkPlayer解码
-        videoView.setPlayerFactory(IjkPlayerFactory.create());
-        videoView.setVideoController(controller); //设置控制器
+        videoView.setPlayerFactory(ExoMediaPlayerFactory.create());
+        //设置控制器
+        videoView.setVideoController(controller);
     }
 
     public void pauseVideo() {

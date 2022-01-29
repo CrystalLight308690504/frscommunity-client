@@ -46,15 +46,18 @@ dependencies {
     //下拉刷新
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-header:1.1.5'
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-layout:1.1.5'
+    //工具类
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:2.0.0'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-sub:2.0.0'
+    //PictureSelector图片选择
+    implementation 'com.github.xuexiangjys.PictureSelector:picture-core:1.0.5'
+    //RxUtil2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //RxBinding的sdk
+//    implementation deps.rxbinding
+    implementation 'com.github.xuexiangjys:RxUtil2:1.2.1'
 
-    // PictureSelector basic (Necessary)
-    implementation 'io.github.lucksiege:pictureselector:v3.0.3'
-    // image compress library (Not necessary)
-    implementation 'io.github.lucksiege:compress:v3.0.3'
-    // uCrop library (Not necessary)
-    implementation 'io.github.lucksiege:ucrop:v3.0.3'
-    // simple camerax library (Not necessary)
-    implementation 'io.github.lucksiege:camerax:v3.0.3'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.22'
@@ -66,15 +69,12 @@ dependencies {
     implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.5'
     implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.5'
     implementation 'xyz.doikki.android.dkplayer:player-exo:3.3.5'
-    implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.5'
     implementation 'xyz.doikki.android.dkplayer:videocache:3.3.5'
 
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
-
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-
     //GreenDAO https://github.com/greenrobot/greenDAO
     implementation 'org.greenrobot:greendao:3.3.0' // add library
 

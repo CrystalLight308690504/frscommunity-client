@@ -35,4 +35,5 @@ public class SingleFragmentActivity extends BaseFragmentActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 }

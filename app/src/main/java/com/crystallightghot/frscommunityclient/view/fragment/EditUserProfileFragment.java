@@ -10,14 +10,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.GlideEngine;
-import com.luck.picture.lib.basic.PictureSelector;
-import com.luck.picture.lib.config.SelectMimeType;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.interfaces.OnResultCallbackListener;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,9 +25,8 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class EditUserProfileFragment extends Fragment {
+    EditUserProfileFragment fragment = this;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.icLog)
@@ -40,7 +39,7 @@ public class EditUserProfileFragment extends Fragment {
     private String mParam2;
 
     public EditUserProfileFragment() {
-        // Required empty public constructor
+        
     }
 
     /**
@@ -69,9 +68,8 @@ public class EditUserProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -79,26 +77,34 @@ public class EditUserProfileFragment extends Fragment {
 
     @OnClick({R.id.icLog, R.id.btnPosition})
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.icLog:
-                PictureSelector.create(this)
-                        .openGallery(SelectMimeType.ofImage())
-                        .setImageEngine(GlideEngine.createGlideEngine())
-                        .forResult(new OnResultCallbackListener<LocalMedia>() {
-                            @Override
-                            public void onResult(ArrayList<LocalMedia> result) {
 
-                            }
-
-                            @Override
-                            public void onCancel() {
-
-                            }
-                        });
+                chosePictureAction();
                 break;
 
             case R.id.btnPosition:
                 break;
+            default:
         }
+    }
+
+    private void chosePictureAction() {
+        List<LocalMedia> mSelectList = new ArrayList<>();
+        PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofImage())
+                .theme(R.style.XUIPictureStyle)
+                .maxSelectNum(8)
+                .minSelectNum(1)
+                .selectionMode(PictureConfig.MULTIPLE)
+                .previewImage(true)
+                .isCamera(true)
+                .enableCrop(false)
+                .compress(true)
+                .previewEggs(true)
+                .selectionMedia(mSelectList)
+                .forResult(PictureConfig.CHOOSE_REQUEST);;
+
     }
 }

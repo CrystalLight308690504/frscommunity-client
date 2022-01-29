@@ -34,7 +34,11 @@ public class AddClassificationDialogFragment extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_add_classification, null);
         ButterKnife.bind(this, view);
         builder.setView(view);
+        init();
         return builder.create();
+    }
+
+    private void init() {
     }
 
     @OnClick({R.id.btnOpened, R.id.btnCancel})

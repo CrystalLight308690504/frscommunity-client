@@ -22,13 +22,8 @@
         <activity
                 android:name=".view.activity.SingleFragmentActivity"
                 android:exported="true"
-        >
-            <intent-filter>
-                <action android:name="SingleFragmentActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-
-        </activity>
+                android:launchMode="singleInstance"
+        />
 
         <receiver
                 android:name=".view.broadcast.HomeViewPagerItemScrollChangedReceiver"
@@ -38,13 +33,10 @@
                 <action android:name="HomeViewPagerItemScrollChangedReceiver"/>
             </intent-filter>
         </receiver>
-
-        <activity android:name=".view.activity.BaseFragmentActivity">
-        </activity>
         <activity
                 android:name=".view.activity.MainActivity"
-                android:configChanges="screenSize"
                 android:exported="true"
+                android:configChanges="orientation|screenSize|keyboardHidden"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".view.activity.AccessActivity"
