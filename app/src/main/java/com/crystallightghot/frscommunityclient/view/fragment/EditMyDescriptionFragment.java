@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.android.material.textfield.TextInputEditText;
 

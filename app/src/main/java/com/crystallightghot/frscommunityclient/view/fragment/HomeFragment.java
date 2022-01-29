@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;

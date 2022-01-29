@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 
 import java.util.List;

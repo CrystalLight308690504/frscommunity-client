@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.utils;
+package com.crystallightghot.frscommunityclient.view.util;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

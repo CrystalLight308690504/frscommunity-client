@@ -2,8 +2,8 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract;
 import com.crystallightghot.frscommunityclient.model.EditUserPasswordModel;
-import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserPasswordByOldPasswordFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserPasswordByPhoneNumberFragment;

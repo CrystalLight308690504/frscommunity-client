@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.view.activity;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.xuexiang.xui.XUI;
 
 /**

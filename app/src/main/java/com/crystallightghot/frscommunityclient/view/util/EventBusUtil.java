@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.utils;
+package com.crystallightghot.frscommunityclient.view.util;
 
 import org.greenrobot.eventbus.EventBus;
 

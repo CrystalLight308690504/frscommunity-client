@@ -5,7 +5,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;

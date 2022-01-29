@@ -2,8 +2,8 @@ package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserEmailContract;
 import com.crystallightghot.frscommunityclient.presenter.EditUserEmailPresenter;
-import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.utils.requestio.RequestIOE;
+import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;

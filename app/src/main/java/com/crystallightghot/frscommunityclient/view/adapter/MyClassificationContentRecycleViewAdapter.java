@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import org.jetbrains.annotations.NotNull;
 
 /**

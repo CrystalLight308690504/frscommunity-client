@@ -4,7 +4,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.crystallightghot.frscommunityclient.contract.BaseContract;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.dialog.LoadingDialog;
 

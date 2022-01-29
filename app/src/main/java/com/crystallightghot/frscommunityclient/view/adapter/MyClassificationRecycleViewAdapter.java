@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import org.jetbrains.annotations.NotNull;
 
 /**

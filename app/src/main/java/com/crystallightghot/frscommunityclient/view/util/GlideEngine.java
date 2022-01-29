@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.utils;
+package com.crystallightghot.frscommunityclient.view.util;
 
 import android.app.Activity;
 import android.content.Context;

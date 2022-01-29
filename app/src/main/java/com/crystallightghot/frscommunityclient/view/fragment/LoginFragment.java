@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;

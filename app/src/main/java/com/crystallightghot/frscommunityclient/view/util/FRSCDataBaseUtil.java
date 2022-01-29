@@ -1,7 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
 import android.database.sqlite.SQLiteDatabase;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.pojo.system.DaoMaster;
 import com.crystallightghot.frscommunityclient.view.pojo.system.DaoSession;
 

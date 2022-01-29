@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
 import com.xuexiang.xui.utils.DensityUtils;

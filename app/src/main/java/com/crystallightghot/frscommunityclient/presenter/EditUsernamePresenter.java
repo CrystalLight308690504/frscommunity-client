@@ -2,9 +2,9 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.model.EditUsernameModel;
-import com.crystallightghot.frscommunityclient.utils.EventBusUtil;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.utils.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditUsernameFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;

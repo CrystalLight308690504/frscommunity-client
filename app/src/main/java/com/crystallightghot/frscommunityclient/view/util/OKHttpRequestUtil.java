@@ -1,8 +1,6 @@
-package com.crystallightghot.frscommunityclient.utils.requestio;
+package com.crystallightghot.frscommunityclient.view.util;
 
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
-import com.crystallightghot.frscommunityclient.utils.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.utils.ThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;

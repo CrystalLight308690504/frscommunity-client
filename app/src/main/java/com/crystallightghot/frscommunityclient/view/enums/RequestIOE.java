@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.utils.requestio;
+package com.crystallightghot.frscommunityclient.view.enums;
 
 /**
  * @Date 2022/1/21

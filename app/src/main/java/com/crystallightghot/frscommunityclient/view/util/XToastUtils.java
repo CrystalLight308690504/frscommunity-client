@@ -15,7 +15,7 @@
  *
  */
 
-package com.crystallightghot.frscommunityclient.utils;
+package com.crystallightghot.frscommunityclient.view.util;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
