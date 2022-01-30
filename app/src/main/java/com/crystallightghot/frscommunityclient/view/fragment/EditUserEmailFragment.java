@@ -70,7 +70,7 @@ public class EditUserEmailFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edite_user_email, container, false);
         ButterKnife.bind(this, view);
-        EventBusUtil.register(this);
+        FRSCEventBusUtil.register(this);
         initView();
         return view;
     }
@@ -109,7 +109,7 @@ public class EditUserEmailFragment extends BaseFragment {
     }
 
     private void clickSendVerifyBtnAction() {
-        verifyCode = VerifyCodeUtil.getVerifyCode();
+        verifyCode = FRSCVerifyCodeUtil.getVerifyCode();
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
         Runnable runnable = () -> {
@@ -125,7 +125,7 @@ public class EditUserEmailFragment extends BaseFragment {
                 e.printStackTrace();
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

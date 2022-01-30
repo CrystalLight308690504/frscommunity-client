@@ -1,15 +1,19 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.EditUserProfilePresenter;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -24,22 +28,19 @@ import java.util.List;
  * Use the {@link EditUserProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditUserProfileFragment extends Fragment {
-    EditUserProfileFragment fragment = this;
+public class EditUserProfileFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.icLog)
     RadiusImageView icLog;
-    @BindView(R.id.btnPosition)
-    Button btnPosition;
 
-    // TODO: Rename and change types of parameters
+    List<LocalMedia> mSelectList = new ArrayList<>();
+    EditUserProfilePresenter presenter;
     private String mParam1;
-    private String mParam2;
 
     public EditUserProfileFragment() {
-        
+        presenter = new EditUserProfilePresenter(this);
+
     }
 
     /**
@@ -63,7 +64,6 @@ public class EditUserProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -72,10 +72,16 @@ public class EditUserProfileFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         ButterKnife.bind(this, view);
+        init();
         return view;
     }
 
-    @OnClick({R.id.icLog, R.id.btnPosition})
+    private void init() {
+        Drawable userProfile = FRSCApplicationContext.getUserProfile();
+        icLog.setImageDrawable(userProfile);
+    }
+
+    @OnClick({R.id.icLog})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -84,27 +90,41 @@ public class EditUserProfileFragment extends Fragment {
                 chosePictureAction();
                 break;
 
-            case R.id.btnPosition:
-                break;
-            default:
         }
     }
 
     private void chosePictureAction() {
-        List<LocalMedia> mSelectList = new ArrayList<>();
         PictureSelector.create(this)
                 .openGallery(PictureMimeType.ofImage())
                 .theme(R.style.XUIPictureStyle)
-                .maxSelectNum(8)
-                .minSelectNum(1)
-                .selectionMode(PictureConfig.MULTIPLE)
+                .selectionMode(PictureConfig.SINGLE)
                 .previewImage(true)
                 .isCamera(true)
+                .cropWH(50,50)
+                .showCropFrame(true)
                 .enableCrop(false)
                 .compress(true)
                 .previewEggs(true)
                 .selectionMedia(mSelectList)
-                .forResult(PictureConfig.CHOOSE_REQUEST);;
+                .maxSelectNum(1)
+                .selectionMode(PictureConfig.SINGLE)
+                .forResult(PictureConfig.CHOOSE_REQUEST);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片选择
+                    mSelectList = PictureSelector.obtainMultipleResult(data);
+                    LocalMedia media = mSelectList.get(0);
+                    String path = media.getPath();
+                    presenter.modifyUserProfile(path);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

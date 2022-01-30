@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * description：
  */
 
-public class ThreadPoolUtil {
+public class FRSCThreadPoolUtil {
 
     private  static final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3, 10, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
 

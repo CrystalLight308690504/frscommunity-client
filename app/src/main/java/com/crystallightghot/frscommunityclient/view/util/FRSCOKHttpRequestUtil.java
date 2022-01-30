@@ -14,7 +14,7 @@ import java.io.IOException;
  * @Version: 1.0
  * description：
  */
-public class OKHttpRequestUtil {
+public class FRSCOKHttpRequestUtil {
 
     public static void getWithAuthorizationHeader(String url, RespondCallBck callback) {
 
@@ -48,7 +48,7 @@ public class OKHttpRequestUtil {
                 callback.failure("失败");
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 public static void deleteRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -84,7 +84,7 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 callback.failure("失败");
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
     public static void postRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
@@ -123,6 +123,6 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 callback.failure("失败");
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 }

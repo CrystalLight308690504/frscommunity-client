@@ -19,7 +19,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
@@ -110,7 +110,7 @@ public class UserInformationFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnEditeUserInformation:
-                FRSCFragmentManageUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
+                FRSCFragmentUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
                 break;
         }
     }

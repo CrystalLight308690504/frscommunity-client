@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.model.SettingModel;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
@@ -57,7 +57,7 @@ public class SettingPresenter implements SettingContract.Presenter , RespondCall
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(respondMessage);
         message.setSuccess(true);
-        EventBusUtil.sendMessage(message);
+        FRSCEventBusUtil.sendMessage(message);
         view.hideLoadingDialog();
 
 

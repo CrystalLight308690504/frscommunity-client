@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.model;
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
-import com.crystallightghot.frscommunityclient.view.util.OKHttpRequestUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
 
@@ -22,6 +22,6 @@ public class RegisterModel implements RegisterContract.Model {
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         String url = RequestIOE.USER_Register.getRequestIO();
-        OKHttpRequestUtil.postRequestWithBodyJson(url,userJson,callback);
+        FRSCOKHttpRequestUtil.postRequestWithBodyJson(url,userJson,callback);
     }
 }

@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * 所有继承此类的activity都要在 Activity的OnStart()前的生命周期使用 setDefaultFragment(Fragment defaultFragment) 方法传入默认加载的Fragmgent
  * 替换fragment的布局的ID 默认为R.id.fragmentContainer 将要替换fragment的容器 可以在OnStart()前的生命周期重新设置
  * <p>
- * 搭配 {@link FRSCFragmentManageUtil }工具类使用
+ * 搭配 {@link FRSCFragmentUtil }工具类使用
  */
 @Getter
 public  class BaseFragmentActivity extends BaseActivity {
@@ -41,7 +41,7 @@ public  class BaseFragmentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        FRSCFragmentManageUtil.removeFragments(this, fragments);
+        FRSCFragmentUtil.removeFragments(this, fragments);
     }
 
 
@@ -50,7 +50,7 @@ public  class BaseFragmentActivity extends BaseActivity {
         FRSCApplicationContext.setBaseFragmentActivity(this);
         super.onStart();
         // 添加默认fragment 到页面
-        FRSCFragmentManageUtil.intentToFragment(getDefaultFragment(), this, false);
+        FRSCFragmentUtil.intentToFragment(getDefaultFragment(), this, false);
     }
 
     /**
@@ -75,7 +75,7 @@ public  class BaseFragmentActivity extends BaseActivity {
             } else {// fragment返回栈里没有fragment了 则显示加载到activity的默认fragment
                 transaction.show(fragmentsNoInBackStack.get(fragmentsNoInBackStack.size() - 1));
             }
-            transaction.commit();
+            transaction.commitAllowingStateLoss();
         } else if (stackEntryCount == 0) {
             // 如果返回栈里没有Fragment 就直接销毁activity
             finish();

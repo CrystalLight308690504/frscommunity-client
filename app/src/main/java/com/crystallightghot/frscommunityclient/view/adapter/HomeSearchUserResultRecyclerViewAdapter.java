@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.fragment.UserInformationFragment;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public class HomeSearchUserResultRecyclerViewAdapter extends RecyclerView.Adapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance("UserInformationFragment"));
+                    FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance("UserInformationFragment"));
                 }
             });
         }

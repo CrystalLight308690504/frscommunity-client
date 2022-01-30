@@ -13,8 +13,8 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.presenter.RegisterPresenter;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.util.VerifyCodeUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCVerifyCodeUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
@@ -139,7 +139,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
 
     private void SendVerifyCodeStateAction() {
         // 随机获取验证码
-        verifyCode = VerifyCodeUtil.getVerifyCode();
+        verifyCode = FRSCVerifyCodeUtil.getVerifyCode();
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
 
@@ -155,7 +155,7 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
                 e.printStackTrace();
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

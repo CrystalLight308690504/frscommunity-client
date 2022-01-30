@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -46,10 +46,10 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
                 callBack.modifyUserPasswordByPhoneResult(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                callBack.modifyUserPasswordByPhoneResult(new RequestResult(false, null,"请求失败",null));
+                callBack.modifyUserPasswordByPhoneResult(new RequestResult(false, null,"服务器跑路了",null));
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
     public void modifyUserPasswordByOldPassword(User user, EditUserPasswordContract.EditUserPasswordCallBack callBack) {
@@ -83,6 +83,6 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
                 callBack.modifyUserPasswordByOldPasswordResult(new RequestResult(false, null, "请求失败", null));
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 }

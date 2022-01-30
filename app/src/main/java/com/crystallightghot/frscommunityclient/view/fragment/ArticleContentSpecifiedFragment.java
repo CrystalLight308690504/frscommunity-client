@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
@@ -76,7 +76,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.profile:
-                FRSCFragmentManageUtil.intentToFragment(UserInformationFragment.newInstance("UserInformationFragment"), (BaseFragmentActivity) getActivity(), true);
+                FRSCFragmentUtil.intentToFragment(UserInformationFragment.newInstance("UserInformationFragment"), (BaseFragmentActivity) getActivity(), true);
                 break;
             case R.id.btnFollow:
                 break;

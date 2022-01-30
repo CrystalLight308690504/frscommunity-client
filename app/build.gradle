@@ -32,6 +32,7 @@ android {
 
 
 dependencies {
+
     // butterKnife
     implementation 'com.jakewharton:butterknife:10.2.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -49,14 +50,25 @@ dependencies {
     //工具类
     implementation 'com.github.xuexiangjys.XUtil:xutil-core:2.0.0'
     implementation 'com.github.xuexiangjys.XUtil:xutil-sub:2.0.0'
+    //切片
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
+
+    // 图片压缩
+    implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
+    // 图片剪切
+    implementation 'com.github.yalantis:ucrop:2.2.6'
+
     //PictureSelector图片选择
     implementation 'com.github.xuexiangjys.PictureSelector:picture-core:1.0.5'
     //RxUtil2
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     //RxBinding的sdk
-//    implementation deps.rxbinding
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
     implementation 'com.github.xuexiangjys:RxUtil2:1.2.1'
+
+    //切片
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
 
 
     // lombok

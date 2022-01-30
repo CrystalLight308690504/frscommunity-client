@@ -15,7 +15,7 @@ import com.crystallightghot.frscommunityclient.presenter.EditUserPasswordPresent
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 /**
@@ -83,7 +83,7 @@ public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
                 modifyAction();
                 break;
             case R.id.btnOldPasswordForgot:
-                FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
                 break;
         }
     }

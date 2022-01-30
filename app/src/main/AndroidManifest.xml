@@ -19,11 +19,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+
         <activity
                 android:name=".view.activity.SingleFragmentActivity"
                 android:exported="true"
-                android:launchMode="singleInstance"
-        />
+                android:launchMode="singleInstance"/>
 
         <receiver
                 android:name=".view.broadcast.HomeViewPagerItemScrollChangedReceiver"
@@ -33,10 +33,16 @@
                 <action android:name="HomeViewPagerItemScrollChangedReceiver"/>
             </intent-filter>
         </receiver>
+
+        <activity
+                android:name="com.yalantis.ucrop.UCropActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <activity
                 android:name=".view.activity.MainActivity"
-                android:exported="true"
                 android:configChanges="orientation|screenSize|keyboardHidden"
+                android:exported="true"
                 android:screenOrientation="portrait"/>
         <activity
                 android:name=".view.activity.AccessActivity"

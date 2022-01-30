@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserEmailContract;
 import com.crystallightghot.frscommunityclient.model.EditUserEmailModel;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
@@ -43,7 +43,7 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
 
 
     public EditUserEmailPresenter(EditUserEmailFragment view) {
-        EventBusUtil.register(this);
+        FRSCEventBusUtil.register(this);
         model = new EditUserEmailModel();
         user = FRSCApplicationContext.getUser();
         this.view = view;
@@ -58,7 +58,7 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
     public void modifyUserEmailResult(RequestResult requestResult) {
         view.hideLoadingDialog();
         RequestMessage message = new RequestMessage(requestResult, MessageCode.MODIFY_USER_EMAIL_RESULT);
-        EventBusUtil.sendMessage(message);
+        FRSCEventBusUtil.sendMessage(message);
     }
 
     /**
@@ -81,7 +81,7 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
             userDao.save(user);
             // 发送修改用户事件
             UserChangedMessage userChangedMessage = new UserChangedMessage();
-            EventBusUtil.sendMessage(userChangedMessage);
+            FRSCEventBusUtil.sendMessage(userChangedMessage);
         } else {
             XToastUtils.error(message.getMessage());
         }

@@ -8,7 +8,7 @@ import org.greenrobot.eventbus.EventBus;
  * @Version: 1.0
  * description：
  */
-public class EventBusUtil {
+public class FRSCEventBusUtil {
     public static final void sendMessage(Object o) {
         EventBus.getDefault().post(o);
     }

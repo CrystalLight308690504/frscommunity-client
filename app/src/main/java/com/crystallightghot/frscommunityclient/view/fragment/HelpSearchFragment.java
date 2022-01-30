@@ -14,7 +14,7 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class HelpSearchFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(HelpSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity());
+                FRSCFragmentUtil.intentToFragmentAddedToBackStack(HelpSearchResultsFragment.newInstance("SearchResultsFragment"), (BaseFragmentActivity) getActivity());
                 break;
             default:
                 break;

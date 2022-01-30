@@ -15,7 +15,7 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class FRSCFragmentManageUtil {
+public class FRSCFragmentUtil {
 
     /**
      * 删除加入到activity的在FragmentManager的fragment
@@ -34,7 +34,7 @@ public class FRSCFragmentManageUtil {
                 fragmentTransaction.remove(fragment);
             }
         }
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
         fragmentsNeededRemove.clear();
     }
 
@@ -126,7 +126,7 @@ public class FRSCFragmentManageUtil {
         if (!addedToBackStack) {
             activity.setDefaultFragment(fragmentIntended);
         }
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**

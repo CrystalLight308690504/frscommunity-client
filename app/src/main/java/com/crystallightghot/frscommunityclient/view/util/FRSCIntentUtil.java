@@ -24,7 +24,7 @@ public class FRSCIntentUtil {
         fragmentChangeMessage.setDefaultFragment(defaultFragment);
 
         // 发送默认EventBus消息
-        EventBusUtil.sendStickMessage(fragmentChangeMessage);
+        FRSCEventBusUtil.sendStickMessage(fragmentChangeMessage);
     }
 
     public static final void intentToSingleFragmentActivity(Fragment defaultFragment) {

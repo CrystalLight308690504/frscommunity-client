@@ -14,14 +14,14 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.presenter.SettingPresenter;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
@@ -62,6 +62,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FRSCEventBusUtil.register(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
@@ -73,7 +74,6 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
 
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         ButterKnife.bind(this, view);
-        EventBusUtil.register(this);
         initView();
         return view;
     }
@@ -86,13 +86,13 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
                 if ("用户名".equals(text)) {
-                    FRSCFragmentManageUtil.intentToFragment(EditUsernameFragment.newInstance(""), activity, true);
+                    FRSCFragmentUtil.intentToFragment(EditUsernameFragment.newInstance(""), activity, true);
                 } else if ("邮箱".equals(text)) {
-                    FRSCFragmentManageUtil.intentToFragment(EditUserEmailFragment.newInstance(""), activity, true);
+                    FRSCFragmentUtil.intentToFragment(EditUserEmailFragment.newInstance(""), activity, true);
                 } else if ("头像".equals(text)) {
-                    FRSCFragmentManageUtil.intentToFragment(EditUserProfileFragment.newInstance(""), activity, true);
+                    FRSCFragmentUtil.intentToFragment(EditUserProfileFragment.newInstance(""), activity, true);
                 } else if ("密码".equals(text)) {
-                    FRSCFragmentManageUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""), activity, true);
+                    FRSCFragmentUtil.intentToFragment(EditeUserPasswordByOldPasswordFragment.newInstance(""), activity, true);
                 } else if ("退出登录".equals(text)) {
                     presenter.unLogin();
                 }
@@ -167,7 +167,7 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
         if (null != mainActivity) {
             mainActivity.finish();
         }
-        FRSCFragmentManageUtil.intentToFragment(LoginFragment.newInstance(""), activity, false);
+        FRSCFragmentUtil.intentToFragment(LoginFragment.newInstance(""), activity, false);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

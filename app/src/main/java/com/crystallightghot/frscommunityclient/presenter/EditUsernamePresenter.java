@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.model.EditUsernameModel;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
@@ -30,7 +30,7 @@ public class EditUsernamePresenter implements EditUserNameContract.Presenter , E
     public EditUsernamePresenter(EditUsernameFragment view) {
         this.view = view;
         this.model = new EditUsernameModel();
-        EventBusUtil.register(this);
+        FRSCEventBusUtil.register(this);
     }
 
 
@@ -47,7 +47,7 @@ public class EditUsernamePresenter implements EditUserNameContract.Presenter , E
     public void modifyUsernameResult(RequestResult requestResult) {
         view.hideLoadingDialog();
         RequestMessage message = new RequestMessage(requestResult, MessageCode.EDITE_USERNAME_RESULT);
-        EventBusUtil.sendMessage(message);
+        FRSCEventBusUtil.sendMessage(message);
     }
 
     /**
@@ -66,7 +66,7 @@ public class EditUsernamePresenter implements EditUserNameContract.Presenter , E
             userDao.save(FRSCApplicationContext.getUser());
             // 发送修改用户事件
             UserChangedMessage userChangedMessage = new UserChangedMessage();
-            EventBusUtil.sendMessage(userChangedMessage);
+            FRSCEventBusUtil.sendMessage(userChangedMessage);
         }else {
             XToastUtils.error(message.getMessage());
         }

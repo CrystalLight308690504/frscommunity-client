@@ -17,7 +17,7 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.*;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
@@ -101,33 +101,33 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
                 setItemTextColorClicked(tvHome);
-                FRSCFragmentManageUtil.intentToFragment(HomeFragment.newInstance("TAG:"), this, false);
+                FRSCFragmentUtil.intentToFragment(HomeFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.ibtnBlog:
                 allBottomIconBeenDefaultState();
                 ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_blog_clicked));
                 setItemTextColorClicked(tvBlog);
-                FRSCFragmentManageUtil.intentToFragment(BlogFragment.newInstance("TAG:"), this, false);
+                FRSCFragmentUtil.intentToFragment(BlogFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.ibtnFounded:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
-                FRSCFragmentManageUtil.intentToFragment(SomethingFoundFragment.newInstance("TAG:"), this, false);
+                FRSCFragmentUtil.intentToFragment(SomethingFoundFragment.newInstance("TAG:"), this, false);
                 break;
             case R.id.btnHelpNeeded:
                 allBottomIconBeenDefaultState();
                 ibtnAnswer.setBackground(getResourceDrawable(R.mipmap.home_answer_clicked));
                 setItemTextColorClicked(tvAnswer);
-                FRSCFragmentManageUtil.intentToFragment(HelpFragment.newInstance("HelpNeededFragment"), this, false);
+                FRSCFragmentUtil.intentToFragment(HelpFragment.newInstance("HelpNeededFragment"), this, false);
                 break;
             case R.id.ibtnSelf:
                 addIconIsVisible(false);
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
-                FRSCFragmentManageUtil.intentToFragment(MyFragment.newInstance("TAG:"), this, false);
+                FRSCFragmentUtil.intentToFragment(MyFragment.newInstance("TAG:"), this, false);
                 break;
             default:
                 break;

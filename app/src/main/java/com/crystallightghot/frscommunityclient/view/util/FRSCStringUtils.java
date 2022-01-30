@@ -11,7 +11,7 @@ package com.crystallightghot.frscommunityclient.view.util;
  * @Date 2022/1/6 16:58
  * @Created by CrystalLightGhost
  */
-public class StringUtils {
+public class FRSCStringUtils {
     public static boolean isEmpty(final CharSequence s) {
         return s == null || s.length() == 0;
     }

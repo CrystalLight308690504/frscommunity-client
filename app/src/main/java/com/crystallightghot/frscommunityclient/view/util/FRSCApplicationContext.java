@@ -1,6 +1,11 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Base64;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -15,6 +20,9 @@ import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 public class FRSCApplicationContext {
 
     private static Activity activity;
+    private static MainActivity mainActivity;
+    private  static User user;
+
     private static BaseFragmentActivity baseFragmentActivity;
 
     public static MainActivity getMainActivity() {
@@ -25,8 +33,6 @@ public class FRSCApplicationContext {
         FRSCApplicationContext.mainActivity = mainActivity;
     }
 
-    private static MainActivity mainActivity;
-    private  static User user;
 
     public static Activity getActivity() {
         return activity;
@@ -50,6 +56,16 @@ public class FRSCApplicationContext {
 
     public static void  setUser(User user) {
         FRSCApplicationContext.user = user;
+    }
+    public static Drawable getUserProfile() {
+        if (null != user) {
+            String userProfileBase64 = user.getProfile();
+            byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            return  new BitmapDrawable(decodedByte);
+        }else {
+            return  null;
+        }
     }
 
 

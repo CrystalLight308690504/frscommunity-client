@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
  * @Date 2022/1/6 8:55
  * @Created by CrystalLightGhost
  */
-public class  ImagePatternChangeUtil {
+public class FRSCImagePatternChangeUtil {
 
     /**
      * Drawable转换成一个Bitmap

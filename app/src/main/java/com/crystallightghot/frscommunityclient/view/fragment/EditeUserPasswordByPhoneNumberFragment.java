@@ -74,7 +74,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_edite_user_password_by_phone_number, container, false);
         ButterKnife.bind(this, view);
         initView();
-        EventBusUtil.register(this);
+        FRSCEventBusUtil.register(this);
         return view;
     }
 
@@ -123,7 +123,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
 
     private void SendVerifyCodeStateAction() {
         // 随机获取验证码
-        verifyCode = VerifyCodeUtil.getVerifyCode();
+        verifyCode = FRSCVerifyCodeUtil.getVerifyCode();
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
         Runnable runnable = () -> {
@@ -138,7 +138,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
                 e.printStackTrace();
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
     public void clearDataInput(){

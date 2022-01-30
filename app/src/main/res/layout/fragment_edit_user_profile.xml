@@ -15,15 +15,5 @@
                                                        android:layout_marginTop="180dp"
                                                        android:id="@+id/icLog"
                                                        />
-<Button android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:background="@drawable/bkd_btn_round_state_blue_to_grey"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="@dimen/distance_max5"
-        android:layout_marginRight="@dimen/distance_max5"
-        app:layout_constraintTop_toBottomOf="@id/icLog"
-        android:layout_marginTop="@dimen/distance_max5"
-        android:text="确认修改"
-        android:id="@+id/btnPosition"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

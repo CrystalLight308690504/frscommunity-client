@@ -50,6 +50,7 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_login_register.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_only_one_fragment_showed.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_other_activities.xml" value="0.3734375" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_picture.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_presenter.xml" value="0.17864583333333334" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/activity_presenterf.xml" value="0.271875" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/adapter_item_tag.xml" value="0.17864583333333334" />
@@ -74,6 +75,7 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_user_password.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_user_password_by_old_password.xml" value="0.3640897755610973" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_user_password_by_phone_number.xml" value="0.19682539682539682" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_edite_user_profile_chose_picture.xml" value="0.3848958333333333" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_editor_user_information.xml" value="0.8800000000000001" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_help__edite_acquired.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_help_needed.xml" value="0.264" />

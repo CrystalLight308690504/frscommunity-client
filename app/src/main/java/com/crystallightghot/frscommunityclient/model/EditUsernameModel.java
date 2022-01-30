@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -24,7 +24,7 @@ public class EditUsernameModel implements EditUserNameContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = RequestIOE.MODIFY_USERNAME.getRequestIO();
+        String url = RequestIOE.MODIFY_USER_PROFILE.getRequestIO();
 
         String head = "";
         if (null != user){
@@ -48,9 +48,9 @@ public class EditUsernameModel implements EditUserNameContract.Model {
                 userRespondCallBack.modifyUsernameResult(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                userRespondCallBack.modifyUsernameResult(new RequestResult(false, null,"请求失败",null));
+                userRespondCallBack.modifyUsernameResult(new RequestResult(false, null,"服务器跑路了",null));
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
-import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentManageUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.jetbrains.annotations.NotNull;
 
@@ -81,7 +81,7 @@ public class HomeSearchBlogAndHelpResultRecyclerViewAdapter extends RecyclerView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCFragmentManageUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
+                    FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
                 }
             });
         }

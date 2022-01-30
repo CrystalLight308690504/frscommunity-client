@@ -4,8 +4,8 @@ import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.ThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.util.OKHttpRequestUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -30,7 +30,7 @@ public class LoginModel implements LoginContract.Model {
 
     public void login(String userJson, RespondCallBck callback) {
         String url = RequestIOE.USER_Login.getRequestIO();
-        OKHttpRequestUtil.postRequestWithBodyJson(url, userJson, callback);
+        FRSCOKHttpRequestUtil.postRequestWithBodyJson(url, userJson, callback);
     }
 
     public void isLogin(LoginPresenter presenter) {
@@ -65,7 +65,7 @@ public class LoginModel implements LoginContract.Model {
 
             }
         };
-        ThreadPoolUtil.executeThread(runnable);
+        FRSCThreadPoolUtil.executeThread(runnable);
     }
 
 

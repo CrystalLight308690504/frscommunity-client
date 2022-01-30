@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
@@ -90,7 +90,7 @@ public class HomeFragment extends BaseFragment {
                 FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
                 fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
                 fragmentChangeMessage.setDefaultFragment(SkatingTypeFragment.newInstance("HomeSkatingTypeFragment"));
-                EventBusUtil.sendStickMessage(fragmentChangeMessage);
+                FRSCEventBusUtil.sendStickMessage(fragmentChangeMessage);
                 break;
             case R.id.search_input_box:
                 FRSCIntentUtil.intentToSingleFragmentActivity(HomeSearchFragment.newInstance("login"));

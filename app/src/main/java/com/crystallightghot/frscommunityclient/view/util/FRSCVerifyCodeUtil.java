@@ -8,7 +8,7 @@ import java.util.Random;
  * @Version: 1.0
  * description：
  */
-public class VerifyCodeUtil {
+public class FRSCVerifyCodeUtil {
     public  static String getVerifyCode(){
         StringBuffer stringBuffer = new StringBuffer();
         Random random = new Random();

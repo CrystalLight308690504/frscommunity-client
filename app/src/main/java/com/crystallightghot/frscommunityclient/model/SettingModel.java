@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
 import com.crystallightghot.frscommunityclient.contract.SettingContract;
-import com.crystallightghot.frscommunityclient.view.util.OKHttpRequestUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -20,7 +20,7 @@ public class SettingModel implements SettingContract.Model {
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         String url = RequestIOE.USER_UNLOGIN.getRequestIO();
-        OKHttpRequestUtil.deleteRequestWithBodyJson(url,userJson,callback);
+        FRSCOKHttpRequestUtil.deleteRequestWithBodyJson(url,userJson,callback);
     }
 
 }

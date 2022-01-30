@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.EventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -85,7 +85,7 @@ public class MyFragment extends Fragment {
     BaseActivity activity;
 
     public MyFragment() {
-        EventBusUtil.register(this);
+        FRSCEventBusUtil.register(this);
     }
 
 
