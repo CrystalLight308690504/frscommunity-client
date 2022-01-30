@@ -4,7 +4,7 @@ import com.crystallightghot.frscommunityclient.contract.EditUserGenderContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.google.gson.Gson;
 
 /**
@@ -18,6 +18,6 @@ public class EditUserGenderModel implements EditUserGenderContract.Model {
         Gson gson = new Gson();
         String jsonUser = gson.toJson(user);
         String requestIO = FRSCRequestIOE.MODIFY_USER_GENDER.getRequestIO();
-        FRSCOKHttpRequestUtil.putWithAuthorizationHeader(requestIO,jsonUser,callBack);
+        FRSCOKHttp3RequestUtil.putWithAuthorizationHeader(requestIO,jsonUser,callBack);
     }
 }

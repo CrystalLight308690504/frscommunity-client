@@ -90,5 +90,7 @@ public class EditUsernameFragment extends BaseFragment {
         user.setUserName(userNameInput);
         presenter.modifyUsername(user);
     }
-
+    public  void  clearDataInput(){
+        ieUserName.setText("");
+    }
 }

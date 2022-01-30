@@ -14,7 +14,7 @@ import java.io.IOException;
  * @Version: 1.0
  * description：
  */
-public class FRSCOKHttpRequestUtil {
+public class FRSCOKHttp3RequestUtil {
 
     public static void putWithAuthorizationHeader(String url, String jsonBody, RequestCallBack callback) {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");

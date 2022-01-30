@@ -24,7 +24,7 @@ public class EditUsernameModel implements EditUserNameContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequestIOE.MODIFY_USER_PROFILE.getRequestIO();
+        String url = FRSCRequestIOE.MODIFY_USERNAME.getRequestIO();
 
         String head = "";
         if (null != user){

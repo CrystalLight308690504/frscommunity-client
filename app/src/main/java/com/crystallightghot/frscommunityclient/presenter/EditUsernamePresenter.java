@@ -61,6 +61,7 @@ public class EditUsernamePresenter implements EditUserNameContract.Presenter , E
         }
         if (message.isSuccess()){
             XToastUtils.success("修改成功");
+            view.clearDataInput();
             // 修改保存在本地数据库的user
             UserDao userDao = FRSCDataBaseUtil.getWriteDaoSession().getUserDao();
             userDao.save(FRSCApplicationContext.getUser());
