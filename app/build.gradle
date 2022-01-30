@@ -55,21 +55,8 @@ dependencies {
 
     // 图片压缩
     implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
-    // 图片剪切
-    implementation 'com.github.yalantis:ucrop:2.2.6'
-
-    //PictureSelector图片选择
-    implementation 'com.github.xuexiangjys.PictureSelector:picture-core:1.0.5'
-    //RxUtil2
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    //RxBinding的sdk
-    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
-    implementation 'com.github.xuexiangjys:RxUtil2:1.2.1'
-
-    //切片
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
-
+    // 图片选择器
+    implementation 'com.github.wildma:PictureSelector:2.1.0'
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.22'

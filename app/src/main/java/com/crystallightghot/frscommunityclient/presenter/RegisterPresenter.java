@@ -45,6 +45,7 @@ public class RegisterPresenter implements RegisterContract.Presenter, RespondCal
         RegisterMessage registerMessage = new RegisterMessage();
         registerMessage.setPhoneNumber(user.getPhoneNumber());
         registerMessage.setPassword(user.getPassword());
+        registerMessage.setSuccess(true);
         registerMessage.setMessage("注册成功");
         EventBus.getDefault().post(registerMessage);
     }

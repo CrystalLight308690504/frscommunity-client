@@ -28,22 +28,28 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
 
     @Override
     public void showLoadingDialog() {
-        loadingDialog.show();
+        if (null != loadingDialog) {
+            loadingDialog.show();
+        }
     }
 
     @Override
     public void hideLoadingDialog() {
-        loadingDialog.dismiss();
+        if (null != loadingDialog) {
+            loadingDialog.dismiss();
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        loadingDialog.dismiss();
-        loadingDialog = null;
+        if (null != loadingDialog) {
+            loadingDialog.dismiss();
+        }
+
     }
 
-    public void  showInformationToast(String informationMessage) {
+    public void showInformationToast(String informationMessage) {
         XToastUtils.info(informationMessage);
     }
 

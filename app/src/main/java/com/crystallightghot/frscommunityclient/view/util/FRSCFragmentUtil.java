@@ -28,13 +28,10 @@ public class FRSCFragmentUtil {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         for (int i = 0; i < fragmentsNeededRemove.size(); i++) {
             Fragment fragment = fragmentsNeededRemove.get(i);
-            if (fragment.getActivity() != activity) {
-                Log.d("FRSCShowFragmentToActivityUtil", "=====removeFragments: 加入的fragment 不属于此 activity======");
-            } else {
-                fragmentTransaction.remove(fragment);
-            }
+            fragmentTransaction.remove(fragment);
         }
         fragmentTransaction.commitAllowingStateLoss();
+        // 清除记录返回栈的内容
         fragmentsNeededRemove.clear();
     }
 
@@ -47,9 +44,7 @@ public class FRSCFragmentUtil {
         if (null == fragment || null == activity) {
             return;
         }
-        if (fragment.getActivity() != activity) {
-            Log.d("FRSCShowFragmentToActivityUtil", "=====hideFragment: 加入的fragment 不属于此 activity======");
-        }
+
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.hide(fragment);
@@ -58,6 +53,10 @@ public class FRSCFragmentUtil {
 
     public static void intentToFragmentAddedToBackStack(Fragment showedFragment) {
         intentToFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), true);
+    }
+
+    public static void intentToFragmentNoAddedToBackStack(Fragment showedFragment) {
+        intentToFragment(showedFragment, FRSCApplicationContext.getBaseFragmentActivity(), false);
     }
 
     public static void intentToFragmentAddedToBackStack(Fragment showedFragment, BaseFragmentActivity activity) {
@@ -81,9 +80,7 @@ public class FRSCFragmentUtil {
         if (null == fragmentIntended || null == activity) {
             return;
         }
-        if (fragmentIntended.getActivity() != activity) {
-            Log.d("FRSCShowFragmentToActivityUtil", "=====intentToFragment: 加入的fragment 不属于此 activity======");
-        }
+
         List<Fragment> fragmentsNoInBackStack = activity.getFragmentsNoInBackStack();
         List<Fragment> fragmentsAddedInBackStack = activity.getFragmentsAddedInBackStack();
         // 隐藏前面显示的的fragment

@@ -1,6 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,14 +13,10 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.EditUserProfilePresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.entity.LocalMedia;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
+import com.wildma.pictureselector.PictureBean;
+import com.wildma.pictureselector.PictureSelector;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +29,6 @@ public class EditUserProfileFragment extends BaseFragment {
     @BindView(R.id.icLog)
     RadiusImageView icLog;
 
-    List<LocalMedia> mSelectList = new ArrayList<>();
     EditUserProfilePresenter presenter;
     private String mParam1;
 
@@ -94,37 +88,25 @@ public class EditUserProfileFragment extends BaseFragment {
     }
 
     private void chosePictureAction() {
-        PictureSelector.create(this)
-                .openGallery(PictureMimeType.ofImage())
-                .theme(R.style.XUIPictureStyle)
-                .selectionMode(PictureConfig.SINGLE)
-                .previewImage(true)
-                .isCamera(true)
-                .cropWH(50,50)
-                .showCropFrame(true)
-                .enableCrop(false)
-                .compress(true)
-                .previewEggs(true)
-                .selectionMedia(mSelectList)
-                .maxSelectNum(1)
-                .selectionMode(PictureConfig.SINGLE)
-                .forResult(PictureConfig.CHOOSE_REQUEST);
+        PictureSelector
+                .create(this, PictureSelector.SELECT_REQUEST_CODE)
+                .selectPicture(true, 100, 100, 1, 1);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case PictureConfig.CHOOSE_REQUEST:
-                    // 图片选择
-                    mSelectList = PictureSelector.obtainMultipleResult(data);
-                    LocalMedia media = mSelectList.get(0);
-                    String path = media.getPath();
-                    presenter.modifyUserProfile(path);
-                    break;
-                default:
-                    break;
+        super.onActivityResult(requestCode, resultCode, data);
+        /*结果回调*/
+        if (requestCode == PictureSelector.SELECT_REQUEST_CODE) {
+            if (data != null) {
+                PictureBean pictureBean = data.getParcelableExtra(PictureSelector.PICTURE_RESULT);
+                if (pictureBean.isCut()) {
+                    presenter.modifyUserProfile( pictureBean.getPath());
+                } else {
+                    XToastUtils.warning("请裁剪你的图片");
+                }
             }
         }
     }
+
 }

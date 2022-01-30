@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -14,13 +15,13 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.presenter.SettingPresenter;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.message.UnLoginMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
@@ -174,10 +175,8 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     public void getUserChangedMessage(UserChangedMessage message) {
         User user = FRSCApplicationContext.getUser();
         usernameItem.setDetailText(user.getUserName());
-        String userProfileBase64 = user.getProfile();
-        byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        profileItem.setImageDrawable(new BitmapDrawable(decodedByte));
+        Drawable userProfile = FRSCApplicationContext.getUserProfile();
+        profileItem.setImageDrawable(userProfile);
         emailItem.setDetailText(user.getEmail());
     }
 

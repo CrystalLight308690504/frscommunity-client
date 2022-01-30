@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -16,11 +17,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.greenrobot.eventbus.Subscribe;
@@ -157,6 +158,8 @@ public class MyFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getUserChangedMessage(UserChangedMessage message) {
         User user = FRSCApplicationContext.getUser();
+        Drawable userProfileD = FRSCApplicationContext.getUserProfile();
+        userProfile.setImageDrawable(userProfileD);
         userName.setText(user.getUserName());
     }
 }

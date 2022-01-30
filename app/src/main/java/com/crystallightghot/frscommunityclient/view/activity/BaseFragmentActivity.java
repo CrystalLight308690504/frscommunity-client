@@ -58,27 +58,24 @@ public  class BaseFragmentActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 
-        FragmentManager fragmentManager = this.getSupportFragmentManager();
-        int stackEntryCount = fragmentManager.getBackStackEntryCount();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
         // 返回栈里还有fragment
-        if (stackEntryCount >0 && fragmentsAddedInBackStack.size() >0) {
+        if (fragmentsAddedInBackStack.size() > 0) {
+            FragmentManager fragmentManager = this.getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
             // 退出栈顶的fragment
-            fragmentManager.popBackStack();
             fragmentsAddedInBackStack.remove(fragmentsAddedInBackStack.size() - 1);
-
             // 将退栈后 栈的栈顶的fragment显示出来
             // 如果fragment返回栈里还有fragment
             if (fragmentsAddedInBackStack.size() > 0) {
+                // 将放回栈的栈顶的fragment显示出来
                 transaction.show(fragmentsAddedInBackStack.get(fragmentsAddedInBackStack.size() - 1));
-            } else {// fragment返回栈里没有fragment了 则显示加载到activity的默认fragment
+            } else if (fragmentsNoInBackStack.size() > 0) {
+                // 将默认绑定在activity的fragment显示出来
                 transaction.show(fragmentsNoInBackStack.get(fragmentsNoInBackStack.size() - 1));
             }
-            transaction.commitAllowingStateLoss();
-        } else if (stackEntryCount == 0) {
-            // 如果返回栈里没有Fragment 就直接销毁activity
-            finish();
+            transaction.commitNowAllowingStateLoss();
         }
     }
 

@@ -39,6 +39,7 @@ public class EditUserProfilePresenter implements EditUserProfileContract.Present
 
     public void modifyUserProfile(String profilePath) {
 
+        // 压缩图片
         File newFile = CompressHelper.getDefault(view.getContext()).compressToFile(new File(profilePath));
 
         try {
@@ -57,15 +58,8 @@ public class EditUserProfilePresenter implements EditUserProfileContract.Present
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 String s = Base64.getEncoder().encodeToString(bytes);
                 user.setProfile(s);
-
-                // 修改保存在本地数据库的user
-                UserDao userDao = FRSCDataBaseUtil.getWriteDaoSession().getUserDao();
-                userDao.save(user);
                 // 修改数据库user
                 model.modifyUserProfile(user, this);
-
-                UserChangedMessage message = new UserChangedMessage();
-                FRSCEventBusUtil.sendMessage(message);
 
             }
         } catch (FileNotFoundException e) {
@@ -90,6 +84,13 @@ public class EditUserProfilePresenter implements EditUserProfileContract.Present
             view.hideLoadingDialog();
             if (message.isSuccess()) {
                 XToastUtils.success("修改成功");
+                // 修改保存在本地数据库的user
+                User user = FRSCApplicationContext.getUser();
+                UserDao userDao = FRSCDataBaseUtil.getWriteDaoSession().getUserDao();
+                userDao.save(user);
+
+                UserChangedMessage userChangedMessage = new UserChangedMessage();
+                FRSCEventBusUtil.sendMessage(userChangedMessage);
             } else {
                 XToastUtils.error(message.getMessage());
             }
