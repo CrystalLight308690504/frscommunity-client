@@ -17,6 +17,7 @@ import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.*;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -39,6 +40,8 @@ public class EditUserEmailFragment extends BaseFragment {
     AppCompatButton btnSendVerifyCode;
     @BindView(R.id.btnModify)
     Button btnModify;
+    @BindView(R.id.log)
+    RadiusImageView log;
     private String mParam1;
 
     String verifyCode;
@@ -78,6 +81,7 @@ public class EditUserEmailFragment extends BaseFragment {
     private void initView() {
         User user = FRSCApplicationContext.getUser();
         ieEmail.setText(user.getEmail());
+        log.setImageDrawable(FRSCApplicationContext.getUserProfile());
     }
 
     @OnClick({R.id.btnSendVerifyCode, R.id.btnModify})
@@ -95,7 +99,7 @@ public class EditUserEmailFragment extends BaseFragment {
     private void modifyAction() {
 
         String email = ieEmail.getText().toString();
-        if (!presenter.verifyEmailPattern(email)){
+        if (!presenter.verifyEmailPattern(email)) {
             return;
         }
 
@@ -143,7 +147,7 @@ public class EditUserEmailFragment extends BaseFragment {
         }
     }
 
-    public void clearDataInput(){
+    public void clearDataInput() {
         verifyCode = null;
         ieVerifyCode.setText("");
     }

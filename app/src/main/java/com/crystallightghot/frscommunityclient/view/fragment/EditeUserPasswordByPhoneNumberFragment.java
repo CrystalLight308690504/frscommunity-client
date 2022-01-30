@@ -16,6 +16,7 @@ import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.*;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -43,6 +44,8 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
 
     String verifyCode;
     EditUserPasswordPresenter presenter;
+    @BindView(R.id.log)
+    RadiusImageView log;
 
     private String mParam1;
     User user = FRSCApplicationContext.getUser();
@@ -80,6 +83,8 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
 
     private void initView() {
         iePhoneNumber.setHint(user.getPhoneNumber());
+        log.setImageDrawable(FRSCApplicationContext.getUserProfile());
+
     }
 
     @OnClick({R.id.btnSendVerifyCode, R.id.btnModify})
@@ -107,7 +112,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
         if (password.equals("") || comfirmPassword.equals("")) {
             XToastUtils.error("请输入密码");
             return;
-        }else if (!comfirmPassword.equals(password)) {
+        } else if (!comfirmPassword.equals(password)) {
             XToastUtils.error("两次输入密码不一致");
             return;
         }
@@ -141,7 +146,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
         FRSCThreadPoolUtil.executeThread(runnable);
     }
 
-    public void clearDataInput(){
+    public void clearDataInput() {
         verifyCode = null;
         iePassword.setText("");
         ieNewPassword.setText("");

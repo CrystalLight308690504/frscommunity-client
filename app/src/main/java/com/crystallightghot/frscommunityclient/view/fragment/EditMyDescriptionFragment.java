@@ -8,10 +8,12 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +28,8 @@ public class EditMyDescriptionFragment extends Fragment {
     TextInputEditText ieDescription;
     @BindView(R.id.btnPosition)
     Button btnPosition;
+    @BindView(R.id.log)
+    RadiusImageView log;
 
     private String mParam1;
     User user;
@@ -71,5 +75,11 @@ public class EditMyDescriptionFragment extends Fragment {
     private void initView() {
         user = FRSCApplicationContext.getUser();
         ieDescription.setText(user.getDescription());
+        log.setImageDrawable(FRSCApplicationContext.getUserProfile());
+    }
+
+    @OnClick(R.id.btnPosition)
+    public void onClick() {
+
     }
 }

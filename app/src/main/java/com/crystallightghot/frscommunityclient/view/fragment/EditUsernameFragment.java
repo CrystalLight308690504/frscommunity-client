@@ -11,11 +11,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.EditUsernamePresenter;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -31,6 +32,8 @@ public class EditUsernameFragment extends BaseFragment {
     TextInputEditText ieUserName;
     @BindView(R.id.btnModify)
     Button btnModify;
+    @BindView(R.id.log)
+    RadiusImageView log;
 
     private String mParam1;
 
@@ -73,6 +76,7 @@ public class EditUsernameFragment extends BaseFragment {
 
     private void initView() {
         ieUserName.setText(FRSCApplicationContext.getUser().getUserName());
+        log.setImageDrawable(FRSCApplicationContext.getUserProfile());
     }
 
     @OnClick(R.id.btnModify)

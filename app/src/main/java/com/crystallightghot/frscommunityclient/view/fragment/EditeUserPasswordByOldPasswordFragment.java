@@ -12,16 +12,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.EditUserPasswordPresenter;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EditeUserPasswordByOldPasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
+ *
  * @author 30869
  */
 public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
@@ -37,12 +39,15 @@ public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
     Button btnModify;
     @BindView(R.id.btnOldPasswordForgot)
     TextView btnOldPasswordForgot;
+    @BindView(R.id.log)
+    RadiusImageView log;
 
     private String mParam1;
 
     BaseFragmentActivity activity;
 
     EditUserPasswordPresenter presenter;
+
     public EditeUserPasswordByOldPasswordFragment() {
         presenter = new EditUserPasswordPresenter(this);
     }
@@ -74,6 +79,7 @@ public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
 
     private void initView() {
         activity = (BaseFragmentActivity) getActivity();
+        log.setImageDrawable(FRSCApplicationContext.getUserProfile());
     }
 
     @OnClick({R.id.btnModify, R.id.btnOldPasswordForgot})
@@ -83,7 +89,7 @@ public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
                 modifyAction();
                 break;
             case R.id.btnOldPasswordForgot:
-                FRSCFragmentUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(),true);
+                FRSCFragmentUtil.intentToFragment(EditeUserPasswordByPhoneNumberFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
                 break;
         }
     }
@@ -98,13 +104,13 @@ public class EditeUserPasswordByOldPasswordFragment extends BaseFragment {
         if (oldPassword.equals("")) {
             showWarningToast("请输入修改的密码");
             return;
-        }else if (newPassword.equals("")) {
+        } else if (newPassword.equals("")) {
             showWarningToast("请再次输入密码");
             return;
-        }else if (confirmPassword.equals("")) {
+        } else if (confirmPassword.equals("")) {
             showWarningToast("请再次输入密码");
             return;
-        }else if (!newPassword.equals(confirmPassword)) {
+        } else if (!newPassword.equals(confirmPassword)) {
             showWarningToast("两次密码不一致");
             return;
         }
