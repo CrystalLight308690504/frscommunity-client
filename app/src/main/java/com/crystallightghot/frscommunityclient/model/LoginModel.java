@@ -6,7 +6,7 @@ import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
-import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
+import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -29,12 +29,12 @@ public class LoginModel implements LoginContract.Model {
     }
 
     public void login(String userJson, RequestCallBack callback) {
-        String url = RequestIOE.USER_Login.getRequestIO();
+        String url = FRSCRequestIOE.USER_Login.getRequestIO();
         FRSCOKHttpRequestUtil.postRequestWithBodyJson(url, userJson, callback);
     }
 
     public void isLogin(LoginPresenter presenter) {
-        String url = RequestIOE.USER_Login.getRequestIO();
+        String url = FRSCRequestIOE.USER_Login.getRequestIO();
         User user = FRSCApplicationContext.getUser();
         String head = "";
         if (null != user) {

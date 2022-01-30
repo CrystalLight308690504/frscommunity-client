@@ -1,9 +1,10 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
-import com.crystallightghot.frscommunityclient.contract.EditUserEmailContract;
-import com.crystallightghot.frscommunityclient.model.EditUserEmailModel;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
-import com.crystallightghot.frscommunityclient.view.fragment.EditUserEmailFragment;
+import com.crystallightghot.frscommunityclient.contract.EditUserGenderContract;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
+import com.crystallightghot.frscommunityclient.model.EditUserGenderModel;
+import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
+import com.crystallightghot.frscommunityclient.view.fragment.EditeUserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
@@ -16,48 +17,33 @@ import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.regex.Pattern;
-
 /**
- * @Date 2022/1/28
+ * @Date 2022/1/30
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
-    EditUserEmailFragment view;
-    EditUserEmailModel model;
+public class EditUserGenderPresenter implements EditUserGenderContract.Presenter , RequestCallBack {
+    EditeUserInformationFragment view;
+    EditUserGenderModel model;
     User user;
 
-    public boolean verifyEmailPattern(String emailInput) {
-
-        String regExEmail = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
-        Pattern pattern = Pattern.compile(regExEmail);
-        if (pattern.matcher(emailInput).matches()) {
-            return true;
-        } else {
-            view.showWarningToast("请输入正确的邮箱");
-            return false;
-        }
-    }
-
-
-    public EditUserEmailPresenter(EditUserEmailFragment view) {
-        FRSCEventBusUtil.register(this);
-        model = new EditUserEmailModel();
-        user = FRSCApplicationContext.getUser();
+    public EditUserGenderPresenter(EditeUserInformationFragment view) {
         this.view = view;
+        model = new EditUserGenderModel();
+        user = FRSCApplicationContext.getUser();
+        FRSCEventBusUtil.register(this);
     }
-
-    public void modifyUserEmail(String emailModified) {
+    public void  modifyUserGender(String gender) {
         view.showLoadingDialog();
-        user.setEmail(emailModified);
-        model.modifyUserEmail(user, this);
+        user.setGender(gender);
+        model.modifyUserGender(user,this);
     }
 
-    public void modifyUserEmailResult(RequestResult requestResult) {
-        view.hideLoadingDialog();
-        RequestMessage message = new RequestMessage(requestResult, MessageCode.MODIFY_USER_EMAIL_RESULT);
+
+    @Override
+    public void callBack(RequestResult requestResult) {
+        RequestMessage message = new RequestMessage(requestResult, FRSCRequestIOE.MODIFY_USER_GENDER);
         FRSCEventBusUtil.sendMessage(message);
     }
 
@@ -67,13 +53,11 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         view.hideLoadingDialog();
-        if (message.getMessageCode() != MessageCode.MODIFY_USER_EMAIL_RESULT) {
+        if (message.getRequestIO() != FRSCRequestIOE.MODIFY_USER_GENDER) {
             return;
         }
         if (message.isSuccess()) {
             XToastUtils.success("修改成功");
-
-            view.clearDataInput();
 
             // 修改保存在本地数据库的user
             UserDao userDao = FRSCDataBaseUtil.getWriteDaoSession().getUserDao();
@@ -85,5 +69,4 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
             XToastUtils.error(message.getMessage());
         }
     }
-
 }

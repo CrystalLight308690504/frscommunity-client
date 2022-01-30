@@ -16,8 +16,9 @@ import java.io.IOException;
  */
 public class FRSCOKHttpRequestUtil {
 
-    public static void putWithAuthorizationHeader(String url, RequestCallBack callback) {
-
+    public static void putWithAuthorizationHeader(String url, String jsonBody, RequestCallBack callback) {
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
         User user = FRSCApplicationContext.getUser();
         String head = "";
         if (null != user){
@@ -26,7 +27,7 @@ public class FRSCOKHttpRequestUtil {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .get()
+                .put(requestBody)
                 .addHeader("Authorization","FRSC"+head)
                 .url(url)
                 .build();

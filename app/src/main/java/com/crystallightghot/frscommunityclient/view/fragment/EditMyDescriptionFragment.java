@@ -10,8 +10,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.EditUserDescriptionPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
@@ -33,19 +35,13 @@ public class EditMyDescriptionFragment extends BaseFragment {
 
     private String mParam1;
     User user;
+    EditUserDescriptionPresenter presenter;
 
     public EditMyDescriptionFragment() {
-        // Required empty public constructor
+        user = FRSCApplicationContext.getUser();
+        presenter = new EditUserDescriptionPresenter(this);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @return A new instance of fragment EditMyDescriptionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static EditMyDescriptionFragment newInstance(String param1) {
         EditMyDescriptionFragment fragment = new EditMyDescriptionFragment();
         Bundle args = new Bundle();
@@ -73,7 +69,7 @@ public class EditMyDescriptionFragment extends BaseFragment {
     }
 
     private void initView() {
-        user = FRSCApplicationContext.getUser();
+
         ieDescription.setText(user.getDescription());
         log.setImageDrawable(FRSCApplicationContext.getUserProfile());
 
@@ -81,7 +77,18 @@ public class EditMyDescriptionFragment extends BaseFragment {
 
     @OnClick(R.id.btnPosition)
     public void onClick() {
+        String description = ieDescription.getText().toString();
+
+        if (description.equals("")) {
+            XToastUtils.warning("请填写自己的描述");
+        }else {
+            presenter.modifyUserDescription(description);
+        }
 
 
+    }
+
+    public void clearDataInput() {
+        ieDescription.setText("");
     }
 }

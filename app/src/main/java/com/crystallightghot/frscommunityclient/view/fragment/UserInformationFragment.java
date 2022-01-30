@@ -16,11 +16,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,9 +57,12 @@ public class UserInformationFragment extends Fragment {
     RadiusImageView userProfile;
 
     private String mParam1;
+    User user;
 
     public UserInformationFragment() {
         // Required empty public constructor
+        FRSCEventBusUtil.register(this);
+        user = FRSCApplicationContext.getUser();
     }
 
     /**
@@ -93,15 +100,14 @@ public class UserInformationFragment extends Fragment {
     }
 
     private void initView() {
-        User user = FRSCApplicationContext.getUser();
         if (null != user) {
-
             userName.setText(user.getUserName());
-
             String userProfileBase64 = user.getProfile();
             byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             userProfile.setImageBitmap(decodedByte);
+            userGender.setText(user.getGender());
+            userSelfIntroduce.setText(user.getDescription());
         }
 
     }
@@ -113,5 +119,16 @@ public class UserInformationFragment extends Fragment {
                 FRSCFragmentUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
                 break;
         }
+    }
+
+    /**
+     * @param message
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(UserChangedMessage message) {
+        userName.setText(user.getUserName());
+        userProfile.setImageDrawable(FRSCApplicationContext.getUserProfile());
+        userGender.setText(user.getGender());
+        userSelfIntroduce.setText(user.getDescription());
     }
 }

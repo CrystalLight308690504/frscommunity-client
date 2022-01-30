@@ -38,7 +38,7 @@ public class User {
 
     private Long credit;
 
-    private Integer gender;
+    private String gender;
 
     private Date createdTime;
 
@@ -52,10 +52,12 @@ public class User {
 
     private String addressIp;
 
-    @Generated(hash = 904275209)
+
+
+    @Generated(hash = 540396057)
     public User(Long userId, String oldPassword, String sessionId, String userName,
             String email, String password, String phoneNumber, String profile,
-            String introduce, Long credit, Integer gender, Date createdTime,
+            String introduce, Long credit, String gender, Date createdTime,
             Date lastLoginTime, Date loginTime, String profession,
             String description, String addressIp) {
         this.userId = userId;
@@ -77,150 +79,221 @@ public class User {
         this.addressIp = addressIp;
     }
 
+
+
     @Generated(hash = 586692638)
     public User() {
     }
+
+
 
     public static User getInstance() {
         return new User();
     }
 
+
+
     public Long getUserId() {
         return this.userId;
     }
+
+
 
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
+
+
     public String getOldPassword() {
         return this.oldPassword;
     }
+
+
 
     public void setOldPassword(String oldPassword) {
         this.oldPassword = oldPassword;
     }
 
+
+
     public String getSessionId() {
         return this.sessionId;
     }
+
+
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
+
+
     public String getUserName() {
         return this.userName;
     }
+
+
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+
+
     public String getEmail() {
         return this.email;
     }
+
+
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+
+
     public String getPassword() {
         return this.password;
     }
+
+
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+
+
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
+
+
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+
+
     public String getProfile() {
         return this.profile;
     }
+
+
 
     public void setProfile(String profile) {
         this.profile = profile;
     }
 
+
+
     public String getIntroduce() {
         return this.introduce;
     }
+
+
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
     }
 
+
+
     public Long getCredit() {
         return this.credit;
     }
+
+
 
     public void setCredit(Long credit) {
         this.credit = credit;
     }
 
-    public Integer getGender() {
+
+
+    public String getGender() {
         return this.gender;
     }
 
-    public void setGender(Integer gender) {
+
+
+    public void setGender(String gender) {
         this.gender = gender;
     }
+
+
 
     public Date getCreatedTime() {
         return this.createdTime;
     }
 
+
+
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
+
+
 
     public Date getLastLoginTime() {
         return this.lastLoginTime;
     }
 
+
+
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
+
+
 
     public Date getLoginTime() {
         return this.loginTime;
     }
 
+
+
     public void setLoginTime(Date loginTime) {
         this.loginTime = loginTime;
     }
+
+
 
     public String getProfession() {
         return this.profession;
     }
 
+
+
     public void setProfession(String profession) {
         this.profession = profession;
     }
+
+
 
     public String getDescription() {
         return this.description;
     }
 
+
+
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 
     public String getAddressIp() {
         return this.addressIp;
     }
 
+
+
     public void setAddressIp(String addressIp) {
         this.addressIp = addressIp;
     }
-
 
 
 }

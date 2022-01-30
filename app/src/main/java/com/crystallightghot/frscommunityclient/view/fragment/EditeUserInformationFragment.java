@@ -8,14 +8,21 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
+import com.crystallightghot.frscommunityclient.presenter.EditUserGenderPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.widget.grouplist.XUICommonListItemView;
 import com.xuexiang.xui.widget.grouplist.XUIGroupListView;
 import com.xuexiang.xui.widget.picker.widget.OptionsPickerView;
 import com.xuexiang.xui.widget.picker.widget.builder.OptionsPickerBuilder;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,17 +31,25 @@ import com.xuexiang.xui.widget.picker.widget.builder.OptionsPickerBuilder;
  *
  * @author 30869
  */
-public class EditeUserInformationFragment extends Fragment {
+public class EditeUserInformationFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.groupListView)
     XUIGroupListView groupListView;
 
     private String mParam1;
-    private String mParam2;
+    XUICommonListItemView itemGender;
+    XUICommonListItemView itemDescription;
+    EditUserGenderPresenter presenter;
+
+    String[] sex = {"男", "女"};
+    User user;
 
     public EditeUserInformationFragment() {
         // Required empty public constructor
+         user = FRSCApplicationContext.getUser();
+        presenter = new EditUserGenderPresenter(this);
+        FRSCEventBusUtil.register(this);
     }
 
     public static EditeUserInformationFragment newInstance(String param1) {
@@ -65,6 +80,9 @@ public class EditeUserInformationFragment extends Fragment {
 
 
     private void initView() {
+
+        itemGender = getItem("性别", user.getGender());
+        itemDescription = getItem("自我介绍", user.getDescription());
         View.OnClickListener onClickListener = v -> {
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
@@ -73,7 +91,7 @@ public class EditeUserInformationFragment extends Fragment {
                 } else if ("自我介绍".equals(text)) {
                     FRSCFragmentUtil.intentToFragment(EditMyDescriptionFragment.newInstance("EditMyDescriptionFragment"), (BaseFragmentActivity) getActivity(),true);
                 }
-                XToastUtils.toast(text + " is Clicked");
+
             }
         };
 
@@ -82,9 +100,8 @@ public class EditeUserInformationFragment extends Fragment {
                 .setTitle("用户信息")
                 .setDescription("点击对应标签修改信息")
                 .setLeftIconSize(size, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(getItem("性别", "男"), onClickListener)
-                .addItemView(getItem("自我介绍", "程序员"), onClickListener)
-
+                .addItemView(itemGender, onClickListener)
+                .addItemView(itemDescription, onClickListener)
                 .addTo(groupListView);
 
     }
@@ -100,22 +117,27 @@ public class EditeUserInformationFragment extends Fragment {
         return item;
     }
 
-    int sexChose;
     /**
      * 性别选择
      */
     private void showSexPickerView() {
         OptionsPickerView pvOptions = new OptionsPickerBuilder(getContext(), (v, options1, options2, options3) -> {
-            XToastUtils.toast(options1 + " ========");
-            sexChose = options1;
+            // 请求修改
+              presenter.modifyUserGender(sex[options1]);
             return false;
         })
                 .setTitleText("性别选择")
-                .setSelectOptions(sexChose)
+                .setSelectOptions(0)
                 .build();
-        String[] sex = {"男", "女"};
         pvOptions.setPicker(sex);
         pvOptions.show();
     }
-
+    /**
+     * @param message
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(UserChangedMessage message) {
+        itemGender.setDetailText(user.getGender());
+        itemDescription.setDetailText(user.getDescription());
+    }
 }

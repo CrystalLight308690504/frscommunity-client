@@ -6,7 +6,7 @@ package com.crystallightghot.frscommunityclient.view.enums;
  * @Version: 1.0
  * description：
  */
-public enum RequestIOE {
+public enum FRSCRequestIOE {
 
     USER_Login("/user/login","9002"),
     USER_Register("/user/register","9002"),
@@ -24,7 +24,7 @@ public enum RequestIOE {
     private String port;
     private String requestInterface;
 
-    private RequestIOE(String requestInterface, String port) {
+    private FRSCRequestIOE(String requestInterface, String port) {
         this.requestInterface = requestInterface;
         this.port = port;
     }
