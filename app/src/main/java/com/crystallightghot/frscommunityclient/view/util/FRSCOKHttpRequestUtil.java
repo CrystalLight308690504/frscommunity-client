@@ -1,6 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
-import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class FRSCOKHttpRequestUtil {
 
-    public static void getWithAuthorizationHeader(String url, RespondCallBck callback) {
+    public static void putWithAuthorizationHeader(String url, RequestCallBack callback) {
 
         User user = FRSCApplicationContext.getUser();
         String head = "";
@@ -37,20 +37,16 @@ public class FRSCOKHttpRequestUtil {
                 Gson gson = new Gson();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
-                boolean success = requestResult.isSuccess();
-                if (success) {//如果成功
-                    callback.success(requestResult.getMessage(), requestResult.getData());
-                } else {// 请求失败
-                    callback.failure(requestResult.getMessage());
-                }
+                callback.callBack(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                callback.failure("失败");
+                RequestResult requestResult = new RequestResult(false,404,"┭┮﹏┭┮服务器跑路了┭┮﹏┭┮",null);
+                callback.callBack(requestResult);
             }
         };
         FRSCThreadPoolUtil.executeThread(runnable);
     }
-public static void deleteRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
+public static void deleteRequestWithBodyJson(String url, String jsonBody, RequestCallBack callback) {
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
         User user = FRSCApplicationContext.getUser();
@@ -73,21 +69,17 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 Gson gson = new Gson();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
-                boolean success = requestResult.isSuccess();
-                if (success) {//如果成功
-                    callback.success(requestResult.getMessage(), requestResult.getData());
-                } else {// 请求失败
-                    callback.failure(requestResult.getMessage());
-                }
+                callback.callBack(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                callback.failure("失败");
+                RequestResult requestResult = new RequestResult(false,404,"┭┮﹏┭┮服务器跑路了┭┮﹏┭┮",null);
+                callback.callBack(requestResult);
             }
         };
         FRSCThreadPoolUtil.executeThread(runnable);
     }
 
-    public static void postRequestWithBodyJson(String url, String jsonBody, RespondCallBck callback) {
+    public static void postRequestWithBodyJson(String url, String jsonBody, RequestCallBack callback) {
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
@@ -112,15 +104,11 @@ public static void deleteRequestWithBodyJson(String url, String jsonBody, Respon
                 Gson gson = new Gson();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
-                boolean success = requestResult.isSuccess();
-                if (success) {//如果成功
-                    callback.success(requestResult.getMessage(), requestResult.getData());
-                } else {// 请求失败
-                    callback.failure(requestResult.getMessage());
-                }
+                callback.callBack(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                callback.failure("失败");
+                RequestResult requestResult = new RequestResult(false,404,"┭┮﹏┭┮服务器跑路了┭┮﹏┭┮",null);
+                callback.callBack(requestResult);
             }
         };
         FRSCThreadPoolUtil.executeThread(runnable);

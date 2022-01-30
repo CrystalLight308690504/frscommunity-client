@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
-import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
@@ -28,7 +28,7 @@ public class LoginModel implements LoginContract.Model {
     public LoginModel() {
     }
 
-    public void login(String userJson, RespondCallBck callback) {
+    public void login(String userJson, RequestCallBack callback) {
         String url = RequestIOE.USER_Login.getRequestIO();
         FRSCOKHttpRequestUtil.postRequestWithBodyJson(url, userJson, callback);
     }

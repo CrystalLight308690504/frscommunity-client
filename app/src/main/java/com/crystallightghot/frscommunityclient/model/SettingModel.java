@@ -1,6 +1,6 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.contract.SettingContract;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttpRequestUtil;
 import com.crystallightghot.frscommunityclient.view.enums.RequestIOE;
@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 public class SettingModel implements SettingContract.Model {
 
 
-    public void unLoginUser(User user, final RespondCallBck callback) {
+    public void unLoginUser(User user, final RequestCallBack callback) {
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         String url = RequestIOE.USER_UNLOGIN.getRequestIO();

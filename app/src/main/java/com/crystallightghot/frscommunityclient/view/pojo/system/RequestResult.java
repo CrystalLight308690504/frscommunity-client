@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.view.pojo.system;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  *      }
  *    }
  */
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestResult {

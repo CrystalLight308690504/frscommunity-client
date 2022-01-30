@@ -2,9 +2,6 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.model.EditUsernameModel;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditUsernameFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
@@ -12,7 +9,10 @@ import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserDao;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 

@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
-import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
@@ -18,7 +18,7 @@ import org.greenrobot.eventbus.EventBus;
  * @Version: 1.0
  * description：
  */
-public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
+public class LoginPresenter implements LoginContract.Presenter, RequestCallBack {
 
     LoginModel model;
     LoginContract.View view;
@@ -63,49 +63,48 @@ public class LoginPresenter implements LoginContract.Presenter, RespondCallBck {
     }
 
     @Override
-    public void success(String respondMessage, Object respondData) {
-        view.hideLoadingDialog();
-        // 将获取的数据转化为User实体类
-        Gson gson = new Gson();
-        User user = gson.fromJson(gson.toJson(respondData), User.class);
+    public void callBack(RequestResult requestResult) {
+        if (requestResult.isSuccess()) {
+            view.hideLoadingDialog();
+            // 将获取的数据转化为User实体类
+            Gson gson = new Gson();
+            User user = gson.fromJson(gson.toJson(requestResult.getData()), User.class);
 
-        // 创建消息
-        RequestMessage<User> message = new RequestMessage();
-        message.setSuccess(true);
-        message.setMessage(respondMessage);
-        message.setData(user);
-        message.setMessageCode(MessageCode.LOGIN_RESULT);
+            // 创建消息
+            RequestMessage<User> message = new RequestMessage();
+            message.setSuccess(true);
+            message.setMessage(requestResult.getMessage());
+            message.setData(user);
+            message.setMessageCode(MessageCode.LOGIN_RESULT);
 
-        // 存储User信息到全局中
-        FRSCApplicationContext.setUser(user);
+            // 存储User信息到全局中
+            FRSCApplicationContext.setUser(user);
 
-        DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
-        UserDao userDao = daoSession.getUserDao();
+            DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
+            UserDao userDao = daoSession.getUserDao();
 
-        User userQuery = userDao.queryBuilder()
-                .where(UserDao.Properties.UserId.eq(user.getUserId()))
-                .build()
-                .unique();
-        if (null == userQuery) {
-            userDao.insert(user);
+            User userQuery = userDao.queryBuilder()
+                    .where(UserDao.Properties.UserId.eq(user.getUserId()))
+                    .build()
+                    .unique();
+            if (null == userQuery) {
+                userDao.insert(user);
+            }
+            // 记录当前用户登陆状态
+            LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
+            LoginInformation loginInformation = new LoginInformation(null,user.getUserId(),1);
+            loginInformationDao.insert(loginInformation);
+
+            EventBus.getDefault().post(message);
+
+        }else {
+            view.hideLoadingDialog();
+            RequestMessage message = new RequestMessage();
+            message.setMessage(requestResult.getMessage());
+            message.setMessageCode(MessageCode.LOGIN_RESULT);
+            message.setSuccess(false);
+            EventBus.getDefault().post(message);
         }
-        // 记录当前用户登陆状态
-        LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
-        LoginInformation loginInformation = new LoginInformation(null,user.getUserId(),1);
-        loginInformationDao.insert(loginInformation);
-
-        EventBus.getDefault().post(message);
 
     }
-
-    @Override
-    public void failure(String failureMessage) {
-        view.hideLoadingDialog();
-        RequestMessage message = new RequestMessage();
-        message.setMessage(failureMessage);
-        message.setMessageCode(MessageCode.LOGIN_RESULT);
-        message.setSuccess(false);
-        EventBus.getDefault().post(message);
-    }
-
 }

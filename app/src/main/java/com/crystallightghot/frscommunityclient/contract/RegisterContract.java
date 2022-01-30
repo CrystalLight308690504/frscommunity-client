@@ -10,7 +10,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.system.User;
  */
 public interface RegisterContract {
     interface Model extends BaseContract.Model{
-        void registerUser(User user, final RespondCallBck callback);
+        void registerUser(User user, final RequestCallBack callback);
     }
 
     interface View extends BaseContract.View {

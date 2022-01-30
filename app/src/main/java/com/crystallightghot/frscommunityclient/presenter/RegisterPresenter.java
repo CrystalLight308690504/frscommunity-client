@@ -1,9 +1,10 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
-import com.crystallightghot.frscommunityclient.contract.RespondCallBck;
+import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.RegisterModel;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;
 import org.greenrobot.eventbus.EventBus;
@@ -16,7 +17,7 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 @Data
-public class RegisterPresenter implements RegisterContract.Presenter, RespondCallBck {
+public class RegisterPresenter implements RegisterContract.Presenter, RequestCallBack {
 
     RegisterContract.Model model;
     RegisterContract.View view;
@@ -39,23 +40,23 @@ public class RegisterPresenter implements RegisterContract.Presenter, RespondCal
         model.registerUser(user,this);
     }
 
-    @Override
-    public void success(String message,Object respondData) {
-        view.hideLoadingDialog();
-        RegisterMessage registerMessage = new RegisterMessage();
-        registerMessage.setPhoneNumber(user.getPhoneNumber());
-        registerMessage.setPassword(user.getPassword());
-        registerMessage.setSuccess(true);
-        registerMessage.setMessage("注册成功");
-        EventBus.getDefault().post(registerMessage);
-    }
 
     @Override
-    public void failure(String failMessage) {
+    public void callBack(RequestResult requestResult) {
         view.hideLoadingDialog();
-        RegisterMessage registerMessage = new RegisterMessage();
-        registerMessage.setMessage(failMessage);
-        registerMessage.setSuccess(false);
-        EventBus.getDefault().post(registerMessage);
+        if (requestResult.isSuccess()) {
+            RegisterMessage registerMessage = new RegisterMessage();
+            registerMessage.setPhoneNumber(user.getPhoneNumber());
+            registerMessage.setPassword(user.getPassword());
+            registerMessage.setSuccess(true);
+            registerMessage.setMessage("注册成功");
+            EventBus.getDefault().post(registerMessage);
+        } else {
+            RegisterMessage registerMessage = new RegisterMessage();
+            registerMessage.setMessage(requestResult.getMessage());
+            registerMessage.setSuccess(false);
+            EventBus.getDefault().post(registerMessage);
+        }
+
     }
 }

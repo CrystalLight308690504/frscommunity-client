@@ -14,6 +14,8 @@ public enum RequestIOE {
     MODIFY_USERNAME("/user/modifyUserName","9002"),
     MODIFY_PASSWORD_BY_PHONE_NUMBER("/user/modifyUserPasswordByPhoneNumber","9002"),
     MODIFY_PASSWORD_BY_OLD_PASSWORD("/user/modifyUserPasswordByOldPassword","9002"),
+    MODIFY_USER_GENDER("/user/modifyUserGender","9002"),
+    MODIFY_USER_DESCRIPTION("/user/modifyUserDescription","9002"),
     MODIFY_USER_PROFILE("/user/modifyUserProfile","9002"),
     MODIFY_USER_EMAIL("/user/modifyUserEmail","9002");
 

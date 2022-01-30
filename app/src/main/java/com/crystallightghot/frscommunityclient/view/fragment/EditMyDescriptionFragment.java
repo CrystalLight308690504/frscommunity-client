@@ -20,7 +20,7 @@ import com.xuexiang.xui.widget.imageview.RadiusImageView;
  * Use the {@link EditMyDescriptionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditMyDescriptionFragment extends Fragment {
+public class EditMyDescriptionFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -76,10 +76,12 @@ public class EditMyDescriptionFragment extends Fragment {
         user = FRSCApplicationContext.getUser();
         ieDescription.setText(user.getDescription());
         log.setImageDrawable(FRSCApplicationContext.getUserProfile());
+
     }
 
     @OnClick(R.id.btnPosition)
     public void onClick() {
+
 
     }
 }

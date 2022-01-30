@@ -38,7 +38,7 @@ public class User {
 
     private Long credit;
 
-    private Boolean gender;
+    private Integer gender;
 
     private Date createdTime;
 
@@ -52,10 +52,10 @@ public class User {
 
     private String addressIp;
 
-    @Generated(hash = 397642711)
+    @Generated(hash = 904275209)
     public User(Long userId, String oldPassword, String sessionId, String userName,
             String email, String password, String phoneNumber, String profile,
-            String introduce, Long credit, Boolean gender, Date createdTime,
+            String introduce, Long credit, Integer gender, Date createdTime,
             Date lastLoginTime, Date loginTime, String profession,
             String description, String addressIp) {
         this.userId = userId;
@@ -82,7 +82,7 @@ public class User {
     }
 
     public static User getInstance() {
-      return   new User();
+        return new User();
     }
 
     public Long getUserId() {
@@ -91,6 +91,14 @@ public class User {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getOldPassword() {
+        return this.oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public String getSessionId() {
@@ -157,11 +165,11 @@ public class User {
         this.credit = credit;
     }
 
-    public Boolean getGender() {
+    public Integer getGender() {
         return this.gender;
     }
 
-    public void setGender(Boolean gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
@@ -213,11 +221,6 @@ public class User {
         this.addressIp = addressIp;
     }
 
-    public String getOldPassword() {
-        return this.oldPassword;
-    }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
-    }
+
 }
