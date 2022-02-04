@@ -13,15 +13,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.adapter.MyClassificationRecycleViewAdapter;
+import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
+import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapter;
 import com.crystallightghot.frscommunityclient.view.dialog.AddClassificationDialogFragment;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MyBlogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyBlogFragment extends Fragment {
+public class MyBlogFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
 
@@ -33,11 +37,11 @@ public class MyBlogFragment extends Fragment {
     @BindView(R.id.rvMyBlogs)
     RecyclerView rvMyBlogs;
 
-    // TODO: Rename and change types of parameters
+    MyBlogPresenter presenter;
     private String mParam1;
 
     public MyBlogFragment() {
-        // Required empty public constructor
+        presenter = new MyBlogPresenter(this);
     }
 
     public static MyBlogFragment newInstance(String param1) {
@@ -59,7 +63,6 @@ public class MyBlogFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine_blog, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -68,9 +71,7 @@ public class MyBlogFragment extends Fragment {
 
     private void init() {
         activity = getActivity();
-
-        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
-        rvMyBlogs.setAdapter(adapter);
+        presenter.loadingCategory();
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
@@ -81,11 +82,14 @@ public class MyBlogFragment extends Fragment {
                 break;
             case R.id.btnAddPackage:
                 AddClassificationDialogFragment dialogFragment = new AddClassificationDialogFragment();
-                dialogFragment.show(getFragmentManager(),"AddClassificationDialogFragment");
+                dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
                 break;
         }
     }
 
+    public void loadingData(List<BlogCategory> blogCategories) {
 
-
+        MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories);
+        rvMyBlogs.setAdapter(adapter);
+    }
 }

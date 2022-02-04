@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:padding="@dimen/distance_small"
+                                                   android:background="@drawable/bkd_bottom_blue"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/text1"
+              android:singleLine="true"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              android:ellipsize="marquee"
+              android:textSize="16dp"
+             />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

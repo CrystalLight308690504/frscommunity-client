@@ -4,12 +4,13 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.greenrobot.eventbus.EventBus;
 
 /**
@@ -67,14 +68,14 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
         if (requestResult.isSuccess()) {
             view.hideLoadingDialog();
             // 将获取的数据转化为User实体类
-            Gson gson = new Gson();
+            Gson gson = (new GsonBuilder()).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
             User user = gson.fromJson(gson.toJson(requestResult.getData()), User.class);
 
             // 创建消息
-            RequestMessage<User> message = new RequestMessage();
+            RequestMessage message = new RequestMessage();
             message.setSuccess(true);
             message.setMessage(requestResult.getMessage());
-            message.setData(user);
+            message.setData(requestResult.getData());
             message.setMessageCode(MessageCode.LOGIN_RESULT);
 
             // 存储User信息到全局中

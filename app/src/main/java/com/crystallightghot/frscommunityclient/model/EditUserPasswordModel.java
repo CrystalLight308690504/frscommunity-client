@@ -2,10 +2,11 @@ package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
+import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -19,11 +20,11 @@ import java.io.IOException;
 public class EditUserPasswordModel implements EditUserPasswordContract.Model {
 
     public void modifyUserPasswordByPhoneNumber(User user, EditUserPasswordContract.EditUserPasswordCallBack  callBack) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequestIOE.MODIFY_PASSWORD_BY_PHONE_NUMBER.getRequestIO();
+        String url = RequstIO.MODIFY_PASSWORD_BY_PHONE_NUMBER.getRequestIO();
         String head = "";
         if (null != user){
             head = user.getSessionId();
@@ -57,7 +58,7 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequestIOE.MODIFY_PASSWORD_BY_OLD_PASSWORD.getRequestIO();
+        String url = RequstIO.MODIFY_PASSWORD_BY_OLD_PASSWORD.getRequestIO();
         String head = "";
         if (null != user) {
             head = user.getSessionId();

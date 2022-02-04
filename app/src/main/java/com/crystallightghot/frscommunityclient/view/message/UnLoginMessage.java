@@ -6,5 +6,5 @@ package com.crystallightghot.frscommunityclient.view.message;
  * @Version: 1.0
  * description：
  */
-public class UnLoginMessage extends RequestMessage<String>{
+public class UnLoginMessage extends RequestMessage{
 }

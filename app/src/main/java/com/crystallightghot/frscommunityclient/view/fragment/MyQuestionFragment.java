@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.adapter.MyClassificationRecycleViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +62,7 @@ public class MyQuestionFragment extends Fragment {
 
     private void init() {
 
-        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
-        rvMyQuestions.setAdapter(adapter);
+//        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
+//        rvMyQuestions.setAdapter(adapter);
     }
 }

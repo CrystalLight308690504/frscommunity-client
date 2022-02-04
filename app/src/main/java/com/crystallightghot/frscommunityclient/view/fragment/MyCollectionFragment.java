@@ -13,7 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.adapter.MyClassificationRecycleViewAdapter;
 import com.crystallightghot.frscommunityclient.view.dialog.AddClassificationDialogFragment;
 
 /**
@@ -73,8 +72,8 @@ public class MyCollectionFragment extends Fragment {
 
         tvTitle.setText("我的收藏");
 
-        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
-        rvMyBlogs.setAdapter(adapter);
+//        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
+//        rvMyBlogs.setAdapter(adapter);
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})

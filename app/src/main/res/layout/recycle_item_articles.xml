@@ -3,13 +3,21 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
                                                    android:padding="@dimen/distance_normal"
-                                                   android:layout_marginStart="@dimen/distance_max"
-                                                   android:background="@drawable/bkd_round_bottom_blue_with_light"
+                                                   android:background="@drawable/bkd_bottom_blue"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               android:maxLines="2"
+              android:textColor="@color/default_displayed_text_black"
               android:id="@+id/contentTitle"
               android:text="内容标题"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@id/contentTitle"
+              app:layout_constraintLeft_toLeftOf="parent"
+              android:textSize="8dp"
+              android:textColor="@color/color_gray_6"
+              android:layout_marginTop="@dimen/distance_small"
+              android:id="@+id/timeCreated"
+              android:text="创建时间"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

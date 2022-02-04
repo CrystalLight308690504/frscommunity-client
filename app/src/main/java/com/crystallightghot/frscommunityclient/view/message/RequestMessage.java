@@ -1,7 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
-import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,21 +16,13 @@ public class RequestMessage<T> {
     String message;
     T data;
     boolean success;
-    MessageCode messageCode;
-    FRSCRequestIOE requestIO;
+    Object messageCode;
 
-    public RequestMessage(RequestResult requestResult, MessageCode messageCode) {
+    public RequestMessage(RequestResult<T> requestResult,Object messageCode) {
         this.message = requestResult.getMessage();
         this.success = requestResult.isSuccess();
+        this.data =  requestResult.getData();
         this.messageCode = messageCode;
-        this.data = (T) requestResult.getData();
-    }
-
-    public RequestMessage(RequestResult requestResult, FRSCRequestIOE requestIO) {
-        this.message = requestResult.getMessage();
-        this.success = requestResult.isSuccess();
-        this.requestIO = requestIO;
-        this.data = (T) requestResult.getData();
     }
 
 }

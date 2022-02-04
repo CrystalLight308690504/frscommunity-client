@@ -1,6 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
-import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class RegisterMessage extends RequestMessage<User> {
+public class RegisterMessage extends RequestMessage {
     String phoneNumber;
     String password;
 }

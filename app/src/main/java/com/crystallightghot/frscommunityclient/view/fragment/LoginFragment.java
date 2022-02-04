@@ -73,7 +73,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
      * @param message
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RequestMessage<User> message) {
+    public void getMessage(RequestMessage message) {
         if (message.getMessageCode() != MessageCode.LOGIN_RESULT) {// 只收有关本fragment的消息
             return;
         }

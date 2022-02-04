@@ -1,11 +1,12 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserProfileContract;
-import com.crystallightghot.frscommunityclient.view.enums.FRSCRequestIOE;
+import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -18,11 +19,11 @@ import java.io.IOException;
  */
 public class EditUserProfileModel implements EditUserProfileContract.Model {
     public void modifyUserProfile(User user, EditUserProfileContract.EditUserProfileCallBack callBack) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequestIOE.MODIFY_USER_PROFILE.getRequestIO();
+        String url = RequstIO.MODIFY_USER_PROFILE.getRequestIO();
 
         String head = "";
         if (null != user){
