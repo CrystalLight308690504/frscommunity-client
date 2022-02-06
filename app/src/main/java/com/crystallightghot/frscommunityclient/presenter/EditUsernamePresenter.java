@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.model.EditUsernameModel;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditUsernameFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -56,7 +56,7 @@ public class EditUsernamePresenter implements EditUserNameContract.Presenter , E
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
 
-        if (message.getMessageCode() != MessageCode.EDITE_USERNAME_RESULT){
+        if (message.getMessageKey() != MessageCode.EDITE_USERNAME_RESULT){
             return;
         }
         if (message.isSuccess()){

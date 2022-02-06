@@ -6,10 +6,11 @@ import com.crystallightghot.frscommunityclient.presenter.LoginPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.RequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -51,7 +52,7 @@ public class LoginModel implements LoginContract.Model {
             try {
                 Response response = client.newCall(request).execute();
                 String string = response.body().string();
-                Gson gson = new Gson();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
                 boolean success = requestResult.isSuccess();

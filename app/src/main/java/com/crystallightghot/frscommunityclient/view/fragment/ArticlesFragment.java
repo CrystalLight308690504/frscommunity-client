@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Use the {@link ArticlesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ArticlesFragment extends Fragment {
+public class ArticlesFragment extends BaseFragment {
 
     MyBlogPresenter presenter;
     Long categoryId;

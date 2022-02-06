@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import android.os.Build;
 import com.crystallightghot.frscommunityclient.contract.EditUserProfileContract;
 import com.crystallightghot.frscommunityclient.model.EditUserProfileModel;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditUserProfileFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -80,7 +80,7 @@ public class EditUserProfilePresenter implements EditUserProfileContract.Present
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
-        if (message.getMessageCode() == MessageCode.MODIFY_USER_PROFILE_RESULT) {
+        if (message.getMessageKey() == MessageCode.MODIFY_USER_PROFILE_RESULT) {
             view.hideLoadingDialog();
             if (message.isSuccess()) {
                 XToastUtils.success("修改成功");

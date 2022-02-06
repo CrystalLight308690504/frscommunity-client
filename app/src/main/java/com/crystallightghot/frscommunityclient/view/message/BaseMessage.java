@@ -1,6 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.message;
 
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import lombok.Data;
 
 /**

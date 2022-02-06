@@ -21,18 +21,15 @@ public class FRSCApplicationContext {
 
     private static Activity activity;
     private static MainActivity mainActivity;
-    private  static User user;
-
+    private static User user;
     private static BaseFragmentActivity baseFragmentActivity;
 
     public static MainActivity getMainActivity() {
         return mainActivity;
     }
-
     public static void setMainActivity(MainActivity mainActivity) {
         FRSCApplicationContext.mainActivity = mainActivity;
     }
-
 
     public static Activity getActivity() {
         return activity;
@@ -54,20 +51,20 @@ public class FRSCApplicationContext {
         return user;
     }
 
-    public static void  setUser(User user) {
+    public static void setUser(User user) {
         FRSCApplicationContext.user = user;
     }
+
     public static Drawable getUserProfile() {
         if (null != user) {
             String userProfileBase64 = user.getProfile();
             byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            return  new BitmapDrawable(decodedByte);
-        }else {
-            return  null;
+            return new BitmapDrawable(decodedByte);
+        } else {
+            return null;
         }
     }
-
 
 
 }

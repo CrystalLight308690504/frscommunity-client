@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeSearchBlogAndHelpResultRecyclerViewAdapter;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeSearchUserResultRecyclerViewAdapter;
-import com.crystallightghot.frscommunityclient.view.enums.SearchType;
+import com.crystallightghot.frscommunityclient.view.value.SearchType;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;

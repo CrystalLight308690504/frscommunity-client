@@ -14,32 +14,46 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.PutBlogConfirmPresenter;
+import com.crystallightghot.frscommunityclient.presenter.PutBlogContentPresenter;
+import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
+import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PutBlogConfirmFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PutBlogConfirmFragment extends Fragment {
+public class PutBlogConfirmFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.icCollection)
     TextView icCollection;
-    @BindView(R.id.spinnerCollection)
-    AppCompatSpinner spinnerCollection;
-    @BindView(R.id.icCategory)
-    TextView icCategory;
     @BindView(R.id.spinnerCategory)
     AppCompatSpinner spinnerCategory;
+    @BindView(R.id.icCategory)
+    TextView icCategory;
+    @BindView(R.id.spinnerSkatingType)
+    AppCompatSpinner spinnerSkatingType;
     @BindView(R.id.btnPosition)
     Button btnPosition;
 
+    PutBlogConfirmPresenter presenter;
+    ArrayList<BlogCategory> blogCategories;
+    ArrayList<SkatingType> skatingTypes;
+    int categoryPosition = 0;
+    int skatingTypePosition = 0;
 
     private String mParam1;
 
     public PutBlogConfirmFragment() {
+        presenter = new PutBlogConfirmPresenter(this);
 
     }
 
@@ -69,26 +83,48 @@ public class PutBlogConfirmFragment extends Fragment {
     }
 
     private void initView() {
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("ddd");
-        list.add("d4d");
-        list.add("dd44");
-        list.add("dd44");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_default_item, R.id.text1, list);
-        spinnerCategory.setAdapter(arrayAdapter);
-        spinnerCategory.setOnItemSelectedListener(new CategorySpinnerItemSelectedListener());
-        spinnerCollection.setAdapter(arrayAdapter);
-        spinnerCollection.setOnItemSelectedListener(new CollectionSpinnerItemSelectedListener());
+        presenter.loadingCategory();
+        presenter.loadingSkatingType();
     }
 
     @OnClick(R.id.btnPosition)
     public void onClick() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("blogCategory", blogCategories.get(categoryPosition));
+        data.put("skatingType",skatingTypes.get(skatingTypePosition));
+        TransportDataMessage message = new TransportDataMessage(data, PutBlogContentPresenter.RespondMessageKey.PUT_BLOG_CONFIRM_REQUEST);
+        FRSCEventBusUtil.sendMessage(message);
         getActivity().onBackPressed();
     }
 
-    class CollectionSpinnerItemSelectedListener implements AdapterView.OnItemSelectedListener {
+    public void loadingBlogCategories(ArrayList blogCategoriesName) {
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(getContext(), R.layout.spinner_default_item, R.id.text1, blogCategoriesName);
+        spinnerCategory.setAdapter(arrayAdapter);
+        spinnerCategory.setOnItemSelectedListener(new CategorySpinnerItemSelectedListener());
+    }
+
+    public void loadingSkatingType(ArrayList<String> skatingTypesName) {
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(getContext(), R.layout.spinner_default_item, R.id.text1, skatingTypesName);
+        spinnerSkatingType.setAdapter(arrayAdapter);
+        spinnerSkatingType.setOnItemSelectedListener(new SkatingTypeSpinnerItemSelectedListener());
+
+    }
+
+    public void getCategoryList(ArrayList<BlogCategory> categories) {
+        this.blogCategories = categories;
+    }
+
+    public void getSkatingTypeList(ArrayList<SkatingType> skatingTypes) {
+        this.skatingTypes = skatingTypes;
+    }
+
+
+    class SkatingTypeSpinnerItemSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            skatingTypePosition = pos;
 
         }
 
@@ -101,7 +137,7 @@ public class PutBlogConfirmFragment extends Fragment {
     class CategorySpinnerItemSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+            categoryPosition = pos;
         }
 
         @Override
@@ -109,4 +145,6 @@ public class PutBlogConfirmFragment extends Fragment {
 
         }
     }
+
+
 }

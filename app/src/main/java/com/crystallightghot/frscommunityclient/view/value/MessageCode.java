@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.view.enums;
+package com.crystallightghot.frscommunityclient.view.value;
 
 /**
  * @Date 2022/1/27
@@ -16,10 +16,8 @@ public enum MessageCode {
     REGISTER_BUTTON_NO_ENABLE_TIME,
     MODIFY_PASSWD_BY_PHONE_NUMBER_RESULT,
     MODIFY_PASSWD_BY_OLD_PASSWORD_RESULT,
-    MODIFY_USER_DESCRIPTION,
     MODIFY_USER_PROFILE_RESULT,
     MODIFY_USER_EMAIL_RESULT,
 
-    BLOG_CATEGORIES
 
 }

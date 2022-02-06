@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.EditUserGenderContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.EditUserGenderModel;
-import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.RequstIO;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -53,7 +53,7 @@ public class EditUserGenderPresenter implements EditUserGenderContract.Presenter
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         view.hideLoadingDialog();
-        if (message.getMessageCode() != RequstIO.MODIFY_USER_GENDER) {
+        if (message.getMessageKey() != RequstIO.MODIFY_USER_GENDER) {
             return;
         }
         if (message.isSuccess()) {

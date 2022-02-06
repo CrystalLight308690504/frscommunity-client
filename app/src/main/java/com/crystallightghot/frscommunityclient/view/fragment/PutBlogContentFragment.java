@@ -5,22 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.PutBlogContentPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.android.material.textfield.TextInputEditText;
+import com.nanchen.compresshelper.StringUtil;
+import lombok.Getter;
 
 /**
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class PutBlogContentFragment extends Fragment {
+public class PutBlogContentFragment extends BaseFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,15 +31,24 @@ public class PutBlogContentFragment extends Fragment {
     ImageView btnBack;
     @BindView(R.id.btnPosition)
     AppCompatButton btnPosition;
-    @BindView(R.id.titleAcquired)
-    TextInputEditText titleAcquired;
-    @BindView(R.id.s1)
-    LinearLayout s1;
+    @BindView(R.id.ieTitle)
+    TextInputEditText ieTitle;
+    @BindView(R.id.ieContent)
+    TextInputEditText ieContent;
+
+    PutBlogContentPresenter presenter;
+
+    @Getter
+    String blogTitle;
+    @Getter
+    String blogContent;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
 
     public PutBlogContentFragment() {
+        presenter = new PutBlogContentPresenter(this);
         // Required empty public constructor
     }
 
@@ -66,17 +77,25 @@ public class PutBlogContentFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.btn_back, R.id.btnPosition, R.id.titleAcquired})
+    @OnClick({R.id.btn_back, R.id.btnPosition})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
                 getActivity().onBackPressed();
                 break;
             case R.id.btnPosition:
-                FRSCFragmentUtil.intentToFragmentNoAddedToBackStack(PutBlogConfirmFragment.newInstance(""));
-                break;
-            case R.id.titleAcquired:
+                blogTitle = ieTitle.getText().toString();
+                blogContent = ieContent.getText().toString();
+                if (StringUtil.isEmpty(blogTitle) ) {
+                    XToastUtils.warning("请输入标题");
+                    return;
+                }else if (StringUtil.isEmpty(blogContent)) {
+                    XToastUtils.warning("请输入内容");
+                    return;
+                }
+                FRSCFragmentUtil.intentToFragmentAddedToBackStack(PutBlogConfirmFragment.newInstance(""));
                 break;
         }
     }
+
 }

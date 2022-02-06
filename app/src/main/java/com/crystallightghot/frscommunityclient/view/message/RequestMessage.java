@@ -16,13 +16,13 @@ public class RequestMessage<T> {
     String message;
     T data;
     boolean success;
-    Object messageCode;
+    Object messageKey;
 
-    public RequestMessage(RequestResult<T> requestResult,Object messageCode) {
+    public RequestMessage(RequestResult<T> requestResult,Object messageKey) {
         this.message = requestResult.getMessage();
         this.success = requestResult.isSuccess();
         this.data =  requestResult.getData();
-        this.messageCode = messageCode;
+        this.messageKey = messageKey;
     }
 
 }

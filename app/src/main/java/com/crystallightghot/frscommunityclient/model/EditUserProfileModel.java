@@ -1,7 +1,8 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserProfileContract;
-import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCString;
+import com.crystallightghot.frscommunityclient.view.value.RequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
@@ -47,7 +48,7 @@ public class EditUserProfileModel implements EditUserProfileContract.Model {
                 callBack.modifyUserProfileResult(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                callBack.modifyUserProfileResult(new RequestResult(false, null,"服务器跑路了",null));
+                callBack.modifyUserProfileResult(new RequestResult(false, null, FRSCString.SERVICE_UN_ONLINE.getString(),null));
             }
         };
         FRSCThreadPoolUtil.executeThread(runnable);

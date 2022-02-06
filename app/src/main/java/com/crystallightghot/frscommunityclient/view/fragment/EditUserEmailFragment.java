@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.EditUserEmailPresenter;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.*;

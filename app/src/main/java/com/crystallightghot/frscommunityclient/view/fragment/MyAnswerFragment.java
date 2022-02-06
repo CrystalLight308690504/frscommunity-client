@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.dialog.AddClassificationDialogFragment;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +69,7 @@ public class MyAnswerFragment extends Fragment {
 
     private void init() {
         activity = getActivity();
-
+        btnAddPackage.setVisibility(View.INVISIBLE);
         tvTitle.setText("我的回答");
 
 //        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
@@ -82,10 +82,7 @@ public class MyAnswerFragment extends Fragment {
             case R.id.btnBack:
                 activity.onBackPressed();
                 break;
-            case R.id.btnAddPackage:
-                AddClassificationDialogFragment dialogFragment = new AddClassificationDialogFragment();
-                dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
-                break;
+
         }
     }
 

@@ -37,22 +37,31 @@
             android:text="发送"
     />
     <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleAcquired"
+            android:layout_marginTop="@dimen/distance_normal"
+            android:id="@+id/ieTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="100"
             android:gravity="start"
+            android:background="@drawable/bkd_input_edit_text"
+            android:padding="@dimen/distance_small"
             android:hint="标题"
             android:inputType="textMultiLine"
             app:layout_constraintTop_toBottomOf="@id/btn_back"
     />
 
     <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ieContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/titleAcquired"
+            app:layout_constraintTop_toBottomOf="@id/ieTitle"
+            android:background="@drawable/bkd_input_edit_text"
+            android:padding="@dimen/distance_small"
             android:gravity="start"
             android:hint="内容"
+            android:layout_marginTop="@dimen/distance_small"
+            app:layout_constraintEnd_toStartOf="@id/s1"
+            android:layout_marginBottom="@dimen/distance_small"
             android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="5dp"/>
     <LinearLayout

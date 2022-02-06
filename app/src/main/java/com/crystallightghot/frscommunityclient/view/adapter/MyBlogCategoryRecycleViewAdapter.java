@@ -73,7 +73,6 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
         public void init(BlogCategory category) {
             this.category = category;
             tvPackageName.setText(category.getCategoryName());
-
             itemView.setOnClickListener(view -> {
                 FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticlesFragment.newInstance(category.getCategoryId()));
             });

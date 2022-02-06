@@ -18,13 +18,13 @@
                                                 app:layout_constraintRight_toRightOf="parent"
                                                 android:spinnerMode="dialog"
                                                 app:layout_constraintTop_toTopOf="parent"
-                                                android:id="@+id/spinnerCollection"
+                                                android:id="@+id/spinnerCategory"
     />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               app:layout_constraintLeft_toLeftOf="parent"
               app:layout_constraintTop_toBottomOf="@id/icCollection"
               android:layout_marginTop="@dimen/distance_max2"
-              android:text="分类:"
+              android:text="发布板块:"
               android:id="@+id/icCategory"
     />
 
@@ -32,12 +32,12 @@
                                                 app:layout_constraintRight_toRightOf="parent"
                                                 app:layout_constraintTop_toTopOf="@id/icCategory"
                                                 android:spinnerMode="dialog"
-                                                android:id="@+id/spinnerCategory"
+                                                android:id="@+id/spinnerSkatingType"
     />
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerCategory"
+            app:layout_constraintTop_toBottomOf="@id/spinnerSkatingType"
             android:layout_marginTop="100dp"
             android:background="@drawable/bkd_btn_round_state_blue_to_grey"
             android:text="确定"

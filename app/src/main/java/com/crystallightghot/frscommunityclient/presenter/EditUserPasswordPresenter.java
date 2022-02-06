@@ -4,7 +4,7 @@ import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract
 import com.crystallightghot.frscommunityclient.model.EditUserPasswordModel;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserPasswordByOldPasswordFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserPasswordByPhoneNumberFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
@@ -62,7 +62,7 @@ public class EditUserPasswordPresenter implements EditUserPasswordContract.Prese
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
-        if (message.getMessageCode() == MessageCode.MODIFY_PASSWD_BY_PHONE_NUMBER_RESULT) {
+        if (message.getMessageKey() == MessageCode.MODIFY_PASSWD_BY_PHONE_NUMBER_RESULT) {
             editeUserPasswordByPhoneNumberFragment.hideLoadingDialog();
             if (message.isSuccess()){
                 XToastUtils.success("修改成功");
@@ -70,7 +70,7 @@ public class EditUserPasswordPresenter implements EditUserPasswordContract.Prese
             }else {
                 XToastUtils.error(message.getMessage());
             }
-        }else if(message.getMessageCode() == MessageCode.MODIFY_PASSWD_BY_OLD_PASSWORD_RESULT) {
+        }else if(message.getMessageKey() == MessageCode.MODIFY_PASSWD_BY_OLD_PASSWORD_RESULT) {
             editeUserPasswordByOldPasswordFragment.hideLoadingDialog();
             if (message.isSuccess()){
                 XToastUtils.success("修改成功");

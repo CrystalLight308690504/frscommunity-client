@@ -13,7 +13,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.dialog.AddClassificationDialogFragment;
+import com.crystallightghot.frscommunityclient.view.dialog.AddCategoryDialogFragment;
+import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,11 +39,15 @@ public class MyCollectionFragment extends Fragment {
     RecyclerView rvMyBlogs;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
+    AddCategoryDialogFragment dialogFragment;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
 
     public MyCollectionFragment() {
+        dialogFragment = new AddCategoryDialogFragment();
+        FRSCEventBusUtil.register(this);
         // Required empty public constructor
     }
 
@@ -69,11 +79,9 @@ public class MyCollectionFragment extends Fragment {
 
     private void init() {
         activity = getActivity();
-
         tvTitle.setText("我的收藏");
 
-//        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
-//        rvMyBlogs.setAdapter(adapter);
+
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
@@ -83,11 +91,19 @@ public class MyCollectionFragment extends Fragment {
                 activity.onBackPressed();
                 break;
             case R.id.btnAddPackage:
-                AddClassificationDialogFragment dialogFragment = new AddClassificationDialogFragment();
                 dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
                 break;
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void getMessage(TransportDataMessage message) {
+        if (message.getMessageKey() != dialogFragment) {
+            return;
+        }
+        Map data = (Map) message.getData();
+        String categoryName = (String) data.get("categoryName");
+        String description = (String) data.get("description");
+    }
 
 }

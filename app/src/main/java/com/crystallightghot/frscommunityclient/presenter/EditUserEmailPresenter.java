@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserEmailContract;
 import com.crystallightghot.frscommunityclient.model.EditUserEmailModel;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.EditUserEmailFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -67,7 +67,7 @@ public class EditUserEmailPresenter implements EditUserEmailContract.Presenter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         view.hideLoadingDialog();
-        if (message.getMessageCode() != MessageCode.MODIFY_USER_EMAIL_RESULT) {
+        if (message.getMessageKey() != MessageCode.MODIFY_USER_EMAIL_RESULT) {
             return;
         }
         if (message.isSuccess()) {

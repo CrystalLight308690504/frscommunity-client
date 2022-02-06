@@ -1,4 +1,4 @@
-package com.crystallightghot.frscommunityclient.view.enums;
+package com.crystallightghot.frscommunityclient.view.value;
 
 /**
  * @Date 2022/1/27

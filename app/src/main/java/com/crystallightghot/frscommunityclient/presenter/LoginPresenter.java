@@ -4,7 +4,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
@@ -76,7 +76,7 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             message.setSuccess(true);
             message.setMessage(requestResult.getMessage());
             message.setData(requestResult.getData());
-            message.setMessageCode(MessageCode.LOGIN_RESULT);
+            message.setMessageKey(MessageCode.LOGIN_RESULT);
 
             // 存储User信息到全局中
             FRSCApplicationContext.setUser(user);
@@ -102,7 +102,7 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             view.hideLoadingDialog();
             RequestMessage message = new RequestMessage();
             message.setMessage(requestResult.getMessage());
-            message.setMessageCode(MessageCode.LOGIN_RESULT);
+            message.setMessageKey(MessageCode.LOGIN_RESULT);
             message.setSuccess(false);
             EventBus.getDefault().post(message);
         }

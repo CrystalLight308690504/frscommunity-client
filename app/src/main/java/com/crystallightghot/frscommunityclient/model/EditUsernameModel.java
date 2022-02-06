@@ -1,8 +1,9 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
+import com.crystallightghot.frscommunityclient.view.value.FRSCString;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.enums.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.RequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -49,7 +50,7 @@ public class EditUsernameModel implements EditUserNameContract.Model {
                 userRespondCallBack.modifyUsernameResult(requestResult);
             } catch (IOException e) {
                 e.printStackTrace();
-                userRespondCallBack.modifyUsernameResult(new RequestResult(false, null,"服务器跑路了",null));
+                userRespondCallBack.modifyUsernameResult(new RequestResult(false, null, FRSCString.SERVICE_UN_ONLINE.getString(),null));
             }
         };
         FRSCThreadPoolUtil.executeThread(runnable);

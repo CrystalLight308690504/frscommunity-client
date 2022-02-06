@@ -17,7 +17,7 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCVerifyCodeUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
-import com.crystallightghot.frscommunityclient.view.enums.MessageCode;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
