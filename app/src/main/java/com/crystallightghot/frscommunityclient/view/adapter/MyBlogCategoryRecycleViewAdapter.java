@@ -10,12 +10,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.MyBlogCategoryRecycleViewAdapterPresenter;
+import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticlesFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
+import com.xuexiang.xui.widget.dialog.materialdialog.simplelist.MaterialSimpleListAdapter;
+import com.xuexiang.xui.widget.dialog.materialdialog.simplelist.MaterialSimpleListItem;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,10 +32,11 @@ import java.util.List;
  */
 public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlogCategoryRecycleViewAdapter.ViewHolder> {
     List<BlogCategory> blogCategories;
+    MyBlogCategoryRecycleViewAdapterPresenter presenter;
 
     public MyBlogCategoryRecycleViewAdapter(List<BlogCategory> blogCategories) {
         this.blogCategories = blogCategories;
-
+        presenter = new MyBlogCategoryRecycleViewAdapterPresenter(this);
     }
 
     @NonNull
@@ -51,8 +58,8 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvPackageName)
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+        @BindView(R.id.tvCategoryName)
         TextView tvPackageName;
         @BindView(R.id.tvTotal)
         TextView tvTotal;
@@ -62,20 +69,55 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
         ImageView ivArrow;
         @BindView(R.id.rvLists)
         RecyclerView rvLists;
+        @BindView(R.id.tvCategoryDescription)
+        TextView tvCategoryDescription;
 
-        BlogCategory category;
+        BlogCategory blogCategory;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void init(BlogCategory category) {
-            this.category = category;
-            tvPackageName.setText(category.getCategoryName());
+        public void init(BlogCategory blogCategory) {
+            this.blogCategory = blogCategory;
+            tvPackageName.setText(blogCategory.getCategoryName());
+            tvCategoryDescription.setText(blogCategory.getDescription());
             itemView.setOnClickListener(view -> {
-                FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticlesFragment.newInstance(category.getCategoryId()));
+                FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticlesFragment.newInstance(blogCategory.getCategoryId()));
             });
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+
+            List<MaterialSimpleListItem> list = new ArrayList<>();
+            list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
+                    .content("编辑")
+                    .icon(R.mipmap.ic_edit)
+                    .build());
+            list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
+                    .content("删除")
+                    .icon(R.mipmap.icon_delete)
+                    .build());
+            final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(list)
+                    .setOnItemClickListener((dialog, index, item) -> {
+                        switch (index) {
+                            case 0 :
+                                CategoryDialogFragment dialogFragment = new CategoryDialogFragment(blogCategory);
+                                dialogFragment.show(FRSCApplicationContext.getBaseFragmentActivity().getSupportFragmentManager(), "s");
+                                break;
+                            case 1 :
+                                presenter.deleteBlogCategory(blogCategory);
+                                break;
+
+                        }
+
+                    });
+            new MaterialDialog.Builder(FRSCApplicationContext.getActivity()).adapter(adapter, null).show();
+
+            return false;
         }
     }
 }

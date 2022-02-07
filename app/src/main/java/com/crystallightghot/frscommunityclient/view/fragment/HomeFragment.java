@@ -16,15 +16,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,7 +39,6 @@ public class HomeFragment extends BaseFragment {
     TextView searchInputBox;
     @BindView(R.id.imageButton)
     ImageButton imageButton;
-
     @BindView(R.id.tabs)
     TabLayout tbSkatingType;
     @BindView(R.id.blog_more_list)
@@ -52,8 +50,6 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.contentViewPager)
     ViewPager2 contentViewPager;
 
-    private List<HomeViewPagerItemFragment> homeViewPagerItemFragments = new ArrayList<>();
-
     String[] tabTitles;
 
     public HomeFragment() {
@@ -61,8 +57,10 @@ public class HomeFragment extends BaseFragment {
     }
 
     public static HomeFragment newInstance(String str) {
-
-        return new HomeFragment();
+        if (null == homeFragment) {
+            homeFragment = new HomeFragment();
+        }
+        return homeFragment;
     }
 
 

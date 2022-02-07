@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.PutBlogContentContract;
 import com.crystallightghot.frscommunityclient.model.PutBlogContentModel;
 import com.crystallightghot.frscommunityclient.view.fragment.PutBlogContentFragment;
+import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
@@ -31,7 +32,6 @@ public class PutBlogContentPresenter implements PutBlogContentContract.Presenter
         this.view = putBlogContentFragment;
         model = new PutBlogContentModel();
         FRSCEventBusUtil.register(this);
-
     }
 
     public void addBlog(Blog blog) {
@@ -40,11 +40,16 @@ public class PutBlogContentPresenter implements PutBlogContentContract.Presenter
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
+        if (!(message.getMessageKey() instanceof RespondMessageKey)) {
+            return;
+        }
         switch ((RespondMessageKey) message.getMessageKey()) {
             case ADD_BLOG:
                 view.hideLoadingDialog();
                 if (message.isSuccess()) {
-                    XToastUtils.success("添加成功");
+                    XToastUtils.success(message.getMessage());
+                    BlogChangMessage blogChangMessage = new BlogChangMessage();
+                    FRSCEventBusUtil.sendMessage(blogChangMessage);
                 }else {
                     XToastUtils.error(message.getMessage());
                 }
@@ -60,8 +65,10 @@ public class PutBlogContentPresenter implements PutBlogContentContract.Presenter
                 Map<String, Object> data = (Map<String, Object>) message.getData();
                 BlogCategory blogCategory = (BlogCategory) data.get("blogCategory");
                 SkatingType skatingType = (SkatingType) data.get("skatingType");
-
-                Blog blog = new Blog();
+                Blog blog = view.getBlog();
+                if (null == blog) {
+                    blog = new Blog();
+                }
                 blog.setBlogTitle(view.getBlogTitle());
                 blog.setContent(view.getBlogContent());
                 User user = FRSCApplicationContext.getUser();

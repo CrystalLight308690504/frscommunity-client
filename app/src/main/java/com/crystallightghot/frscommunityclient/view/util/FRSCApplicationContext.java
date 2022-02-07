@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
+import androidx.appcompat.app.AppCompatActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -19,7 +20,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 
 public class FRSCApplicationContext {
 
-    private static Activity activity;
+    private static AppCompatActivity activity;
     private static MainActivity mainActivity;
     private static User user;
     private static BaseFragmentActivity baseFragmentActivity;
@@ -35,7 +36,7 @@ public class FRSCApplicationContext {
         return activity;
     }
 
-    public static void setActivity(Activity activity) {
+    public static void setActivity(AppCompatActivity activity) {
         FRSCApplicationContext.activity = activity;
     }
 
@@ -65,6 +66,7 @@ public class FRSCApplicationContext {
             return null;
         }
     }
+
 
 
 }

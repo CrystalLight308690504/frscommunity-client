@@ -27,7 +27,6 @@ import com.xuexiang.xui.widget.imageview.RadiusImageView;
  */
 public class MainActivity extends BaseFragmentActivity {
 
-
     @BindView(R.id.ibtnHome)
     ImageButton ibtnHome;
     @BindView(R.id.tvHome)
@@ -68,6 +67,7 @@ public class MainActivity extends BaseFragmentActivity {
         setItemTextColorNoClicked(tvBlog);
         setItemTextColorNoClicked(tvFounded);
         setItemTextColorNoClicked(tvSelf);
+        btnAdd.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -85,7 +85,6 @@ public class MainActivity extends BaseFragmentActivity {
         FRSCApplicationContext.setMainActivity(this);
         ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
         setItemTextColorClicked(tvHome);
-
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
         receiver = new HomeViewPagerItemScrollChangedReceiver(this);
@@ -115,6 +114,7 @@ public class MainActivity extends BaseFragmentActivity {
                 ibtnFounded.setBackground(getResourceDrawable(R.mipmap.home_founded_clicked));
                 setItemTextColorClicked(tvFounded);
                 FRSCFragmentUtil.intentToFragment(SomethingFoundFragment.newInstance("TAG:"), this, false);
+                btnAdd.setVisibility(View.GONE);
                 break;
             case R.id.btnHelpNeeded:
                 allBottomIconBeenDefaultState();
@@ -127,6 +127,7 @@ public class MainActivity extends BaseFragmentActivity {
                 allBottomIconBeenDefaultState();
                 ibtnSelf.setBackground(getResourceDrawable(R.mipmap.home_self_clicked));
                 setItemTextColorClicked(tvSelf);
+                btnAdd.setVisibility(View.GONE);
                 FRSCFragmentUtil.intentToFragment(MyFragment.newInstance("TAG:"), this, false);
                 break;
             default:
@@ -137,7 +138,6 @@ public class MainActivity extends BaseFragmentActivity {
     /**
      * 设置底部栏可见
      */
-
     public void bottomItemIsVisible(boolean isShowed) {
         if (isShowed) {
             bottomItem.setVisibility(View.VISIBLE);
@@ -160,7 +160,6 @@ public class MainActivity extends BaseFragmentActivity {
 
     /**
      * 获取
-     *
      * @param resourceId
      * @return
      */
@@ -193,11 +192,6 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     protected void onDestroy() {
         Log.d(TAG, "onRestart: ");
         super.onDestroy();
@@ -210,13 +204,11 @@ public class MainActivity extends BaseFragmentActivity {
     @OnClick(R.id.btnAdd)
     public void onClick() {
         showSimpleBottomSheetList();
-
     }
 
     // ================================ 生成不同类型的BottomSheet
     private void showSimpleBottomSheetList() {
         new BottomSheet.BottomListSheetBuilder(this)
-                .setTitle("添加")
                 .addItem("博客", "博客")
                 .addItem("求助", "求助")
                 .setIsCenter(true)

@@ -96,7 +96,7 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_my_help.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_my_help_questioned.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_my_question.xml" value="0.39947916666666666" />
-        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_put_blog.xml" value="0.3848958333333333" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_put_blog.xml" value="0.3397590361445783" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_put_blog_confirm.xml" value="0.39947916666666666" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_put_help_content.xml" value="0.31145833333333334" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/fragment_refresh_status_layout.xml" value="0.271875" />
@@ -120,6 +120,7 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_article_lists.xml" value="0.264" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_classsification_content.xml" value="0.3763586956521739" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_list.xml" value="0.19427558257345492" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_my_category.xml" value="0.1640625" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_my_classfication.xml" value="0.4" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_my_classsification_content.xml" value="0.3763586956521739" />
         <entry key="..\:/Workspaces/IDEAWorkspace/FRSCommunityClient/app/src/main/res/layout/recycle_item_my_package.xml" value="0.12470023980815348" />

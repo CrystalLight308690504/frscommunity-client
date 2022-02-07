@@ -1,10 +1,9 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.PixelFormat;
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Base64;
 
 /**
  * @author crystallightghost
@@ -41,6 +40,12 @@ public class FRSCImagePatternChangeUtil {
         // 重新绘制Bitmap
         Bitmap   bitmapAfter = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return bitmapAfter;
+    }
+
+    public static Drawable getDrawableFromBase64(String base64Image) {
+        byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return new BitmapDrawable(decodedByte);
     }
 
 }

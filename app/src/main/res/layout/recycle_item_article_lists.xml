@@ -4,6 +4,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="wrap_content"
+                                                   android:minHeight="65dp"
                                                    android:background="@drawable/bkd_round_solid_while_stroke_bottom_right_bule_gray"
                                                    android:layout_marginBottom="@dimen/distance_small"
                                                    android:padding="@dimen/distance_normal">
@@ -77,5 +78,6 @@
             app:layout_constraintTop_toTopOf="@id/article_title"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:visibility="gone"
             />
 </androidx.constraintlayout.widget.ConstraintLayout>

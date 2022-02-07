@@ -1,14 +1,14 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.MyBlogContract;
-import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.MyBlogModel;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticlesFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.MyBlogFragment;
+import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
+import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
-import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -20,6 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @Date 2022/2/4
@@ -27,9 +28,9 @@ import java.util.ArrayList;
  * @Version: 1.0
  * description：
  */
-public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBack {
+public class MyBlogPresenter implements MyBlogContract.Presenter{
 
-    MyBlogModel model;
+    MyBlogModel blogModel;
     MyBlogFragment view;
     ArticlesFragment articlesFragment;
 
@@ -38,12 +39,12 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
 
     public MyBlogPresenter(ArticlesFragment articlesFragment) {
         this.articlesFragment = articlesFragment;
-        model = new MyBlogModel();
+        blogModel = new MyBlogModel();
         FRSCEventBusUtil.register(this);
     }
 
     public MyBlogPresenter(MyBlogFragment view) {
-        model = new MyBlogModel();
+        blogModel = new MyBlogModel();
         this.view = view;
         FRSCEventBusUtil.register(this);
     }
@@ -52,7 +53,7 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
     public void loadingCategory() {
         view.showLoadingDialog();
         User user = FRSCApplicationContext.getUser();
-        model.loadingCategory(user.getUserId(), this);
+        blogModel.loadingCategory(user.getUserId());
     }
 
     /**
@@ -62,10 +63,16 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
-
-        switch ((MessageCode)message.getMessageKey()) {
-            case BLOG_CATEGORIES :
+        if (!(message.getMessageKey() instanceof RespondMessageKey)) {
+            return;
+        }
+        switch ((RespondMessageKey)message.getMessageKey()) {
+            case LOADING_BLOG_CATEGORIES:
+                if (null == view){
+                    return;
+                }
                 view.hideLoadingDialog();
+                blogCategories.clear();
                 if (message.isSuccess()) {
                     ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
@@ -81,7 +88,10 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
                     XToastUtils.error(message.getMessage());
                 }
                 break;
-            case LOADING_BLOGS_CALLBACK :
+            case LOADING_BLOGS:
+                if (null == articlesFragment) {
+                    return;
+                }
                 articlesFragment.hideLoadingDialog();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();
@@ -97,31 +107,32 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
                 if (message.isSuccess()) {
                     view.hideLoadingDialog();
                     XToastUtils.success("添加成功");
-                    view.loadingData(blogCategories);
+                    loadingCategory();
                 }else {
                     XToastUtils.error(message.getMessage());
                 }
 
                 break;
+            case MODIFY_CATEGORY:
+            case DELETE_CATEGORY :
+               if (message.isSuccess()) {
+                   loadingCategory();
+                   XToastUtils.success(message.getMessage());
+
+               }else {
+                   XToastUtils.error(message.getMessage());
+               }
+                break;
         }
 
     }
 
-    @Override
-    public void callBack(RequestResult requestResult) {
-        RequestMessage message = new RequestMessage(requestResult,MessageCode.BLOG_CATEGORIES);
-        FRSCEventBusUtil.sendMessage(message);
-    }
 
     public void loadingBlogs(Long categoryId) {
+
         articlesFragment.showLoadingDialog();
         User user = FRSCApplicationContext.getUser();
-        model.loadingBlogs(user.getUserId(), categoryId, this);
-    }
-
-    public void loadingBlogsCallBack(RequestResult requestResult) {
-        RequestMessage message = new RequestMessage(requestResult, MessageCode.LOADING_BLOGS_CALLBACK);
-        FRSCEventBusUtil.sendMessage(message);
+        blogModel.loadingBlogs(user.getUserId(), categoryId);
     }
 
     public void addBlogCategory(String categoryName, String description) {
@@ -131,14 +142,47 @@ public class MyBlogPresenter implements MyBlogContract.Presenter, RequestCallBac
         category.setCategoryName(categoryName);
         category.setDescription(description);
         category.setUser(user);
-        model.addBlogCategory(category);
-        blogCategories.add(category);
+        blogModel.addBlogCategory(category);
     }
 
-    public enum MessageCode {
-        LOADING_BLOGS_CALLBACK,
-        BLOG_CATEGORIES,
-        ADD_BLOG_CATEGORY
+    public void modifyBlogCategory(BlogCategory blogCategory) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        String blogCategoryJson = gson.toJson(blogCategory);
+        blogModel.modifyCategory(blogCategoryJson, RespondMessageKey.MODIFY_CATEGORY);
+    }
+
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void getMessage(TransportDataMessage message) {
+        if (message.getMessageKey() != RespondMessageKey.CATEGORY_DIALOG) {
+            return;
+        }
+        Object data = message.getData();
+        if (data instanceof Map) {
+          Map map = (Map) data;
+            String categoryName = (String) map.get("categoryName");
+            String description = (String) map.get("description");
+            addBlogCategory(categoryName, description);
+        } else if (data instanceof BlogCategory) {
+            BlogCategory blogCategory = (BlogCategory) data;
+            modifyBlogCategory(blogCategory);
+        }
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(BlogChangMessage message ) {
+        if (articlesFragment == null) {
+            return;
+        }
+        articlesFragment.initView();
+    }
+
+    public enum RespondMessageKey {
+        LOADING_BLOGS,
+        LOADING_BLOG_CATEGORIES,
+        ADD_BLOG_CATEGORY,
+        MODIFY_CATEGORY,
+        DELETE_CATEGORY,
+        CATEGORY_DIALOG
     }
 
 }

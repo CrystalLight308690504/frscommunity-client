@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
+import androidx.annotation.NonNull;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
@@ -114,7 +115,7 @@ public class FRSCOKHttp3RequestUtil {
         FRSCThreadPoolUtil.executeThread(runnable);
     }
 
-    public static void postRequestWithBodyJson(String url, String jsonBody, RequestCallBack callback) {
+    public static void postRequestWithBodyJson(String url,@NonNull String jsonBody, RequestCallBack callback) {
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
@@ -153,9 +154,9 @@ public class FRSCOKHttp3RequestUtil {
      *
      * @param url  请求路径
      * @param jsonBody 请求体
-     * @param respondKey 获取请求url结果的的消息的唯一编码
+     * @param respondMessageKey 获取请求url结果的的消息的唯一编码
      */
-    public static void callPostRequest(String url, String jsonBody,Object respondKey) {
+    public static void callPostRequest(String url, @NonNull String jsonBody, Object respondMessageKey) {
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
@@ -180,11 +181,11 @@ public class FRSCOKHttp3RequestUtil {
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
-                message = new RequestMessage<>(requestResult,respondKey);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
             } catch (IOException e) {
                 e.printStackTrace();
                 RequestResult requestResult = new RequestResult(false, 404, "(ಥ﹏ಥ)服务器跑路了", null);
-                message = new RequestMessage<>(requestResult,respondKey);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
 
             }
             FRSCEventBusUtil.sendMessage(message);
@@ -192,7 +193,7 @@ public class FRSCOKHttp3RequestUtil {
         FRSCThreadPoolUtil.executeThread(runnable);
     }
 
-    public static void callGetRequest(String url, Object respondKey) {
+    public static void callGetRequest(String url, Object respondMessageKey) {
 
         User user = FRSCApplicationContext.getUser();
         String head = "";
@@ -215,15 +216,90 @@ public class FRSCOKHttp3RequestUtil {
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 // 获取返回结果信息
                 RequestResult requestResult = gson.fromJson(string, RequestResult.class);
-                message = new RequestMessage<>(requestResult,respondKey);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
             } catch (IOException e) {
                 e.printStackTrace();
                 RequestResult requestResult = new RequestResult(false, 404, "(ಥ﹏ಥ)服务器跑路了", null);
-                message = new RequestMessage<>(requestResult,respondKey);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
 
             }
             FRSCEventBusUtil.sendMessage(message);
         };
         FRSCThreadPoolUtil.executeThread(runnable);
+    }
+
+    public static void callDeleteRequest(String url, String jsonBody, Object respondMessageKey) {
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
+        User user = FRSCApplicationContext.getUser();
+        String head = "";
+        if (null != user) {
+            head = user.getSessionId();
+        }
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .delete(requestBody)
+                .addHeader("Authorization", "FRSC" + head)
+                .url(url)
+                .build();
+
+        Runnable runnable = () -> {
+            RequestMessage message;
+            try {
+                Response response = client.newCall(request).execute();
+                String string = response.body().string();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                // 获取返回结果信息
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
+            } catch (IOException e) {
+                e.printStackTrace();
+                RequestResult requestResult = new RequestResult(false, 404, "(ಥ﹏ಥ)服务器跑路了", null);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
+
+            }
+            FRSCEventBusUtil.sendMessage(message);
+        };
+        FRSCThreadPoolUtil.executeThread(runnable);
+
+    }
+
+    public static void callPutRequest(String url, String jsonBody, Object respondMessageKey) {
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(mediaType, jsonBody);
+        User user = FRSCApplicationContext.getUser();
+        String head = "";
+        if (null != user) {
+            head = user.getSessionId();
+        }
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .put(requestBody)
+                .addHeader("Authorization", "FRSC" + head)
+                .url(url)
+                .build();
+
+        Runnable runnable = () -> {
+            RequestMessage message;
+            try {
+                Response response = client.newCall(request).execute();
+                String string = response.body().string();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                // 获取返回结果信息
+                RequestResult requestResult = gson.fromJson(string, RequestResult.class);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
+            } catch (IOException e) {
+                e.printStackTrace();
+                RequestResult requestResult = new RequestResult(false, 404, "(ಥ﹏ಥ)服务器跑路了", null);
+                message = new RequestMessage<>(requestResult,respondMessageKey);
+
+            }
+            FRSCEventBusUtil.sendMessage(message);
+        };
+        FRSCThreadPoolUtil.executeThread(runnable);
+
     }
 }

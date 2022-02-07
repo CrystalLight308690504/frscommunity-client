@@ -51,14 +51,13 @@ public class ArticlesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_articles, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
-    private void initView() {
+    public void initView() {
         loadingData(categoryId);
     }
 
@@ -69,5 +68,6 @@ public class ArticlesFragment extends BaseFragment {
     public void addDataToList(ArrayList<Blog> blogs) {
         articles.setAdapter(new ArticlesAdapter(blogs));
     }
+
 
 }

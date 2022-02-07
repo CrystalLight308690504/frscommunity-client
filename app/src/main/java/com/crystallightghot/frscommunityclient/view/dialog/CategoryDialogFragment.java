@@ -12,7 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
 import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.android.material.textfield.TextInputEditText;
@@ -27,9 +29,9 @@ import java.util.TreeMap;
  * @Version: 1.0
  * description：
  */
-public class AddCategoryDialogFragment extends DialogFragment {
+public class CategoryDialogFragment extends DialogFragment {
 
-
+    private BlogCategory category;
     @BindView(R.id.btnCancel)
     Button btnCancel;
     @BindView(R.id.ieCategoryName)
@@ -39,6 +41,13 @@ public class AddCategoryDialogFragment extends DialogFragment {
     @BindView(R.id.btnPosition)
     Button btnPosition;
 
+    public CategoryDialogFragment() {
+    }
+
+    public CategoryDialogFragment(BlogCategory category) {
+        this.category = category;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -47,11 +56,15 @@ public class AddCategoryDialogFragment extends DialogFragment {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_add_classification, null);
         ButterKnife.bind(this, view);
         builder.setView(view);
-        init();
+        initView();
         return builder.create();
     }
 
-    private void init() {
+    private void initView() {
+        if (null != category) {
+            ieCategoryName.setText(category.getCategoryName());
+            ieDescription.setText(category.getDescription());
+        }
     }
 
     @OnClick({R.id.btnCancel, R.id.btnPosition})
@@ -60,20 +73,29 @@ public class AddCategoryDialogFragment extends DialogFragment {
             case R.id.btnCancel:
                 dismiss();
                 break;
-             case R.id.btnPosition:
+            case R.id.btnPosition:
 
-                 String categoryName = ieCategoryName.getText().toString();
-                 String description = ieDescription.getText().toString();
-                 if (StringUtil.isEmpty(categoryName)) {
-                     XToastUtils.info("请填写分类名字");
-                     return;
-                 }
-                 Map<String, String> data = new TreeMap();
-                 data.put("categoryName", categoryName);
-                 data.put("description", description);
-                 TransportDataMessage transportDataMessage = new TransportDataMessage(data,this);
-                 FRSCEventBusUtil.sendMessage(transportDataMessage);
+                String categoryName = ieCategoryName.getText().toString();
+                String description = ieDescription.getText().toString();
+                if (StringUtil.isEmpty(categoryName)) {
+                    XToastUtils.info("请填写分类名字");
+                    return;
+                }
 
+                Object data;
+                if (null != category) {
+                    category.setCategoryName(categoryName);
+                    category.setDescription(description);
+                    data = category;
+                }else {
+                    Map<String, String> map = new TreeMap();
+                    map.put("categoryName", categoryName);
+                    map.put("description", description);
+                    data = map;
+                }
+
+                TransportDataMessage transportDataMessage = new TransportDataMessage(data, MyBlogPresenter.RespondMessageKey.CATEGORY_DIALOG);
+                FRSCEventBusUtil.sendMessage(transportDataMessage);
                 dismiss();
                 break;
             default:

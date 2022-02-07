@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.dialog.AddCategoryDialogFragment;
+import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +42,7 @@ public class MyQuestionFragment extends Fragment {
     DialogFragment dialogFragment;
 
     public MyQuestionFragment() {
-        dialogFragment = new AddCategoryDialogFragment();
+        dialogFragment = new CategoryDialogFragment();
         FRSCEventBusUtil.register(this);
         // Required empty public constructor
     }

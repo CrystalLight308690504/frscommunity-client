@@ -2,7 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="XUITheme.Phone">
-            <item name="android:textColor">@color/default_displayed_text_gray</item>
+            <item name="android:textColor">@color/color_black</item>
     </style>
 
     <style name="PullDownStyle">

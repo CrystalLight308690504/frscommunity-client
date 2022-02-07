@@ -15,15 +15,11 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapter;
-import com.crystallightghot.frscommunityclient.view.dialog.AddCategoryDialogFragment;
-import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
+import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +28,7 @@ import java.util.Map;
  */
 public class MyBlogFragment extends BaseFragment {
 
-    AddCategoryDialogFragment dialogFragment;
+    CategoryDialogFragment dialogFragment;
     private static final String ARG_PARAM1 = "param1";
 
     Activity activity;
@@ -48,7 +44,6 @@ public class MyBlogFragment extends BaseFragment {
 
     public MyBlogFragment() {
         presenter = new MyBlogPresenter(this);
-        FRSCEventBusUtil.register(this);
     }
 
     public static MyBlogFragment newInstance(String param1) {
@@ -88,26 +83,21 @@ public class MyBlogFragment extends BaseFragment {
                 activity.onBackPressed();
                 break;
             case R.id.btnAddPackage:
-                dialogFragment = new AddCategoryDialogFragment();
+                dialogFragment = new CategoryDialogFragment();
                 dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
                 break;
         }
     }
 
     public void loadingData(List<BlogCategory> blogCategories) {
-
         MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories);
         rvMyBlogs.setAdapter(adapter);
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
-    public void getMessage(TransportDataMessage message) {
-        if (message.getMessageKey() != dialogFragment) {
-            return;
-        }
-        Map data = (Map) message.getData();
-        String categoryName = (String) data.get("categoryName");
-        String description = (String) data.get("description");
-        presenter.addBlogCategory(categoryName, description);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        FRSCEventBusUtil.unregister(presenter);
     }
+
 }

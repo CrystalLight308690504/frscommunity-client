@@ -6,16 +6,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.PutBlogContentPresenter;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.android.material.textfield.TextInputEditText;
 import com.nanchen.compresshelper.StringUtil;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @Author crystalLightGhost
@@ -42,7 +45,9 @@ public class PutBlogContentFragment extends BaseFragment {
     String blogTitle;
     @Getter
     String blogContent;
-
+    @Getter
+    @Setter
+    private  Blog blog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -52,10 +57,23 @@ public class PutBlogContentFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public PutBlogContentFragment(Blog blog) {
+        this.blog = blog;
+        presenter = new PutBlogContentPresenter(this);
+        // Required empty public constructor
+    }
+
     public static PutBlogContentFragment newInstance(String param1) {
         PutBlogContentFragment fragment = new PutBlogContentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static Fragment newInstance(Blog blog) {
+        PutBlogContentFragment fragment = new PutBlogContentFragment(blog);
+        Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,7 +92,15 @@ public class PutBlogContentFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_put_blog, container, false);
         ButterKnife.bind(this, view);
+        initView();
         return view;
+    }
+
+    public void initView() {
+        if (null != blog) {
+            ieTitle.setText(blog.getBlogTitle());
+            ieContent.setText(blog.getContent());
+        }
     }
 
     @OnClick({R.id.btn_back, R.id.btnPosition})

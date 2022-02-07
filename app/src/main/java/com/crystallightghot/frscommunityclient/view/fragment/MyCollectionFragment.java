@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.dialog.AddCategoryDialogFragment;
+import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +29,6 @@ import java.util.Map;
 public class MyCollectionFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-
     Activity activity;
     @BindView(R.id.btnBack)
     ImageView btnBack;
@@ -39,16 +38,14 @@ public class MyCollectionFragment extends Fragment {
     RecyclerView rvMyBlogs;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
-    AddCategoryDialogFragment dialogFragment;
-
+    CategoryDialogFragment dialogFragment;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
 
     public MyCollectionFragment() {
-        dialogFragment = new AddCategoryDialogFragment();
+        dialogFragment = new CategoryDialogFragment();
         FRSCEventBusUtil.register(this);
-        // Required empty public constructor
     }
 
     public static MyCollectionFragment newInstance(String param1) {
@@ -70,7 +67,6 @@ public class MyCollectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine_blog, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -80,7 +76,6 @@ public class MyCollectionFragment extends Fragment {
     private void init() {
         activity = getActivity();
         tvTitle.setText("我的收藏");
-
 
     }
 
@@ -104,6 +99,7 @@ public class MyCollectionFragment extends Fragment {
         Map data = (Map) message.getData();
         String categoryName = (String) data.get("categoryName");
         String description = (String) data.get("description");
+
     }
 
 }
