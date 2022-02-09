@@ -32,7 +32,7 @@ public enum RequstIO {
     DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory", "9003"),
     MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory","9003" );
 
-    private String host = "http://192.168.1.100:";
+    private String host = "http://192.168.0.100:";
 //    private String host = "http://42.194.211.199:";
     private String port;
     private String requestInterface;

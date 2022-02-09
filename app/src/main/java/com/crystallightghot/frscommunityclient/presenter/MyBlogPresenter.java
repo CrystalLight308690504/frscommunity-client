@@ -51,7 +51,6 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
 
 
     public void loadingCategory() {
-        view.showLoadingDialog();
         User user = FRSCApplicationContext.getUser();
         blogModel.loadingCategory(user.getUserId());
     }
@@ -71,7 +70,6 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
                 if (null == view){
                     return;
                 }
-                view.hideLoadingDialog();
                 blogCategories.clear();
                 if (message.isSuccess()) {
                     ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();
@@ -86,6 +84,7 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
                     view.loadingData(blogCategories);
                 } else {
                     XToastUtils.error(message.getMessage());
+                    view.showError();
                 }
                 break;
             case LOADING_BLOGS:
@@ -129,7 +128,6 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
 
 
     public void loadingBlogs(Long categoryId) {
-
         articlesFragment.showLoadingDialog();
         User user = FRSCApplicationContext.getUser();
         blogModel.loadingBlogs(user.getUserId(), categoryId);

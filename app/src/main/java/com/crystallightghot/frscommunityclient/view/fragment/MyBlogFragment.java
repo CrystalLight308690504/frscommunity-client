@@ -18,6 +18,9 @@ import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycl
 import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xuexiang.xui.utils.ViewUtils;
+import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
 import java.util.List;
 
@@ -40,6 +43,12 @@ public class MyBlogFragment extends BaseFragment {
     RecyclerView rvMyBlogs;
 
     MyBlogPresenter presenter;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ll_stateful)
+    StatefulLayout llStateful;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     private String mParam1;
 
     public MyBlogFragment() {
@@ -73,7 +82,16 @@ public class MyBlogFragment extends BaseFragment {
 
     private void init() {
         activity = getActivity();
-        presenter.loadingCategory();
+        refreshLayout.autoRefresh();
+        //下拉刷新
+        ViewUtils.setViewsFont(refreshLayout);
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            presenter.loadingCategory();
+            });
+        //上拉加载
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            presenter.loadingCategory();
+        });
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
@@ -92,6 +110,11 @@ public class MyBlogFragment extends BaseFragment {
     public void loadingData(List<BlogCategory> blogCategories) {
         MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories);
         rvMyBlogs.setAdapter(adapter);
+        refreshLayout.resetNoMoreData();
+        refreshLayout.setEnableLoadMore(true);
+        llStateful.showContent();
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
     }
 
     @Override
@@ -99,5 +122,18 @@ public class MyBlogFragment extends BaseFragment {
         super.onDestroy();
         FRSCEventBusUtil.unregister(presenter);
     }
+
+    private void showOffline() {
+        llStateful.showOffline(v -> refreshLayout.autoRefresh());
+        refreshLayout.setEnableLoadMore(false);
+    }
+
+    public void showError() {
+        llStateful.showError(v -> refreshLayout.autoRefresh());
+        refreshLayout.setEnableLoadMore(false);
+        refreshLayout.finishRefresh();
+
+    }
+
 
 }

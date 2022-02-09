@@ -12,6 +12,9 @@ import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.ArticlesAdapter;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xuexiang.xui.utils.ViewUtils;
+import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,10 @@ public class ArticlesFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.articles)
     RecyclerView articles;
+    @BindView(R.id.ll_stateful)
+    StatefulLayout llStateful;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     public ArticlesFragment(Long categoryId) {
         this.categoryId = categoryId;
@@ -58,7 +65,12 @@ public class ArticlesFragment extends BaseFragment {
     }
 
     public void initView() {
-        loadingData(categoryId);
+        refreshLayout.autoRefresh();
+        //下拉刷新
+        ViewUtils.setViewsFont(refreshLayout);
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            loadingData(categoryId);
+        });
     }
 
     public void loadingData(Long categoryId) {
@@ -66,6 +78,15 @@ public class ArticlesFragment extends BaseFragment {
     }
 
     public void addDataToList(ArrayList<Blog> blogs) {
+        refreshLayout.finishRefresh();
+        if (blogs.size() == 0) {
+            llStateful.showEmpty();
+            refreshLayout.setEnableLoadMore(false);
+            return;
+        }
+        refreshLayout.resetNoMoreData();
+        refreshLayout.setEnableLoadMore(true);
+        llStateful.showContent();
         articles.setAdapter(new ArticlesAdapter(blogs));
     }
 

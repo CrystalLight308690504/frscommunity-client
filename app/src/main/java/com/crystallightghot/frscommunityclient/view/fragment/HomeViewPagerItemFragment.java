@@ -109,7 +109,6 @@ public class HomeViewPagerItemFragment extends Fragment {
 
         rvLists.setAdapter(new HomeRecyclerViewAdapter(getActivity(), dataAll));
 
-
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
