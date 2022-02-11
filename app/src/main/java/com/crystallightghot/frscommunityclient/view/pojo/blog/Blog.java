@@ -28,7 +28,7 @@ public class Blog {
 
     private Blog nextContent;
 
-    private Long rightId;
+    private Long rightId = 1L;
 
     private Timestamp createdTime;
 

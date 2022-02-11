@@ -8,19 +8,19 @@ import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.BlogViewPagerItemFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.BlogRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
+import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class HomeViewPagerItemFragment extends Fragment {
+public class BlogViewPagerItemFragment extends BaseFragment {
 
     @BindView(R.id.rv_lists)
     RecyclerView rvLists;
@@ -38,17 +38,14 @@ public class HomeViewPagerItemFragment extends Fragment {
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
 
-    public HomeViewPagerItemFragment() {
+    SkatingType skatingType;
+    BlogViewPagerItemFragmentPresenter presenter;
+    public BlogViewPagerItemFragment() {
     }
 
-
-    List<HashMap> dataAll;
-
-    public HomeViewPagerItemFragment(String label, List<HashMap> dataAll) {
-        this.dataAll = dataAll;
-        Bundle args = new Bundle();
-        args.putString("label", label);
-        setArguments(args);
+    public BlogViewPagerItemFragment(SkatingType skatingType) {
+        presenter = new BlogViewPagerItemFragmentPresenter(this);
+        this.skatingType = skatingType;
     }
 
     private void addRecycleViewScrolledListener() {
@@ -84,60 +81,30 @@ public class HomeViewPagerItemFragment extends Fragment {
 
     private void init() {
         addRecycleViewScrolledListener();
+        presenter.loadingBlogs(skatingType);
     }
 
     /**
      * 将数据加入到RecycleView中
      */
-    public void putDataToRV(List dataAll) {
-        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (null == dataAll) {
-            dataAll = new LinkedList<>();
-        }
-
-        for (int i = 0; i < 20; i++) {
-            HashMap<Object, Object> data = new HashMap();
-            data.put("userName", "crystallightghost");
-            data.put("putDate", "2020-10-3");
-            data.put("articleStyle", "博客");
-            data.put("articleTitle", "轮滑" + i);
-            data.put("articleContent", "轮滑的地方轮滑的地方轮滑的地方轮滑的地方轮滑的地方" + i);
-            dataAll.add(data);
-        }
-
-        rvLists.setAdapter(new BlogRecyclerViewAdapter(getActivity(), dataAll));
+    public void loadData(List<Blog> blogs) {
 
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
-        refreshLayout.setOnRefreshListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
-            Status status = getRefreshStatus();
-            switch (status) {
-                case SUCCESS:
-                    refreshLayout.resetNoMoreData();//setNoMoreData(false);
-                    llStateful.showContent();
-                    refreshLayout.setEnableLoadMore(true);
-                    break;
-                case EMPTY:
-                    llStateful.showEmpty();
-                    refreshLayout.setEnableLoadMore(false);
-                    break;
-                case ERROR:
-                    showError();
-                    break;
-                case NO_NET:
-                    showOffline();
-                    break;
-                default:
-                    break;
-            }
-            refreshLayout.finishRefresh();
-        }, 2000));
+        refreshLayout.setOnRefreshListener(refreshLayout ->{
+            presenter.loadingBlogs(skatingType);
+        });
         //上拉加载
-        refreshLayout.setOnLoadMoreListener(refreshLayout -> refreshLayout.getLayout().postDelayed(() -> {
-            refreshLayout.finishLoadMore();
-
-        }, 2000));
-//        refreshLayout.autoRefresh();//第一次进入触发自动刷新，演示效果
+        refreshLayout.setOnLoadMoreListener(refreshLayout ->{
+            presenter.loadingBlogs(skatingType);
+        });
+        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvLists.setAdapter(new BlogRecyclerViewAdapter(getActivity(), blogs));
+        refreshLayout.resetNoMoreData();
+        refreshLayout.setEnableLoadMore(true);
+        llStateful.showContent();
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
     }
 
     private void showOffline() {
@@ -148,26 +115,6 @@ public class HomeViewPagerItemFragment extends Fragment {
     private void showError() {
         llStateful.showError(v -> refreshLayout.autoRefresh());
         refreshLayout.setEnableLoadMore(false);
-    }
-
-    public enum Status {
-        SUCCESS,
-        EMPTY,
-        ERROR,
-        NO_NET,
-    }
-
-    private Status getRefreshStatus() {
-        return Status.SUCCESS;
-//        int status = (int) (Math.random() * 10);
-//        if (status % 2 == 0) {
-//        } else if (status % 3 == 0) {
-//            return Status.EMPTY;
-//        } else if (status % 5 == 0) {
-//            return Status.ERROR;
-//        } else {
-//            return Status.NO_NET;
-//        }
     }
 
 }

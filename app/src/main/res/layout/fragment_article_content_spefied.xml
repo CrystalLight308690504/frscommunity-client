@@ -51,8 +51,18 @@
             android:id="@+id/articleType"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/profile"
-            app:layout_constraintLeft_toLeftOf="@id/profile"
+            app:layout_constraintRight_toRightOf="parent"
+
             android:text="博文贴"
+            android:textSize="12dp"
+            android:textColor="@color/default_displayed_text_gray"
+            android:layout_marginTop="@dimen/distance_small"/>
+    <TextView
+            android:id="@+id/articleSkatingType"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/profile"
+            app:layout_constraintLeft_toLeftOf="@id/profile"
+            android:text="轮滑类型"
             android:textSize="12dp"
             android:textColor="@color/applicationMainTheme"
             android:layout_marginTop="@dimen/distance_small"/>
@@ -79,7 +89,7 @@
               android:visibility="gone"
               android:id="@+id/btnModify"
     />
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -118,15 +128,35 @@
                                                            app:layout_constraintTop_toTopOf="parent"
                                                            android:id="@+id/btnLove"
                 />
+                <com.google.android.material.textfield.TextInputEditText android:layout_width="300dp"
+                                                                         android:layout_height="wrap_content"
+                                                                         app:layout_constraintTop_toBottomOf="@id/btnLove"
+                                                                         android:background="@drawable/bkd_input_edit_text"
+                                                                         android:hint="这里写你的评论"
+                                                                         android:inputType="textMultiLine"
+                                                                         android:padding="@dimen/distance_small"
+                                                                         android:id="@+id/ieCriticism"
+                                                                         app:layout_constraintStart_toStartOf="parent"
+                                                                         />
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:id="@+id/btnCriticism"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ieCriticism"
+                        android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+                        android:text="评论"
+                        android:layout_marginRight="@dimen/distance_normal"
+                        />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/articleComments"
+                    android:id="@+id/articleCriticism"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
             />
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

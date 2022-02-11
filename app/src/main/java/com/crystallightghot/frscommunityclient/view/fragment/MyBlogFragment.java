@@ -132,7 +132,6 @@ public class MyBlogFragment extends BaseFragment {
         llStateful.showError(v -> refreshLayout.autoRefresh());
         refreshLayout.setEnableLoadMore(false);
         refreshLayout.finishRefresh();
-
     }
 
 

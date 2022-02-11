@@ -3,32 +3,30 @@ package com.crystallightghot.frscommunityclient.view.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.BlogViewPagerItemFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 
 import java.util.ArrayList;
 
 /**
- * @author crystallightghost
- * @date 2022/1/5
+ * @Date 2022/2/11
+ * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-
-public class HomeViewPagerAdapter extends FragmentStateAdapter {
+public class BlogViewPagerAdapter extends FragmentStateAdapter {
     ArrayList<SkatingType> skatingTypes;
 
-    public HomeViewPagerAdapter(HomeFragment fragment, ArrayList<SkatingType> skatingTypes) {
-        super(fragment);
+    public BlogViewPagerAdapter(BlogFragment blogFragment, ArrayList<SkatingType> skatingTypes) {
+        super(blogFragment);
         this.skatingTypes = skatingTypes;
     }
-
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new  HomeViewPagerItemFragment();
+        return new BlogViewPagerItemFragment(skatingTypes.get(position));
     }
 
     @Override

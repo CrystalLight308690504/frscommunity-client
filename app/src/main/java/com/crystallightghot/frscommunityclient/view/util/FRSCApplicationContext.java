@@ -9,7 +9,10 @@ import android.util.Base64;
 import androidx.appcompat.app.AppCompatActivity;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
+import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+
+import java.util.List;
 
 /**
  * @Date 2022/1/21
@@ -24,10 +27,12 @@ public class FRSCApplicationContext {
     private static MainActivity mainActivity;
     private static User user;
     private static BaseFragmentActivity baseFragmentActivity;
+    private static List<SkatingType> skatingTypes;
 
     public static MainActivity getMainActivity() {
         return mainActivity;
     }
+
     public static void setMainActivity(MainActivity mainActivity) {
         FRSCApplicationContext.mainActivity = mainActivity;
     }
@@ -48,6 +53,14 @@ public class FRSCApplicationContext {
         FRSCApplicationContext.baseFragmentActivity = baseFragmentActivity;
     }
 
+    public static List<SkatingType> getSkatingTypes() {
+        return skatingTypes;
+    }
+
+    public static void setSkatingTypes(List<SkatingType> skatingTypes) {
+        FRSCApplicationContext.skatingTypes = skatingTypes;
+    }
+
     public static User getUser() {
         return user;
     }
@@ -66,7 +79,6 @@ public class FRSCApplicationContext {
             return null;
         }
     }
-
 
 
 }

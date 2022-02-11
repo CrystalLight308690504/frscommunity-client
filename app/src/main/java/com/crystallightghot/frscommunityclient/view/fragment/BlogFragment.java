@@ -11,18 +11,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.BlogPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.MainActivity;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.BlogViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class BlogFragment extends BaseFragment {
 
-    String[] tabTitles;
     private static final String ARG_PARAM1 = "param1";
     Unbinder bind;
     @BindView(R.id.tbSkatingTypes)
@@ -36,10 +37,12 @@ public class BlogFragment extends BaseFragment {
     ImageButton btnSearch;
     @BindView(R.id.contentViewPager)
     ViewPager2 contentViewPager;
-    private List<HomeViewPagerItemFragment> fragments;
+
+    BlogPresenter presenter;
+    private String[] skatingTypesName;
 
     public BlogFragment() {
-        // Required empty public constructor
+        presenter = new BlogPresenter(this);
     }
 
     public static BlogFragment newInstance(String param1) {
@@ -53,26 +56,22 @@ public class BlogFragment extends BaseFragment {
         return blogFragment;
     }
 
-    private void init() {
-        tabTitles = getResources().getStringArray(R.array.skatingType);
-        setViewPages(null);
-    }
-
-
-    private void setViewPages(List<View> views) {
-        contentViewPager.setAdapter(new HomeViewPagerAdapter(this));
-        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(tabTitles[position])
+    public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {
+        this.skatingTypesName = skatingTypesName;
+        contentViewPager.setAdapter(new BlogViewPagerAdapter(this,skatingTypes));
+        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(skatingTypesName[position])
         ).attach();
-
+    }
+    private void ladingSkatingType() {
+        presenter.loadingSkatingType();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blog, container, false);
         bind = ButterKnife.bind(this, view);
-        init();
+        ladingSkatingType();
         return view;
     }
 
@@ -81,7 +80,6 @@ public class BlogFragment extends BaseFragment {
         bind.unbind();
         super.onDestroy();
     }
-
 
     @OnClick({R.id.blog_more_list, R.id.btnSearch})
     public void onClick(View view) {

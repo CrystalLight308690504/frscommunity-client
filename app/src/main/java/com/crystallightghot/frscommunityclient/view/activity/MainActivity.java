@@ -14,9 +14,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.broadcast.HomeViewPagerItemScrollChangedReceiver;
 import com.crystallightghot.frscommunityclient.view.fragment.*;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
@@ -160,6 +160,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     /**
      * 获取
+     *
      * @param resourceId
      * @return
      */

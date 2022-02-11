@@ -16,15 +16,17 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.HomeFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.adapter.HomeViewPagerAdapter;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 /**
@@ -40,7 +42,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.imageButton)
     ImageButton imageButton;
     @BindView(R.id.tabs)
-    TabLayout tbSkatingType;
+    TabLayout tbSkatingTypes;
     @BindView(R.id.blog_more_list)
     ImageButton blogMoreList;
 
@@ -49,11 +51,12 @@ public class HomeFragment extends BaseFragment {
     static HomeFragment homeFragment;
     @BindView(R.id.contentViewPager)
     ViewPager2 contentViewPager;
+    String[] skatingTypesName;
 
-    String[] tabTitles;
-
+    HomeFragmentPresenter presenter;
     public HomeFragment() {
-        // Required empty public constructor
+        presenter = new HomeFragmentPresenter(this);
+
     }
 
     public static HomeFragment newInstance(String str) {
@@ -63,19 +66,16 @@ public class HomeFragment extends BaseFragment {
         return homeFragment;
     }
 
-
-    private void init() {
+    public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {
+        this.skatingTypesName = skatingTypesName;
         activity = (AppCompatActivity) getActivity();
-        tabTitles = activity.getResources().getStringArray(R.array.skatingType);
+        contentViewPager.setAdapter(new HomeViewPagerAdapter(this,skatingTypes));
+        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(skatingTypesName[position])
+        ).attach();
     }
 
-    /**
-     * @param views
-     */
-    private void addDateToViewPager(List<View> views) {
-        contentViewPager.setAdapter(new HomeViewPagerAdapter(this));
-        new TabLayoutMediator(tbSkatingType, contentViewPager, (tab, position) -> tab.setText(tabTitles[position])
-        ).attach();
+    private void ladingSkatingType() {
+            presenter.loadingSkatingType();
     }
 
     @OnClick({R.id.blog_more_list, R.id.search_input_box})
@@ -104,10 +104,11 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bind = ButterKnife.bind(this, view);
-        init();
-        addDateToViewPager(null);
+        ladingSkatingType();
         return view;
     }
+
+
 
     @Override
     public void onDestroy() {
@@ -115,5 +116,6 @@ public class HomeFragment extends BaseFragment {
         if (bind != null) {
             bind.unbind();
         }
+        FRSCEventBusUtil.unregister(presenter);
     }
 }

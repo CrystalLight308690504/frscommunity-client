@@ -1,6 +1,10 @@
 package com.crystallightghot.frscommunityclient.view.adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author crystallightghost
@@ -24,15 +27,15 @@ import java.util.Map;
  * @Version: 1.0
  * description：
  */
-public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.MyViewHolder> {
+public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerViewAdapter.MyViewHolder> {
 
     Activity activity;
-    List<HashMap<Object, Object>> datas;
+    List<Blog> blogs;
 
 
-    public HomeRecyclerViewAdapter(Activity activity, List<HashMap<Object, Object>> datas) {
+    public BlogRecyclerViewAdapter(Activity activity, List<Blog> blogs) {
         this.activity = activity;
-        this.datas = datas;
+        this.blogs = blogs;
     }
 
     @NotNull
@@ -45,13 +48,13 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Map<Object, Object> data = datas.get(position);
-        holder.setData(data);
+        Blog blog = blogs.get(position);
+        holder.setData(blog);
     }
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return blogs.size();
     }
 
 
@@ -67,7 +70,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         @BindView(R.id.image1)
         RadiusImageView image1;
         View itemView;
-
+        Blog blog;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
@@ -81,20 +84,22 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(""));
+                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(blog));
                 }
             });
         }
 
-        public void setData(Map<Object, Object> data) {
-            data.get("userProfile");
-            data.get("imageView1");
-            data.get("imageView2");
-            userNameTV.setText(data.get("userName").toString());
-            putDateTV.setText(data.get("putDate").toString());
-            articleStyle.setText(data.get("articleStyle").toString());
-            articleTitleTV.setText(data.get("articleTitle").toString());
-            articleContentTV.setText(data.get("articleContent").toString());
+        public void setData(Blog blog) {
+            this.blog = blog;
+            String profileBase64 = blog.getUser().getProfile();
+            byte[] decodedString = Base64.decode(profileBase64, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profile.setImageDrawable(new BitmapDrawable(decodedByte));
+            userNameTV.setText(blog.getUser().getUserName());
+            putDateTV.setText(blog.getCreatedTime().toString());
+            articleStyle.setText(blog.getSkatingType().getName());
+            articleTitleTV.setText(blog.getBlogTitle());
+            articleContentTV.setText(blog.getContent());
         }
     }
 }

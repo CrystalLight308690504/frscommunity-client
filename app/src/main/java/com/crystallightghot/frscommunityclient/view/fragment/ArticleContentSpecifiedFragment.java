@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCImagePatternChangeUtil;
+import com.google.android.material.textfield.TextInputEditText;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -53,19 +55,24 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     TextView btnReport;
     @BindView(R.id.btnLove)
     AppCompatButton btnLove;
-    @BindView(R.id.articleComments)
+    @BindView(R.id.articleCriticism)
     RecyclerView articleComments;
     @BindView(R.id.profile)
     RadiusImageView profile;
     @BindView(R.id.btnModify)
     TextView btnModify;
+    @BindView(R.id.ieCriticism)
+    TextInputEditText ieCriticism;
+    @BindView(R.id.btnCriticism)
+    Button btnCriticism;
+    @BindView(R.id.articleSkatingType)
+    TextView articleSkatingType;
     private Blog blog;
     private User user;
     private SkatingType skatingType;
 
     public ArticleContentSpecifiedFragment() {
         FRSCEventBusUtil.register(this);
-        // Required empty public constructor
     }
 
     public ArticleContentSpecifiedFragment(@NonNull Blog blog) {
@@ -74,12 +81,10 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         this.user = blog.getUser();
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ArticleContentSpecifiedFragment newInstance(String param1) {
         return new ArticleContentSpecifiedFragment();
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ArticleContentSpecifiedFragment newInstance(Blog blog) {
         return new ArticleContentSpecifiedFragment(blog);
     }
@@ -115,21 +120,28 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             articleDateCreated.setText(blog.getCreatedTime().toString());
             articleTitle.setText(blog.getBlogTitle());
             articleContent.setText(blog.getContent());
+            articleSkatingType.setText(blog.getSkatingType().getName());
 
             User userLogin = FRSCApplicationContext.getUser();
             Long userLoginUserId = userLogin.getUserId();
             Long userId = user.getUserId();
             if (userLoginUserId.equals(userId)) {
-                btnFollow.setVisibility(View.GONE);
-                btnLove.setVisibility(View.GONE);
-                btnCllection.setVisibility(View.GONE);
-                btnReport.setVisibility(View.GONE);
-                btnModify.setVisibility(View.VISIBLE);
+                changeToSelfState();
             }
         }
     }
 
-    @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCllection, R.id.btnLove,R.id.btnModify})
+    private void changeToSelfState() {
+        btnFollow.setVisibility(View.GONE);
+        btnLove.setVisibility(View.GONE);
+        btnCllection.setVisibility(View.GONE);
+        btnReport.setVisibility(View.GONE);
+        ieCriticism.setVisibility(View.GONE);
+        btnCriticism.setVisibility(View.GONE);
+        btnModify.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCllection, R.id.btnLove, R.id.btnModify})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.profile:
@@ -141,8 +153,11 @@ public class ArticleContentSpecifiedFragment extends Fragment {
                 break;
             case R.id.btnLove:
                 break;
-                case R.id.btnModify:
-                    FRSCFragmentUtil.intentToFragmentAddedToBackStack(PutBlogContentFragment.newInstance(blog));
+            case R.id.btnModify:
+                FRSCFragmentUtil.intentToFragmentAddedToBackStack(PutBlogContentFragment.newInstance(blog));
+                break;
+            case R.id.btnCriticism:
+
                 break;
             default:
                 break;
@@ -150,8 +165,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(BlogChangMessage message ) {
+    public void getMessage(BlogChangMessage message) {
         initView();
     }
-
 }
