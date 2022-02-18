@@ -11,8 +11,8 @@ import com.crystallightghot.frscommunityclient.view.value.RequstIO;
  * description：
  */
 public class BlogViewPagerItemFragmentModel {
-    public void loadingBlogs(SkatingType skatingType, Object respondMessageKey) {
-        String url = RequstIO.FIND_BLOGS_BY_SKATING_TYPE_ID.getRequestIO() + skatingType.getSkatingTypeId();
+    public void loadingBlogs(SkatingType skatingType, Object respondMessageKey, int index) {
+        String url = RequstIO.FIND_BLOGS_BY_SKATING_TYPE_ID.getRequestIO() + skatingType.getSkatingTypeId() + "/" +index;
         FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
     }
 }

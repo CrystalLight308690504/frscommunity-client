@@ -6,6 +6,7 @@ import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
@@ -13,6 +14,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @Date 2022/2/11
@@ -30,9 +32,9 @@ public class BlogViewPagerItemFragmentPresenter {
         FRSCEventBusUtil.register(this);
     }
 
-    public void loadingBlogs(SkatingType skatingType) {
+    public void loadingBlogs(SkatingType skatingType, int index) {
         view.showLoadingDialog();
-        model.loadingBlogs(skatingType, this);
+        model.loadingBlogs(skatingType, this, index);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -40,18 +42,22 @@ public class BlogViewPagerItemFragmentPresenter {
         if ((message.getMessageKey() != this)) {
             return;
         }
+        view.hideLoadingDialog();
         if (message.isSuccess()) {
-            view.hideLoadingDialog();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-            ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();
+            Map resultMap = (Map) message.getData();
+            ArrayList dataList = (ArrayList) resultMap.get("data");
+            boolean hasNext = (boolean) resultMap.get("hasNext");
             ArrayList<Blog> blogs = new ArrayList<>();
-            for (int i = 0; i < list.size(); i++) {
-                LinkedTreeMap linkedTreeMap = list.get(i);
+            for (int i = 0; i < dataList.size(); i++) {
+                LinkedTreeMap linkedTreeMap = (LinkedTreeMap) dataList.get(i);
                 String toJson = gson.toJson(linkedTreeMap);
                 Blog blog = gson.fromJson(toJson, Blog.class);
                 blogs.add(blog);
             }
-            view.loadData(blogs);
+            view.loadData(blogs,hasNext);
+        }else  {
+            XToastUtils.error(message.getMessage());
         }
     }
 }

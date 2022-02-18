@@ -8,7 +8,6 @@ import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +37,11 @@ public class BlogViewPagerItemFragment extends BaseFragment {
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
 
+    int pagerIndex = 0;
     SkatingType skatingType;
     BlogViewPagerItemFragmentPresenter presenter;
+    BlogRecyclerViewAdapter blogRecyclerViewAdapter;
+
     public BlogViewPagerItemFragment() {
     }
 
@@ -54,6 +56,7 @@ public class BlogViewPagerItemFragment extends BaseFragment {
          */
         rvLists.setOnScrollChangeListener(new OnScrollChangeListener() {
             int lastScrolledInstance = 0;
+
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int scrolledInstance) {
 
@@ -76,35 +79,50 @@ public class BlogViewPagerItemFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_view_page_content_item, container, false);
         ButterKnife.bind(this, view);
         init();
+        addRecycleViewScrolledListener();
         return view;
     }
 
     private void init() {
-        addRecycleViewScrolledListener();
-        presenter.loadingBlogs(skatingType);
+        blogRecyclerViewAdapter = new BlogRecyclerViewAdapter(getActivity());
+        //下拉刷新
+        ViewUtils.setViewsFont(refreshLayout);
+        refreshLayout.setOnRefreshListener(refreshLayout -> {
+            blogRecyclerViewAdapter.getBlogs().clear();
+            pagerIndex = 0;
+            presenter.loadingBlogs(skatingType, 0);
+        });
+        //上拉加载
+        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            presenter.loadingBlogs(skatingType, ++pagerIndex);
+        });
+        rvLists.setAdapter(blogRecyclerViewAdapter);
+        presenter.loadingBlogs(skatingType, pagerIndex);
+
     }
 
     /**
      * 将数据加入到RecycleView中
      */
-    public void loadData(List<Blog> blogs) {
-
-        //下拉刷新
-        ViewUtils.setViewsFont(refreshLayout);
-        refreshLayout.setOnRefreshListener(refreshLayout ->{
-            presenter.loadingBlogs(skatingType);
-        });
-        //上拉加载
-        refreshLayout.setOnLoadMoreListener(refreshLayout ->{
-            presenter.loadingBlogs(skatingType);
-        });
-        rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvLists.setAdapter(new BlogRecyclerViewAdapter(getActivity(), blogs));
+    public void loadData(List<Blog> blogs, boolean hasNext) {
+        for (int i = 0; i < blogs.size(); i++) {
+            blogRecyclerViewAdapter.getBlogs().add(blogs.get(i));
+        }
         refreshLayout.resetNoMoreData();
-        refreshLayout.setEnableLoadMore(true);
         llStateful.showContent();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
+        if (hasNext) {
+            refreshLayout.setEnableLoadMore(true);
+        } else {
+            refreshLayout.setEnableLoadMore(false);
+        }
+
+        if (blogRecyclerViewAdapter.getBlogs().size() == 0) {
+            llStateful.showEmpty();
+            return;
+        }
+        blogRecyclerViewAdapter.notifyDataSetChanged();
     }
 
     private void showOffline() {
@@ -112,9 +130,10 @@ public class BlogViewPagerItemFragment extends BaseFragment {
         refreshLayout.setEnableLoadMore(false);
     }
 
-    private void showError() {
+    public void showError() {
         llStateful.showError(v -> refreshLayout.autoRefresh());
-        refreshLayout.setEnableLoadMore(false);
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
     }
 
 }

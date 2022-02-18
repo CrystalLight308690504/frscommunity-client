@@ -17,8 +17,11 @@ import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpeci
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,12 +33,17 @@ import java.util.List;
 public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerViewAdapter.MyViewHolder> {
 
     Activity activity;
-    List<Blog> blogs;
-
+    @Getter
+    @Setter
+    List<Blog> blogs = new ArrayList<>();
 
     public BlogRecyclerViewAdapter(Activity activity, List<Blog> blogs) {
         this.activity = activity;
         this.blogs = blogs;
+    }
+
+    public BlogRecyclerViewAdapter(Activity activity) {
+        this.activity = activity;
     }
 
     @NotNull
@@ -54,7 +62,11 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
 
     @Override
     public int getItemCount() {
-        return blogs.size();
+        if (null != blogs){
+            return blogs.size();
+        }else  {
+            return 0;
+        }
     }
 
 
@@ -71,6 +83,7 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
         RadiusImageView image1;
         View itemView;
         Blog blog;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
