@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,14 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.contract.RegisterContract;
 import com.crystallightghot.frscommunityclient.presenter.RegisterPresenter;
-import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCVerifyCodeUtil;
-import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
-import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RegisterMessage;
 import com.crystallightghot.frscommunityclient.view.message.TimeMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCVerifyCodeUtil;
+import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.google.android.material.textfield.TextInputEditText;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -74,7 +75,69 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
     private void init() {
         activity = (BaseActivity) getActivity();
         presenter = new RegisterPresenter(this);
+        iePhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() != 11 || iePassword.getText().length() == 0 || ieVerifyCode.getText().length() != 6) {
+                    register.setEnabled(false);
+                } else {
+                    register.setEnabled(true);
+                }
+
+            }
+        });
+        iePassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0 || iePhoneNumber.getText().length() != 11 || ieVerifyCode.getText().length() != 6) {
+                    register.setEnabled(false);
+                } else {
+                    register.setEnabled(true);
+                }
+
+            }
+        });
+        ieVerifyCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() != 6 || iePassword.getText().length() == 0 || iePhoneNumber.getText().length() != 11) {
+                    register.setEnabled(false);
+                } else {
+                    register.setEnabled(true);
+                }
+
+            }
+        });
     }
 
 

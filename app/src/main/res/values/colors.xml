@@ -6,7 +6,7 @@
     <!--  输入框样式  -->
     <color name="input_box_background">#FFFFFF</color>
     <color name="input_box_background_text_gray1">#8a8a8a</color>
-    <color name="input_box_background_no_enable">#9E9E9E</color>
+    <color name="input_box_background_no_enable">#BAB9B9</color>
 
     <!--默认显示字体样式-->
 

@@ -1,8 +1,8 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
 import android.database.sqlite.SQLiteDatabase;
-import com.crystallightghot.frscommunityclient.view.pojo.system.DaoMaster;
-import com.crystallightghot.frscommunityclient.view.pojo.system.DaoSession;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoMaster;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoSession;
 
 /**
  * @Date 2022/1/21

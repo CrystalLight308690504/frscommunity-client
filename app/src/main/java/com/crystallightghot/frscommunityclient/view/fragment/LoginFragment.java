@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ import org.greenrobot.eventbus.ThreadMode;
  */
 public class LoginFragment extends BaseFragment implements LoginContract.View {
     @BindView(R.id.phoneNumber)
-    TextInputEditText phoneName;
+    TextInputEditText iePhoneName;
     @BindView(R.id.iePassword)
     TextInputEditText iePassword;
 
@@ -63,6 +64,48 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     private void init() {
         activity = (BaseActivity) getActivity();
         presenter.checkUserLoginState();
+        iePhoneName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() < 11 || iePassword.getText().length() == 0) {
+                    login.setEnabled(false);
+                }else {
+                    login.setEnabled(true);
+                }
+
+            }
+        });
+        iePassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0 || iePhoneName.getText().length() < 11) {
+                    login.setEnabled(false);
+                }else {
+                    login.setEnabled(true);
+                }
+
+            }
+        });
     }
 
 
@@ -96,7 +139,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void getMessage(RegisterMessage message) {
         // 注册账号成功 将账号消息填入
         if (message.isSuccess()) {
-            phoneName.setText(message.getPhoneNumber());
+            iePhoneName.setText(message.getPhoneNumber());
             iePassword.setText(message.getPassword());
         }
     }
@@ -104,7 +147,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private void loginAction() {
         String passwordInput = iePassword.getText().toString();
-        Editable phoneNameText = phoneName.getText();
+        Editable phoneNameText = iePhoneName.getText();
         int length = phoneNameText.length();
 
         if (length != 11) {

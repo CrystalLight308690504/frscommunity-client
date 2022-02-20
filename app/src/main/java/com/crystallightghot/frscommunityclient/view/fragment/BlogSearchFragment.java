@@ -1,6 +1,8 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +58,27 @@ public class BlogSearchFragment extends BaseFragment {
 
     private void init() {
         activity = (SingleFragmentActivity) getActivity();
+        topBarBack.setOnClickListener(view -> activity.onBackPressed());
+        inputBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        topBarBack.setOnClickListener( view -> activity.onBackPressed());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0) {
+                    btnSearch.setEnabled(false);
+                } else {
+                    btnSearch.setEnabled(true);
+                }
+            }
+        });
     }
 
     @Override
