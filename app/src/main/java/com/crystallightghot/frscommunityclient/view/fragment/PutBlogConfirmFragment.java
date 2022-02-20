@@ -50,6 +50,8 @@ public class PutBlogConfirmFragment extends BaseFragment {
     int categoryPosition = 0;
     int skatingTypePosition = 0;
 
+    boolean loadingBlogCategoriesSuccess;
+    boolean loadingSkatingTypeSuccess;
     private String mParam1;
 
     public PutBlogConfirmFragment() {
@@ -98,14 +100,24 @@ public class PutBlogConfirmFragment extends BaseFragment {
     }
 
     public void loadingBlogCategories(ArrayList blogCategoriesName) {
-
+        loadingBlogCategoriesSuccess = true;
+        if (loadingSkatingTypeSuccess) {
+            btnPosition.setEnabled(true);
+        }else {
+            btnPosition.setEnabled(false);
+        }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter(getContext(), R.layout.spinner_default_item, R.id.text1, blogCategoriesName);
         spinnerCategory.setAdapter(arrayAdapter);
         spinnerCategory.setOnItemSelectedListener(new CategorySpinnerItemSelectedListener());
     }
 
     public void loadingSkatingType(ArrayList<String> skatingTypesName) {
-
+        loadingSkatingTypeSuccess = true;
+        if (loadingBlogCategoriesSuccess ) {
+            btnPosition.setEnabled(true);
+        }else {
+            btnPosition.setEnabled(false);
+        }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter(getContext(), R.layout.spinner_default_item, R.id.text1, skatingTypesName);
         spinnerSkatingType.setAdapter(arrayAdapter);
         spinnerSkatingType.setOnItemSelectedListener(new SkatingTypeSpinnerItemSelectedListener());
