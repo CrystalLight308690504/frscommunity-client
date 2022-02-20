@@ -14,9 +14,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.BlogSearchFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.adapter.SearchHistoryRecycleViewAdapter;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.SearchHistory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.google.android.material.textfield.TextInputEditText;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -35,18 +39,19 @@ public class BlogSearchFragment extends BaseFragment {
     TextInputEditText inputBox;
     @BindView(R.id.btn_search)
     TextView btnSearch;
-
-
     @BindView(R.id.rv_search_history)
     RecyclerView lvSearchHistory;
-
     SingleFragmentActivity activity;
+    BlogSearchFragmentPresenter presenter;
+    @Getter
+    SearchHistoryRecycleViewAdapter searchHistoryRecycleViewAdapter;
 
 
     private String mParam1;
     List<Fragment> fragments;
 
     public BlogSearchFragment() {
+        presenter = new BlogSearchFragmentPresenter(this);
         // Required empty public constructor
     }
 
@@ -79,6 +84,20 @@ public class BlogSearchFragment extends BaseFragment {
                 }
             }
         });
+        presenter.loadSearchHistory();
+    }
+
+    public void loadingSearchHistory(List<SearchHistory> searchHistories){
+        searchHistoryRecycleViewAdapter = new SearchHistoryRecycleViewAdapter(searchHistories);
+        lvSearchHistory.setAdapter(searchHistoryRecycleViewAdapter);
+    }
+
+    private void searchAction(String searchString) {
+        FRSCFragmentUtil.intentToFragmentAddedToBackStack(BlogSearchResultsFragment.newInstance("SearchResultsFragment"));
+        presenter.saveSearchHistory(searchString);
+    }
+    public void searchHistoryNotify() {
+        searchHistoryRecycleViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -108,7 +127,7 @@ public class BlogSearchFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                FRSCFragmentUtil.intentToFragmentAddedToBackStack(BlogSearchResultsFragment.newInstance("SearchResultsFragment"));
+                searchAction(btnSearch.getText().toString());
                 break;
             default:
                 break;

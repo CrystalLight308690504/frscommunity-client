@@ -15,23 +15,25 @@ import java.util.Date;
  */
 @Entity
 @Data
-public class BlogSearchHistory {
+public class SearchHistory {
     @Id(autoincrement = true)
     @Generated
     Long id ;
     Long userId;
     String searchText;
+    int historyType; // 0 为blog 1// 为问答
     Date createdTime;
-    @Generated(hash = 481773427)
-    public BlogSearchHistory(Long id, Long userId, String searchText,
+    @Generated(hash = 1998079834)
+    public SearchHistory(Long id, Long userId, String searchText, int historyType,
             Date createdTime) {
         this.id = id;
         this.userId = userId;
         this.searchText = searchText;
+        this.historyType = historyType;
         this.createdTime = createdTime;
     }
-    @Generated(hash = 1576745356)
-    public BlogSearchHistory() {
+    @Generated(hash = 1905904755)
+    public SearchHistory() {
     }
     public Long getId() {
         return this.id;
@@ -56,5 +58,11 @@ public class BlogSearchHistory {
     }
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+    public int getHistoryType() {
+        return this.historyType;
+    }
+    public void setHistoryType(int historyType) {
+        this.historyType = historyType;
     }
 }

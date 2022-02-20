@@ -24,6 +24,8 @@ public abstract class BaseFragment extends Fragment implements BaseContract.View
         loadingDialog = WidgetUtils.getLoadingDialog(getActivity())
                 .setIconScale(0.4F)
                 .setLoadingSpeed(8);
+        loadingDialog.setCancelable(true);
+        loadingDialog.updateMessage("(●'◡'●)加载中...");
     }
 
     @Override

@@ -44,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/input_box"
             android:layout_marginTop="@dimen/distance_max"
     />
@@ -51,6 +52,7 @@
             android:id="@+id/hot_searches"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tv_host_search"
             android:layout_marginTop="@dimen/distance_normal"
    />
@@ -71,6 +73,7 @@
             android:id="@+id/rv_search_history"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/tv_search_history"
             android:layout_marginTop="@dimen/distance_normal"
     />
