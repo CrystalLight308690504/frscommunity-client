@@ -36,17 +36,17 @@
             android:textColor="@color/color_gray_7"
             android:textSize="8dp"
             android:layout_marginRight="@dimen/distance_small"
-            app:layout_constraintRight_toLeftOf="@id/articleType"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/profile"/>
     <TextView
             android:id="@+id/articleType"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/distance_small"
             android:text="发布类型"
-            android:textColor="@color/color_gray_7"
+            android:textColor="@color/applicationMainTheme"
             android:textSize="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/profile"/>
+            app:layout_constraintTop_toTopOf="parent"/>
     <TextView
             android:id="@+id/article_title"
             android:singleLine="true"

@@ -1,6 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.adapter;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,14 +14,15 @@ import butterknife.BindView;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
-import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author crystallightghost
@@ -30,43 +30,36 @@ import java.util.List;
  * @Version: 1.0
  * description：
  */
-public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerViewAdapter.MyViewHolder> {
+public class BlogSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<BlogSearchResultRecyclerViewAdapter.MyViewHolder> {
 
-    Activity activity;
     @Getter
-    @Setter
-    List<Blog> blogs = new ArrayList<>();
+    List<Blog> blogs;
 
-    public BlogRecyclerViewAdapter(Activity activity, List<Blog> blogs) {
-        this.activity = activity;
+    public BlogSearchResultRecyclerViewAdapter(@NonNull List<Blog> blogs) {
+
         this.blogs = blogs;
     }
 
-    public BlogRecyclerViewAdapter(Activity activity) {
-        this.activity = activity;
+    public BlogSearchResultRecyclerViewAdapter() {
+        this.blogs = new ArrayList<>();
     }
 
     @NotNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.recycle_item_article_lists, parent, false);
+        View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_article_lists, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Blog blog = blogs.get(position);
-        holder.setData(blog);
+        holder.initView(blogs.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (null != blogs){
-            return blogs.size();
-        }else  {
-            return 0;
-        }
+        return blogs.size();
     }
 
 
@@ -83,7 +76,6 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
         RadiusImageView image1;
         View itemView;
         Blog blog;
-
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
@@ -94,10 +86,10 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
             articleTitleTV = itemView.findViewById(R.id.article_title);
             articleContentTV = itemView.findViewById(R.id.article_content);
             image1 = itemView.findViewById(R.id.image1);
-            itemView.setOnClickListener(view -> FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(blog)));
+            itemView.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(blog)));
         }
 
-        public void setData(Blog blog) {
+        public void initView(Blog blog) {
             this.blog = blog;
             String profileBase64 = blog.getUser().getProfile();
             byte[] decodedString = Base64.decode(profileBase64, Base64.DEFAULT);
@@ -108,6 +100,8 @@ public class BlogRecyclerViewAdapter extends RecyclerView.Adapter<BlogRecyclerVi
             articleStyle.setText(blog.getSkatingType().getName());
             articleTitleTV.setText(blog.getBlogTitle());
             articleContentTV.setText(blog.getContent());
+            userNameTV.setText(blog.getUser().getUserName());
+
         }
     }
 }

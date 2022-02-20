@@ -1,26 +1,28 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeSearchResultViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.SearchResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class BlogSearchResultsFragment extends Fragment {
+public class SearchResultsFragment extends BaseFragment {
 
-    static BlogSearchResultsFragment allSearchResultsFragment;
+    static SearchResultsFragment allSearchResultsFragment;
     @BindView(R.id.top_bar_back)
     ImageButton topBarBack;
     @BindView(R.id.input_box)
@@ -34,13 +36,19 @@ public class BlogSearchResultsFragment extends Fragment {
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
 
-    public BlogSearchResultsFragment() {
+    public SearchResultsFragment(String searchText) {
+        this.searchText = searchText;
+    }
+
+    String searchText;
+
+    public SearchResultsFragment() {
         // Required empty public constructor
     }
 
-    public static BlogSearchResultsFragment newInstance(String param1) {
+    public static SearchResultsFragment newInstance(String searchText) {
 
-        return new BlogSearchResultsFragment();
+        return new SearchResultsFragment(searchText);
     }
 
     @Override
@@ -59,24 +67,49 @@ public class BlogSearchResultsFragment extends Fragment {
     }
 
     private void init() {
+        inputBox.setText(searchText);
+        if (inputBox.length() != 0) {
+            btnSearch.setEnabled(true);
+        }
         activity = (BaseFragmentActivity) getActivity();
         topBarBack.setOnClickListener(view -> activity.onBackPressed());
+        inputBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        // CS
-        addData();
-    }
+            }
 
-    /**
-     * 数据翻倍增加BUG
-     * 每次编译器应用改变后 会重新调用 会重新createView()方法  而对象this 不会重新创建 所以pagerFragments 的内容成倍数增加
-     */
-    public void addData() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 0) {
+                    btnSearch.setEnabled(false);
+                } else {
+                    btnSearch.setEnabled(true);
+                }
+            }
+        });
+
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
-
-        // 添加测试数据
-        viewPager.setAdapter(new HomeSearchResultViewPagerAdapter(this));
+        viewPager.setAdapter(new SearchResultViewPagerAdapter(this, searchText));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }
 
+    @OnClick({R.id.top_bar_back, R.id.btn_search})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.top_bar_back:
+                getActivity().onBackPressed();
+                break;
+            case R.id.btn_search:
+                searchText = inputBox.getText().toString();
+                viewPager.setAdapter(new SearchResultViewPagerAdapter(this, searchText));
+                break;
+        }
+    }
 }

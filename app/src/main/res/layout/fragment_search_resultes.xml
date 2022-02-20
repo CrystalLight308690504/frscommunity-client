@@ -33,8 +33,9 @@
             app:layout_constraintRight_toRightOf="parent"
             android:text="搜索"
             android:textSize="15dp"
+            android:enabled="false"
             app:layout_constraintBaseline_toBaselineOf="@id/input_box"
-            android:textColor="@color/default_displayed_text_gray"
+            android:textColor="@color/text_colo_state_gray_to_blue"
     />
     <com.google.android.material.tabs.TabLayout
             android:id="@+id/searchResultType"
@@ -62,6 +63,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
+            android:minHeight="300dp"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/searchResultType"
             android:layout_marginTop="@dimen/distance_normal"/>

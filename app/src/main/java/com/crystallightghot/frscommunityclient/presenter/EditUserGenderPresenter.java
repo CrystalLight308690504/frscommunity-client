@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.EditUserGenderContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.EditUserGenderModel;
-import com.crystallightghot.frscommunityclient.view.value.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
 import com.crystallightghot.frscommunityclient.view.fragment.EditeUserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -43,7 +43,7 @@ public class EditUserGenderPresenter implements EditUserGenderContract.Presenter
 
     @Override
     public void callBack(RequestResult requestResult) {
-        RequestMessage message = new RequestMessage(requestResult, RequstIO.MODIFY_USER_GENDER);
+        RequestMessage message = new RequestMessage(requestResult, FRSCRequstIO.MODIFY_USER_GENDER);
         FRSCEventBusUtil.sendMessage(message);
     }
 
@@ -53,7 +53,7 @@ public class EditUserGenderPresenter implements EditUserGenderContract.Presenter
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         view.hideLoadingDialog();
-        if (message.getMessageKey() != RequstIO.MODIFY_USER_GENDER) {
+        if (message.getMessageKey() != FRSCRequstIO.MODIFY_USER_GENDER) {
             return;
         }
         if (message.isSuccess()) {

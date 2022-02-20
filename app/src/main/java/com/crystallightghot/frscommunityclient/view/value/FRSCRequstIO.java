@@ -6,7 +6,7 @@ package com.crystallightghot.frscommunityclient.view.value;
  * @Version: 1.0
  * description：
  */
-public enum RequstIO {
+public enum FRSCRequstIO {
 
     // 系统请求接口
     USER_Login("/user/login","9002"),
@@ -30,6 +30,7 @@ public enum RequstIO {
     FIND_BLOGS_BY_SKATING_TYPE_ID("/blog/findBlogsBySkatingTypeId/","9003"),
     FIND_CATEGORIES_BY_USERID("/blog/findBlogCategories/","9003"),
     FIND_BLOGS_BY_USERID_AND_CATEGORY("/blog/findBlogsByUserAndCategory/","9003"),
+    FIND_BLOGS_BY_SEARCH_KEY("/blog/findBlogsBySearchKey/","9003"),
     ADD_BLOG_CATEGORY("/blog/addBlogCategory/","9003"),
     DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory", "9003"),
     MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory","9003" );
@@ -39,7 +40,7 @@ public enum RequstIO {
     private String port;
     private String requestInterface;
 
-    private RequstIO(String requestInterface, String port) {
+    private FRSCRequstIO(String requestInterface, String port) {
         this.requestInterface = requestInterface;
         this.port = port;
     }

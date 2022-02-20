@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.value.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
 
 /**
  * @Date 2022/2/11
@@ -11,7 +11,7 @@ import com.crystallightghot.frscommunityclient.view.value.RequstIO;
  */
 public class SkatingTypeModel {
     public void loadingSkatingType(Object respondMessageKey) {
-        String requestIO = RequstIO.GET_SKATING_TYPE.getRequestIO();
+        String requestIO = FRSCRequstIO.GET_SKATING_TYPE.getRequestIO();
         FRSCOKHttp3RequestUtil.callGetRequest(requestIO,respondMessageKey);
     }
 

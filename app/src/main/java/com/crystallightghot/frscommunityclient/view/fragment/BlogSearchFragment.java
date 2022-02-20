@@ -93,7 +93,7 @@ public class BlogSearchFragment extends BaseFragment {
     }
 
     private void searchAction() {
-        FRSCFragmentUtil.intentToFragmentAddedToBackStack(BlogSearchResultsFragment.newInstance("SearchResultsFragment"));
+        FRSCFragmentUtil.intentToFragmentAddedToBackStack(SearchResultsFragment.newInstance(inputBox.getText().toString()));
         presenter.saveSearchHistory(inputBox.getText().toString());
         inputBox.setText("");
     }

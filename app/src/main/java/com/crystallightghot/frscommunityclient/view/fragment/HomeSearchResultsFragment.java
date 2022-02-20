@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.adapter.HomeSearchResultViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.SearchResultViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.textfield.TextInputEditText;
@@ -68,7 +68,7 @@ public class HomeSearchResultsFragment extends Fragment {
     public void initView() {
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
         // 添加测试数据
-        viewPager.setAdapter(new HomeSearchResultViewPagerAdapter(this));
+        viewPager.setAdapter(new SearchResultViewPagerAdapter(this));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }

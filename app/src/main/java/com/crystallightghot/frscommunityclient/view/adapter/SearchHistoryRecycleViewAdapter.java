@@ -11,11 +11,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.fragment.SearchResultsFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.SearchHistory;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.SearchHistoryDao;
-import com.crystallightghot.frscommunityclient.view.pojo.system.LoginInformationDao;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +31,6 @@ import java.util.List;
 public class SearchHistoryRecycleViewAdapter extends RecyclerView.Adapter<SearchHistoryRecycleViewAdapter.ViewHolder> {
     @Getter
     List<SearchHistory> searchHistories;
-
 
     public SearchHistoryRecycleViewAdapter(List<SearchHistory> searchHistories) {
         this.searchHistories = searchHistories;
@@ -61,15 +61,21 @@ public class SearchHistoryRecycleViewAdapter extends RecyclerView.Adapter<Search
         @BindView(R.id.btnDelete)
         AppCompatImageButton btnDelete;
         SearchHistory searchHistory;
+        View itemView;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            this.itemView = itemView;
             ButterKnife.bind(this, itemView);
         }
 
         public void initView(SearchHistory searchHistory) {
             this.searchHistory = searchHistory;
+            itemView.setOnClickListener((view) -> {
+                FRSCFragmentUtil.intentToFragmentAddedToBackStack(SearchResultsFragment.newInstance(searchHistory.getSearchText()));
+            });
             tvSearchText.setText(searchHistory.getSearchText());
+
         }
 
         @OnClick(R.id.btnDelete)

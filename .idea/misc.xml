@@ -144,7 +144,10 @@
         <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_login.xml" value="0.35733695652173914" />
         <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_register_user.xml" value="0.20989583333333334" />
         <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_search_result_view_pager.xml" value="0.2572463768115942" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_search_resultes.xml" value="0.4086294416243655" />
         <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/fragment_view_page_content_item.xml" value="0.39947916666666666" />
+        <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/recycle_item_article_lists.xml" value="0.4" />
         <entry key="..\:/Workspaces/IDEAWorkspace/frscommunity-client/app/src/main/res/layout/recycle_view_item_search_history.xml" value="0.2859375" />
       </map>
     </option>

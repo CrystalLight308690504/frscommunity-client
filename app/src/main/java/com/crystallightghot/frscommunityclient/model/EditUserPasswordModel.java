@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.model;
 import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract;
 import com.crystallightghot.frscommunityclient.view.value.FRSCString;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.value.RequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = RequstIO.MODIFY_PASSWORD_BY_PHONE_NUMBER.getRequestIO();
+        String url = FRSCRequstIO.MODIFY_PASSWORD_BY_PHONE_NUMBER.getRequestIO();
         String head = "";
         if (null != user){
             head = user.getSessionId();
@@ -59,7 +59,7 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = RequstIO.MODIFY_PASSWORD_BY_OLD_PASSWORD.getRequestIO();
+        String url = FRSCRequstIO.MODIFY_PASSWORD_BY_OLD_PASSWORD.getRequestIO();
         String head = "";
         if (null != user) {
             head = user.getSessionId();
