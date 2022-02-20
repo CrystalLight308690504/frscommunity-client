@@ -92,9 +92,10 @@ public class BlogSearchFragment extends BaseFragment {
         lvSearchHistory.setAdapter(searchHistoryRecycleViewAdapter);
     }
 
-    private void searchAction(String searchString) {
+    private void searchAction() {
         FRSCFragmentUtil.intentToFragmentAddedToBackStack(BlogSearchResultsFragment.newInstance("SearchResultsFragment"));
-        presenter.saveSearchHistory(searchString);
+        presenter.saveSearchHistory(inputBox.getText().toString());
+        inputBox.setText("");
     }
     public void searchHistoryNotify() {
         searchHistoryRecycleViewAdapter.notifyDataSetChanged();
@@ -127,7 +128,7 @@ public class BlogSearchFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_search:
-                searchAction(btnSearch.getText().toString());
+                searchAction();
                 break;
             default:
                 break;
