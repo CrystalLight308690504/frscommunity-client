@@ -91,6 +91,7 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
                 if (null == articlesFragment) {
                     return;
                 }
+                blogs.clear();
                 articlesFragment.hideLoadingDialog();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();

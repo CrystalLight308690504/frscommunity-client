@@ -12,7 +12,7 @@ import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
 public class BlogModel {
 
     public void deleteBlog(String requestBody, Object respondMessageKey) {
-        String url = FRSCRequstIO.DELETE_BLOG_CATEGORY.getRequestIO();
+        String url = FRSCRequstIO.DELETE_BLOG.getRequestIO();
         FRSCOKHttp3RequestUtil.callDeleteRequest(url, requestBody, respondMessageKey);
     }
 
