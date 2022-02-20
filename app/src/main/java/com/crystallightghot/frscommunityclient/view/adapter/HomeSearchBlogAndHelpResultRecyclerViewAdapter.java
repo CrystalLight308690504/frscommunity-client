@@ -30,7 +30,7 @@ public class HomeSearchBlogAndHelpResultRecyclerViewAdapter extends RecyclerView
     List<HashMap<Object, Object>> datas;
 
 
-    public HomeSearchBlogAndHelpResultRecyclerViewAdapter(Activity activity, List<HashMap<Object, Object>> datas) {
+    public HomeSearchBlogAndHelpResultRecyclerViewAdapter(Activity activity, @NonNull List<HashMap<Object, Object>> datas) {
         this.activity = activity;
         this.datas = datas;
     }
@@ -51,6 +51,9 @@ public class HomeSearchBlogAndHelpResultRecyclerViewAdapter extends RecyclerView
 
     @Override
     public int getItemCount() {
+        if (null == datas ) {
+            return 0;
+        }
         return datas.size();
     }
 

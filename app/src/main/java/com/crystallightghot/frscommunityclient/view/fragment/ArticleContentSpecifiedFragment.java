@@ -145,7 +145,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.profile:
-                FRSCFragmentUtil.intentToFragment(UserInformationFragment.newInstance("UserInformationFragment"), (BaseFragmentActivity) getActivity(), true);
+                FRSCFragmentUtil.intentToFragment(UserInformationFragment.newInstance(user), (BaseFragmentActivity) getActivity(), true);
                 break;
             case R.id.btnFollow:
                 break;

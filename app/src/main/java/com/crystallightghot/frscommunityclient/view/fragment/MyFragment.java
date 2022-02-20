@@ -132,7 +132,7 @@ public class MyFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnArrowRight:
-                FRSCIntentUtil.intentToSingleFragmentActivity(UserInformationFragment.newInstance("UserInformationFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(UserInformationFragment.newInstance());
                 break;
             case R.id.ivBlog:
                 FRSCIntentUtil.intentToSingleFragmentActivity(MyBlogFragment.newInstance("MyBlogFragment"));
