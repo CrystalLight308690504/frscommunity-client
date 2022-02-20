@@ -18,6 +18,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,8 @@ public class BlogFragment extends BaseFragment {
     ViewPager2 contentViewPager;
 
     BlogPresenter presenter;
+    @BindView(R.id.ll_stateful)
+    StatefulLayout llStateful;
     private String[] skatingTypesName;
 
     public BlogFragment() {
@@ -58,12 +61,19 @@ public class BlogFragment extends BaseFragment {
 
     public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {
         this.skatingTypesName = skatingTypesName;
-        contentViewPager.setAdapter(new BlogViewPagerAdapter(this,skatingTypes));
+        contentViewPager.setAdapter(new BlogViewPagerAdapter(this, skatingTypes));
         new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(skatingTypesName[position])
         ).attach();
     }
+
     private void ladingSkatingType() {
         presenter.loadingSkatingType();
+    }
+    public void showSuccessState() {
+        llStateful.showContent();
+    }
+    public void showErrorState(String message) {
+        llStateful.showError(message, view -> {presenter.loadingSkatingType();});
     }
 
     @Override

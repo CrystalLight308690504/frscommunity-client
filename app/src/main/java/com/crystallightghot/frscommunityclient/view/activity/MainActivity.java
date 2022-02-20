@@ -83,8 +83,8 @@ public class MainActivity extends BaseFragmentActivity {
 
     private void init() {
         FRSCApplicationContext.setMainActivity(this);
-        ibtnHome.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
-        setItemTextColorClicked(tvHome);
+        ibtnBlog.setBackground(getResourceDrawable(R.mipmap.home_home_clicked));
+        setItemTextColorClicked(tvBlog);
         // 注册广播
         IntentFilter intentFilter = new IntentFilter("HomeViewPagerItemScrollChangedReceiver");
         receiver = new HomeViewPagerItemScrollChangedReceiver(this);
@@ -185,7 +185,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // 设置默认fragment
-        setDefaultFragment(HomeFragment.newInstance("homeFragment"));
+        setDefaultFragment(BlogFragment.newInstance("homeFragment"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         bind = ButterKnife.bind(this);

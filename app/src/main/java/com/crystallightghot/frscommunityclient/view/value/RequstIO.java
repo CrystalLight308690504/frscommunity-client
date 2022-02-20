@@ -19,7 +19,8 @@ public enum RequstIO {
     MODIFY_USER_DESCRIPTION("/user/modifyUserDescription","9002"),
     MODIFY_USER_PROFILE("/user/modifyUserProfile","9002"),
     MODIFY_USER_EMAIL("/user/modifyUserEmail","9002"),
-    GET_SKATING_TYPE("/user/getSkatingType","9002"),
+
+    GET_SKATING_TYPE("/blog/getSkatingType","9003"),
 
     // 博客请求接口
     ADD_BLOG("/blog/save","9003"),
@@ -33,7 +34,7 @@ public enum RequstIO {
     DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory", "9003"),
     MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory","9003" );
 
-    private String host = "http://192.168.0.103:";
+    private String host = "http://192.168.0.100:";
 //    private String host = "http://42.194.211.199:";
     private String port;
     private String requestInterface;

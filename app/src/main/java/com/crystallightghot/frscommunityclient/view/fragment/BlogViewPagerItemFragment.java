@@ -108,8 +108,8 @@ public class BlogViewPagerItemFragment extends BaseFragment {
         for (int i = 0; i < blogs.size(); i++) {
             blogRecyclerViewAdapter.getBlogs().add(blogs.get(i));
         }
-        refreshLayout.resetNoMoreData();
         llStateful.showContent();
+        refreshLayout.resetNoMoreData();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
         if (hasNext) {
@@ -125,13 +125,8 @@ public class BlogViewPagerItemFragment extends BaseFragment {
         blogRecyclerViewAdapter.notifyDataSetChanged();
     }
 
-    private void showOffline() {
-        llStateful.showOffline(v -> refreshLayout.autoRefresh());
-        refreshLayout.setEnableLoadMore(false);
-    }
-
-    public void showError() {
-        llStateful.showError(v -> refreshLayout.autoRefresh());
+    public void showError(String message) {
+        llStateful.showError(message, v -> refreshLayout.autoRefresh());
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
     }

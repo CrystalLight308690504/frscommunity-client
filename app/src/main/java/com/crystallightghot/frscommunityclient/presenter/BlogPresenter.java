@@ -57,8 +57,11 @@ public class BlogPresenter {
                         skatingTypes.add(skatingType);
                         skatingTypesName[i] = skatingType.getName();
                     }
+                    blogFragment.showSuccessState();
                     blogFragment.init(skatingTypesName, skatingTypes);
                     FRSCApplicationContext.setSkatingTypes(skatingTypes);
+                }else {
+                    blogFragment.showErrorState(message.getMessage());
                 }
                 break;
         }

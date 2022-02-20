@@ -57,7 +57,7 @@ public class BlogViewPagerItemFragmentPresenter {
             }
             view.loadData(blogs,hasNext);
         }else  {
-            XToastUtils.error(message.getMessage());
+            view.showError(message.getMessage());
         }
     }
 }
