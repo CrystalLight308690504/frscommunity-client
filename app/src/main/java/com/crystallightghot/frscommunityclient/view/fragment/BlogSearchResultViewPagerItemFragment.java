@@ -9,24 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.presenter.BlogSearchResultDefaultViewPagerItemFragmentPresenter;
+import com.crystallightghot.frscommunityclient.presenter.BlogSearchResultViewPagerItemFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.BlogSearchResultRecyclerViewAdapter;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link BlogSearchResultDefaultViewPagerItemFragment#newInstance} factory method to
+ * Use the {@link BlogSearchResultViewPagerItemFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
  * @author
  */
-public class BlogSearchResultDefaultViewPagerItemFragment extends BaseFragment {
+public class BlogSearchResultViewPagerItemFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
 
@@ -37,17 +36,17 @@ public class BlogSearchResultDefaultViewPagerItemFragment extends BaseFragment {
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     String searchText;
-    BlogSearchResultDefaultViewPagerItemFragmentPresenter presenter;
+    BlogSearchResultViewPagerItemFragmentPresenter presenter;
     BlogSearchResultRecyclerViewAdapter recyclerViewAdapter;
     int pagerIndex = 0;
 
-    public BlogSearchResultDefaultViewPagerItemFragment(String searchText) {
+    public BlogSearchResultViewPagerItemFragment(String searchText) {
         this.searchText = searchText;
-        presenter = new BlogSearchResultDefaultViewPagerItemFragmentPresenter(this);
+        presenter = new BlogSearchResultViewPagerItemFragmentPresenter(this);
     }
 
-    public static BlogSearchResultDefaultViewPagerItemFragment newInstance(String searchText) {
-        BlogSearchResultDefaultViewPagerItemFragment fragment = new BlogSearchResultDefaultViewPagerItemFragment(searchText);
+    public static BlogSearchResultViewPagerItemFragment newInstance(String searchText) {
+        BlogSearchResultViewPagerItemFragment fragment = new BlogSearchResultViewPagerItemFragment(searchText);
         return fragment;
     }
 

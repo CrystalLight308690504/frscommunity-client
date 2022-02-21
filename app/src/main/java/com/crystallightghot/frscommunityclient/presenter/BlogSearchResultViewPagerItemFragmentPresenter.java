@@ -1,17 +1,16 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.model.BlogModel;
-import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultDefaultViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultViewPagerItemFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.LinkedTreeMap;
+import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,12 +19,12 @@ import java.util.Map;
  * @Version: 1.0
  * description：
  */
-public class BlogSearchResultDefaultViewPagerItemFragmentPresenter {
-    BlogSearchResultDefaultViewPagerItemFragment view;
+public class BlogSearchResultViewPagerItemFragmentPresenter {
+    BlogSearchResultViewPagerItemFragment view;
     BlogModel model;
     boolean hasNext = true;
 
-    public BlogSearchResultDefaultViewPagerItemFragmentPresenter(BlogSearchResultDefaultViewPagerItemFragment view) {
+    public BlogSearchResultViewPagerItemFragmentPresenter(BlogSearchResultViewPagerItemFragment view) {
         model = new BlogModel();
         this.view = view;
         FRSCEventBusUtil.register(this);
@@ -50,16 +49,8 @@ public class BlogSearchResultDefaultViewPagerItemFragmentPresenter {
                     if (null != data) {
                         hasNext = (boolean) data.get("hasNext");
                         Map resultMap = (Map) message.getData();
-
-                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                         ArrayList dataList = (ArrayList) resultMap.get("data");
-                        ArrayList<Blog> blogs = new ArrayList<>();
-                        for (int i = 0; i < dataList.size(); i++) {
-                            LinkedTreeMap linkedTreeMap = (LinkedTreeMap) dataList.get(i);
-                            String toJson = gson.toJson(linkedTreeMap);
-                            Blog blog = gson.fromJson(toJson, Blog.class);
-                            blogs.add(blog);
-                        }
+                        List blogs = FRSCObjectTransferUtil.ListMapToListObject(dataList, Blog.class);
                         view.addDataToRV(blogs, hasNext);
                     }
                 } else {

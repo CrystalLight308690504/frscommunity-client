@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.model;
 
+import android.view.View;
 import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
@@ -54,5 +55,8 @@ public class BlogModel {
     }
 
 
-
+    public void loadBlogCount(Long userId, Object respondMessageKey) {
+        String url = FRSCRequstIO.COUNT_BLOGS.getRequestIO() + userId;
+        FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
 }

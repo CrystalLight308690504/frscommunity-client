@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class RequestMessage<T> {
+public class RequestMessage<K> {
     String message;
-    T data;
+    Object data;
     boolean success;
-    Object messageKey;
+    K messageKey;
 
-    public RequestMessage(RequestResult<T> requestResult,Object messageKey) {
+    public RequestMessage(RequestResult requestResult, K messageKey) {
         this.message = requestResult.getMessage();
         this.success = requestResult.isSuccess();
         this.data =  requestResult.getData();

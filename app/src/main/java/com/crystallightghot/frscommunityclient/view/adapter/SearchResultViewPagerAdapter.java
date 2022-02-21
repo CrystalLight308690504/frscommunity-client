@@ -3,8 +3,9 @@ package com.crystallightghot.frscommunityclient.view.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultDefaultViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultViewPagerItemFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.HomeSearchResultDefaultViewPagerItemFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.UserSearchResultViewPagerItemFragment;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,9 +32,11 @@ public class SearchResultViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new BlogSearchResultDefaultViewPagerItemFragment(searchText);
+                return new BlogSearchResultViewPagerItemFragment(searchText);
             case 1:
                 return new HomeSearchResultDefaultViewPagerItemFragment();
+            case 2:
+                return new UserSearchResultViewPagerItemFragment(searchText);
             default:
                 return new HomeSearchResultDefaultViewPagerItemFragment();
         }

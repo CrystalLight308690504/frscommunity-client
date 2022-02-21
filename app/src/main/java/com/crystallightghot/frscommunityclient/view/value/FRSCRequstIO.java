@@ -12,6 +12,7 @@ public enum FRSCRequstIO {
     USER_Login("/user/login","9002"),
     USER_REGISTER("/user/register","9002"),
     USER_UNLOGIN("/user/logout","9002"),
+    FIND_USERS_BY_NAME_KEY("/user/findUserByNameKey/","9002"),
     MODIFY_USERNAME("/user/modifyUserName","9002"),
     MODIFY_PASSWORD_BY_PHONE_NUMBER("/user/modifyUserPasswordByPhoneNumber","9002"),
     MODIFY_PASSWORD_BY_OLD_PASSWORD("/user/modifyUserPasswordByOldPassword","9002"),
@@ -33,6 +34,7 @@ public enum FRSCRequstIO {
     FIND_BLOGS_BY_SEARCH_KEY("/blog/findBlogsBySearchKey/","9003"),
     ADD_BLOG_CATEGORY("/blog/addBlogCategory/","9003"),
     DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory", "9003"),
+    COUNT_BLOGS("/blog/countBlogs/", "9003"),
     MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory","9003" );
 
     private String host = "http://192.168.0.100:";

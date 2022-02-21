@@ -34,12 +34,6 @@ public class BlogSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Bl
 
     @Getter
     List<Blog> blogs;
-
-    public BlogSearchResultRecyclerViewAdapter(@NonNull List<Blog> blogs) {
-
-        this.blogs = blogs;
-    }
-
     public BlogSearchResultRecyclerViewAdapter() {
         this.blogs = new ArrayList<>();
     }
