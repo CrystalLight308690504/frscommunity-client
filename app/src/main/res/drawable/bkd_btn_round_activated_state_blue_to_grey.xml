@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
+    <item android:state_activated="false">
         <shape >
             <solid android:color="@color/input_box_background_no_enable"/>
             <corners android:radius="30dp"/>
         </shape>
     </item>
-    <item android:state_pressed="false">
+    <item android:state_activated="true">
         <shape >
             <solid android:color="@color/applicationMainTheme"/>
             <corners android:radius="30dp"/>

@@ -28,4 +28,9 @@ public class FRSCObjectTransferUtil {
         }
         return objects;
     }
+
+    public static <C> String ObjectToJsonString(Object o) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        return gson.toJson(o);
+    }
 }

@@ -12,6 +12,7 @@ public enum FRSCRequstIO {
     USER_Login("/user/login","9002"),
     USER_REGISTER("/user/register","9002"),
     USER_UNLOGIN("/user/logout","9002"),
+    FOLLOW_USER("/user/followUser","9002"),
     FIND_USERS_BY_NAME_KEY("/user/findUserByNameKey/","9002"),
     MODIFY_USERNAME("/user/modifyUserName","9002"),
     MODIFY_PASSWORD_BY_PHONE_NUMBER("/user/modifyUserPasswordByPhoneNumber","9002"),

@@ -109,6 +109,7 @@ public class UserSearchResultViewPagerItemFragment extends BaseFragment {
     public void showError(String errorMessage) {
         llStateful.showError(errorMessage, view ->  presenter.loadSearchUserResult(searchText, pagerIndex));
         refreshLayout.setEnableLoadMore(false);
+        refreshLayout.finishRefresh();
     }
 
 }

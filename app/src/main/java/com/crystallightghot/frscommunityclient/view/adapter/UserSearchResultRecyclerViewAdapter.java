@@ -98,6 +98,18 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
             ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
             presenter.loadBlogCount(user.getUserId());
+            btnFollow.setActivated(true);
+            btnFollow.setOnClickListener(view -> {
+                btnFollow.setActivated(!btnFollow.isActivated());
+                if (btnFollow.isActivated()) { // 取消关注
+                    btnFollow.setText("关注");
+
+                }else { // 关注
+                    presenter.followUser(user.getUserId());
+
+                    btnFollow.setText("已关注");
+                }
+            });
         }
 
         @OnClick({R.id.ivProfile, R.id.btnFollow})
