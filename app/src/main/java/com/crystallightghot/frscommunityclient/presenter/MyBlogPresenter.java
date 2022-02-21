@@ -1,7 +1,7 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.contract.MyBlogContract;
-import com.crystallightghot.frscommunityclient.model.MyBlogModel;
+import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticlesFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.MyBlogFragment;
 import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class MyBlogPresenter implements MyBlogContract.Presenter{
 
-    MyBlogModel blogModel;
+    BlogModel blogModel;
     MyBlogFragment view;
     ArticlesFragment articlesFragment;
 
@@ -39,12 +39,12 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
 
     public MyBlogPresenter(ArticlesFragment articlesFragment) {
         this.articlesFragment = articlesFragment;
-        blogModel = new MyBlogModel();
+        blogModel = new BlogModel();
         FRSCEventBusUtil.register(this);
     }
 
     public MyBlogPresenter(MyBlogFragment view) {
-        blogModel = new MyBlogModel();
+        blogModel = new BlogModel();
         this.view = view;
         FRSCEventBusUtil.register(this);
     }

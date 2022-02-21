@@ -25,6 +25,6 @@ public class MyBlogCategoryRecycleViewAdapterPresenter implements MyBlogCategory
     public void deleteBlogCategory(BlogCategory blogCategory) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String blogCategoryJson = gson.toJson(blogCategory);
-        blogModel.deleteBlog(blogCategoryJson, MyBlogPresenter.RespondMessageKey.DELETE_CATEGORY);
+        blogModel.deleteBlogCategory(blogCategoryJson, MyBlogPresenter.RespondMessageKey.DELETE_CATEGORY);
     }
 }
