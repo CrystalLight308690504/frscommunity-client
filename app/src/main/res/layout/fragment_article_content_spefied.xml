@@ -142,7 +142,7 @@
                         android:id="@+id/btnCriticism"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@id/ieCriticism"
-                        android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+                        android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
                         android:text="评论"
                         android:layout_marginRight="@dimen/distance_normal"
                         />

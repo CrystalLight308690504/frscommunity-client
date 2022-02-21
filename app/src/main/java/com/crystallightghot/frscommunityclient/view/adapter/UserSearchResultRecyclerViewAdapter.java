@@ -89,16 +89,15 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
             this.itemView = itemView;
             ButterKnife.bind(this, itemView);
             presenter = new UserSearchResultRecyclerViewAdapterViewHolderPresenter(this);
-            itemView.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
         }
 
         public void initView(User user) {
             this.user = user;
             Drawable userProfile = FRSCImagePatternChangeUtil.getDrawableFromBase64(user.getProfile());
             ivProfile.setImageDrawable(userProfile);
+            ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
             presenter.loadBlogCount(user.getUserId());
-            tvArticleCount.setText("博客总数 " + 1000);
         }
 
         @OnClick({R.id.ivProfile, R.id.btnFollow})

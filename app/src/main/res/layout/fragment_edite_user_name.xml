@@ -30,7 +30,7 @@
                                                          />
     <Button android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="确认修改"
-            android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+            android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
             app:layout_constraintTop_toBottomOf="@id/ieEmail"
             android:layout_marginLeft="@dimen/distance_max4"
             android:layout_marginRight="@dimen/distance_max4"

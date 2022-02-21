@@ -63,7 +63,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
-            android:minHeight="300dp"
+            android:minHeight="400dp"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/searchResultType"
             android:layout_marginTop="@dimen/distance_normal"/>

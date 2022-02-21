@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/spinnerSkatingType"
             android:layout_marginTop="100dp"
             android:enabled="false"
-            android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+            android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
             android:text="确定"
             android:id="@+id/btnPosition"
     />

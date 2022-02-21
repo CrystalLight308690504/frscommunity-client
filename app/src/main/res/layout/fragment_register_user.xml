@@ -63,7 +63,7 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:padding="@dimen/distance_normal"
             app:layout_constraintLeft_toRightOf="@id/ieVerifyCode"
-            android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+            android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
             app:layout_constraintTop_toTopOf="@id/ieVerifyCode"
             android:layout_marginLeft="@dimen/distance_max1"
             android:text="发送验证码"/>
@@ -75,7 +75,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:enabled="false"
-            android:background="@drawable/bkd_btn_round_state_blue_to_grey"
+            android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
             android:text="确认注册"
             app:layout_constraintTop_toBottomOf="@+id/ieVerifyCode"
     />

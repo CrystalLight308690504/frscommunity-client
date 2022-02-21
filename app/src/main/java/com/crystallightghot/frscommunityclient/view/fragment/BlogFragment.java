@@ -50,13 +50,13 @@ public class BlogFragment extends BaseFragment {
 
     public static BlogFragment newInstance(String param1) {
 
-        if (null == blogFragment) {
+      /*  if (null == blogFragment ) {
             blogFragment = new BlogFragment();
             Bundle args = new Bundle();
             args.putString(ARG_PARAM1, param1);
             blogFragment.setArguments(args);
-        }
-        return blogFragment;
+        }*/
+        return new BlogFragment();
     }
 
     public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {

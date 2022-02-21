@@ -34,6 +34,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:stf_animationEnabled="false"
+                android:minHeight="400dp"
                 app:stf_inAnimation="@android:anim/slide_in_left"
                 app:stf_outAnimation="@android:anim/slide_out_right">
 
@@ -43,7 +44,6 @@
                     android:layout_height="match_parent"
                     android:background="@android:color/white"
                     android:overScrollMode="never"
-                    android:minHeight="300dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@android:layout/simple_list_item_2" />
         </com.xuexiang.xui.widget.statelayout.StatefulLayout>
