@@ -85,17 +85,19 @@ public class UserSearchResultViewPagerItemFragment extends BaseFragment {
      * 将数据加入到RecycleView中
      */
     public void addDataToRV(List<User> users, boolean hasNext) {
+        refreshLayout.finishRefresh();
         if (null == users || users.size() == 0) {
             llStateful.showEmpty();
+            refreshLayout.setEnableLoadMore(false);
             return;
+        }else {
+            llStateful.showContent();
         }
-        llStateful.showContent();
         if (hasNext) {
             refreshLayout.setEnableLoadMore(true);
         }else  {
             refreshLayout.setEnableLoadMore(false);
         }
-        refreshLayout.finishRefresh();
         recyclerViewAdapter.getUsers().addAll(users);
         recyclerViewAdapter.notifyDataSetChanged();
     }

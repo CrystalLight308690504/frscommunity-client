@@ -98,15 +98,15 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
             ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
             presenter.loadBlogCount(user.getUserId());
-            btnFollow.setActivated(true);
+            presenter.loadFollowerCount(user.getUserId());
+            presenter.checkIfFollowed(user.getUserId());
             btnFollow.setOnClickListener(view -> {
                 btnFollow.setActivated(!btnFollow.isActivated());
                 if (btnFollow.isActivated()) { // 取消关注
                     btnFollow.setText("关注");
-
+                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
                 }else { // 关注
                     presenter.followUser(user.getUserId());
-
                     btnFollow.setText("已关注");
                 }
             });
@@ -122,12 +122,21 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
             }
         }
 
-        public void showArticleCount(String articleCount) {
-            tvArticleCount.setText(articleCount);
+        public void showArticleCount(long articleCount) {
+            tvArticleCount.setText(""+ articleCount);
         }
 
-        public void showFollowerCount(String followerCount) {
-            tvFollowerCount.setText("博客总数 " + followerCount);
+        public void showFollowerCount(long followerCount) {
+            tvFollowerCount.setText(""+followerCount);
+        }
+
+        public void isFollowed(boolean isFollowed) {
+            btnFollow.setActivated(!isFollowed);
+            if (btnFollow.isActivated()) { // 取消关注
+                btnFollow.setText("关注");
+            }else { // 关注
+                btnFollow.setText("已关注");
+            }
         }
     }
 }

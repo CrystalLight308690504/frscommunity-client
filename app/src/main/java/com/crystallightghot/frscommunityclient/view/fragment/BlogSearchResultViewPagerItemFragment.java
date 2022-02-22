@@ -86,11 +86,14 @@ public class BlogSearchResultViewPagerItemFragment extends BaseFragment {
      * 将数据加入到RecycleView中
      */
     public void addDataToRV(List<Blog> blogs, boolean hasNext) {
+        refreshLayout.finishRefresh();
         if (null == blogs || blogs.size() == 0) {
             llStateful.showEmpty();
+            refreshLayout.setEnableLoadMore(false);
             return;
+        }else {
+            llStateful.showContent();
         }
-        llStateful.showContent();
         if (hasNext) {
             refreshLayout.setEnableLoadMore(true);
         }else  {

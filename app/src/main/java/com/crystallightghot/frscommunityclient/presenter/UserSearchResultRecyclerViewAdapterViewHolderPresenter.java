@@ -23,6 +23,9 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
     UserModel userModel;
     RespondMessageKey loadBlogCount = new RespondMessageKey();
     RespondMessageKey followUserK = new RespondMessageKey();
+    RespondMessageKey cancelUserK = new RespondMessageKey();
+    RespondMessageKey showFollowerCountK = new RespondMessageKey();
+    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
 
     public UserSearchResultRecyclerViewAdapterViewHolderPresenter(UserSearchResultRecyclerViewAdapter.MyViewHolder view) {
         this.view = view;
@@ -43,17 +46,23 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
         userModel.followUser(userFollower, followUserK);
     }
 
-
-    private class RespondMessageKey {
+    public void cancelFollower(Long userId, Long userFollowedId) {
+        userModel.cancelFollower(userId, userFollowedId, cancelUserK);
     }
+
+    public void loadFollowerCount(Long userId) {
+        userModel.loadFollowerCount(userId, showFollowerCountK);
+    }
+
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage<RespondMessageKey> message) {
+
         if (message.getMessageKey() == loadBlogCount) {
             double data = (double) message.getData();
-            int count = (int) data;
-            view.showArticleCount(count + "");
+            long count = (long) data;
+            view.showArticleCount(count);
         } else if (message.getMessageKey() == followUserK) {
             if (message.isSuccess()) {
                 XToastUtils.success(message.getMessage());
@@ -61,8 +70,32 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
                 XToastUtils.error(message.getMessage());
 
             }
+        } else if (message.getMessageKey() == cancelUserK){
+            if (message.isSuccess()) {
+                XToastUtils.success(message.getMessage());
+            }else {
+                XToastUtils.error(message.getMessage());
+            }
+        }else if (message.getMessageKey() == showFollowerCountK){
+            if (message.isSuccess()) {
+                double data = (double) message.getData();
+                int count = (int) data;
+                view.showFollowerCount(count);
+            }
+        }else if (message.getMessageKey() == checkIfFollowedK){
+            if (message.isSuccess()) {
+                boolean isFollowed = (boolean) message.getData();
+                view.isFollowed(isFollowed);
+            }
         }
 
+    }
+
+    public void checkIfFollowed(Long userFollowedId) {
+        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId,checkIfFollowedK);
+    }
+
+    private class RespondMessageKey {
     }
 
 }
