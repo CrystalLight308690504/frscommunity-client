@@ -2,7 +2,7 @@ package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 
 /**
  * @Date 2022/2/11
@@ -12,7 +12,7 @@ import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
  */
 public class BlogViewPagerItemFragmentModel {
     public void loadingBlogs(SkatingType skatingType, Object respondMessageKey, int index) {
-        String url = FRSCRequstIO.FIND_BLOGS_BY_SKATING_TYPE_ID.getRequestIO() + skatingType.getSkatingTypeId() + "/" +index;
+        String url = FRSCRequestIO.BlogIO.FIND_BLOGS_BY_SKATING_TYPE_ID.getRequestIO() + skatingType.getSkatingTypeId() + "/" +index;
         FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
     }
 }

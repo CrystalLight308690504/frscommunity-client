@@ -1,10 +1,9 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.presenter.UserSearchResultRecyclerViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 
 /**
  * @Date 2022/2/21
@@ -14,12 +13,12 @@ import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
  */
 public class UserModel {
     public <K> void  findUserByNameKey(String searchText, int pagerIndex, K respondMessageKey) {
-        String url = FRSCRequstIO.FIND_USERS_BY_NAME_KEY.getRequestIO() + searchText + "/" + pagerIndex;
+        String url = FRSCRequestIO.SystemIO.FIND_USERS_BY_NAME_KEY.getRequestIO() + searchText + "/" + pagerIndex;
         FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
     }
 
     public void followUser(UserFollower userFollower,  Object respondMessageKey) {
-        String url = FRSCRequstIO.FOLLOW_USER.getRequestIO();
+        String url = FRSCRequestIO.SystemIO.FOLLOW_USER.getRequestIO();
         String requestBody = FRSCObjectTransferUtil.ObjectToJsonString(userFollower);
         FRSCOKHttp3RequestUtil.callPostRequest(url, requestBody,respondMessageKey);
     }

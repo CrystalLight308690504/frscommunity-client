@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.model;
 import com.crystallightghot.frscommunityclient.contract.PutBlogConfirmContract;
 import com.crystallightghot.frscommunityclient.presenter.PutBlogConfirmPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 
 /**
  * @Date 2022/2/6
@@ -13,12 +13,12 @@ import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
  */
 public class PutBlogConfirmModel implements PutBlogConfirmContract.Model {
     public void loadingCategory(Long userId) {
-        String requestIO = FRSCRequstIO.FIND_CATEGORIES_BY_USERID.getRequestIO() + userId;
+        String requestIO = FRSCRequestIO.BlogIO.FIND_CATEGORIES_BY_USERID.getRequestIO() + userId;
         FRSCOKHttp3RequestUtil.callGetRequest(requestIO, PutBlogConfirmPresenter.MessageRespondKey.BLOG_CATEGORIES);
     }
 
     public void loadingSkatingType() {
-        String requestIO = FRSCRequstIO.GET_SKATING_TYPE.getRequestIO();
+        String requestIO = FRSCRequestIO.BlogIO.GET_SKATING_TYPE.getRequestIO();
         FRSCOKHttp3RequestUtil.callGetRequest(requestIO,PutBlogConfirmPresenter.MessageRespondKey.SKATING_TYPES);
     }
 }

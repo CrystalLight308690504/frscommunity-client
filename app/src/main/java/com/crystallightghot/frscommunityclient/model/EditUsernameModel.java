@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.model;
 import com.crystallightghot.frscommunityclient.contract.EditUserNameContract;
 import com.crystallightghot.frscommunityclient.view.value.FRSCString;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -26,7 +26,7 @@ public class EditUsernameModel implements EditUserNameContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequstIO.MODIFY_USERNAME.getRequestIO();
+        String url = FRSCRequestIO.SystemIO.MODIFY_USERNAME.getRequestIO();
 
         String head = "";
         if (null != user){

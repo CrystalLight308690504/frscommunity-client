@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.EditUserDescriptionContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.EditUserDescriptionModel;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 import com.crystallightghot.frscommunityclient.view.fragment.EditMyDescriptionFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
@@ -42,7 +42,7 @@ public class EditUserDescriptionPresenter implements EditUserDescriptionContract
 
     @Override
     public void callBack(RequestResult requestResult) {
-        RequestMessage message = new RequestMessage(requestResult, FRSCRequstIO.MODIFY_USER_DESCRIPTION);
+        RequestMessage message = new RequestMessage(requestResult, FRSCRequestIO.SystemIO.MODIFY_USER_DESCRIPTION);
         FRSCEventBusUtil.sendMessage(message);
 
     }
@@ -53,7 +53,7 @@ public class EditUserDescriptionPresenter implements EditUserDescriptionContract
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         view.hideLoadingDialog();
-        if (message.getMessageKey() != FRSCRequstIO.MODIFY_USER_DESCRIPTION) {
+        if (message.getMessageKey() != FRSCRequestIO.SystemIO.MODIFY_USER_DESCRIPTION) {
             return;
         }
         if (message.isSuccess()) {

@@ -55,6 +55,7 @@
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/contentViewPager"
             android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:minHeight="400dp"
             android:layout_marginTop="@dimen/distance_small"
            />
 

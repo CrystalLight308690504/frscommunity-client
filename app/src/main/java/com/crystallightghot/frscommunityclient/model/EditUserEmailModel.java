@@ -4,7 +4,7 @@ import com.crystallightghot.frscommunityclient.contract.EditUserEmailContract;
 import com.crystallightghot.frscommunityclient.presenter.EditUserEmailPresenter;
 import com.crystallightghot.frscommunityclient.view.value.FRSCString;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequstIO;
+import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 import com.crystallightghot.frscommunityclient.view.pojo.system.RequestResult;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.google.gson.Gson;
@@ -26,7 +26,7 @@ public class EditUserEmailModel implements EditUserEmailContract.Model {
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);
-        String url = FRSCRequstIO.MODIFY_USER_EMAIL.getRequestIO();
+        String url = FRSCRequestIO.SystemIO.MODIFY_USER_EMAIL.getRequestIO();
         String head = "";
         if (null != user) {
             head = user.getSessionId();
