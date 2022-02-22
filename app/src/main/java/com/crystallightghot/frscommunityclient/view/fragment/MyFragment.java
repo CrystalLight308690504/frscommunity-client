@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.MyFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
@@ -39,15 +40,6 @@ public class MyFragment extends Fragment {
     @BindView(R.id.userName)
     TextView userName;
 
-    @BindView(R.id.tviFllowed)
-    TextView tviFllowed;
-    @BindView(R.id.tvFan)
-    TextView tvFan;
-    @BindView(R.id.tvArticleBrowed)
-    TextView tvArticleBrowed;
-    @BindView(R.id.tvicArticleCreated)
-    TextView tvicArticleCreated;
-    @BindView(R.id.tvArticleCreated)
     TextView tvArticleCreated;
     @BindView(R.id.ivBlog)
     AppCompatImageView ivBlog;
@@ -55,18 +47,7 @@ public class MyFragment extends Fragment {
     AppCompatImageView ivAnswer;
     @BindView(R.id.ivCllection)
     AppCompatImageView ivCllection;
-    @BindView(R.id.tvicFllowed)
-    TextView tvicFllowed;
-    @BindView(R.id.tvicFan)
-    TextView tvicFan;
-    @BindView(R.id.tvicScanded)
-    TextView tvicScanded;
-    @BindView(R.id.ivicBlog)
-    TextView ivicBlog;
-    @BindView(R.id.ivicAnswer)
-    TextView ivicAnswer;
-    @BindView(R.id.ivicCllection)
-    TextView ivicCllection;
+
     @BindView(R.id.icivSetting)
     ImageView icivSetting;
 
@@ -80,13 +61,26 @@ public class MyFragment extends Fragment {
     TextView ivicMyHelp;
     @BindView(R.id.userProfile)
     RadiusImageView userProfile;
+    @BindView(R.id.tvicFllowed)
+    TextView tvicFllowed;
+    @BindView(R.id.tvFollowUserCount)
+    TextView tvFollowUserCount;
+    @BindView(R.id.tvicFan)
+    TextView tvicFan;
+    @BindView(R.id.tvFanCount)
+    TextView tvFanCount;
+    @BindView(R.id.tvQuestionCount)
+    TextView tvQuestionCount;
+    @BindView(R.id.tvBlogCount)
+    TextView tvBlogCount;
 
     private String mParam1;
 
     BaseActivity activity;
+    MyFragmentPresenter presenter;
 
     public MyFragment() {
-        FRSCEventBusUtil.register(this);
+        presenter = new MyFragmentPresenter(this);
     }
 
 
@@ -109,7 +103,6 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -126,9 +119,16 @@ public class MyFragment extends Fragment {
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             this.userProfile.setImageBitmap(decodedByte);
         }
+        loadData();
     }
 
-    @OnClick({R.id.btnArrowRight, R.id.tviFllowed, R.id.tvFan, R.id.tvArticleBrowed, R.id.tvArticleCreated, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting})
+    private void loadData() {
+        presenter.loadFollowUserCount();
+        presenter.loadFanOfUserCount();
+        presenter.loadBlogCount();
+    }
+
+    @OnClick({R.id.btnArrowRight, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting, R.id.tvicFllowed, R.id.tvicFan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnArrowRight:
@@ -149,19 +149,43 @@ public class MyFragment extends Fragment {
             case R.id.btnSetting:
                 FRSCIntentUtil.intentToSingleFragmentActivity(SettingFragment.newInstance("MyHelpQuestionedFragment"));
                 break;
+            case R.id.tvicFllowed:
+                break;
+            case R.id.tvicFan:
+                break;
             default:
                 break;
         }
     }
 
+    /**
+     * 显示关注的用户数量
+     * @param followUserCount
+     */
+    public void showFollowUserCount(long followUserCount) {
+        tvFollowUserCount.setText(followUserCount + "");
+    }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getUserChangedMessage(UserChangedMessage message) {
+    public void showFanCount(long fanCount) {
+        tvFanCount.setText(fanCount + "");
+    }
+
+    public void showQuestionCount(long questionCount) {
+        tvQuestionCount.setText(questionCount + "");
+    }
+
+    public void showBlogCount(long blogCount) {
+        tvBlogCount.setText(blogCount + "");
+    }
+
+    public void userChanged() {
         User user = FRSCApplicationContext.getUser();
         Drawable userProfileD = FRSCApplicationContext.getUserProfile();
         userProfile.setImageDrawable(userProfileD);
         userName.setText(user.getUserName());
     }
+
+
 }
 
 

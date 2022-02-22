@@ -4,6 +4,7 @@ import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.model.UserModel;
 import com.crystallightghot.frscommunityclient.view.adapter.UserSearchResultRecyclerViewAdapter;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
+import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -91,9 +92,10 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
 
     }
 
-    public void checkIfFollowed(Long userFollowedId) {
+        public void checkIfFollowed(Long userFollowedId) {
         userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId,checkIfFollowedK);
     }
+
 
     private class RespondMessageKey {
     }

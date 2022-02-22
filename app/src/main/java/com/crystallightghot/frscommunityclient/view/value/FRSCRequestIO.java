@@ -18,6 +18,7 @@ public class FRSCRequestIO {
         EXIST_FOLLOWER("/user/existFollower/"),
         CANCEL_FOLLOW_USER("/user/cancelFollowUser/"),
         COUNT_FOLLOWER("/user/countFollower/"),
+        COUNT_USER_FOLLOW_COUNT("/user/countUserFollowCount/"),
         FOLLOW_USER("/user/followUser"),
         FIND_USERS_BY_NAME_KEY("/user/findUserByNameKey/"),
         MODIFY_USERNAME("/user/modifyUserName"),
