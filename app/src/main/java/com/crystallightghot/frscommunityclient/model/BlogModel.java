@@ -20,18 +20,24 @@ public class BlogModel {
         FRSCOKHttp3RequestUtil.callDeleteRequest(url, requestBody, respondMessageKey);
     }
 
-    public void loadSearchBlogResult(String searchText, int pagerIndex , Object respondMessageKey) {
+    public void loadSearchBlogResult(String searchText, int pagerIndex, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.FIND_BLOGS_BY_SEARCH_KEY.getRequestIO() + searchText + "/" + pagerIndex;
-        FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
+        FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
     }
 
     public void deleteBlogCategory(String blogCategoryJson, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.DELETE_BLOG_CATEGORY.getRequestIO();
-        FRSCOKHttp3RequestUtil.callPutRequest(url,blogCategoryJson,respondMessageKey);
+        FRSCOKHttp3RequestUtil.callPutRequest(url, blogCategoryJson, respondMessageKey);
     }
+
     public void loadingCategory(Long userId) {
         String requestIO = FRSCRequestIO.BlogIO.FIND_CATEGORIES_BY_USERID.getRequestIO() + userId;
         FRSCOKHttp3RequestUtil.callGetRequest(requestIO, MyBlogPresenter.RespondMessageKey.LOADING_BLOG_CATEGORIES);
+    }
+
+    public void loadingCategory(Long userId, Object respondMessageKey) {
+        String requestIO = FRSCRequestIO.BlogIO.FIND_CATEGORIES_BY_USERID.getRequestIO() + userId;
+        FRSCOKHttp3RequestUtil.callGetRequest(requestIO,respondMessageKey);
     }
 
     public void loadingBlogs(Long userId, Long blogCategoryId) {
@@ -50,7 +56,7 @@ public class BlogModel {
 
     public void modifyCategory(String jsonBody, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.MODIFY_BLOG_CATEGORY.getRequestIO();
-        FRSCOKHttp3RequestUtil.callPutRequest(url,jsonBody, respondMessageKey);
+        FRSCOKHttp3RequestUtil.callPutRequest(url, jsonBody, respondMessageKey);
     }
 
 

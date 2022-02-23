@@ -7,7 +7,7 @@ package com.crystallightghot.frscommunityclient.view.value;
  * description：
  */
 public class FRSCRequestIO {
-    private static  String localHost = "http://192.168.0.100:";
+    private static String localHost = "http://192.168.0.100:";
 //    private static  String localHost = "http://42.194.211.199:";
 
     public enum SystemIO {
@@ -29,16 +29,16 @@ public class FRSCRequestIO {
         MODIFY_USER_PROFILE("/user/modifyUserProfile"),
         MODIFY_USER_EMAIL("/user/modifyUserEmail");
 
-        private String host = localHost;
-        private String port = "9002";
-        private String requestInterface;
+        private final String requestInterface;
 
-        private SystemIO(String requestInterface) {
+        SystemIO(String requestInterface) {
             this.requestInterface = requestInterface;
         }
 
         public String getRequestIO() {
-            return host + port  + requestInterface;
+            String host = "http://42.194.211.199:";
+            String port = "9002";
+            return host + port + requestInterface;
         }
     }
 
@@ -57,24 +57,21 @@ public class FRSCRequestIO {
         ADD_BLOG_CATEGORY("/blog/addBlogCategory/"),
         DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory"),
         COUNT_BLOGS("/blog/countBlogs/"),
-        MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory" );
+        MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory");
 
-        private String host = localHost;
-        private String port = "9003";
-        private String requestInterface;
+        private final String requestInterface;
 
-        private BlogIO(String requestInterface) {
+        BlogIO(String requestInterface) {
             this.requestInterface = requestInterface;
-            this.port = port;
         }
 
         public String getRequestIO() {
-            return host + port  + requestInterface;
+            String host = "http://42.194.211.199:";
+            String port = "9003";
+            return host + port + requestInterface;
         }
 
     }
-
-
 
 
 }

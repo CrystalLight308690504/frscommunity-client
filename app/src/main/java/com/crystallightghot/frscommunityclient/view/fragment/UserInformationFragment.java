@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,8 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.UserInformationFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
-import com.crystallightghot.frscommunityclient.view.adapter.UserInformationViewPagerAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.UserInformationBlogViewPagerItemAdapter;
 import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
@@ -35,7 +37,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * create an instance of this fragment.
  */
 public class UserInformationFragment extends Fragment {
-
+    UserInformationFragmentPresenter presenter;
     private static final String ARG_PARAM1 = "param1";
     @BindView(R.id.ivInformationBackground)
     ImageView userInformationBackground;
@@ -46,8 +48,6 @@ public class UserInformationFragment extends Fragment {
     TextView userGender;
     @BindView(R.id.user_self_introduce)
     TextView userSelfIntroduce;
-    @BindView(R.id.followers)
-    TextView followers;
     @BindView(R.id.btnEditeUserInformation)
     TextView btnEditeUserInformation;
     @BindView(R.id.clUserInformation)
@@ -61,17 +61,27 @@ public class UserInformationFragment extends Fragment {
     ViewPager2 vpContentViewPager;
     @BindView(R.id.tlSkatingTypes)
     TabLayout tlSkatingTypes;
+    @BindView(R.id.btnFollow)
+    Button btnFollow;
+    @BindView(R.id.icFollowerUserCount)
+    TextView icFollowerUserCount;
+    @BindView(R.id.tvFollowUserCount)
+    TextView tvFollowUserCount;
+    @BindView(R.id.icFollowerCount)
+    TextView icFollowerCount;
+    @BindView(R.id.tvFollowerCount)
+    TextView tvFollowerCount;
     User user;
-    private String mParam1;
 
     public UserInformationFragment() {
-        // Required empty public constructor
         FRSCEventBusUtil.register(this);
+        presenter = new UserInformationFragmentPresenter(this);
         user = FRSCApplicationContext.getUser();
     }
 
     public UserInformationFragment(User user) {
         this.user = user;
+        presenter = new UserInformationFragmentPresenter(this);
     }
 
     public static UserInformationFragment newInstance(User user) {
@@ -79,6 +89,7 @@ public class UserInformationFragment extends Fragment {
 
         return fragment;
     }
+
     public static UserInformationFragment newInstance() {
         UserInformationFragment fragment = new UserInformationFragment();
 
@@ -88,15 +99,11 @@ public class UserInformationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_information, container, false);
         ButterKnife.bind(this, view);
         initView();
@@ -104,28 +111,74 @@ public class UserInformationFragment extends Fragment {
     }
 
     private void initView() {
-        if (null != user) {
-            userName.setText(user.getUserName());
-            String userProfileBase64 = user.getProfile();
-            byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            userProfile.setImageBitmap(decodedByte);
-            userInformationBackground.setImageBitmap(decodedByte);
-            userGender.setText(user.getGender());
-            userSelfIntroduce.setText(user.getDescription());
+        if (null == user) {
+            return;
+        }
+        btnFollow.setOnClickListener(view -> {
+            btnFollow.setSelected(!btnFollow.isSelected());
+            if (btnFollow.isSelected()) { // 取消关注
+                btnFollow.setText("已关注");
+                presenter.followUser(user.getUserId());
+            }else { // 关注
+                btnFollow.setText("关注");
+                presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
+            }
+        });
+        userName.setText(user.getUserName());
+        String userProfileBase64 = user.getProfile();
+        byte[] decodedString = Base64.decode(userProfileBase64, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        userProfile.setImageBitmap(decodedByte);
+        userInformationBackground.setImageBitmap(decodedByte);
+        userGender.setText(user.getGender());
+        userSelfIntroduce.setText(user.getDescription());
+
+        // 隐藏按钮
+        if (user.getUserId().equals(FRSCApplicationContext.getUser().getUserId())) {
+            btnFollow.setVisibility(View.INVISIBLE);
+            btnEditeUserInformation.setVisibility(View.VISIBLE);
+        }else {
+            btnFollow.setVisibility(View.VISIBLE);
+            btnEditeUserInformation.setVisibility(View.INVISIBLE);
+            presenter.checkIfFollowed(user.getUserId());
         }
 
-        String[] tabTitles = new String[]{"博客","问答"};
-        vpContentViewPager.setAdapter(new UserInformationViewPagerAdapter(this));
+        presenter.loadFollowUserCount(user.getUserId());
+        presenter.loadFollowerCount(user.getUserId());
+
+        String[] tabTitles = new String[]{"博客", "问答"};
+        vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, user));
         new TabLayoutMediator(tlSkatingTypes, vpContentViewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }
 
-    @OnClick({R.id.followers, R.id.btnEditeUserInformation})
+    public void isFollowed(boolean isFollowed) {
+        btnFollow.setSelected(isFollowed);
+        if (btnFollow.isSelected()) { // 取消关注
+            btnFollow.setText("已关注");
+        } else { // 关注
+            btnFollow.setText("关注");
+        }
+    }
+
+    public void showFollowUserCount(long articleCount) {
+        tvFollowUserCount.setText("" + articleCount);
+    }
+
+    public void showFollowerCount(long followerCount) {
+        tvFollowerCount.setText("" + followerCount);
+    }
+
+
+    @OnClick({ R.id.btnEditeUserInformation,R.id.icFollowerUserCount, R.id.icFollowerCount})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnEditeUserInformation:
                 FRSCFragmentUtil.intentToFragment(EditeUserInformationFragment.newInstance(""), (BaseFragmentActivity) getActivity(), true);
+                break;
+            case R.id.icFollowerUserCount:
+                break;
+            case R.id.icFollowerCount:
                 break;
         }
     }
@@ -140,4 +193,9 @@ public class UserInformationFragment extends Fragment {
         userGender.setText(user.getGender());
         userSelfIntroduce.setText(user.getDescription());
     }
+
+    @OnClick(R.id.btnFollow)
+    public void onClick() {
+    }
+
 }

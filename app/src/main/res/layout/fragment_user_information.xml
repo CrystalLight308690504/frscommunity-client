@@ -36,8 +36,8 @@
                     tools:ignore="MissingConstraints"/>
             <TextView
                     android:id="@+id/user_name"
-                    android:text="crystallight"
-                    android:textColor="@color/default_displayed_text_black"
+                    android:text="FRSC"
+                    android:textColor="@color/applicationMainTheme"
                     app:layout_constraintTop_toBottomOf="@id/user_profile"
                     app:layout_constraintLeft_toLeftOf="@id/user_profile"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -47,6 +47,7 @@
                     android:id="@+id/user_gender"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="男"
+                    android:textColor="@color/default_displayed_text_gray"
                     app:layout_constraintLeft_toRightOf="@id/user_name"
                     app:layout_constraintTop_toTopOf="@id/user_name"
                     android:layout_marginLeft="@dimen/distance_max1"
@@ -54,33 +55,57 @@
             <TextView
                     android:id="@+id/user_self_introduce"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="我是个工程师"
+                    android:text="INTRODUSE"
+                    android:textColor="@color/default_displayed_text_gray"
                     app:layout_constraintLeft_toLeftOf="@id/user_profile"
                     app:layout_constraintTop_toBottomOf="@id/user_name"
                     android:layout_marginTop="@dimen/distance_normal"
             />
+
             <TextView
-                    android:id="@+id/followers"
+                    android:id="@+id/icFollowerUserCount"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="关注：50"
-                    android:textColor="@color/default_displayed_text_black"
+                    android:text="关注"
+                    android:textColor="@color/default_displayed_text_gray"
                     app:layout_constraintLeft_toLeftOf="@id/user_profile"
                     app:layout_constraintTop_toBottomOf="@id/user_self_introduce"
                     android:layout_marginTop="@dimen/distance_normal"
             />
             <TextView
+                    android:id="@+id/tvFollowUserCount"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="粉丝：50"
-                    android:textColor="@color/default_displayed_text_black"
-                    app:layout_constraintStart_toEndOf="@+id/followers"
-                    app:layout_constraintBottom_toBottomOf="@+id/followers"
+                    android:text="0"
+                    android:textColor="@color/applicationMainTheme"
+                    app:layout_constraintLeft_toLeftOf="@id/icFollowerUserCount"
+                    app:layout_constraintTop_toBottomOf="@id/icFollowerUserCount"
+                    android:layout_marginLeft="@dimen/distance_small"
+            />
+            <TextView
+                    android:id="@+id/icFollowerCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="粉丝"
+                    android:textColor="@color/default_displayed_text_gray"
+                    app:layout_constraintLeft_toRightOf="@id/icFollowerUserCount"
+                    app:layout_constraintTop_toTopOf="@id/icFollowerUserCount"
                     android:layout_marginLeft="@dimen/distance_max"
+            />
+            <TextView
+                    android:id="@+id/tvFollowerCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/applicationMainTheme"
+                    app:layout_constraintLeft_toLeftOf="@id/icFollowerCount"
+                    app:layout_constraintTop_toBottomOf="@id/icFollowerCount"
+                    android:layout_marginLeft="@dimen/distance_small"
             />
 
             <Button
+                    android:id="@+id/btnFollow"
                     android:text="关注"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@drawable/bkd_btn_round_selected_state_blue_to_grey"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="@id/user_profile"
             />
@@ -89,8 +114,9 @@
                       android:text="编辑资料"
                       android:textColor="@color/applicationMainTheme"
                       android:textSize="12dp"
+                      android:visibility="invisible"
                       app:layout_constraintRight_toRightOf="parent"
-                      app:layout_constraintTop_toTopOf="@id/followers"
+                      app:layout_constraintTop_toTopOf="@id/icFollowerUserCount"
                       android:id="@+id/btnEditeUserInformation"
             />
 

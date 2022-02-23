@@ -2,8 +2,9 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.model.UserModel;
-import com.crystallightghot.frscommunityclient.view.adapter.UserSearchResultRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.fragment.UserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -12,22 +13,25 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * @Date 2022/2/21
+ * @Date 2022/2/23
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
-    UserSearchResultRecyclerViewAdapter.MyViewHolder view;
+public class UserInformationFragmentPresenter {
+    UserInformationFragment view;
     BlogModel blogModel;
     UserModel userModel;
-    RespondMessageKey loadBlogCount = new RespondMessageKey();
+
+    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
+    RespondMessageKey showFollowUserCountK = new RespondMessageKey();
     RespondMessageKey followUserK = new RespondMessageKey();
     RespondMessageKey cancelUserK = new RespondMessageKey();
     RespondMessageKey showFollowerCountK = new RespondMessageKey();
-    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
 
-    public UserSearchResultRecyclerViewAdapterViewHolderPresenter(UserSearchResultRecyclerViewAdapter.MyViewHolder view) {
+
+
+    public UserInformationFragmentPresenter(UserInformationFragment view) {
         this.view = view;
         blogModel = new BlogModel();
         userModel = new UserModel();
@@ -35,8 +39,13 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
     }
 
 
-    public void loadBlogCount(Long userId) {
-        blogModel.loadBlogCount(userId, loadBlogCount);
+
+    public void checkIfFollowed(Long userFollowedId) {
+        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId, checkIfFollowedK);
+    }
+
+    public void loadFollowerCount(Long userId) {
+        userModel.loadFollowerCount(userId, showFollowerCountK);
     }
 
     public void followUser(Long userId) {
@@ -50,18 +59,16 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
         userModel.cancelFollower(userId, userFollowedId, cancelUserK);
     }
 
-    public void loadFollowerCount(Long userId) {
-        userModel.loadFollowerCount(userId, showFollowerCountK);
+    public void loadFollowUserCount(Long userId) {
+        userModel.loadFollowUserCount(userId,showFollowUserCountK);
     }
-
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage<RespondMessageKey> message) {
-
-        if (message.getMessageKey() == loadBlogCount) {
+        if (message.getMessageKey() == showFollowUserCountK) {
             double data = (double) message.getData();
             long count = (long) data;
-            view.showArticleCount(count);
+            view.showFollowUserCount(count);
         } else if (message.getMessageKey() == followUserK) {
             if (message.isSuccess()) {
                 XToastUtils.success(message.getMessage());
@@ -90,12 +97,6 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
 
     }
 
-    public void checkIfFollowed(Long userFollowedId) {
-        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId, checkIfFollowedK);
-    }
-
-
     private class RespondMessageKey {
     }
-
 }

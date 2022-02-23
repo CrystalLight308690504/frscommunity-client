@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.UserInformationBlogViewPagerItemAdapterPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.BlogRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapter;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
@@ -35,14 +39,13 @@ public class UserInformationViewPagerBlogItemFragment extends Fragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
+    private User user;
+    UserInformationBlogViewPagerItemAdapterPresenter presenter;
 
-    public UserInformationViewPagerBlogItemFragment() {
+    public UserInformationViewPagerBlogItemFragment(User user) {
+        this.user = user;
+        presenter = new UserInformationBlogViewPagerItemAdapterPresenter(this);
     }
-
-    public UserInformationViewPagerBlogItemFragment(String label) {
-
-    }
-
 
     @Nullable
     @Override
@@ -54,40 +57,13 @@ public class UserInformationViewPagerBlogItemFragment extends Fragment {
     }
 
     private void init() {
-
-    }
-
-    /**
-     * 将数据加入到RecycleView中
-     */
-    public void putDataToRV(List dataAll) {
         rvLists.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if (null == dataAll) {
-            dataAll = new LinkedList<>();
-        }
-
-        for (int i = 0; i < 20; i++) {
-            HashMap<Object, Object> data = new HashMap();
-            data.put("userName", "crystallightghost");
-            data.put("putDate", "2020-10-3");
-            data.put("articleStyle", "博客");
-            data.put("articleTitle", "轮滑" + i);
-            data.put("articleContent", "轮滑的地方轮滑的地方轮滑的地方轮滑的地方轮滑的地方" + i);
-            dataAll.add(data);
-        }
-
-        rvLists.setAdapter(new BlogRecyclerViewAdapter(getActivity(), dataAll));
-
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout ->{
-
+            presenter.loadingCategory(user.getUserId());
         });
-        //上拉加载
-        refreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            refreshLayout.finishLoadMore();
-
-        });
+        presenter.loadingCategory(user.getUserId());
     }
 
     private void showOffline() {
@@ -95,9 +71,20 @@ public class UserInformationViewPagerBlogItemFragment extends Fragment {
         refreshLayout.setEnableLoadMore(false);
     }
 
-    private void showError() {
+    public void loadingData(List<BlogCategory> blogCategories) {
+        MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories);
+        rvLists.setAdapter(adapter);
+        refreshLayout.resetNoMoreData();
+        refreshLayout.setEnableLoadMore(true);
+        llStateful.showContent();
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
+    }
+
+    public void showError() {
         llStateful.showError(v -> refreshLayout.autoRefresh());
         refreshLayout.setEnableLoadMore(false);
+        refreshLayout.finishRefresh();
     }
 
 }

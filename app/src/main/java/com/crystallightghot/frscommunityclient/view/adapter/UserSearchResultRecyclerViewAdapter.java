@@ -93,23 +93,28 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
 
         public void initView(User user) {
             this.user = user;
+
+            btnFollow.setOnClickListener(view -> {
+                btnFollow.setSelected(!btnFollow.isSelected());
+                if (btnFollow.isSelected()) { // 取消关注
+                    btnFollow.setText("已关注");
+                    presenter.followUser(user.getUserId());
+                }else { // 关注
+                    btnFollow.setText("已关注");
+                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
+                }
+            });
+
             Drawable userProfile = FRSCImagePatternChangeUtil.getDrawableFromBase64(user.getProfile());
             ivProfile.setImageDrawable(userProfile);
             ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
+
             presenter.loadBlogCount(user.getUserId());
             presenter.loadFollowerCount(user.getUserId());
             presenter.checkIfFollowed(user.getUserId());
-            btnFollow.setOnClickListener(view -> {
-                btnFollow.setActivated(!btnFollow.isActivated());
-                if (btnFollow.isActivated()) { // 取消关注
-                    btnFollow.setText("关注");
-                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
-                }else { // 关注
-                    presenter.followUser(user.getUserId());
-                    btnFollow.setText("已关注");
-                }
-            });
+
+
         }
 
         @OnClick({R.id.ivProfile, R.id.btnFollow})
@@ -131,11 +136,11 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
         }
 
         public void isFollowed(boolean isFollowed) {
-            btnFollow.setActivated(!isFollowed);
-            if (btnFollow.isActivated()) { // 取消关注
-                btnFollow.setText("关注");
-            }else { // 关注
+            btnFollow.setSelected(isFollowed);
+            if (btnFollow.isSelected()) { // 取消关注
                 btnFollow.setText("已关注");
+            } else { // 关注
+                btnFollow.setText("关注");
             }
         }
     }
