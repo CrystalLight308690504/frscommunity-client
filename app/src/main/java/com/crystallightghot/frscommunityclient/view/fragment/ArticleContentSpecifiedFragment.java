@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecifiedFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
@@ -71,6 +72,8 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     private User user;
     private SkatingType skatingType;
 
+    ArticleContentSpecifiedFragmentPresenter presenter;
+
     public ArticleContentSpecifiedFragment() {
         FRSCEventBusUtil.register(this);
     }
@@ -79,6 +82,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         FRSCEventBusUtil.register(this);
         this.blog = blog;
         this.user = blog.getUser();
+        presenter = new ArticleContentSpecifiedFragmentPresenter(this);
     }
 
     public static ArticleContentSpecifiedFragment newInstance(String param1) {
@@ -121,6 +125,16 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             articleTitle.setText(blog.getBlogTitle());
             articleContent.setText(blog.getContent());
             articleSkatingType.setText(blog.getSkatingType().getName());
+            btnFollow.setOnClickListener(view -> {
+                btnFollow.setSelected(!btnFollow.isSelected());
+                if (btnFollow.isSelected()) { // 取消关注
+                    btnFollow.setText("已关注");
+                    presenter.followUser(user.getUserId());
+                }else { // 关注
+                    btnFollow.setText("关注");
+                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
+                }
+            });
 
             User userLogin = FRSCApplicationContext.getUser();
             Long userLoginUserId = userLogin.getUserId();
@@ -128,6 +142,9 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             if (userLoginUserId.equals(userId)) {
                 changeToSelfState();
             }
+
+            presenter.checkIfFollowed(user.getUserId());
+
         }
     }
 
@@ -139,6 +156,15 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         ieCriticism.setVisibility(View.GONE);
         btnCriticism.setVisibility(View.GONE);
         btnModify.setVisibility(View.VISIBLE);
+    }
+
+    public void isFollowed(boolean isFollowed) {
+        btnFollow.setSelected(isFollowed);
+        if (btnFollow.isSelected()) { // 取消关注
+            btnFollow.setText("已关注");
+        } else { // 关注
+            btnFollow.setText("关注");
+        }
     }
 
     @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCllection, R.id.btnLove, R.id.btnModify})

@@ -100,7 +100,7 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
                     btnFollow.setText("已关注");
                     presenter.followUser(user.getUserId());
                 }else { // 关注
-                    btnFollow.setText("已关注");
+                    btnFollow.setText("关注");
                     presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
                 }
             });

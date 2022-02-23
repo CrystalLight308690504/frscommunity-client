@@ -1,8 +1,7 @@
 package com.crystallightghot.frscommunityclient.presenter;
 
-import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.model.UserModel;
-import com.crystallightghot.frscommunityclient.view.adapter.UserSearchResultRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
@@ -12,31 +11,28 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * @Date 2022/2/21
+ * @Date 2022/2/23
  * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
-    UserSearchResultRecyclerViewAdapter.MyViewHolder view;
-    BlogModel blogModel;
+public class ArticleContentSpecifiedFragmentPresenter {
+
     UserModel userModel;
-    RespondMessageKey loadBlogCount = new RespondMessageKey();
+    private ArticleContentSpecifiedFragment view;
+    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
     RespondMessageKey followUserK = new RespondMessageKey();
     RespondMessageKey cancelUserK = new RespondMessageKey();
-    RespondMessageKey showFollowerCountK = new RespondMessageKey();
-    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
 
-    public UserSearchResultRecyclerViewAdapterViewHolderPresenter(UserSearchResultRecyclerViewAdapter.MyViewHolder view) {
+
+    public ArticleContentSpecifiedFragmentPresenter(ArticleContentSpecifiedFragment view) {
         this.view = view;
-        blogModel = new BlogModel();
         userModel = new UserModel();
         FRSCEventBusUtil.register(this);
     }
 
-
-    public void loadBlogCount(Long userId) {
-        blogModel.loadBlogCount(userId, loadBlogCount);
+    public void checkIfFollowed(Long userFollowedId) {
+        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId, checkIfFollowedK);
     }
 
     public void followUser(Long userId) {
@@ -50,22 +46,14 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
         userModel.cancelFollower(userId, userFollowedId, cancelUserK);
     }
 
-    public void loadFollowerCount(Long userId) {
-        userModel.loadFollowerCount(userId, showFollowerCountK);
-    }
-
-
-    public void checkIfFollowed(Long userFollowedId) {
-        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId, checkIfFollowedK);
-    }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage<RespondMessageKey> message) {
-        if (message.getMessageKey() == loadBlogCount) {
-            double data = (double) message.getData();
-            long count = (long) data;
-            view.showArticleCount(count);
-        } else if (message.getMessageKey() == followUserK) {
+        if (message.getMessageKey() == checkIfFollowedK) {
+            if (message.isSuccess()) {
+                boolean isFollowed = (boolean) message.getData();
+                view.isFollowed(isFollowed);
+            }
+        }else if (message.getMessageKey() == followUserK) {
             if (message.isSuccess()) {
                 XToastUtils.success(message.getMessage());
             } else {
@@ -78,23 +66,9 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
             } else {
                 XToastUtils.error(message.getMessage());
             }
-        } else if (message.getMessageKey() == showFollowerCountK) {
-            if (message.isSuccess()) {
-                double data = (double) message.getData();
-                int count = (int) data;
-                view.showFollowerCount(count);
-            }
-        } else if (message.getMessageKey() == checkIfFollowedK) {
-            if (message.isSuccess()) {
-                boolean isFollowed = (boolean) message.getData();
-                view.isFollowed(isFollowed);
-            }
         }
-
     }
-
 
     private class RespondMessageKey {
     }
-
 }
