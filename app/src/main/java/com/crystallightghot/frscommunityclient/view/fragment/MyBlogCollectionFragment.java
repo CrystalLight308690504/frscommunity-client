@@ -13,22 +13,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
-import com.crystallightghot.frscommunityclient.view.message.TransportDataMessage;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MyCollectionFragment#newInstance} factory method to
+ * Use the {@link MyBlogCollectionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyCollectionFragment extends Fragment {
+public class MyBlogCollectionFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
+
     Activity activity;
     @BindView(R.id.btnBack)
     ImageView btnBack;
@@ -38,18 +32,16 @@ public class MyCollectionFragment extends Fragment {
     RecyclerView rvMyBlogs;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
-    CategoryDialogFragment dialogFragment;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
 
-    public MyCollectionFragment() {
-        dialogFragment = new CategoryDialogFragment();
-        FRSCEventBusUtil.register(this);
+    public MyBlogCollectionFragment() {
+        // Required empty public constructor
     }
 
-    public static MyCollectionFragment newInstance(String param1) {
-        MyCollectionFragment fragment = new MyCollectionFragment();
+    public static MyBlogCollectionFragment newInstance(String param1) {
+        MyBlogCollectionFragment fragment = new MyBlogCollectionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -67,6 +59,7 @@ public class MyCollectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine_blog, container, false);
         ButterKnife.bind(this, view);
         init();
@@ -75,8 +68,11 @@ public class MyCollectionFragment extends Fragment {
 
     private void init() {
         activity = getActivity();
-        tvTitle.setText("我的收藏");
+        btnAddPackage.setVisibility(View.INVISIBLE);
+        tvTitle.setText("我的回答");
 
+//        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
+//        rvMyBlogs.setAdapter(adapter);
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
@@ -85,21 +81,9 @@ public class MyCollectionFragment extends Fragment {
             case R.id.btnBack:
                 activity.onBackPressed();
                 break;
-            case R.id.btnAddPackage:
-                dialogFragment.show(getFragmentManager(), "AddClassificationDialogFragment");
-                break;
+
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    public void getMessage(TransportDataMessage message) {
-        if (message.getMessageKey() != dialogFragment) {
-            return;
-        }
-        Map data = (Map) message.getData();
-        String categoryName = (String) data.get("categoryName");
-        String description = (String) data.get("description");
-
-    }
 
 }

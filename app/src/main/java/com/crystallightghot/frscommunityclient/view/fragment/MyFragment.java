@@ -19,14 +19,10 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.MyFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
-import com.crystallightghot.frscommunityclient.view.message.UserChangedMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -138,10 +134,10 @@ public class MyFragment extends Fragment {
                 FRSCIntentUtil.intentToSingleFragmentActivity(MyBlogFragment.newInstance("MyBlogFragment"));
                 break;
             case R.id.ivAnswer:
-                FRSCIntentUtil.intentToSingleFragmentActivity(MyAnswerFragment.newInstance("MyAnswerFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyBlogCollectionFragment.newInstance("MyBlogCollectionFragment"));
                 break;
             case R.id.ivCllection:
-                FRSCIntentUtil.intentToSingleFragmentActivity(MyCollectionFragment.newInstance("MyCollectionFragment"));
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyQuestionCollectionFragment.newInstance("MyQuestionCollectionFragment"));
                 break;
             case R.id.ivMyHelp:
                 FRSCIntentUtil.intentToSingleFragmentActivity(MyQuestionFragment.newInstance("MyHelpQuestionedFragment"));

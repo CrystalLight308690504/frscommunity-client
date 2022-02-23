@@ -141,15 +141,14 @@
                   android:id="@+id/ivicBlog"
         />
         <androidx.appcompat.widget.AppCompatImageView android:layout_width="35dp" android:layout_height="35dp"
-                                                      android:src="@mipmap/ic_answer"
+                                                      android:src="@mipmap/ic_cllection"
                                                       app:layout_constraintLeft_toLeftOf="@id/ivicAnswer"
                                                       app:layout_constraintRight_toRightOf="@+id/ivicAnswer"
                                                       app:layout_constraintBottom_toTopOf="@+id/ivicAnswer"
                                                       android:id="@+id/ivAnswer"
-
                                                       app:layout_constraintTop_toTopOf="parent"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="我的回答"
+                  android:text="博客收藏"
                   app:layout_constraintLeft_toRightOf="@+id/ivicBlog"
                   app:layout_constraintTop_toBottomOf="@+id/ivAnswer"
                   app:layout_constraintRight_toLeftOf="@id/ivicCllection"
@@ -164,7 +163,7 @@
                                                       app:layout_constraintBottom_toTopOf="@id/ivicCllection"
                                                       app:layout_constraintTop_toTopOf="parent"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="我的收藏"
+                  android:text="求助收藏"
                   app:layout_constraintLeft_toRightOf="@+id/ivicAnswer"
                   app:layout_constraintTop_toBottomOf="@+id/ivCllection"
                   app:layout_constraintRight_toRightOf="parent"
