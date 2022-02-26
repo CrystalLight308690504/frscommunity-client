@@ -70,7 +70,6 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     TextView articleSkatingType;
     private Blog blog;
     private User user;
-    private SkatingType skatingType;
 
     ArticleContentSpecifiedFragmentPresenter presenter;
 
@@ -134,6 +133,8 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             }
             addListener();
             presenter.checkIfFollowed(user.getUserId());
+            presenter.checkIfCollection(blog.getBlogId());
+            presenter.checkIsApplauseBlog(blog.getBlogId());
         }
     }
 
@@ -151,9 +152,19 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         btnCollection.setOnClickListener(view -> {
             btnCollection.setActivated(!btnCollection.isActivated());
             if (btnCollection.isActivated()) { // 收藏
-                presenter.collectionBlog(blog,user);
+                presenter.collectionBlog(blog);
             }else {// 取消收藏
-                presenter.cancelCollectionBlog(blog,user);
+                presenter.cancelCollectionBlog(blog);
+            }
+
+        });
+
+        btnLove.setOnClickListener(view -> {
+            btnLove.setActivated(!btnLove.isActivated());
+            if (btnLove.isActivated()) { // 点赞
+                presenter.applauseBlog(blog);
+            }else {// 取消点赞
+                presenter.cancelApplauseBlog(blog);
             }
 
         });
@@ -176,6 +187,14 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         } else { // 关注
             btnFollow.setText("关注");
         }
+    }
+
+    public void showIsCollectionBlog(boolean isCollection) {
+        btnCollection.setActivated(isCollection);
+    }
+
+    public void showIsApplauseBlog(boolean isLove) {
+        btnLove.setActivated(isLove);
     }
 
     @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCollection, R.id.btnLove, R.id.btnModify})

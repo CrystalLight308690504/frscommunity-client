@@ -62,7 +62,6 @@ public class AccessActivityPresenter {
         if (message.getMessageKey() != isLogin) {
             return;
         }
-
         if (message.isSuccess()) {
             if ((boolean) message.getData()) {
                 FRSCApplicationContext.setUser(user);

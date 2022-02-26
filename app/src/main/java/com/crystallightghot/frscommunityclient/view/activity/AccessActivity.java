@@ -35,7 +35,6 @@ public class AccessActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         Runnable runnable =()-> {
             int i = 1;
 
@@ -51,24 +50,6 @@ public class AccessActivity extends BaseActivity {
         FRSCThreadPoolUtil.executeThread(runnable);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetStickyEvent(TimeMessage message) {
-        if (message.getCode() != MessageCode.ACCESS_TIME){
-            return;
-        }
-        int time = message.getTime();
-        tvTime.setText(time+"");
-
-        if (time == 0){
-            presenter.checkUserLoginState();
-        }
-    }
-
     public void stateToLogin(boolean isLogin) {
         if (isLogin) {
             Intent intent = new Intent(this, MainActivity.class);
@@ -77,5 +58,22 @@ public class AccessActivity extends BaseActivity {
             intentToSingleFragmentActivity(LoginFragment.newInstance("login"));
         }
         finish();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetStickyEvent(TimeMessage message) {
+        if (message.getCode() != MessageCode.ACCESS_TIME){
+            return;
+        }
+        int time = message.getTime();
+        tvTime.setText(time+"");
+        if (time == 0){
+            presenter.checkUserLoginState();
+        }
     }
 }

@@ -50,18 +50,22 @@ public class FRSCRequestIO {
         // 博客请求接口
         ADD_BLOG("/blog/save"),
         ADD_BLOG_CATEGORY("/blog/addBlogCategory/"),
+        APPLAUSE_BLOG("/blog/applauseBlog/"),
+        CANCEL_APPLAUSE_BLOG("/blog/cancelApplauseBlog/"),
         COLLECTION_BLOG("/blog/collectionBlog"),
         CANCEL_COLLECTION_BLOG("/blog/cancelCollectionBlog"),
         COUNT_BLOGS("/blog/countBlogs/"),
+        COUNT_BLOGS_BY_CATEGORY("/blog/countBlogsByCategoryId/"),
         DELETE_BLOG("/blog/delete"),
+        DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory"),
         MODIFY_BLOG("/blog/modifyBlog"),
         FIND_BLOGS_BY_USERID("/blog/findBlogsByUserId/"),
         FIND_BLOGS_BY_SKATING_TYPE_ID("/blog/findBlogsBySkatingTypeId/"),
         FIND_CATEGORIES_BY_USERID("/blog/findBlogCategories/"),
         FIND_BLOGS_BY_USERID_AND_CATEGORY("/blog/findBlogsByUserAndCategory/"),
         FIND_BLOGS_BY_SEARCH_KEY("/blog/findBlogsBySearchKey/"),
-        DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory"),
-        COUNT_BLOGS_BY_CATEGORY("/blog/countBlogsByCategoryId/"),
+        IS_COLLECTION_BLOG("/blog/isCollectionBlog/"),
+        IS_APPLAUSE_BLOG("/blog/isApplauseBlog/"),
         MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory");
 
         private final String requestInterface;
