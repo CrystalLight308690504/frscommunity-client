@@ -73,9 +73,12 @@ public  class BaseFragmentActivity extends BaseActivity {
             } else if (fragmentsNoInBackStack.size() > 0) {
                 // 将默认绑定在activity的fragment显示出来
                 transaction.show(fragmentsNoInBackStack.get(fragmentsNoInBackStack.size() - 1));
+                // 删除存储的默认fragment
                 fragmentsNoInBackStack.remove(fragmentsNoInBackStack.size() - 1);
             }
             transaction.commitNowAllowingStateLoss();
+        }else {
+            finish();
         }
     }
 

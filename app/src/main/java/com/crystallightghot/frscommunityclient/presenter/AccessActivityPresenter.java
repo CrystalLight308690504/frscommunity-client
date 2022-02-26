@@ -55,7 +55,14 @@ public class AccessActivityPresenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RequestMessage<RespondMessageKey> message) {
+    public void getMessage(RequestMessage message) {
+        /**
+         * 不添加下面的代码，会重复请求 导致回退异常
+         */
+        if (message.getMessageKey() != isLogin) {
+            return;
+        }
+
         if (message.isSuccess()) {
             if ((boolean) message.getData()) {
                 FRSCApplicationContext.setUser(user);
