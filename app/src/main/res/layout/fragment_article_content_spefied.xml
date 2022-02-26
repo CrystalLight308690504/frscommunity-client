@@ -89,9 +89,9 @@
               android:visibility="gone"
               android:id="@+id/btnModify"
     />
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/articleTitle"
             android:layout_marginTop="@dimen/distance_max"
@@ -100,11 +100,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <TextView
+            <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/articleContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
+                    android:gravity="start"
+                    android:layout_height="300dp"
+                    android:enabled="false"
+                    android:inputType="textMultiLine"
+                    android:background="@drawable/bkd_input_edit_text"
             />
 
 
@@ -135,16 +138,18 @@
                                                                          android:background="@drawable/bkd_input_edit_text"
                                                                          android:hint="这里写你的评论"
                                                                          android:inputType="textMultiLine"
+                                                                         android:gravity="start"
                                                                          android:padding="@dimen/distance_small"
-                                                                         android:id="@+id/ieCriticism"
                                                                          android:layout_marginTop="@dimen/distance_max"
                                                                          app:layout_constraintStart_toStartOf="parent"
-                                                                         />
+                                                                         android:id="@+id/ieCriticism"
+                />
                 <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:id="@+id/btnCriticism"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@id/ieCriticism"
                         android:background="@drawable/bkd_btn_round_enable_state_blue_to_grey"
+                        android:enabled="false"
                         android:text="评论"
                         android:layout_marginRight="@dimen/distance_normal"
                         />
@@ -153,12 +158,12 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/articleCriticism"
+                    android:id="@+id/rlArticleCriticisms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
             />
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

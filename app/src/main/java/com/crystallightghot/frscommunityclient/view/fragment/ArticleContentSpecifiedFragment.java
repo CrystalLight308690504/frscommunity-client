@@ -2,6 +2,8 @@ package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +22,6 @@ import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecified
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
-import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -50,14 +51,10 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     TextView articleTitle;
     @BindView(R.id.btnCollection)
     ImageButton btnCollection;
-    @BindView(R.id.articleContent)
-    TextView articleContent;
     @BindView(R.id.report)
     TextView btnReport;
     @BindView(R.id.btnLove)
     AppCompatButton btnLove;
-    @BindView(R.id.articleCriticism)
-    RecyclerView articleComments;
     @BindView(R.id.profile)
     RadiusImageView profile;
     @BindView(R.id.btnModify)
@@ -68,6 +65,10 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     Button btnCriticism;
     @BindView(R.id.articleSkatingType)
     TextView articleSkatingType;
+    @BindView(R.id.articleContent)
+    TextInputEditText articleContent;
+    @BindView(R.id.rlArticleCriticisms)
+    RecyclerView rlArticleCriticisms;
     private Blog blog;
     private User user;
 
@@ -124,6 +125,26 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             articleTitle.setText(blog.getBlogTitle());
             articleContent.setText(blog.getContent());
             articleSkatingType.setText(blog.getSkatingType().getName());
+            ieCriticism.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if (editable.length() > 0) {
+                        btnCriticism.setEnabled(true);
+                    } else {
+                        btnCriticism.setEnabled(false);
+                    }
+                }
+            });
 
             User userLogin = FRSCApplicationContext.getUser();
             Long userLoginUserId = userLogin.getUserId();
@@ -131,44 +152,12 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             if (userLoginUserId.equals(userId)) {
                 changeToSelfState();
             }
-            addListener();
             presenter.checkIfFollowed(user.getUserId());
             presenter.checkIfCollection(blog.getBlogId());
             presenter.checkIsApplauseBlog(blog.getBlogId());
         }
     }
 
-    private void addListener() {
-        btnFollow.setOnClickListener(view -> {
-            btnFollow.setSelected(!btnFollow.isSelected());
-            if (btnFollow.isSelected()) { // 取消关注
-                btnFollow.setText("已关注");
-                presenter.followUser(user.getUserId());
-            }else { // 关注
-                btnFollow.setText("关注");
-                presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
-            }
-        });
-        btnCollection.setOnClickListener(view -> {
-            btnCollection.setActivated(!btnCollection.isActivated());
-            if (btnCollection.isActivated()) { // 收藏
-                presenter.collectionBlog(blog);
-            }else {// 取消收藏
-                presenter.cancelCollectionBlog(blog);
-            }
-
-        });
-
-        btnLove.setOnClickListener(view -> {
-            btnLove.setActivated(!btnLove.isActivated());
-            if (btnLove.isActivated()) { // 点赞
-                presenter.applauseBlog(blog);
-            }else {// 取消点赞
-                presenter.cancelApplauseBlog(blog);
-            }
-
-        });
-    }
 
     private void changeToSelfState() {
         btnFollow.setVisibility(View.GONE);
@@ -197,6 +186,13 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         btnLove.setActivated(isLove);
     }
 
+    public void criticiseBlogAfter(boolean isSuccess) {
+        if (isSuccess) {
+            ieCriticism.setText("");
+        }
+
+    }
+
     @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCollection, R.id.btnLove, R.id.btnModify})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -204,16 +200,36 @@ public class ArticleContentSpecifiedFragment extends Fragment {
                 FRSCFragmentUtil.intentToFragment(UserInformationFragment.newInstance(user), (BaseFragmentActivity) getActivity(), true);
                 break;
             case R.id.btnFollow:
+                btnFollow.setSelected(!btnFollow.isSelected());
+                if (btnFollow.isSelected()) { // 取消关注
+                    btnFollow.setText("已关注");
+                    presenter.followUser(user.getUserId());
+                } else { // 关注
+                    btnFollow.setText("关注");
+                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
+                }
                 break;
             case R.id.btnCollection:
+                btnCollection.setActivated(!btnCollection.isActivated());
+                if (btnCollection.isActivated()) { // 收藏
+                    presenter.collectionBlog(blog);
+                } else {// 取消收藏
+                    presenter.cancelCollectionBlog(blog);
+                }
                 break;
             case R.id.btnLove:
+                btnLove.setActivated(!btnLove.isActivated());
+                if (btnLove.isActivated()) { // 点赞
+                    presenter.applauseBlog(blog);
+                } else {// 取消点赞
+                    presenter.cancelApplauseBlog(blog);
+                }
                 break;
             case R.id.btnModify:
                 FRSCFragmentUtil.intentToFragmentAddedToBackStack(PutBlogContentFragment.newInstance(blog));
                 break;
             case R.id.btnCriticism:
-
+                presenter.criticiseBlog(ieCriticism.getText().toString(), blog.getBlogId());
                 break;
             default:
                 break;

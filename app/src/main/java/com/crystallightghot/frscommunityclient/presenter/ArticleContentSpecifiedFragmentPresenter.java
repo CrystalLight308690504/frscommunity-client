@@ -6,6 +6,7 @@ import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpeci
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCriticism;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
@@ -36,6 +37,7 @@ public class ArticleContentSpecifiedFragmentPresenter {
     RespondMessageKey isApplauseBlogK = new RespondMessageKey();
     RespondMessageKey applauseBlogK = new RespondMessageKey();
     RespondMessageKey cancelApplauseBlogK = new RespondMessageKey();
+    RespondMessageKey criticiseBlogK = new RespondMessageKey();
 
 
     public ArticleContentSpecifiedFragmentPresenter(ArticleContentSpecifiedFragment view) {
@@ -93,6 +95,14 @@ public class ArticleContentSpecifiedFragmentPresenter {
         blogModel.cancelApplauseBlog(FRSCApplicationContext.getUser().getUserId(), blog.getBlogId(), applauseBlogK);
     }
 
+    public void criticiseBlog(String toString, long blogId) {
+        BlogCriticism blogCriticism = new BlogCriticism();
+        blogCriticism.setContent(toString);
+        blogCriticism.setBlogId(blogId);
+        blogCriticism.setUserId(FRSCApplicationContext.getUser().getUserId());
+        blogModel.criticiseBlog(blogCriticism,criticiseBlogK);
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(RequestMessage message) {
         if (!message.getMessageKey().getClass().equals(RespondMessageKey.class)){
@@ -109,7 +119,6 @@ public class ArticleContentSpecifiedFragmentPresenter {
                 XToastUtils.success(message.getMessage());
             } else {
                 XToastUtils.error(message.getMessage());
-
             }
         }else if (message.getMessageKey() == cancelUserK) {
             if (message.isSuccess()) {
@@ -155,6 +164,14 @@ public class ArticleContentSpecifiedFragmentPresenter {
                 XToastUtils.success(message.getMessage());
 
             } else {
+                XToastUtils.error(message.getMessage());
+            }
+        }else if (message.getMessageKey() == criticiseBlogK) {
+            if (message.isSuccess()) {
+                XToastUtils.success(message.getMessage());
+                view.criticiseBlogAfter(true);
+            } else {
+                view.criticiseBlogAfter(false);
                 XToastUtils.error(message.getMessage());
             }
         }

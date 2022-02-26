@@ -1,9 +1,11 @@
 package com.crystallightghot.frscommunityclient.model;
 
+import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecifiedFragmentPresenter;
 import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogApplause;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCriticism;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
@@ -115,5 +117,12 @@ public class BlogModel {
         blogApplause.setUserId(userId);
         String json = gson.toJson(blogApplause);
         FRSCOKHttp3RequestUtil.callDeleteRequest(url, json, respondMessageKey);
+    }
+
+    public void criticiseBlog(BlogCriticism blogCriticism, Object respondMessageKey) {
+        String url = FRSCRequestIO.BlogIO.CRITICISE_BLOG.getRequestIO();
+        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        String jsonBody = gson.toJson(blogCriticism);
+        FRSCOKHttp3RequestUtil.callPostRequest(url, jsonBody, respondMessageKey);
     }
 }

@@ -36,6 +36,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     ArrayList<Blog> blogs;
     ArticlesAdapterPresenter presenter;
 
+
     public ArticlesAdapter(ArrayList<Blog> blogs) {
         this.blogs = blogs;
         presenter = new ArticlesAdapterPresenter(this);
@@ -70,6 +71,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         TextView contentTitle;
         @BindView(R.id.timeCreated)
         TextView timeCreated;
+        @BindView(R.id.article_content)
+        TextView articleContent;
         public View itemView;
         @Getter
         Blog blog;
@@ -83,6 +86,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         public void initView(Blog blog) {
             this.blog = blog;
             contentTitle.setText(blog.getBlogTitle());
+            articleContent.setText(blog.getContent());
             timeCreated.setText(blog.getCreatedTime().toString());
             itemView.setOnClickListener(view -> {
                 FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(blog));
@@ -104,10 +108,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         }
     }
 
-    public  void  showLoadingDialog(){
+    public void showLoadingDialog() {
         loadingDialog.show();
     }
-    public  void  hideLoadingDialog(){
+
+    public void hideLoadingDialog() {
         loadingDialog.dismiss();
     }
 }
