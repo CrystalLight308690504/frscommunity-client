@@ -1,7 +1,5 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.presenter.MyFragmentPresenter;
-import com.crystallightghot.frscommunityclient.presenter.UserSearchResultRecyclerViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
@@ -21,7 +19,7 @@ public class UserModel {
 
     public void followUser(UserFollower userFollower, Object respondMessageKey) {
         String url = FRSCRequestIO.SystemIO.FOLLOW_USER.getRequestIO();
-        String requestBody = FRSCObjectTransferUtil.ObjectToJsonString(userFollower);
+        String requestBody = FRSCObjectTransferUtil.objectToJsonString(userFollower);
         FRSCOKHttp3RequestUtil.callPostRequest(url, requestBody, respondMessageKey);
     }
 
@@ -53,5 +51,11 @@ public class UserModel {
     public void isLogin(String sessionId, Object respondMessageKey) {
         String url = FRSCRequestIO.SystemIO.IS_LOGIN.getRequestIO() + sessionId;
         FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
+
+    public void findUserById(Long userId, Object respondMessageKey) {
+        String url = FRSCRequestIO.SystemIO.FIND_USERS_BY_ID.getRequestIO() + userId;
+        FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
+
     }
 }

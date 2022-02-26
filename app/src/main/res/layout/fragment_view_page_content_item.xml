@@ -19,14 +19,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srlClassicsSpinnerStyle="FixedBehind"
-                app:srlDrawableArrowSize="20dp"
-                app:srlDrawableMarginRight="20dp"
-                app:srlDrawableProgressSize="20dp"
+                app:srlDrawableArrowSize="15dp"
+                app:srlDrawableMarginRight="12dp"
+                app:srlDrawableProgressSize="15dp"
                 app:srlEnableLastTime="true"
                 app:srlFinishDuration="500"
                 app:srlTextSizeTime="10dp"
-                app:srlTextSizeTitle="16sp"
-                app:srlTextTimeMarginTop="2dp" />
+                app:srlAccentColor="@color/applicationMainTheme"
+                app:srlTextSizeTitle="13dp"
+                app:srlTextTimeMarginTop="0dp"/>
 
         <com.xuexiang.xui.widget.statelayout.StatefulLayout
                 android:id="@+id/ll_stateful"
@@ -47,6 +48,15 @@
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
                 android:layout_marginBottom="?attr/actionBarSize"
+                app:srlDrawableArrowSize="15dp"
+                app:srlDrawableMarginRight="12dp"
+                app:srlDrawableProgressSize="15dp"
+                app:srlEnableLastTime="true"
+                app:srlFinishDuration="500"
+                app:srlTextSizeTime="10dp"
+                app:srlAccentColor="@color/applicationMainTheme"
+                app:srlTextSizeTitle="13dp"
+                app:srlTextTimeMarginTop="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

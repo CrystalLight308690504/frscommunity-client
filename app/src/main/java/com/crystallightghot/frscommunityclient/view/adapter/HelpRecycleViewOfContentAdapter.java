@@ -66,7 +66,7 @@ public class HelpRecycleViewOfContentAdapter extends RecyclerView.Adapter<HelpRe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance("ArticleContentSpecifiedFragment"));
+//                    FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance("ArticleContentSpecifiedFragment"));
                 }
             });
         }

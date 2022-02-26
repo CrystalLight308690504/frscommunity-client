@@ -15,7 +15,10 @@ import java.util.Map;
  */
 public class FRSCObjectTransferUtil {
 
-    public static <T> List<T> ListMapToListObject(ArrayList<Map> lists, Class<T> clazz) {
+    public static <T> List<T> listMapToListObject(ArrayList<Map> lists, Class<T> clazz) {
+        if (null == lists) {
+            return null;
+        }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         ArrayList<T> objects = new ArrayList();
         for (int i = 0; i < lists.size(); i++) {
@@ -27,9 +30,14 @@ public class FRSCObjectTransferUtil {
         return objects;
     }
 
-    public static <C> String ObjectToJsonString(Object o) {
+    public static <C> String objectToJsonString(Object o) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         return gson.toJson(o);
+    }
+
+    public static <C> C mapToObject(Map map,Class<C> clazz) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        return gson.fromJson(gson.toJson(map),clazz);
     }
 
     public static Gson getGsonWithTimeForm() {

@@ -22,6 +22,7 @@ public class FRSCRequestIO {
         COUNT_USER_FOLLOW_COUNT("/user/countUserFollowCount/"),
         FOLLOW_USER("/user/followUser"),
         FIND_USERS_BY_NAME_KEY("/user/findUserByNameKey/"),
+        FIND_USERS_BY_ID("/user/findUserByUserId/"),
         MODIFY_USERNAME("/user/modifyUserName"),
         MODIFY_PASSWORD_BY_PHONE_NUMBER("/user/modifyUserPasswordByPhoneNumber"),
         MODIFY_PASSWORD_BY_OLD_PASSWORD("/user/modifyUserPasswordByOldPassword"),
@@ -37,8 +38,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-//            String host = "http://42.194.211.199:";
-            String host = localHost;
+            String host = "http://42.194.211.199:";
+//            String host = localHost;
             String port = "9002";
             return host + port + requestInterface;
         }
@@ -56,7 +57,7 @@ public class FRSCRequestIO {
         CANCEL_COLLECTION_BLOG("/blog/cancelCollectionBlog"),
         CRITICISE_BLOG("/blog/criticiseBlog"),
         DELETE_BLOG_CRITICISM("/blog/deleteBlogCriticism"),
-        FIND_BLOG_CRITICISMS("/blog/findBlogCriticisms"),
+        FIND_BLOG_CRITICISMS("/blog/findBlogCriticisms/"),
         COUNT_BLOGS("/blog/countBlogs/"),
         COUNT_BLOGS_BY_CATEGORY("/blog/countBlogsByCategoryId/"),
         DELETE_BLOG("/blog/delete"),
@@ -78,8 +79,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-//            String host = "http://42.194.211.199:";
-            String host = localHost;
+            String host = "http://42.194.211.199:";
+//            String host = localHost;
             String port = "9003";
             return host + port + requestInterface;
         }

@@ -50,7 +50,7 @@ public class BlogSearchResultViewPagerItemFragmentPresenter {
                         hasNext = (boolean) data.get("hasNext");
                         Map resultMap = (Map) message.getData();
                         ArrayList dataList = (ArrayList) resultMap.get("data");
-                        List blogs = FRSCObjectTransferUtil.ListMapToListObject(dataList, Blog.class);
+                        List blogs = FRSCObjectTransferUtil.listMapToListObject(dataList, Blog.class);
                         view.addDataToRV(blogs, hasNext);
                     }
                 } else {

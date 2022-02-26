@@ -7,15 +7,15 @@ import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCriticism;
-import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
-import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
-import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
+import com.crystallightghot.frscommunityclient.view.util.*;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Date 2022/2/23
@@ -27,6 +27,7 @@ public class ArticleContentSpecifiedFragmentPresenter {
 
     UserModel userModel;
     BlogModel blogModel;
+    BlogCriticism blogCriticismAdded;
     private ArticleContentSpecifiedFragment view;
     RespondMessageKey checkIfFollowedK = new RespondMessageKey();
     RespondMessageKey followUserK = new RespondMessageKey();
@@ -38,6 +39,7 @@ public class ArticleContentSpecifiedFragmentPresenter {
     RespondMessageKey applauseBlogK = new RespondMessageKey();
     RespondMessageKey cancelApplauseBlogK = new RespondMessageKey();
     RespondMessageKey criticiseBlogK = new RespondMessageKey();
+    RespondMessageKey loadCriticismK = new RespondMessageKey();
 
 
     public ArticleContentSpecifiedFragmentPresenter(ArticleContentSpecifiedFragment view) {
@@ -96,11 +98,16 @@ public class ArticleContentSpecifiedFragmentPresenter {
     }
 
     public void criticiseBlog(String toString, long blogId) {
-        BlogCriticism blogCriticism = new BlogCriticism();
-        blogCriticism.setContent(toString);
-        blogCriticism.setBlogId(blogId);
-        blogCriticism.setUserId(FRSCApplicationContext.getUser().getUserId());
-        blogModel.criticiseBlog(blogCriticism,criticiseBlogK);
+        blogCriticismAdded = new BlogCriticism();
+        blogCriticismAdded.setContent(toString);
+        blogCriticismAdded.setBlogId(blogId);
+        blogCriticismAdded.setCreatedTime(new Timestamp(System.currentTimeMillis()));
+        blogCriticismAdded.setUser(FRSCApplicationContext.getUser());
+        blogModel.criticiseBlog(blogCriticismAdded,criticiseBlogK);
+    }
+
+    public void loadCriticisms(long blogId, int pagerIndex) {
+        blogModel.loadCriticisms(blogId,pagerIndex, loadCriticismK);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -169,11 +176,23 @@ public class ArticleContentSpecifiedFragmentPresenter {
         }else if (message.getMessageKey() == criticiseBlogK) {
             if (message.isSuccess()) {
                 XToastUtils.success(message.getMessage());
-                view.criticiseBlogAfter(true);
+                view.criticiseBlogAfter(true,blogCriticismAdded);
             } else {
-                view.criticiseBlogAfter(false);
+                view.criticiseBlogAfter(false,null);
                 XToastUtils.error(message.getMessage());
             }
+        }else if (message.getMessageKey() == loadCriticismK) {
+                if (message.isSuccess()) {
+                    Map resultMap = (Map) message.getData();
+                    boolean hasNext = (boolean) resultMap.get("hasNext");
+                    ArrayList dataList = (ArrayList) resultMap.get("data");
+                    if (null != dataList){
+                        List<BlogCriticism> blogCriticisms = FRSCObjectTransferUtil.listMapToListObject(dataList, BlogCriticism.class);
+                        view.showMoreBlogCriticism(blogCriticisms,hasNext);
+                    }
+                }else  {
+                    view.showMoreBlogCriticismError(message.getMessage());
+                }
         }
     }
 

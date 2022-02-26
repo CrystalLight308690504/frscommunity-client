@@ -45,7 +45,7 @@ public class UserSearchResultViewPagerItemFragmentPresenter {
                 if (message.isSuccess()) {
                     Map resultMap = (Map) message.getData();
                     ArrayList dataList = (ArrayList) resultMap.get("data");
-                    List<User> users = FRSCObjectTransferUtil.ListMapToListObject(dataList, User.class);
+                    List<User> users = FRSCObjectTransferUtil.listMapToListObject(dataList, User.class);
                     hasNext = (boolean) resultMap.get("hasNext");
                     view.addDataToRV(users, hasNext);
                 }else {

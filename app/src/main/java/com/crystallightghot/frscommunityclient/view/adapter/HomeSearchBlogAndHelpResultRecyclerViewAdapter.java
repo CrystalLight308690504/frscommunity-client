@@ -84,7 +84,7 @@ public class HomeSearchBlogAndHelpResultRecyclerViewAdapter extends RecyclerView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
+//                    FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(""));
                 }
             });
         }

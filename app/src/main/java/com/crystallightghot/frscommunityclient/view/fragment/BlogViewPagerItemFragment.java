@@ -105,9 +105,7 @@ public class BlogViewPagerItemFragment extends BaseFragment {
      * 将数据加入到RecycleView中
      */
     public void loadData(List<Blog> blogs, boolean hasNext) {
-        for (int i = 0; i < blogs.size(); i++) {
-            blogRecyclerViewAdapter.getBlogs().add(blogs.get(i));
-        }
+        blogRecyclerViewAdapter.getBlogs().addAll(blogs);
         llStateful.showContent();
         refreshLayout.resetNoMoreData();
         refreshLayout.finishRefresh();

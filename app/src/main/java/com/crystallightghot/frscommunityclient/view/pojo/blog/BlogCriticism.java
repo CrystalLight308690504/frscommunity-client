@@ -1,5 +1,6 @@
 package com.crystallightghot.frscommunityclient.view.pojo.blog;
 
+import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -18,7 +19,7 @@ public class BlogCriticism {
 
     private Long blogId;
 
-    private Long userId;
+    private User user;
 
     private String content;
 

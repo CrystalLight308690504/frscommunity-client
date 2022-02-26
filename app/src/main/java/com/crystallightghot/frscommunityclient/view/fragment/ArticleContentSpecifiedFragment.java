@@ -20,17 +20,24 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecifiedFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseFragmentActivity;
+import com.crystallightghot.frscommunityclient.view.adapter.BlogCriticismAdapter;
 import com.crystallightghot.frscommunityclient.view.message.BlogChangMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCriticism;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCImagePatternChangeUtil;
 import com.google.android.material.textfield.TextInputEditText;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
+import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,18 +73,19 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     @BindView(R.id.articleSkatingType)
     TextView articleSkatingType;
     @BindView(R.id.articleContent)
-    TextInputEditText articleContent;
+    TextView articleContent;
     @BindView(R.id.rlArticleCriticisms)
     RecyclerView rlArticleCriticisms;
+    @BindView(R.id.ll_stateful)
+    StatefulLayout llStateful;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     private Blog blog;
     private User user;
-
+    int pagerIndex = 0;
+    boolean hasNext;
+    BlogCriticismAdapter blogCriticismAdapter = new BlogCriticismAdapter();
     ArticleContentSpecifiedFragmentPresenter presenter;
-
-    public ArticleContentSpecifiedFragment() {
-        FRSCEventBusUtil.register(this);
-    }
-
     public ArticleContentSpecifiedFragment(@NonNull Blog blog) {
         FRSCEventBusUtil.register(this);
         this.blog = blog;
@@ -85,9 +93,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         presenter = new ArticleContentSpecifiedFragmentPresenter(this);
     }
 
-    public static ArticleContentSpecifiedFragment newInstance(String param1) {
-        return new ArticleContentSpecifiedFragment();
-    }
+
 
     public static ArticleContentSpecifiedFragment newInstance(Blog blog) {
         return new ArticleContentSpecifiedFragment(blog);
@@ -108,7 +114,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_article_content_spefied, container, false);
         ButterKnife.bind(this, view);
         initView();
@@ -117,6 +123,25 @@ public class ArticleContentSpecifiedFragment extends Fragment {
 
     private void initView() {
         if (null != blog && null != user) {
+            rlArticleCriticisms.setAdapter(blogCriticismAdapter);
+            presenter.checkIfFollowed(user.getUserId());
+            presenter.checkIfCollection(blog.getBlogId());
+            presenter.checkIsApplauseBlog(blog.getBlogId());
+            presenter.loadCriticisms(blog.getBlogId(), pagerIndex);
+
+            //下拉刷新
+            ViewUtils.setViewsFont(refreshLayout);
+            refreshLayout.setOnRefreshListener(refreshLayout -> {
+                blogCriticismAdapter.getBlogCriticisms().clear();
+                pagerIndex = 0;
+                presenter.loadCriticisms(blog.getBlogId(), pagerIndex);
+            });
+
+            //上拉加载
+            refreshLayout.setOnLoadMoreListener(refreshLayout -> {
+                presenter.loadCriticisms(blog.getBlogId(), ++pagerIndex);
+            });
+
             articleType.setText("博文");
             Drawable profileDrawable = FRSCImagePatternChangeUtil.getDrawableFromBase64(user.getProfile());
             profile.setImageDrawable(profileDrawable);
@@ -145,27 +170,20 @@ public class ArticleContentSpecifiedFragment extends Fragment {
                     }
                 }
             });
-
             User userLogin = FRSCApplicationContext.getUser();
             Long userLoginUserId = userLogin.getUserId();
             Long userId = user.getUserId();
             if (userLoginUserId.equals(userId)) {
                 changeToSelfState();
             }
-            presenter.checkIfFollowed(user.getUserId());
-            presenter.checkIfCollection(blog.getBlogId());
-            presenter.checkIsApplauseBlog(blog.getBlogId());
+
         }
     }
 
 
     private void changeToSelfState() {
-        btnFollow.setVisibility(View.GONE);
-        btnLove.setVisibility(View.GONE);
-        btnCollection.setVisibility(View.GONE);
-        btnReport.setVisibility(View.GONE);
-        ieCriticism.setVisibility(View.GONE);
-        btnCriticism.setVisibility(View.GONE);
+        btnFollow.setVisibility(View.INVISIBLE);
+        btnCollection.setVisibility(View.INVISIBLE);
         btnModify.setVisibility(View.VISIBLE);
     }
 
@@ -178,6 +196,22 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         }
     }
 
+    public void showMoreBlogCriticism(List<BlogCriticism> criticismsAdded, boolean hasNext) {
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
+        this.hasNext = hasNext;
+        llStateful.showContent();
+        refreshLayout.resetNoMoreData();
+
+        if (hasNext) {
+            refreshLayout.setEnableLoadMore(true);
+        } else {
+            refreshLayout.setEnableLoadMore(false);
+        }
+        blogCriticismAdapter.getBlogCriticisms().addAll(criticismsAdded);
+        blogCriticismAdapter.notifyDataSetChanged();
+    }
+
     public void showIsCollectionBlog(boolean isCollection) {
         btnCollection.setActivated(isCollection);
     }
@@ -186,9 +220,12 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         btnLove.setActivated(isLove);
     }
 
-    public void criticiseBlogAfter(boolean isSuccess) {
+    public void criticiseBlogAfter(boolean isSuccess,BlogCriticism blogCriticism) {
         if (isSuccess) {
             ieCriticism.setText("");
+            ieCriticism.clearFocus();
+            blogCriticismAdapter.getBlogCriticisms().add(0,blogCriticism);
+            blogCriticismAdapter.notifyItemInserted(0);
         }
 
     }
@@ -239,5 +276,11 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMessage(BlogChangMessage message) {
         initView();
+    }
+
+    public void showMoreBlogCriticismError(String message) {
+        llStateful.showError(message, v -> refreshLayout.autoRefresh());
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
     }
 }

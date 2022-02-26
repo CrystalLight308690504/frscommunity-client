@@ -90,9 +90,7 @@ public class UserSearchResultRecyclerViewAdapterViewHolderPresenter {
                 view.isFollowed(isFollowed);
             }
         }
-
     }
-
 
     private class RespondMessageKey {
     }
