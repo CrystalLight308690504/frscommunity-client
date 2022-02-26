@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.presenter.MyBlogCategoryRecycleViewAdapterPresenter;
 import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticlesFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
@@ -32,11 +31,9 @@ import java.util.List;
  */
 public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlogCategoryRecycleViewAdapter.ViewHolder> {
     List<BlogCategory> blogCategories;
-    MyBlogCategoryRecycleViewAdapterPresenter presenter;
 
     public MyBlogCategoryRecycleViewAdapter(List<BlogCategory> blogCategories) {
         this.blogCategories = blogCategories;
-        presenter = new MyBlogCategoryRecycleViewAdapterPresenter(this);
     }
 
     @NonNull
@@ -49,7 +46,7 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        holder.init(blogCategories.get(position));
+        holder.init(blogCategories.get(position),position);
     }
 
     @Override
@@ -61,8 +58,8 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         @BindView(R.id.tvCategoryName)
         TextView tvPackageName;
-        @BindView(R.id.tvTotal)
-        TextView tvTotal;
+        @BindView(R.id.tvBlogCount)
+        TextView tvBlogCount;
         @BindView(R.id.tvPrivilege)
         TextView tvPrivilege;
         @BindView(R.id.ivArrow)
@@ -71,16 +68,20 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
         RecyclerView rvLists;
         @BindView(R.id.tvCategoryDescription)
         TextView tvCategoryDescription;
+        int position;
 
         BlogCategory blogCategory;
-
+        MyBlogCategoryRecycleViewAdapterViewHolderPresenter presenter;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            presenter = new MyBlogCategoryRecycleViewAdapterViewHolderPresenter(this);
         }
 
-        public void init(BlogCategory blogCategory) {
+        public void init(BlogCategory blogCategory,int position) {
+            this.position = position;
             this.blogCategory = blogCategory;
+            presenter.loadBlogCount(blogCategory);
             tvPackageName.setText(blogCategory.getCategoryName());
             tvCategoryDescription.setText(blogCategory.getDescription());
             itemView.setOnClickListener(view -> {
@@ -104,14 +105,13 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
             final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(list)
                     .setOnItemClickListener((dialog, index, item) -> {
                         switch (index) {
-                            case 0 :
+                            case 0:
                                 CategoryDialogFragment dialogFragment = new CategoryDialogFragment(blogCategory);
                                 dialogFragment.show(FRSCApplicationContext.getBaseFragmentActivity().getSupportFragmentManager(), "s");
                                 break;
-                            case 1 :
+                            case 1:
                                 presenter.deleteBlogCategory(blogCategory);
                                 break;
-
                         }
 
                     });
@@ -119,5 +119,13 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
 
             return false;
         }
+        public void showBlogCount(long count){
+            tvBlogCount.setText(count + "");
+            /** 用这个会出现不断请求BUG
+            notifyDataSetChanged();
+
+             */
+        }
     }
+
 }

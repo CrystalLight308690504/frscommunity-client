@@ -7,12 +7,13 @@ package com.crystallightghot.frscommunityclient.view.value;
  * description：
  */
 public class FRSCRequestIO {
-    private static String localHost = "http://192.168.0.100:";
+    private static String localHost = "http://192.168.0.101:";
 //    private static  String localHost = "http://42.194.211.199:";
 
     public enum SystemIO {
         // 系统请求接口
         USER_LOGIN("/user/login"),
+        IS_LOGIN("/user/isLogined/"),
         USER_REGISTER("/user/register"),
         USER_LOGGED_OUT("/user/logout"),
         EXIST_FOLLOWER("/user/existFollower/"),
@@ -36,7 +37,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-            String host = "http://42.194.211.199:";
+//            String host = "http://42.194.211.199:";
+            String host = localHost;
             String port = "9002";
             return host + port + requestInterface;
         }
@@ -47,6 +49,10 @@ public class FRSCRequestIO {
         GET_SKATING_TYPE("/blog/getSkatingType"),
         // 博客请求接口
         ADD_BLOG("/blog/save"),
+        ADD_BLOG_CATEGORY("/blog/addBlogCategory/"),
+        COLLECTION_BLOG("/blog/collectionBlog"),
+        CANCEL_COLLECTION_BLOG("/blog/cancelCollectionBlog"),
+        COUNT_BLOGS("/blog/countBlogs/"),
         DELETE_BLOG("/blog/delete"),
         MODIFY_BLOG("/blog/modifyBlog"),
         FIND_BLOGS_BY_USERID("/blog/findBlogsByUserId/"),
@@ -54,9 +60,8 @@ public class FRSCRequestIO {
         FIND_CATEGORIES_BY_USERID("/blog/findBlogCategories/"),
         FIND_BLOGS_BY_USERID_AND_CATEGORY("/blog/findBlogsByUserAndCategory/"),
         FIND_BLOGS_BY_SEARCH_KEY("/blog/findBlogsBySearchKey/"),
-        ADD_BLOG_CATEGORY("/blog/addBlogCategory/"),
         DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory"),
-        COUNT_BLOGS("/blog/countBlogs/"),
+        COUNT_BLOGS_BY_CATEGORY("/blog/countBlogsByCategoryId/"),
         MODIFY_BLOG_CATEGORY("/blog/modifyBlogCategory");
 
         private final String requestInterface;
@@ -66,7 +71,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-            String host = "http://42.194.211.199:";
+//            String host = "http://42.194.211.199:";
+            String host = localHost;
             String port = "9003";
             return host + port + requestInterface;
         }

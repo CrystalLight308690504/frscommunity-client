@@ -1,9 +1,7 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
-import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +30,10 @@ public class FRSCObjectTransferUtil {
     public static <C> String ObjectToJsonString(Object o) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         return gson.toJson(o);
+    }
+
+    public static Gson getGsonWithTimeForm() {
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+
     }
 }

@@ -48,8 +48,8 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     TextView articleType;
     @BindView(R.id.articleTitle)
     TextView articleTitle;
-    @BindView(R.id.btnCllection)
-    ImageButton btnCllection;
+    @BindView(R.id.btnCollection)
+    ImageButton btnCollection;
     @BindView(R.id.articleContent)
     TextView articleContent;
     @BindView(R.id.report)
@@ -125,16 +125,6 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             articleTitle.setText(blog.getBlogTitle());
             articleContent.setText(blog.getContent());
             articleSkatingType.setText(blog.getSkatingType().getName());
-            btnFollow.setOnClickListener(view -> {
-                btnFollow.setSelected(!btnFollow.isSelected());
-                if (btnFollow.isSelected()) { // 取消关注
-                    btnFollow.setText("已关注");
-                    presenter.followUser(user.getUserId());
-                }else { // 关注
-                    btnFollow.setText("关注");
-                    presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
-                }
-            });
 
             User userLogin = FRSCApplicationContext.getUser();
             Long userLoginUserId = userLogin.getUserId();
@@ -142,16 +132,37 @@ public class ArticleContentSpecifiedFragment extends Fragment {
             if (userLoginUserId.equals(userId)) {
                 changeToSelfState();
             }
-
+            addListener();
             presenter.checkIfFollowed(user.getUserId());
-
         }
+    }
+
+    private void addListener() {
+        btnFollow.setOnClickListener(view -> {
+            btnFollow.setSelected(!btnFollow.isSelected());
+            if (btnFollow.isSelected()) { // 取消关注
+                btnFollow.setText("已关注");
+                presenter.followUser(user.getUserId());
+            }else { // 关注
+                btnFollow.setText("关注");
+                presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
+            }
+        });
+        btnCollection.setOnClickListener(view -> {
+            btnCollection.setActivated(!btnCollection.isActivated());
+            if (btnCollection.isActivated()) { // 收藏
+                presenter.collectionBlog(blog,user);
+            }else {// 取消收藏
+                presenter.cancelCollectionBlog(blog,user);
+            }
+
+        });
     }
 
     private void changeToSelfState() {
         btnFollow.setVisibility(View.GONE);
         btnLove.setVisibility(View.GONE);
-        btnCllection.setVisibility(View.GONE);
+        btnCollection.setVisibility(View.GONE);
         btnReport.setVisibility(View.GONE);
         ieCriticism.setVisibility(View.GONE);
         btnCriticism.setVisibility(View.GONE);
@@ -167,7 +178,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         }
     }
 
-    @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCllection, R.id.btnLove, R.id.btnModify})
+    @OnClick({R.id.profile, R.id.btnFollow, R.id.btnCriticism, R.id.btnCollection, R.id.btnLove, R.id.btnModify})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.profile:
@@ -175,7 +186,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
                 break;
             case R.id.btnFollow:
                 break;
-            case R.id.btnCllection:
+            case R.id.btnCollection:
                 break;
             case R.id.btnLove:
                 break;

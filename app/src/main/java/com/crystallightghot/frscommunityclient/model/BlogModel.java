@@ -1,8 +1,12 @@
 package com.crystallightghot.frscommunityclient.model;
 
+import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecifiedFragmentPresenter;
 import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
+import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,5 +67,24 @@ public class BlogModel {
     public void loadBlogCount(Long userId, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.COUNT_BLOGS.getRequestIO() + userId;
         FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
+
+    public void countBlogCount(Long categoryId, Object respondMessageKey) {
+        String url = FRSCRequestIO.BlogIO.COUNT_BLOGS_BY_CATEGORY.getRequestIO() + categoryId;
+        FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
+
+    public void collectionBlog(BlogCollection blogCollection, Object respondMessageKey) {
+        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        String body = gson.toJson(blogCollection);
+        String url = FRSCRequestIO.BlogIO.COLLECTION_BLOG.getRequestIO();
+        FRSCOKHttp3RequestUtil.callPostRequest(url,body, respondMessageKey);
+    }
+
+    public void cancelCollectionBlog(BlogCollection blogCollection, Object respondMessageKey) {
+        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        String body = gson.toJson(blogCollection);
+        String url = FRSCRequestIO.BlogIO.CANCEL_COLLECTION_BLOG.getRequestIO();
+        FRSCOKHttp3RequestUtil.callDeleteRequest(url,body, respondMessageKey);
     }
 }

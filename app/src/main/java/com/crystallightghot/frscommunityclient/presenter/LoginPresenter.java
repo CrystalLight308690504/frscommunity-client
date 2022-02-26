@@ -4,7 +4,9 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
+import com.crystallightghot.frscommunityclient.model.UserModel;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoSession;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
@@ -13,6 +15,8 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @Date 2022/1/21
@@ -24,6 +28,7 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
 
     LoginModel model;
     LoginContract.View view;
+    UserModel userModel;
 
     public static LoginPresenter getInstance(LoginContract.View view) {
         return new LoginPresenter(view);
@@ -32,6 +37,7 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
     public LoginPresenter(LoginContract.View view) {
         this.view = view;
         model = new LoginModel();
+        userModel = new UserModel();
     }
 
     @Override
@@ -40,28 +46,6 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
         Gson gson = new Gson();
         String userJson = gson.toJson(user);
         model.login(userJson, this);
-    }
-
-    public void checkUserLoginState() {
-        DaoSession daoSession = FRSCDataBaseUtil.getReadDaoSession();
-        LoginInformationDao informationDao = daoSession.getLoginInformationDao();
-        LoginInformation information = informationDao.queryBuilder()
-                .where(LoginInformationDao.Properties.Login.eq(1))
-                .build()
-                .unique();
-
-        // 如果存在已经登陆的用户
-        if (information != null) {
-            UserDao userDao = daoSession.getUserDao();
-            User user = userDao.queryBuilder()
-                    .where(UserDao.Properties.UserId.eq(information.getUserId()))
-                    .build()
-                    .unique();
-
-            FRSCApplicationContext.setUser(user);
-            // 转化为登陆状态
-            view.stateToLogin();
-        }
     }
 
     @Override
@@ -96,7 +80,6 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
             LoginInformation loginInformation = new LoginInformation(null,user.getUserId(),1);
             loginInformationDao.insert(loginInformation);
-
             EventBus.getDefault().post(message);
 
         }else {

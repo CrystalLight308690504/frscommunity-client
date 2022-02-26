@@ -78,7 +78,7 @@
                  app:layout_constraintTop_toTopOf="@id/articleTitle"
                  app:layout_constraintBottom_toBottomOf="@id/articleTitle"
                  android:background="@drawable/ic_collection_stated"
-                 android:id="@+id/btnCllection"
+                 android:id="@+id/btnCollection"
     />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               app:layout_constraintRight_toRightOf="parent"
@@ -120,6 +120,7 @@
                         android:textColor="@color/default_displayed_text_gray"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
+                        android:visibility="invisible"
                         android:text="举报"/>
                 <androidx.appcompat.widget.AppCompatButton android:layout_width="20dp"
                                                            android:layout_height="20dp"
@@ -136,6 +137,7 @@
                                                                          android:inputType="textMultiLine"
                                                                          android:padding="@dimen/distance_small"
                                                                          android:id="@+id/ieCriticism"
+                                                                         android:layout_marginTop="@dimen/distance_max"
                                                                          app:layout_constraintStart_toStartOf="parent"
                                                                          />
                 <Button android:layout_width="wrap_content" android:layout_height="wrap_content"

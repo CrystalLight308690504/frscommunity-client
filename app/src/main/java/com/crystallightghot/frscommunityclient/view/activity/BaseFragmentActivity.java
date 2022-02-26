@@ -34,7 +34,7 @@ public  class BaseFragmentActivity extends BaseActivity {
 
     // 默认在activity显示的fragment并且不加入到返回栈的fragment
     @Setter
-    Fragment defaultFragment;
+    Fragment defaultFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +59,21 @@ public  class BaseFragmentActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
         // 返回栈里还有fragment
         if (fragmentsAddedInBackStack.size() > 0) {
-            FragmentManager fragmentManager = this.getSupportFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
             // 退出栈顶的fragment
             fragmentsAddedInBackStack.remove(fragmentsAddedInBackStack.size() - 1);
             // 将退栈后 栈的栈顶的fragment显示出来
             // 如果fragment返回栈里还有fragment
+            FragmentManager fragmentManager = this.getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
             if (fragmentsAddedInBackStack.size() > 0) {
                 // 将放回栈的栈顶的fragment显示出来
                 transaction.show(fragmentsAddedInBackStack.get(fragmentsAddedInBackStack.size() - 1));
             } else if (fragmentsNoInBackStack.size() > 0) {
                 // 将默认绑定在activity的fragment显示出来
                 transaction.show(fragmentsNoInBackStack.get(fragmentsNoInBackStack.size() - 1));
+                fragmentsNoInBackStack.remove(fragmentsNoInBackStack.size() - 1);
             }
             transaction.commitNowAllowingStateLoss();
         }
@@ -82,5 +82,12 @@ public  class BaseFragmentActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FRSCFragmentUtil.removeFragments(this,fragmentsAddedInBackStack);
+        FRSCFragmentUtil.removeFragments(this,fragmentsNoInBackStack);
     }
 }

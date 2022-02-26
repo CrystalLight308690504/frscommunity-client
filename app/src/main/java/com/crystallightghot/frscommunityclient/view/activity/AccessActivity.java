@@ -1,10 +1,12 @@
 package com.crystallightghot.frscommunityclient.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.AccessActivityPresenter;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.fragment.LoginFragment;
@@ -19,13 +21,11 @@ public class AccessActivity extends BaseActivity {
 
     @BindView(R.id.tv_time)
     TextView tvTime;
-
-
-
-
+    AccessActivityPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new AccessActivityPresenter(this);
         setContentView(R.layout.activity_access);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
@@ -56,7 +56,7 @@ public class AccessActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetStickyEvent(TimeMessage message) {
         if (message.getCode() != MessageCode.ACCESS_TIME){
             return;
@@ -65,10 +65,17 @@ public class AccessActivity extends BaseActivity {
         tvTime.setText(time+"");
 
         if (time == 0){
-            intentToSingleFragmentActivity(LoginFragment.newInstance("login"));
-            finish();
+            presenter.checkUserLoginState();
         }
     }
 
-
+    public void stateToLogin(boolean isLogin) {
+        if (isLogin) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }else {
+            intentToSingleFragmentActivity(LoginFragment.newInstance("login"));
+        }
+        finish();
+    }
 }

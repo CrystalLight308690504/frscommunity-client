@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
@@ -46,7 +47,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     AppCompatButton register;
 
     LoginPresenter presenter;
-
     BaseActivity activity;
     User user = new User();
     final int MESSAGE_CODE = 1001;
@@ -63,7 +63,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     private void init() {
         activity = (BaseActivity) getActivity();
-        presenter.checkUserLoginState();
         iePhoneName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -103,7 +102,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 }else {
                     login.setEnabled(true);
                 }
-
             }
         });
     }
@@ -165,6 +163,11 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         presenter.login(user);
     }
 
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -207,13 +210,12 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(presenter);
     }
-
 }

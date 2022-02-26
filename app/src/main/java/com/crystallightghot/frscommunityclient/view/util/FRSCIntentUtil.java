@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.view.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import com.crystallightghot.frscommunityclient.view.activity.SingleFragmentActivity;
 import com.crystallightghot.frscommunityclient.view.message.FragmentChangeMessage;
@@ -22,7 +23,6 @@ public class FRSCIntentUtil {
         FragmentChangeMessage fragmentChangeMessage = new FragmentChangeMessage();
         fragmentChangeMessage.setCode(SingleFragmentActivity.MESSAGE_COD);
         fragmentChangeMessage.setDefaultFragment(defaultFragment);
-
         // 发送默认EventBus消息
         FRSCEventBusUtil.sendStickMessage(fragmentChangeMessage);
     }

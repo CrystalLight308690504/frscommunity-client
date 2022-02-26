@@ -24,8 +24,10 @@ public class SingleFragmentActivity extends BaseFragmentActivity {
         if (message.getCode() != MESSAGE_COD){
             return;
         }
-        // 设置默认加载Fragment
-        setDefaultFragment(message.getDefaultFragment());
+        if (null == getDefaultFragment()){
+            // 设置默认加载Fragment
+            setDefaultFragment(message.getDefaultFragment());
+        }
         // 显示fragment
         FRSCFragmentUtil.intentToFragment(getDefaultFragment(),this,false);
     }
