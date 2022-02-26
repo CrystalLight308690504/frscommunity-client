@@ -94,11 +94,6 @@ public class BlogCriticismAdapter extends RecyclerView.Adapter<BlogCriticismAdap
             tvCreatedTime.setText(blogCriticism.getCreatedTime().toString());
         }
 
-        public void deleteBlogCriticiseSuccess(){
-            notifyItemRemoved(position);
-        }
-
-
         @OnClick({R.id.btnDeleteCriticism, R.id.btnReplyCriticism})
         public void onClick(View view) {
             switch (view.getId()) {

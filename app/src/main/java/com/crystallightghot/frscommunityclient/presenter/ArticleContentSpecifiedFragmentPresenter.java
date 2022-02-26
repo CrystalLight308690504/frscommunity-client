@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.model.UserModel;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
+import com.crystallightghot.frscommunityclient.view.message.BlogCriticiseChangeMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
@@ -194,6 +195,11 @@ public class ArticleContentSpecifiedFragmentPresenter {
                     view.showMoreBlogCriticismError(message.getMessage());
                 }
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(BlogCriticiseChangeMessage message) {
+        view.blogCriticiseChange();
+
     }
 
     private class RespondMessageKey {

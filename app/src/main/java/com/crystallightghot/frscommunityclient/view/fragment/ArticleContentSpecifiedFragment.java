@@ -224,8 +224,7 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         if (isSuccess) {
             ieCriticism.setText("");
             ieCriticism.clearFocus();
-            blogCriticismAdapter.getBlogCriticisms().add(0,blogCriticism);
-            blogCriticismAdapter.notifyItemInserted(0);
+            refreshLayout.autoRefresh();
         }
 
     }
@@ -282,5 +281,9 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         llStateful.showError(message, v -> refreshLayout.autoRefresh());
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
+    }
+
+    public void blogCriticiseChange() {
+        refreshLayout.autoRefresh();
     }
 }

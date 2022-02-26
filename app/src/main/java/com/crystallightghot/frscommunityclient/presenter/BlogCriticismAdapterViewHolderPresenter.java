@@ -2,6 +2,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.view.adapter.BlogCriticismAdapter;
+import com.crystallightghot.frscommunityclient.view.message.BlogCriticiseChangeMessage;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCriticism;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -39,8 +40,8 @@ public class BlogCriticismAdapterViewHolderPresenter {
         if (message.getMessageKey() == deleteBlogCriticiseK) {
             if (message.isSuccess()) {
                 XToastUtils.success(message.getMessage());
-                view.deleteBlogCriticiseSuccess();
-            }else {
+                FRSCEventBusUtil.sendMessage(new BlogCriticiseChangeMessage());
+            } else {
                 XToastUtils.error(message.getMessage());
             }
         }
