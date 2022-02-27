@@ -54,6 +54,7 @@ public class FRSCRequestIO {
         ADD_BLOG("/blog/save"),
         ADD_BLOG_CATEGORY("/blog/addBlogCategory/"),
         APPLAUSE_BLOG("/blog/applauseBlog/"),
+        COUNT_BlOG_APPLAUSE_COUNT("/blog/countBlogApplause/"),
         CANCEL_APPLAUSE_BLOG("/blog/cancelApplauseBlog/"),
         COLLECTION_BLOG("/blog/collectionBlog"),
         CANCEL_COLLECTION_BLOG("/blog/cancelCollectionBlog"),

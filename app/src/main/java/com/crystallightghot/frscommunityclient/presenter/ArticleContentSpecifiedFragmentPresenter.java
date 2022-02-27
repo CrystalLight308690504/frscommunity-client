@@ -91,11 +91,11 @@ public class ArticleContentSpecifiedFragmentPresenter {
     }
 
     public void applauseBlog(Blog blog) {
-        blogModel.applauseBlog(FRSCApplicationContext.getUser().getUserId(), blog.getBlogId(), applauseBlogK);
+        blogModel.applauseBlog(FRSCApplicationContext.getUser().getUserId(), blog, applauseBlogK);
     }
 
     public void cancelApplauseBlog(Blog blog) {
-        blogModel.cancelApplauseBlog(FRSCApplicationContext.getUser().getUserId(), blog.getBlogId(), applauseBlogK);
+        blogModel.cancelApplauseBlog(FRSCApplicationContext.getUser().getUserId(), blog, applauseBlogK);
     }
 
     public void criticiseBlog(String toString, long blogId) {

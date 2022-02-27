@@ -1,6 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.presenter.MyUserFollowedFragmentPresenter;
+import com.crystallightghot.frscommunityclient.presenter.UserInformationFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
@@ -69,4 +70,6 @@ public class UserModel {
         String url = FRSCRequestIO.SystemIO.FIND_USERS_FAN.getRequestIO() + userId + "/" + pagerIndex;
         FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
     }
+
+
 }

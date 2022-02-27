@@ -98,6 +98,24 @@
                     app:layout_constraintTop_toBottomOf="@id/icFollowerCount"
                     android:layout_marginLeft="@dimen/distance_small"
             />
+            <TextView
+                    android:id="@+id/icApplauseCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="赞"
+                    android:textColor="@color/default_displayed_text_gray"
+                    app:layout_constraintLeft_toRightOf="@id/icFollowerCount"
+                    app:layout_constraintTop_toTopOf="@id/icFollowerCount"
+                    android:layout_marginLeft="@dimen/distance_max"
+            />
+            <TextView
+                    android:id="@+id/tvApplauseCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/applicationMainTheme"
+                    app:layout_constraintLeft_toLeftOf="@id/icApplauseCount"
+                    app:layout_constraintTop_toBottomOf="@id/icApplauseCount"
+                    android:layout_marginLeft="@dimen/distance_small"
+            />
 
             <Button
                     android:id="@+id/btnFollow"

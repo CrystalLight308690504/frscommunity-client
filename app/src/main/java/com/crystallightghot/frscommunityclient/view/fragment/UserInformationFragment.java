@@ -72,6 +72,8 @@ public class UserInformationFragment extends Fragment {
     @BindView(R.id.tvFollowerCount)
     TextView tvFollowerCount;
     User user;
+    @BindView(R.id.tvApplauseCount)
+    TextView tvApplauseCount;
 
     public UserInformationFragment() {
         FRSCEventBusUtil.register(this);
@@ -119,7 +121,7 @@ public class UserInformationFragment extends Fragment {
             if (btnFollow.isSelected()) { // 取消关注
                 btnFollow.setText("已关注");
                 presenter.followUser(user.getUserId());
-            }else { // 关注
+            } else { // 关注
                 btnFollow.setText("关注");
                 presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
             }
@@ -137,7 +139,7 @@ public class UserInformationFragment extends Fragment {
         if (user.getUserId().equals(FRSCApplicationContext.getUser().getUserId())) {
             btnFollow.setVisibility(View.INVISIBLE);
             btnEditeUserInformation.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             btnFollow.setVisibility(View.VISIBLE);
             btnEditeUserInformation.setVisibility(View.INVISIBLE);
             presenter.checkIfFollowed(user.getUserId());
@@ -145,6 +147,7 @@ public class UserInformationFragment extends Fragment {
 
         presenter.loadFollowUserCount(user.getUserId());
         presenter.loadFollowerCount(user.getUserId());
+        presenter.loadApplauseCount(user.getUserId());
 
         String[] tabTitles = new String[]{"博客", "问答"};
         vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, user));
@@ -169,8 +172,12 @@ public class UserInformationFragment extends Fragment {
         tvFollowerCount.setText("" + followerCount);
     }
 
+    public void showApplauseCount(long applauseCount) {
+        tvApplauseCount.setText("" + applauseCount);
+    }
 
-    @OnClick({ R.id.btnEditeUserInformation,R.id.icFollowerUserCount, R.id.icFollowerCount})
+
+    @OnClick({R.id.btnEditeUserInformation, R.id.icFollowerUserCount, R.id.icFollowerCount})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnEditeUserInformation:
