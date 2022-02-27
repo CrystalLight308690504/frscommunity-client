@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultViewPagerItemFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.HomeSearchResultDefaultViewPagerItemFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.UserSearchResultViewPagerItemFragment;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,14 +16,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class SearchResultViewPagerAdapter extends FragmentStateAdapter {
     String searchText;
+    String[] tabTitles;
 
-    public SearchResultViewPagerAdapter(@NotNull Fragment fragment, String searchText) {
+    public SearchResultViewPagerAdapter(@NotNull Fragment fragment, String[] tabTitles, String searchText) {
         super(fragment);
         this.searchText = searchText;
-    }
-
-    public SearchResultViewPagerAdapter(@NotNull Fragment fragment) {
-        super(fragment);
+        this.tabTitles = tabTitles;
     }
 
     @NonNull
@@ -42,6 +39,6 @@ public class SearchResultViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return tabTitles.length;
     }
 }

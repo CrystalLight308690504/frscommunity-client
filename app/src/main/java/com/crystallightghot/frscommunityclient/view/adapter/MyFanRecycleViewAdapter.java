@@ -81,7 +81,6 @@ public class MyFanRecycleViewAdapter extends RecyclerView.Adapter<MyFanRecycleVi
         public void initView(UserFollowerEntity userFollower) {
             this.userFollower = userFollower;
             user = userFollower.getUser();
-
             presenter = new MyFanRecycleViewAdapterViewHolderPresenter(this);
             Drawable userProfile = FRSCImagePatternChangeUtil.getDrawableFromBase64(user.getProfile());
             ivProfile.setImageDrawable(userProfile);
@@ -91,8 +90,8 @@ public class MyFanRecycleViewAdapter extends RecyclerView.Adapter<MyFanRecycleVi
             btnFollow.setText("已关注");
             presenter.loadBlogCount(user.getUserId());
             presenter.loadFollowerCount(user.getUserId());
+            presenter.checkIfFollowed(user.getUserId());
         }
-
 
         public void showArticleCount(long articleCount) {
             tvArticleCount.setText(""+ articleCount);
@@ -120,6 +119,14 @@ public class MyFanRecycleViewAdapter extends RecyclerView.Adapter<MyFanRecycleVi
             }
         }
 
+        public void isFollowed(boolean isFollowed) {
+            btnFollow.setSelected(isFollowed);
+            if (btnFollow.isSelected()) { // 取消关注
+                btnFollow.setText("已关注");
+            } else { // 关注
+                btnFollow.setText("关注");
+            }
+        }
     }
 
 

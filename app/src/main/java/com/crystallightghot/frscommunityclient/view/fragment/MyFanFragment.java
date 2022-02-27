@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.MyFanFragmentPresenter;
 import com.crystallightghot.frscommunityclient.presenter.MyUserFollowedFragmentPresenter;
+import com.crystallightghot.frscommunityclient.view.adapter.MyFanRecycleViewAdapter;
 import com.crystallightghot.frscommunityclient.view.adapter.UserFollowedRecycleViewAdapter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollowerEntity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -44,7 +45,7 @@ public class MyFanFragment extends Fragment {
     Activity activity;
     MyFanFragmentPresenter presenter;
     int pageIndex = 0;
-    UserFollowedRecycleViewAdapter adapter = new UserFollowedRecycleViewAdapter();
+    MyFanRecycleViewAdapter adapter = new MyFanRecycleViewAdapter();
 
     public MyFanFragment() {
     }
@@ -75,6 +76,7 @@ public class MyFanFragment extends Fragment {
     private void init() {
         presenter = new MyFanFragmentPresenter(this);
         activity = getActivity();
+        tvTitle.setText("我的粉丝");
         rvUsersFollowed.setAdapter(adapter);
         presenter.loadUsersFan(pageIndex);
         //下拉刷新

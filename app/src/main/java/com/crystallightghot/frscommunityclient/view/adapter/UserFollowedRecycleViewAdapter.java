@@ -86,8 +86,7 @@ public class UserFollowedRecycleViewAdapter extends RecyclerView.Adapter<UserFol
             ivProfile.setImageDrawable(userProfile);
             ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
-            btnFollow.setSelected(true);
-            btnFollow.setText("已关注");
+
             presenter.loadBlogCount(user.getUserId());
             presenter.loadFollowerCount(user.getUserId());
         }

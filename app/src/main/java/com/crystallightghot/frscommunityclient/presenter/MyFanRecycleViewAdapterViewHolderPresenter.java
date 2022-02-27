@@ -24,6 +24,7 @@ public class MyFanRecycleViewAdapterViewHolderPresenter {
     RespondMessageKey followUserK = new RespondMessageKey();
     RespondMessageKey cancelUserK = new RespondMessageKey();
     RespondMessageKey showFollowerCountK = new RespondMessageKey();
+    RespondMessageKey checkIfFollowedK = new RespondMessageKey();
     BlogModel blogModel;
     UserModel userModel;
 
@@ -78,8 +79,18 @@ public class MyFanRecycleViewAdapterViewHolderPresenter {
                 int count = (int) data;
                 view.showFollowerCount(count);
             }
+        } else if (message.getMessageKey() == checkIfFollowedK) {
+            if (message.isSuccess()) {
+                boolean isFollowed = (boolean) message.getData();
+                view.isFollowed(isFollowed);
+            }
         }
     }
+
+    public void checkIfFollowed(Long userFollowedId) {
+        userModel.checkIfFollowed(FRSCApplicationContext.getUser().getUserId(), userFollowedId, checkIfFollowedK);
+    }
+
 
 
     private class RespondMessageKey {

@@ -95,7 +95,7 @@ public class SearchResultsFragment extends BaseFragment {
         });
 
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
-        viewPager.setAdapter(new SearchResultViewPagerAdapter(this, searchText));
+        viewPager.setAdapter(new SearchResultViewPagerAdapter(this, tabTitles,searchText));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }
@@ -108,7 +108,8 @@ public class SearchResultsFragment extends BaseFragment {
                 break;
             case R.id.btn_search:
                 searchText = inputBox.getText().toString();
-                viewPager.setAdapter(new SearchResultViewPagerAdapter(this, searchText));
+                String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
+                viewPager.setAdapter(new SearchResultViewPagerAdapter(this,tabTitles, searchText));
                 break;
         }
     }

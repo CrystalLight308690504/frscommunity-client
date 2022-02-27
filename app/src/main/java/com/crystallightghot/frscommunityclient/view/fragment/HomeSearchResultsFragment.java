@@ -68,7 +68,7 @@ public class HomeSearchResultsFragment extends Fragment {
     public void initView() {
         String[] tabTitles = activity.getResources().getStringArray(R.array.searchResultType);
         // 添加测试数据
-        viewPager.setAdapter(new SearchResultViewPagerAdapter(this));
+        viewPager.setAdapter(new SearchResultViewPagerAdapter(this,tabTitles,""));
         new TabLayoutMediator(searchResultType, viewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }
