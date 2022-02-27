@@ -13,6 +13,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.xuexiang.xui.widget.statelayout.StatefulLayout;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +37,10 @@ public class MyBlogCollectionFragment extends Fragment {
     RecyclerView rvMyBlogs;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
+    @BindView(R.id.ll_stateful)
+    StatefulLayout llStateful;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -69,11 +78,30 @@ public class MyBlogCollectionFragment extends Fragment {
     private void init() {
         activity = getActivity();
         btnAddPackage.setVisibility(View.INVISIBLE);
-        tvTitle.setText("我的回答");
-
-//        MyClassificationRecycleViewAdapter adapter = new MyClassificationRecycleViewAdapter();
-//        rvMyBlogs.setAdapter(adapter);
+        tvTitle.setText("我的博客收藏");
     }
+
+/*    *//**
+     * 将数据加入到RecycleView中
+     *//*
+    public void loadData(List<Blog> blogs, boolean hasNext) {
+        blogRecyclerViewAdapter.getBlogs().addAll(blogs);
+        llStateful.showContent();
+        refreshLayout.resetNoMoreData();
+        refreshLayout.finishRefresh();
+        refreshLayout.finishLoadMore();
+        if (hasNext) {
+            refreshLayout.setEnableLoadMore(true);
+        } else {
+            refreshLayout.setEnableLoadMore(false);
+        }
+
+        if (blogRecyclerViewAdapter.getBlogs().size() == 0) {
+            llStateful.showEmpty();
+            return;
+        }
+        blogRecyclerViewAdapter.notifyDataSetChanged();
+    }*/
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
     public void onClick(View view) {

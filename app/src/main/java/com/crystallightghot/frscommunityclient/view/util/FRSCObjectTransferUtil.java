@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class FRSCObjectTransferUtil {
 
-    public static <T> List<T> listMapToListObject(ArrayList<Map> lists, Class<T> clazz) {
+    public static <T> List<T> listMapToListObject(List<Map> lists, Class<T> clazz) {
         if (null == lists) {
             return null;
         }

@@ -39,8 +39,11 @@ public class UserSearchResultViewPagerItemFragmentPresenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RequestMessage<RespondMessageKey> message) {
-        switch (message.getMessageKey()) {
+    public void getMessage(RequestMessage message) {
+        if (!message.getMessageKey().getClass().equals(RespondMessageKey.class)){
+            return;
+        }
+        switch ((RespondMessageKey)message.getMessageKey()) {
             case LOADING_USERS_BY_NAME_KEY:
                 if (message.isSuccess()) {
                     Map resultMap = (Map) message.getData();

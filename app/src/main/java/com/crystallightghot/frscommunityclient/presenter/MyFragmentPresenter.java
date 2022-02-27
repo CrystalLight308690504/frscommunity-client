@@ -51,8 +51,11 @@ public class MyFragmentPresenter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void getMessage(RequestMessage<RespondMessageKey> message) {
-        switch (message.getMessageKey()) {
+    public void getMessage(RequestMessage message) {
+        if (!message.getMessageKey().getClass().equals(RespondMessageKey.class)){
+            return;
+        }
+        switch ((RespondMessageKey)message.getMessageKey()) {
             case LOAD_FOLLOW_USER_COUNT:
                 if (message.isSuccess()) {
                     double data = (Double) message.getData();

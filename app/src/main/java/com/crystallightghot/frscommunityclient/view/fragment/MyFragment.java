@@ -146,6 +146,8 @@ public class MyFragment extends Fragment {
                 FRSCIntentUtil.intentToSingleFragmentActivity(SettingFragment.newInstance("MyHelpQuestionedFragment"));
                 break;
             case R.id.tvicFllowed:
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyUserFollowedFragment.newInstance());
+
                 break;
             case R.id.tvicFan:
                 break;

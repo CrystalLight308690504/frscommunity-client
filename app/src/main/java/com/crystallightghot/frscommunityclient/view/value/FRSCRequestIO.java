@@ -21,6 +21,8 @@ public class FRSCRequestIO {
         COUNT_FOLLOWER("/user/countFollower/"),
         COUNT_USER_FOLLOW_COUNT("/user/countUserFollowCount/"),
         FOLLOW_USER("/user/followUser"),
+        FIND_USERS_FOLLOWED("/user/findUserFollowed/"),
+        FIND_USERS_FAN("/user/findUserFan/"),
         FIND_USERS_BY_NAME_KEY("/user/findUserByNameKey/"),
         FIND_USERS_BY_ID("/user/findUserByUserId/"),
         MODIFY_USERNAME("/user/modifyUserName"),
@@ -38,8 +40,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-            String host = "http://42.194.211.199:";
-//            String host = localHost;
+//            String host = "http://42.194.211.199:";
+            String host = localHost;
             String port = "9002";
             return host + port + requestInterface;
         }

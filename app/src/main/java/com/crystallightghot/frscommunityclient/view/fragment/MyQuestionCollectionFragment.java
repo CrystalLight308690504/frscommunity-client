@@ -76,7 +76,6 @@ public class MyQuestionCollectionFragment extends Fragment {
     private void init() {
         activity = getActivity();
         tvTitle.setText("我的收藏");
-
     }
 
     @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})

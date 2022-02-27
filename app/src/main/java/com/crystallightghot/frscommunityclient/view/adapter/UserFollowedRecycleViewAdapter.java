@@ -12,9 +12,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
-import com.crystallightghot.frscommunityclient.presenter.UserSearchResultRecyclerViewAdapterViewHolderPresenter;
+import com.crystallightghot.frscommunityclient.presenter.UserFollowedRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.fragment.UserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
+import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollowerEntity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCImagePatternChangeUtil;
@@ -26,53 +27,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author crystallightghost
- * @date 2022/1/5
+ * @Date 2022/2/27
+ * @Author crystalLightGhost
  * @Version: 1.0
  * description：
  */
-public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<UserSearchResultRecyclerViewAdapter.MyViewHolder> {
+public class UserFollowedRecycleViewAdapter extends RecyclerView.Adapter<UserFollowedRecycleViewAdapter.ViewHolder> {
 
     @Getter
-    List<User> users = new ArrayList<>();
+    final List<UserFollowerEntity> usersFollowers = new ArrayList<>();
 
-    public UserSearchResultRecyclerViewAdapter() {
-    }
 
-    @NotNull
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_search_user, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.initView(users.get(position));
+    public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        holder.initView(usersFollowers.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return users.size();
-    }
-
-    @OnClick({R.id.ivProfile, R.id.btnFollow})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivProfile:
-                break;
-            case R.id.btnFollow:
-                break;
-        }
+        return usersFollowers.size();
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private UserFollowerEntity userFollower;
 
-        UserSearchResultRecyclerViewAdapterViewHolderPresenter presenter;
-        View itemView;
-        User user;
         @BindView(R.id.ivProfile)
         RadiusImageView ivProfile;
         @BindView(R.id.tvUserName)
@@ -84,22 +70,34 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
         @BindView(R.id.tvFollowerCount)
         TextView tvFollowerCount;
 
-        public MyViewHolder(@NonNull View itemView) {
+        User user;
+        UserFollowedRecycleViewAdapterViewHolderPresenter presenter;
+        public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            this.itemView = itemView;
             ButterKnife.bind(this, itemView);
-            presenter = new UserSearchResultRecyclerViewAdapterViewHolderPresenter(this);
         }
 
-        public void initView(User user) {
-            this.user = user;
+        public void initView(UserFollowerEntity userFollower) {
+            this.userFollower = userFollower;
+            user = userFollower.getUserFollowed();
 
+            presenter = new UserFollowedRecycleViewAdapterViewHolderPresenter(this);
             Drawable userProfile = FRSCImagePatternChangeUtil.getDrawableFromBase64(user.getProfile());
             ivProfile.setImageDrawable(userProfile);
+            ivProfile.setOnClickListener((view) -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(UserInformationFragment.newInstance(user)));
             tvUserName.setText(user.getUserName());
+            btnFollow.setSelected(true);
+            btnFollow.setText("已关注");
             presenter.loadBlogCount(user.getUserId());
             presenter.loadFollowerCount(user.getUserId());
-            presenter.checkIfFollowed(user.getUserId());
+        }
+
+
+        public void showArticleCount(long articleCount) {
+            tvArticleCount.setText(""+ articleCount);
+        }
+        public void showFollowerCount(long followerCount) {
+            tvFollowerCount.setText(""+followerCount);
         }
 
         @OnClick({R.id.ivProfile, R.id.btnFollow})
@@ -113,7 +111,7 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
                     if (btnFollow.isSelected()) { // 取消关注
                         btnFollow.setText("已关注");
                         presenter.followUser(user.getUserId());
-                    }else { // 关注
+                    } else { // 关注
                         btnFollow.setText("关注");
                         presenter.cancelFollower(FRSCApplicationContext.getUser().getUserId(), user.getUserId());
                     }
@@ -121,21 +119,7 @@ public class UserSearchResultRecyclerViewAdapter extends RecyclerView.Adapter<Us
             }
         }
 
-        public void showArticleCount(long articleCount) {
-            tvArticleCount.setText(""+ articleCount);
-        }
-
-        public void showFollowerCount(long followerCount) {
-            tvFollowerCount.setText(""+followerCount);
-        }
-
-        public void isFollowed(boolean isFollowed) {
-            btnFollow.setSelected(isFollowed);
-            if (btnFollow.isSelected()) { // 取消关注
-                btnFollow.setText("已关注");
-            } else { // 关注
-                btnFollow.setText("关注");
-            }
-        }
     }
+
+
 }
