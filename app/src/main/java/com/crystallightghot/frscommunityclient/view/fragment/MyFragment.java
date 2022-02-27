@@ -150,6 +150,8 @@ public class MyFragment extends Fragment {
 
                 break;
             case R.id.tvicFan:
+                FRSCIntentUtil.intentToSingleFragmentActivity(MyFanFragment.newInstance());
+
                 break;
             default:
                 break;

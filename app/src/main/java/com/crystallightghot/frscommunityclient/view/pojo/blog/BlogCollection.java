@@ -17,7 +17,7 @@ public class BlogCollection {
 
     private Long userId;
 
-    private Long blogId;
+    private Blog blog;
 
     private Timestamp createdTime;
 }

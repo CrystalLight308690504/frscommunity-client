@@ -82,7 +82,7 @@ public class MyBlogFragment extends BaseFragment {
 
     private void init() {
         activity = getActivity();
-        refreshLayout.autoRefresh();
+        presenter.loadingCategory();
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> {

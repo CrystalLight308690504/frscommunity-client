@@ -67,14 +67,14 @@ public class ArticleContentSpecifiedFragmentPresenter {
 
     public void collectionBlog(Blog blog) {
         BlogCollection blogCollection = new BlogCollection();
-        blogCollection.setBlogId(blog.getBlogId());
+        blogCollection.setBlog(blog);
         blogCollection.setUserId(FRSCApplicationContext.getUser().getUserId());
         blogModel.collectionBlog(blogCollection, collectionBlogK);
     }
 
     public void cancelCollectionBlog(Blog blog) {
         BlogCollection blogCollection = new BlogCollection();
-        blogCollection.setBlogId(blog.getBlogId());
+        blogCollection.setBlog(blog);
         blogCollection.setUserId(FRSCApplicationContext.getUser().getUserId());
         blogModel.cancelCollectionBlog(blogCollection, cancelCollectionBlogK);
 

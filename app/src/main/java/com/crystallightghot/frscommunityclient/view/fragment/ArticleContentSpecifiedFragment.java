@@ -224,7 +224,9 @@ public class ArticleContentSpecifiedFragment extends Fragment {
         if (isSuccess) {
             ieCriticism.setText("");
             ieCriticism.clearFocus();
-            refreshLayout.autoRefresh();
+            blogCriticismAdapter.getBlogCriticisms().clear();
+            pagerIndex = 0;
+            presenter.loadCriticisms(blog.getBlogId(), pagerIndex);
         }
 
     }
@@ -284,6 +286,8 @@ public class ArticleContentSpecifiedFragment extends Fragment {
     }
 
     public void blogCriticiseChange() {
-        refreshLayout.autoRefresh();
+        blogCriticismAdapter.getBlogCriticisms().clear();
+        pagerIndex = 0;
+        presenter.loadCriticisms(blog.getBlogId(), pagerIndex);
     }
 }
