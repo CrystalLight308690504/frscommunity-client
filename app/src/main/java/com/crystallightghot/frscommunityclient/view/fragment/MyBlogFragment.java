@@ -39,7 +39,7 @@ public class MyBlogFragment extends BaseFragment {
     ImageView btnBack;
     @BindView(R.id.btnAddPackage)
     TextView btnAddPackage;
-    @BindView(R.id.rvMyBlogs)
+    @BindView(R.id.rvContents)
     RecyclerView rvMyBlogs;
 
     MyBlogPresenter presenter;
@@ -94,7 +94,7 @@ public class MyBlogFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
+    @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvContents})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnBack:

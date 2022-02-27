@@ -1,9 +1,6 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.presenter.ArticleContentSpecifiedFragmentPresenter;
-import com.crystallightghot.frscommunityclient.presenter.BlogCriticismAdapterViewHolderPresenter;
-import com.crystallightghot.frscommunityclient.presenter.MyBlogPresenter;
-import com.crystallightghot.frscommunityclient.presenter.UserInformationFragmentPresenter;
+import com.crystallightghot.frscommunityclient.presenter.*;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
@@ -139,6 +136,11 @@ public class BlogModel {
 
     public void loadApplauseCount(Long userId, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.COUNT_BlOG_APPLAUSE_COUNT.getRequestIO() + userId;
+        FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
+
+    public void loadBlogCollections(Long userId, int pagerIndex, Object respondMessageKey) {
+        String url = FRSCRequestIO.BlogIO.FIND_BLOGS_COLLECTED.getRequestIO() + userId + "/" + pagerIndex;
         FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
     }
 }

@@ -1,7 +1,5 @@
 package com.crystallightghot.frscommunityclient.view.util;
 
-import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapterViewHolderPresenter;
-import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import org.greenrobot.eventbus.EventBus;
 
 /**

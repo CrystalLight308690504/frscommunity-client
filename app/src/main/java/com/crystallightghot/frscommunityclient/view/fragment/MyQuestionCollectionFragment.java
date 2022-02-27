@@ -34,7 +34,7 @@ public class MyQuestionCollectionFragment extends Fragment {
     ImageView btnBack;
     @BindView(R.id.btnAddPackage)
     TextView btnAddPackage;
-    @BindView(R.id.rvMyBlogs)
+    @BindView(R.id.rvContents)
     RecyclerView rvMyBlogs;
     @BindView(R.id.tvTitle)
     TextView tvTitle;
@@ -78,7 +78,7 @@ public class MyQuestionCollectionFragment extends Fragment {
         tvTitle.setText("我的收藏");
     }
 
-    @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvMyBlogs})
+    @OnClick({R.id.btnBack, R.id.btnAddPackage, R.id.rvContents})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnBack:

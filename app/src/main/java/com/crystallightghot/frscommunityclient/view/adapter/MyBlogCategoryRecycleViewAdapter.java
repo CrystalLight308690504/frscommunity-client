@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.MyBlogCategoryRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.dialog.CategoryDialogFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticlesFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;

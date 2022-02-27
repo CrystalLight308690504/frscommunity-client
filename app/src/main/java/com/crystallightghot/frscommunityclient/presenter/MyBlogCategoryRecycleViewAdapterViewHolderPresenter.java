@@ -1,6 +1,7 @@
-package com.crystallightghot.frscommunityclient.view.adapter;
+package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.model.BlogModel;
+import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycleViewAdapter;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
