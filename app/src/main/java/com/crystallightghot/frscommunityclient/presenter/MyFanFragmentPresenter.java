@@ -2,12 +2,11 @@ package com.crystallightghot.frscommunityclient.presenter;
 
 import com.crystallightghot.frscommunityclient.model.UserModel;
 import com.crystallightghot.frscommunityclient.view.fragment.MyFanFragment;
-import com.crystallightghot.frscommunityclient.view.fragment.MyUserFollowedFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollowerEntity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -48,7 +47,7 @@ public class MyFanFragmentPresenter {
                     Map mapResult = (Map) message.getData();
                     boolean hasNext = (boolean) mapResult.get("hasNext");
                     List data = (List) mapResult.get("data");
-                    List<UserFollowerEntity> userFollowers = FRSCObjectTransferUtil.listMapToListObject(data, UserFollowerEntity.class);
+                    List<UserFollowerEntity> userFollowers = FRSCGsonUtil.listMapToListObject(data, UserFollowerEntity.class);
                     view.loadMoreData(userFollowers, hasNext);
                 }else {
                     XToastUtils.error(message.getMessage());

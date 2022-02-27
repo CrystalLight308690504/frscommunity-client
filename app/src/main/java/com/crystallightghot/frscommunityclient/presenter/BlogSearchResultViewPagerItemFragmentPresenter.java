@@ -5,7 +5,7 @@ import com.crystallightghot.frscommunityclient.view.fragment.BlogSearchResultVie
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -50,7 +50,7 @@ public class BlogSearchResultViewPagerItemFragmentPresenter {
                         hasNext = (boolean) data.get("hasNext");
                         Map resultMap = (Map) message.getData();
                         ArrayList dataList = (ArrayList) resultMap.get("data");
-                        List blogs = FRSCObjectTransferUtil.listMapToListObject(dataList, Blog.class);
+                        List blogs = FRSCGsonUtil.listMapToListObject(dataList, Blog.class);
                         view.addDataToRV(blogs, hasNext);
                     }
                 } else {

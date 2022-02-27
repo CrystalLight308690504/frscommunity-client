@@ -5,11 +5,9 @@ import com.crystallightghot.frscommunityclient.view.adapter.MyBlogCategoryRecycl
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 

@@ -3,7 +3,7 @@ package com.crystallightghot.frscommunityclient.model;
 import com.crystallightghot.frscommunityclient.presenter.*;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -72,14 +72,14 @@ public class BlogModel {
     }
 
     public void collectionBlog(BlogCollection blogCollection, Object respondMessageKey) {
-        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         String body = gson.toJson(blogCollection);
         String url = FRSCRequestIO.BlogIO.COLLECTION_BLOG.getRequestIO();
         FRSCOKHttp3RequestUtil.callPostRequest(url,body, respondMessageKey);
     }
 
     public void cancelCollectionBlog(BlogCollection blogCollection, Object respondMessageKey) {
-        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         String body = gson.toJson(blogCollection);
         String url = FRSCRequestIO.BlogIO.CANCEL_COLLECTION_BLOG.getRequestIO();
         FRSCOKHttp3RequestUtil.callDeleteRequest(url,body, respondMessageKey);
@@ -97,7 +97,7 @@ public class BlogModel {
 
     public void applauseBlog(Long userId, Blog blog, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.APPLAUSE_BLOG.getRequestIO();
-        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         BlogApplause blogApplause = new BlogApplause();
         blogApplause.setBlog(blog);
         blogApplause.setUserId(userId);
@@ -108,7 +108,7 @@ public class BlogModel {
 
     public void cancelApplauseBlog(Long userId, Blog blog, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.CANCEL_APPLAUSE_BLOG.getRequestIO();
-        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         BlogApplause blogApplause = new BlogApplause();
         blogApplause.setBlog(blog);
         blogApplause.setUserId(userId);
@@ -118,7 +118,7 @@ public class BlogModel {
 
     public void criticiseBlog(BlogCriticism blogCriticism, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.CRITICISE_BLOG.getRequestIO();
-        Gson gson = FRSCObjectTransferUtil.getGsonWithTimeForm();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         String jsonBody = gson.toJson(blogCriticism);
         FRSCOKHttp3RequestUtil.callPostRequest(url, jsonBody, respondMessageKey);
     }
@@ -130,7 +130,7 @@ public class BlogModel {
 
     public void deleteBlogCriticise(BlogCriticism blogCriticism, Object respondMessageKey) {
         String url = FRSCRequestIO.BlogIO.DELETE_BLOG_CRITICISM.getRequestIO();
-        String jsonBody = FRSCObjectTransferUtil.getGsonWithTimeForm().toJson(blogCriticism);
+        String jsonBody = FRSCGsonUtil.getGsonWithTimeForm().toJson(blogCriticism);
         FRSCOKHttp3RequestUtil.callDeleteRequest(url, jsonBody, respondMessageKey);
     }
 

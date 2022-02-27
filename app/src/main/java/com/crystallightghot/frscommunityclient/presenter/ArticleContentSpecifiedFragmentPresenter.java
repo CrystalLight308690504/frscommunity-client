@@ -188,7 +188,7 @@ public class ArticleContentSpecifiedFragmentPresenter {
                     boolean hasNext = (boolean) resultMap.get("hasNext");
                     ArrayList dataList = (ArrayList) resultMap.get("data");
                     if (null != dataList){
-                        List<BlogCriticism> blogCriticisms = FRSCObjectTransferUtil.listMapToListObject(dataList, BlogCriticism.class);
+                        List<BlogCriticism> blogCriticisms = FRSCGsonUtil.listMapToListObject(dataList, BlogCriticism.class);
                         view.showMoreBlogCriticism(blogCriticisms,hasNext);
                     }
                 }else  {

@@ -1,6 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
 import com.crystallightghot.frscommunityclient.contract.EditUserPasswordContract;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCString;
 import com.crystallightghot.frscommunityclient.view.util.FRSCThreadPoolUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
@@ -55,7 +56,7 @@ public class EditUserPasswordModel implements EditUserPasswordContract.Model {
     }
 
     public void modifyUserPasswordByOldPassword(User user, EditUserPasswordContract.EditUserPasswordCallBack callBack) {
-        Gson gson = new Gson();
+        Gson gson = FRSCGsonUtil.getGsonWithTimeForm();
         String jsonUser = gson.toJson(user);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(mediaType, jsonUser);

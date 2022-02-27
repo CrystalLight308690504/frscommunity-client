@@ -4,10 +4,9 @@ import com.crystallightghot.frscommunityclient.model.BlogModel;
 import com.crystallightghot.frscommunityclient.view.fragment.MyBlogCollectionFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCollection;
-import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollowerEntity;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import com.crystallightghot.frscommunityclient.view.util.XToastUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -48,7 +47,7 @@ public class MyBlogCollectionFragmentPresenter {
                     Map mapResult = (Map) message.getData();
                     boolean hasNext = (boolean) mapResult.get("hasNext");
                     List data = (List) mapResult.get("data");
-                    List<BlogCollection> blogCollections = FRSCObjectTransferUtil.listMapToListObject(data, BlogCollection.class);
+                    List<BlogCollection> blogCollections = FRSCGsonUtil.listMapToListObject(data, BlogCollection.class);
                     view.loadMoreData(blogCollections, hasNext);
                 }else {
                     XToastUtils.error(message.getMessage());

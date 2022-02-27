@@ -1,10 +1,8 @@
 package com.crystallightghot.frscommunityclient.model;
 
-import com.crystallightghot.frscommunityclient.presenter.MyUserFollowedFragmentPresenter;
-import com.crystallightghot.frscommunityclient.presenter.UserInformationFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
-import com.crystallightghot.frscommunityclient.view.util.FRSCObjectTransferUtil;
+import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
 import com.crystallightghot.frscommunityclient.view.value.FRSCRequestIO;
 
 /**
@@ -21,7 +19,7 @@ public class UserModel {
 
     public void followUser(UserFollower userFollower, Object respondMessageKey) {
         String url = FRSCRequestIO.SystemIO.FOLLOW_USER.getRequestIO();
-        String requestBody = FRSCObjectTransferUtil.objectToJsonString(userFollower);
+        String requestBody = FRSCGsonUtil.objectToJsonString(userFollower);
         FRSCOKHttp3RequestUtil.callPostRequest(url, requestBody, respondMessageKey);
     }
 

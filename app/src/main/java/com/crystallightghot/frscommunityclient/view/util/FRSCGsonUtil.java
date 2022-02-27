@@ -13,7 +13,7 @@ import java.util.Map;
  * @Version: 1.0
  * description：
  */
-public class FRSCObjectTransferUtil {
+public class FRSCGsonUtil {
 
     public static <T> List<T> listMapToListObject(List<Map> lists, Class<T> clazz) {
         if (null == lists) {
