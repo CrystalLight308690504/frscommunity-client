@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,8 @@ public class BlogFragment extends BaseFragment {
     BlogPresenter presenter;
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
+    @BindView(R.id.icBack)
+    TextView icBack;
     private String[] skatingTypesName;
 
     public BlogFragment() {
@@ -69,11 +72,15 @@ public class BlogFragment extends BaseFragment {
     private void ladingSkatingType() {
         presenter.loadingSkatingType();
     }
+
     public void showSuccessState() {
         llStateful.showContent();
     }
+
     public void showErrorState(String message) {
-        llStateful.showError(message, view -> {presenter.loadingSkatingType();});
+        llStateful.showError(message, view -> {
+            presenter.loadingSkatingType();
+        });
     }
 
     @Override
@@ -91,17 +98,19 @@ public class BlogFragment extends BaseFragment {
         super.onDestroy();
     }
 
-    @OnClick({R.id.blog_more_list, R.id.btnSearch})
+    @OnClick({R.id.blog_more_list, R.id.btnSearch,R.id.icBack})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blog_more_list:
                 FRSCIntentUtil.intentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
                 break;
             case R.id.btnSearch:
+            case R.id.icBack:
                 FRSCIntentUtil.intentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));
                 break;
             default:
                 break;
         }
     }
+
 }
