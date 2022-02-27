@@ -211,7 +211,8 @@ public class MainActivity extends BaseFragmentActivity {
     private void showSimpleBottomSheetList() {
         new BottomSheet.BottomListSheetBuilder(this)
                 .addItem("博客", "博客")
-                .addItem("求助", "求助")
+                /** 暂时删除改功能*/
+//                .addItem("求助", "求助")
                 .setIsCenter(true)
                 .setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
                     dialog.dismiss();

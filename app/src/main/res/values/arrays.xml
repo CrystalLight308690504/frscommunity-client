@@ -17,7 +17,7 @@
     <!--标签-->
     <string-array name="searchResultType">
         <item>博客</item>
-        <item>求助</item>
+  <!--      <item>求助</item>-->
         <item>用户</item>
     </string-array>
 

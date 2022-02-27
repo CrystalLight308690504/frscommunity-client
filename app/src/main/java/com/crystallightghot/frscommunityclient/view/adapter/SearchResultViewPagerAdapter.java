@@ -34,11 +34,9 @@ public class SearchResultViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new BlogSearchResultViewPagerItemFragment(searchText);
             case 1:
-                return new HomeSearchResultDefaultViewPagerItemFragment();
-            case 2:
                 return new UserSearchResultViewPagerItemFragment(searchText);
             default:
-                return new HomeSearchResultDefaultViewPagerItemFragment();
+                return new BlogSearchResultViewPagerItemFragment(searchText);
         }
     }
 
