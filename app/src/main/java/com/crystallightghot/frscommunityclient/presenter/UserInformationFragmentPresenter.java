@@ -52,7 +52,6 @@ public class UserInformationFragmentPresenter {
 
     public void loadApplauseCount(Long userId) {
         blogModel.loadApplauseCount(userId, RespondMessageKey.showApplauseCount);
-
     }
 
     public void loadFollowUserCount(Long userId) {

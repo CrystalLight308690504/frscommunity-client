@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.view.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import com.crystallightghot.frscommunityclient.view.fragment.UserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.fragment.UserInformationViewPagerBlogItemFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import org.jetbrains.annotations.NotNull;
@@ -16,9 +17,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class UserInformationBlogViewPagerItemAdapter extends FragmentStateAdapter {
 
+    private String[] tabTitles;
     User user;
     public UserInformationBlogViewPagerItemAdapter(@NonNull @NotNull Fragment fragment, User user) {
         super(fragment);
+        this.user = user;
+    }
+
+    public UserInformationBlogViewPagerItemAdapter(UserInformationFragment fragment, String[] tabTitles, User user) {
+        super(fragment);
+        this.tabTitles = tabTitles;
         this.user = user;
     }
 
@@ -35,6 +43,6 @@ public class UserInformationBlogViewPagerItemAdapter extends FragmentStateAdapte
 
     @Override
     public int getItemCount() {
-        return 2;
+        return tabTitles.length;
     }
 }

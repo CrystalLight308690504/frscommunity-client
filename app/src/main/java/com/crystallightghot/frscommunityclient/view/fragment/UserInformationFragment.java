@@ -149,8 +149,8 @@ public class UserInformationFragment extends Fragment {
         presenter.loadFollowerCount(user.getUserId());
         presenter.loadApplauseCount(user.getUserId());
 
-        String[] tabTitles = new String[]{"博客", "问答"};
-        vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, user));
+        String[] tabTitles = new String[]{"博客"};
+        vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, tabTitles,user));
         new TabLayoutMediator(tlSkatingTypes, vpContentViewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }

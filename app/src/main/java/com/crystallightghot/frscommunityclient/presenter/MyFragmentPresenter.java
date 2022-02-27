@@ -74,13 +74,24 @@ public class MyFragmentPresenter {
                     view.showBlogCount((long) count);
                 }
                 break;
+            case SHOW_APPLAUSE_COUNT:
+                if (message.isSuccess()) {
+                    double count = (Double) message.getData();
+                    view.showApplauseCount((long) count);
+                }
+                break;
         }
 
+    }
+
+    public void loadApplauseCount() {
+        blogModel.loadApplauseCount(FRSCApplicationContext.getUser().getUserId(), RespondMessageKey.SHOW_APPLAUSE_COUNT);
     }
 
     private enum RespondMessageKey {
         LOAD_FOLLOW_USER_COUNT,
         LOAD_FAN_COUNT,
         LOAD_BlOG_COUNT,
+        SHOW_APPLAUSE_COUNT
     }
 }

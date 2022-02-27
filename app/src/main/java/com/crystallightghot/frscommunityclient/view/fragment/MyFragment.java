@@ -65,10 +65,10 @@ public class MyFragment extends Fragment {
     TextView tvicFan;
     @BindView(R.id.tvFanCount)
     TextView tvFanCount;
-    @BindView(R.id.tvQuestionCount)
-    TextView tvQuestionCount;
     @BindView(R.id.tvBlogCount)
     TextView tvBlogCount;
+    @BindView(R.id.tvApplauseCount)
+    TextView tvApplauseCount;
 
     private String mParam1;
 
@@ -122,6 +122,8 @@ public class MyFragment extends Fragment {
         presenter.loadFollowUserCount();
         presenter.loadFanOfUserCount();
         presenter.loadBlogCount();
+        presenter.loadApplauseCount();
+
     }
 
     @OnClick({R.id.btnArrowRight, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting, R.id.tvicFllowed, R.id.tvicFan})
@@ -160,6 +162,7 @@ public class MyFragment extends Fragment {
 
     /**
      * 显示关注的用户数量
+     *
      * @param followUserCount
      */
     public void showFollowUserCount(long followUserCount) {
@@ -170,8 +173,8 @@ public class MyFragment extends Fragment {
         tvFanCount.setText(fanCount + "");
     }
 
-    public void showQuestionCount(long questionCount) {
-        tvQuestionCount.setText(questionCount + "");
+    public void showApplauseCount(long questionCount) {
+        tvApplauseCount.setText(questionCount + "");
     }
 
     public void showBlogCount(long blogCount) {
