@@ -16,24 +16,22 @@ import java.util.ArrayList;
  * description：
  */
 public class BlogViewPagerAdapter extends FragmentStateAdapter {
-    ArrayList<SkatingType> skatingTypes;
-    ArrayList<Fragment> fragments = new ArrayList<>();
-    public BlogViewPagerAdapter(BlogFragment blogFragment, ArrayList<SkatingType> skatingTypes) {
+
+    private ArrayList<Fragment> fragments;
+    public BlogViewPagerAdapter(BlogFragment blogFragment, ArrayList<Fragment> fragments) {
         super(blogFragment);
-        this.skatingTypes = skatingTypes;
+        this.fragments = fragments;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        BlogViewPagerItemFragment itemFragment = new BlogViewPagerItemFragment(skatingTypes.get(position));
-        fragments.add(itemFragment);
-        return itemFragment;
+        return fragments.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return skatingTypes.size();
+        return fragments.size();
     }
 
 }

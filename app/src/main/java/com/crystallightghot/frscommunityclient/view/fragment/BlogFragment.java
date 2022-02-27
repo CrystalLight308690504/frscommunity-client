@@ -49,7 +49,7 @@ public class BlogFragment extends BaseFragment {
     TextView icBack;
     private String[] skatingTypesName;
     BlogViewPagerAdapter blogViewPagerAdapter;
-
+    ArrayList<Fragment> fragments = new ArrayList<>();
     public BlogFragment() {
         presenter = new BlogPresenter(this);
     }
@@ -67,14 +67,43 @@ public class BlogFragment extends BaseFragment {
 
     public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {
         this.skatingTypesName = skatingTypesName;
-        blogViewPagerAdapter = new BlogViewPagerAdapter(this, skatingTypes);
+
+        for (int i = 0; i < skatingTypes.size(); i++) {
+            BlogViewPagerItemFragment itemFragment = new BlogViewPagerItemFragment(skatingTypes.get(i));
+            fragments.add(itemFragment);
+        }
+
+        blogViewPagerAdapter = new BlogViewPagerAdapter(this, fragments);
         contentViewPager.setAdapter(blogViewPagerAdapter);
         new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> {
             tab.setText(skatingTypesName[position]);
+            updateHeight(position);
         }
         ).attach();
     }
 
+    /**
+     * 这段代码作用是让viewpaper2自适应高度，使得scrollview能在高度不一的fragment滑动，解决fragment出现裁切或空白的问题
+     * @param position
+     */
+    private void updateHeight(int position) {
+        if (fragments.size() > position) {
+            Fragment fragment = fragments.get(position);
+            if (fragment.getView() != null) {
+                int viewWidth = View.MeasureSpec.makeMeasureSpec(fragment.getView().getWidth(), View.MeasureSpec.EXACTLY);
+                int viewHeight = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                fragment.getView().measure(viewWidth, viewHeight);
+                if (contentViewPager.getLayoutParams().height != fragment.getView().getMeasuredHeight()) {
+                    //必须要用对象去接收，然后修改该对象再采用该对象，否则无法生效...
+                    Log.e("TAG", "updatePagerHeightForChild: " + contentViewPager.getLayoutParams().height);
+                    ViewGroup.LayoutParams layoutParams = contentViewPager.getLayoutParams();
+                    layoutParams.height = fragment.getView().getMeasuredHeight();
+                    Log.e("TAG", "updatePagerHeightForChild: " + contentViewPager.getLayoutParams().height);
+                    contentViewPager.setLayoutParams(layoutParams);
+                }
+            }
+        }
+    }
 
     private void ladingSkatingType() {
         presenter.loadingSkatingType();
