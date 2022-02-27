@@ -132,7 +132,7 @@ public class EditeUserPasswordByPhoneNumberFragment extends BaseFragment {
         XToastUtils.info("验证码：" + verifyCode);
         btnSendVerifyCode.setEnabled(false);
         Runnable runnable = () -> {
-            int i = 2;
+            int i = 59;
             try {
                 while (i-- > 0) {
                     Thread.sleep(1000);
