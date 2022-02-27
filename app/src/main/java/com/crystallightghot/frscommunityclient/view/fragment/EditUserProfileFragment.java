@@ -26,15 +26,11 @@ import com.xuexiang.xui.widget.imageview.RadiusImageView;
 public class EditUserProfileFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
-    @BindView(R.id.icLog)
-    RadiusImageView icLog;
-
     EditUserProfilePresenter presenter;
     private String mParam1;
 
     public EditUserProfileFragment() {
         presenter = new EditUserProfilePresenter(this);
-
     }
 
     /**
@@ -71,21 +67,9 @@ public class EditUserProfileFragment extends BaseFragment {
     }
 
     private void init() {
-        Drawable userProfile = FRSCApplicationContext.getUserProfile();
-        icLog.setImageDrawable(userProfile);
+        chosePictureAction();
     }
 
-    @OnClick({R.id.icLog})
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.icLog:
-
-                chosePictureAction();
-                break;
-
-        }
-    }
 
     private void chosePictureAction() {
         PictureSelector
