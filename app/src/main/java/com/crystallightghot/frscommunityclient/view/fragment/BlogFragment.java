@@ -1,11 +1,13 @@
 package com.crystallightghot.frscommunityclient.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +48,7 @@ public class BlogFragment extends BaseFragment {
     @BindView(R.id.icBack)
     TextView icBack;
     private String[] skatingTypesName;
+    BlogViewPagerAdapter blogViewPagerAdapter;
 
     public BlogFragment() {
         presenter = new BlogPresenter(this);
@@ -64,10 +67,14 @@ public class BlogFragment extends BaseFragment {
 
     public void init(String[] skatingTypesName, ArrayList<SkatingType> skatingTypes) {
         this.skatingTypesName = skatingTypesName;
-        contentViewPager.setAdapter(new BlogViewPagerAdapter(this, skatingTypes));
-        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> tab.setText(skatingTypesName[position])
+        blogViewPagerAdapter = new BlogViewPagerAdapter(this, skatingTypes);
+        contentViewPager.setAdapter(blogViewPagerAdapter);
+        new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> {
+            tab.setText(skatingTypesName[position]);
+        }
         ).attach();
     }
+
 
     private void ladingSkatingType() {
         presenter.loadingSkatingType();
@@ -98,7 +105,7 @@ public class BlogFragment extends BaseFragment {
         super.onDestroy();
     }
 
-    @OnClick({R.id.blog_more_list, R.id.btnSearch,R.id.icBack})
+    @OnClick({R.id.blog_more_list, R.id.btnSearch, R.id.icBack})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blog_more_list:

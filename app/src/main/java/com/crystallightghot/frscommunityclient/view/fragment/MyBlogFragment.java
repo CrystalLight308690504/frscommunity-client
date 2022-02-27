@@ -20,6 +20,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.blog.BlogCategory;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
+import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
 import java.util.List;
@@ -83,6 +84,7 @@ public class MyBlogFragment extends BaseFragment {
     private void init() {
         activity = getActivity();
         presenter.loadingCategory();
+        WidgetUtils.initRecyclerView(rvMyBlogs);
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> {

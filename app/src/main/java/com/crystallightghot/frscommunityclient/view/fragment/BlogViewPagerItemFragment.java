@@ -18,6 +18,7 @@ import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
+import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.statelayout.StatefulLayout;
 
 import java.util.List;
@@ -85,6 +86,7 @@ public class BlogViewPagerItemFragment extends BaseFragment {
 
     private void init() {
         blogRecyclerViewAdapter = new BlogRecyclerViewAdapter(getActivity());
+        WidgetUtils.initRecyclerView(rvLists);
         //下拉刷新
         ViewUtils.setViewsFont(refreshLayout);
         refreshLayout.setOnRefreshListener(refreshLayout -> {

@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:padding="@dimen/distance_small"
         android:background="@drawable/bkd_bottom_blue"
-        android:layout_marginBottom="@dimen/distance_normal"
+        android:layout_marginBottom="@dimen/distance_small"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class BlogViewPagerAdapter extends FragmentStateAdapter {
     ArrayList<SkatingType> skatingTypes;
-
+    ArrayList<Fragment> fragments = new ArrayList<>();
     public BlogViewPagerAdapter(BlogFragment blogFragment, ArrayList<SkatingType> skatingTypes) {
         super(blogFragment);
         this.skatingTypes = skatingTypes;
@@ -26,11 +26,14 @@ public class BlogViewPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new BlogViewPagerItemFragment(skatingTypes.get(position));
+        BlogViewPagerItemFragment itemFragment = new BlogViewPagerItemFragment(skatingTypes.get(position));
+        fragments.add(itemFragment);
+        return itemFragment;
     }
 
     @Override
     public int getItemCount() {
         return skatingTypes.size();
     }
+
 }
