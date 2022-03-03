@@ -100,13 +100,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
             <TextView
                     android:id="@+id/articleContent"
                     android:layout_width="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_height="200dp"
-                    android:enabled="false"
-                    android:inputType="textMultiLine"
+                    android:layout_height="wrap_content"
             />
 
 

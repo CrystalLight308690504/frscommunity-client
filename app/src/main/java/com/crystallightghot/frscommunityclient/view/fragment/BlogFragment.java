@@ -77,7 +77,6 @@ public class BlogFragment extends BaseFragment {
         contentViewPager.setAdapter(blogViewPagerAdapter);
         new TabLayoutMediator(tbSkatingTypes, contentViewPager, (tab, position) -> {
             tab.setText(skatingTypesName[position]);
-            updateHeight(position);
         }
         ).attach();
     }

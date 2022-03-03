@@ -124,7 +124,6 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
             tvBlogCount.setText(count + "");
             /** 用这个会出现不断请求BUG
             notifyDataSetChanged();
-
              */
         }
     }

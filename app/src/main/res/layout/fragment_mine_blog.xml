@@ -11,6 +11,7 @@
                android:layout_height="@dimen/ic_btn_top_bar_back_size"
                android:src="@mipmap/icon_top_bar_back_blue"
                android:id="@+id/btnBack"
+               android:layout_marginTop="@dimen/distance_small"
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintTop_toTopOf="parent"
     />
@@ -26,7 +27,7 @@
     />
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               android:background="@drawable/bkd_btn_back_round"
-              android:padding="@dimen/distance_small"
+              android:padding="@dimen/distance_normal"
               android:textSize="10dp"
               android:text="新建分类"
               android:textColor="@color/color_white"

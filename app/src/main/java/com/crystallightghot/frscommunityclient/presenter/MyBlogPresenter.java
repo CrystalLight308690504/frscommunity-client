@@ -104,8 +104,8 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
                 articlesFragment.addDataToList(blogs);
                 break;
             case  ADD_BLOG_CATEGORY :
+                view.hideLoadingDialog();
                 if (message.isSuccess()) {
-                    view.hideLoadingDialog();
                     XToastUtils.success("添加成功");
                     loadingCategory();
                 }else {
