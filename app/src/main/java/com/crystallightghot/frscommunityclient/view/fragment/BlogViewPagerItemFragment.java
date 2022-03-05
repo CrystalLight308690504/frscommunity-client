@@ -15,8 +15,10 @@ import butterknife.ButterKnife;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.BlogViewPagerItemFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.adapter.BlogRecyclerViewAdapter;
+import com.crystallightghot.frscommunityclient.view.message.ViewPagerHeightUpdateMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
+import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xuexiang.xui.utils.ViewUtils;
 import com.xuexiang.xui.utils.WidgetUtils;
@@ -125,6 +127,8 @@ public class BlogViewPagerItemFragment extends BaseFragment {
             return;
         }
         blogRecyclerViewAdapter.notifyDataSetChanged();
+        if (pagerIndex == 0)
+            FRSCEventBusUtil.sendMessage(new ViewPagerHeightUpdateMessage(this));
     }
 
     public void showError(String message) {

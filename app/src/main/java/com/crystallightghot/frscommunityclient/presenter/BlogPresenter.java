@@ -3,6 +3,7 @@ package com.crystallightghot.frscommunityclient.presenter;
 import com.crystallightghot.frscommunityclient.model.SkatingTypeModel;
 import com.crystallightghot.frscommunityclient.view.fragment.BlogFragment;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
+import com.crystallightghot.frscommunityclient.view.message.ViewPagerHeightUpdateMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.skatingtype.SkatingType;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -23,18 +24,18 @@ import java.util.ArrayList;
 public class BlogPresenter {
     SkatingTypeModel skatingTypeModel;
 
-    BlogFragment blogFragment;
+    BlogFragment view;
     String[] skatingTypesName;
     ArrayList<SkatingType> skatingTypes = new ArrayList();
 
-    public BlogPresenter(BlogFragment blogFragment) {
-        this.blogFragment = blogFragment;
+    public BlogPresenter(BlogFragment view) {
+        this.view = view;
         skatingTypeModel = new SkatingTypeModel();
         FRSCEventBusUtil.register(this);
     }
 
     public void loadingSkatingType() {
-        blogFragment.showLoadingDialog();
+        view.showLoadingDialog();
         skatingTypeModel.loadingSkatingType(RespondMessageKey.LOADING_SKATING_TYPE);
     }
 
@@ -45,7 +46,7 @@ public class BlogPresenter {
         }
         switch ((RespondMessageKey) message.getMessageKey()) {
             case LOADING_SKATING_TYPE:
-                blogFragment.hideLoadingDialog();
+                view.hideLoadingDialog();
                 if (message.isSuccess()) {
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                     ArrayList<LinkedTreeMap> list = (ArrayList) message.getData();
@@ -57,15 +58,23 @@ public class BlogPresenter {
                         skatingTypes.add(skatingType);
                         skatingTypesName[i] = skatingType.getName();
                     }
-                    blogFragment.showSuccessState();
-                    blogFragment.init(skatingTypesName, skatingTypes);
+                    view.showSuccessState();
+                    view.init(skatingTypesName, skatingTypes);
                     FRSCApplicationContext.setSkatingTypes(skatingTypes);
                 }else {
-                    blogFragment.showErrorState(message.getMessage());
+                    view.showErrorState(message.getMessage());
                 }
                 break;
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getMessage(ViewPagerHeightUpdateMessage message) {
+        if (null != message.getFragment()) {
+            view.updateHeight(message.getFragment());
+        }
+    }
+
     public enum RespondMessageKey {
         LOADING_SKATING_TYPE
     }
