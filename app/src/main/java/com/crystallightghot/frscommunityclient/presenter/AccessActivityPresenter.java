@@ -11,6 +11,8 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 /**
  * @Date 2022/2/26
  * @Author crystalLightGhost
@@ -33,20 +35,21 @@ public class AccessActivityPresenter {
     public void checkUserLoginState() {
         DaoSession daoSession = FRSCDataBaseUtil.getReadDaoSession();
         LoginInformationDao informationDao = daoSession.getLoginInformationDao();
-        LoginInformation information = informationDao.queryBuilder()
+        List<LoginInformation> informationList = informationDao.queryBuilder()
                 .where(LoginInformationDao.Properties.Login.eq(1))
                 .build()
-                .unique();
+                .list();
         // 如果存在已经登陆的用户
-        if (information != null) {
-            UserDao userDao = daoSession.getUserDao();
-            user = userDao.queryBuilder()
-                    .where(UserDao.Properties.UserId.eq(information.getUserId()))
-                    .build()
-                    .unique();
-            // 检查是否登陆失效
-            userModel.isLogin(user.getSessionId(), isLogin);
-        }else {
+        if (!informationList.isEmpty()){
+            LoginInformation loginInformation = informationList.get(informationList.size() - 1);
+                UserDao userDao = daoSession.getUserDao();
+                user = userDao.queryBuilder()
+                        .where(UserDao.Properties.UserId.eq(loginInformation.getUserId()))
+                        .build()
+                        .unique();
+                // 检查是否登陆失效
+                userModel.isLogin(user.getSessionId(), isLogin);
+        } else {
             view.stateToLogin(false);
         }
     }

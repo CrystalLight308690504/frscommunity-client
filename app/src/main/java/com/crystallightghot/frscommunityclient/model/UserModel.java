@@ -51,7 +51,7 @@ public class UserModel {
     }
 
     public void isLogin(String sessionId, Object respondMessageKey) {
-        String url = FRSCRequestIO.SystemIO.IS_LOGIN.getRequestIO() + sessionId;
+        String url = FRSCRequestIO.SystemIO.IS_LOGIN.getRequestIO() +sessionId;
         FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
     }
 

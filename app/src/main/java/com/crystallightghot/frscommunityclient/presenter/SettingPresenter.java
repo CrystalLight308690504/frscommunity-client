@@ -10,6 +10,8 @@ import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
 
+import java.util.List;
+
 /**
  * @Date 2022/1/25
  * @Author crystalLightGhost
@@ -40,22 +42,28 @@ public class SettingPresenter implements SettingContract.Presenter, RequestCallB
         User user = FRSCApplicationContext.getUser();
         DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
         LoginInformationDao informationDao = daoSession.getLoginInformationDao();
-        LoginInformation loginInformation = informationDao.queryBuilder()
+        List<LoginInformation> informationList = informationDao.queryBuilder()
                 .where(LoginInformationDao.Properties.UserId.eq(user.getUserId()))
-                .build().unique();
-        daoSession.delete(loginInformation);
+                .build().
+                list();
+        for (int i = 0; i <informationList.size(); i++) {
+            informationDao.delete(informationList.get(i));
+        }
+
         // 删除用户
         UserDao userDao = daoSession.getUserDao();
-        User user1 = userDao.queryBuilder()
+        List<User> list = userDao.queryBuilder()
                 .where(UserDao.Properties.UserId.eq(user.getUserId()))
-                .build().unique();
-        if (null != user1) {
-            userDao.delete(user1);
+                .build()
+                .list();
+        if (null != list) {
+            for (int i = 0; i < list.size(); i++) {
+                userDao.delete(list.get(i));
+            }
         }
         // 删除角色
         RoleDao roleDao = daoSession.getRoleDao();
-        roleDao.deleteByKey(user.getRole().getRoleId());
-
+        roleDao.deleteByKey(user.getRole().getUserId());
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(requestResult.getMessage());
         message.setSuccess(true);

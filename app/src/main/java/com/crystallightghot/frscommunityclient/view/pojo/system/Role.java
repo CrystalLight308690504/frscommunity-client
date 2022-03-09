@@ -19,8 +19,9 @@ import org.greenrobot.greendao.annotation.Generated;
 @Data
 @Entity
 public class Role {
-    @Id
+
     private long roleId;
+    @Id
     private long userId;
     private String roleName;
     private String code;

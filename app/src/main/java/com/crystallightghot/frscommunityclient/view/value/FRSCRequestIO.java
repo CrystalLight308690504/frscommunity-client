@@ -67,6 +67,7 @@ public class FRSCRequestIO {
         DELETE_BLOG("/blog/delete"),
         DELETE_BLOG_CATEGORY("/blog/deleteBlogCategory"),
         MODIFY_BLOG("/blog/modifyBlog"),
+        FIND_BLOGS("/blog/findBlogs/"),
         FIND_BLOGS_BY_USERID("/blog/findBlogsByUserId/"),
         FIND_BLOGS_COLLECTED("/blog/findBlogsCollected/"),
         FIND_BLOGS_BY_SKATING_TYPE_ID("/blog/findBlogsBySkatingTypeId/"),
