@@ -4,10 +4,7 @@ import com.crystallightghot.frscommunityclient.model.UserModel;
 import com.crystallightghot.frscommunityclient.view.activity.AccessActivity;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoSession;
-import com.crystallightghot.frscommunityclient.view.pojo.system.LoginInformation;
-import com.crystallightghot.frscommunityclient.view.pojo.system.LoginInformationDao;
-import com.crystallightghot.frscommunityclient.view.pojo.system.User;
-import com.crystallightghot.frscommunityclient.view.pojo.system.UserDao;
+import com.crystallightghot.frscommunityclient.view.pojo.system.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
@@ -64,6 +61,13 @@ public class AccessActivityPresenter {
         }
         if (message.isSuccess()) {
             if ((boolean) message.getData()) {
+                DaoSession daoSession = FRSCDataBaseUtil.getReadDaoSession();
+                RoleDao roleDao = daoSession.getRoleDao();
+                Role role = roleDao.queryBuilder()
+                        .where(RoleDao.Properties.UserId.eq(user.getUserId()))
+                        .build()
+                        .unique();
+                user.setRole(role);
                 FRSCApplicationContext.setUser(user);
                 // 转化为登陆状态
                 view.stateToLogin(true);

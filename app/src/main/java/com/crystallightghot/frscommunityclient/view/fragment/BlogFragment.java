@@ -84,7 +84,7 @@ public class BlogFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                updateHeightP( position);
+//                updateHeightP( position);
             }
         });
     }

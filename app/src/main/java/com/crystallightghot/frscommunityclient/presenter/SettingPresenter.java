@@ -52,6 +52,9 @@ public class SettingPresenter implements SettingContract.Presenter, RequestCallB
         if (null != user1) {
             userDao.delete(user1);
         }
+        // 删除角色
+        RoleDao roleDao = daoSession.getRoleDao();
+        roleDao.deleteByKey(user.getRole().getRoleId());
 
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(requestResult.getMessage());

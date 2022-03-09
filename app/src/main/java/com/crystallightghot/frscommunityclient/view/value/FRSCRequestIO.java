@@ -8,7 +8,6 @@ package com.crystallightghot.frscommunityclient.view.value;
  */
 public class FRSCRequestIO {
     private static String localHost = "http://192.168.0.101:";
-//    private static  String localHost = "http://42.194.211.199:";
 
     public enum SystemIO {
         // 系统请求接口
@@ -40,8 +39,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-            String host = "http://42.194.211.199:";
-//            String host = localHost;
+//            String host = "http://42.194.211.199:";
+            String host = localHost;
             String port = "9002";
             return host + port + requestInterface;
         }

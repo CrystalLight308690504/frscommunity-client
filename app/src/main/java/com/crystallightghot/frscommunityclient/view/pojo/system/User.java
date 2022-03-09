@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.Date;
 
@@ -52,7 +53,8 @@ public class User {
 
     private String addressIp;
 
-
+    @Transient
+    Role role;
 
     @Generated(hash = 540396057)
     public User(Long userId, String oldPassword, String sessionId, String userName,

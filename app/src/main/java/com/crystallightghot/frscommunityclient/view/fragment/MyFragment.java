@@ -69,8 +69,9 @@ public class MyFragment extends Fragment {
     TextView tvBlogCount;
     @BindView(R.id.tvApplauseCount)
     TextView tvApplauseCount;
+    @BindView(R.id.tvUserRoleName)
+    TextView tvUserRoleName;
 
-    private String mParam1;
 
     BaseActivity activity;
     MyFragmentPresenter presenter;
@@ -91,9 +92,7 @@ public class MyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
+
     }
 
     @Override
@@ -110,6 +109,9 @@ public class MyFragment extends Fragment {
         User user = FRSCApplicationContext.getUser();
         if (null != user) {
             userName.setText(user.getUserName());
+            if (user.getRole() != null) {
+                tvUserRoleName.setText(user.getRole().getRoleName());
+            }
             String userProfile = user.getProfile();
             byte[] decodedString = Base64.decode(userProfile, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

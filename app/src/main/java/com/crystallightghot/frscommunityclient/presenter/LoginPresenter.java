@@ -5,18 +5,15 @@ import com.crystallightghot.frscommunityclient.contract.LoginContract;
 import com.crystallightghot.frscommunityclient.contract.RequestCallBack;
 import com.crystallightghot.frscommunityclient.model.LoginModel;
 import com.crystallightghot.frscommunityclient.model.UserModel;
-import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoSession;
-import com.crystallightghot.frscommunityclient.view.util.FRSCEventBusUtil;
-import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.crystallightghot.frscommunityclient.view.message.RequestMessage;
+import com.crystallightghot.frscommunityclient.view.pojo.blog.DaoSession;
 import com.crystallightghot.frscommunityclient.view.pojo.system.*;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCDataBaseUtil;
+import com.crystallightghot.frscommunityclient.view.value.MessageCode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * @Date 2022/1/21
@@ -65,10 +62,9 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
 
             // 存储User信息到全局中
             FRSCApplicationContext.setUser(user);
-
+            // 存储到本地数据库
             DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
             UserDao userDao = daoSession.getUserDao();
-
             User userQuery = userDao.queryBuilder()
                     .where(UserDao.Properties.UserId.eq(user.getUserId()))
                     .build()
@@ -76,13 +72,17 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             if (null == userQuery) {
                 userDao.insert(user);
             }
+
+            user.getRole().setUserId(user.getUserId());
+            daoSession.getRoleDao().insert(user.getRole());
+
             // 记录当前用户登陆状态
             LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
-            LoginInformation loginInformation = new LoginInformation(null,user.getUserId(),1);
+            LoginInformation loginInformation = new LoginInformation(null, user.getUserId(), 1);
             loginInformationDao.insert(loginInformation);
             EventBus.getDefault().post(message);
 
-        }else {
+        } else {
             view.hideLoadingDialog();
             RequestMessage message = new RequestMessage();
             message.setMessage(requestResult.getMessage());

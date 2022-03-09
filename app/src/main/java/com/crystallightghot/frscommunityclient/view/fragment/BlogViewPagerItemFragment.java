@@ -104,7 +104,6 @@ public class BlogViewPagerItemFragment extends BaseFragment {
         });
         rvLists.setAdapter(blogRecyclerViewAdapter);
         presenter.loadingBlogs(skatingType, pagerIndex);
-
     }
 
     /**
@@ -127,8 +126,8 @@ public class BlogViewPagerItemFragment extends BaseFragment {
             return;
         }
         blogRecyclerViewAdapter.notifyDataSetChanged();
-        if (pagerIndex == 0)
-            FRSCEventBusUtil.sendMessage(new ViewPagerHeightUpdateMessage(this));
+      /*  if (pagerIndex == 0)
+            FRSCEventBusUtil.sendMessage(new ViewPagerHeightUpdateMessage(this));*/
     }
 
     public void showError(String message) {
