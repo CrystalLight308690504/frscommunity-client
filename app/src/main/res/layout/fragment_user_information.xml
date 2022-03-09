@@ -37,30 +37,40 @@
             <TextView
                     android:id="@+id/user_name"
                     android:text="FRSC"
+                    android:textSize="15dp"
                     android:textColor="@color/applicationMainTheme"
-                    app:layout_constraintTop_toBottomOf="@id/user_profile"
-                    app:layout_constraintLeft_toLeftOf="@id/user_profile"
+                    app:layout_constraintTop_toTopOf="@id/user_profile"
+                    app:layout_constraintLeft_toRightOf="@id/user_profile"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/distance_normal"
             />
             <TextView
                     android:id="@+id/user_gender"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="男"
+                    android:textSize="10dp"
                     android:textColor="@color/default_displayed_text_gray"
                     app:layout_constraintLeft_toRightOf="@id/user_name"
                     app:layout_constraintTop_toTopOf="@id/user_name"
-                    android:layout_marginLeft="@dimen/distance_max1"
+                    app:layout_constraintBottom_toBottomOf="@id/user_name"
+                    android:layout_marginLeft="@dimen/distance_normal"
             />
             <TextView
                     android:id="@+id/user_self_introduce"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="INTRODUSE"
+                    android:textSize="10dp"
                     android:textColor="@color/default_displayed_text_gray"
-                    app:layout_constraintLeft_toLeftOf="@id/user_profile"
+                    app:layout_constraintLeft_toLeftOf="@id/user_name"
                     app:layout_constraintTop_toBottomOf="@id/user_name"
                     android:layout_marginTop="@dimen/distance_normal"
             />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      app:layout_constraintRight_toRightOf="parent"
+                      app:layout_constraintTop_toTopOf="@id/user_profile"
+                      android:textColor="@color/applicationMainTheme"
+                      android:textSize="12dp"
+                      android:id="@+id/tvUserRoleName"
+                      />
 
             <TextView
                     android:id="@+id/icFollowerUserCount"
@@ -68,7 +78,7 @@
                     android:text="关注"
                     android:textColor="@color/default_displayed_text_gray"
                     app:layout_constraintLeft_toLeftOf="@id/user_profile"
-                    app:layout_constraintTop_toBottomOf="@id/user_self_introduce"
+                    app:layout_constraintTop_toBottomOf="@id/user_profile"
                     android:layout_marginTop="@dimen/distance_normal"
             />
             <TextView
@@ -130,7 +140,7 @@
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:text="编辑资料"
-                      android:textColor="@color/applicationMainTheme"
+                      android:textColor="@color/default_displayed_text_gray"
                       android:textSize="12dp"
                       android:visibility="invisible"
                       app:layout_constraintRight_toRightOf="parent"
@@ -141,7 +151,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/clUserInformation"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:padding="@dimen/distance_small"

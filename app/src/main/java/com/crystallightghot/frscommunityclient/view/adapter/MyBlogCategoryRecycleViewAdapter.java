@@ -32,9 +32,15 @@ import java.util.List;
  */
 public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlogCategoryRecycleViewAdapter.ViewHolder> {
     List<BlogCategory> blogCategories;
+    private boolean isSelf = true;
 
     public MyBlogCategoryRecycleViewAdapter(List<BlogCategory> blogCategories) {
         this.blogCategories = blogCategories;
+    }
+
+    public MyBlogCategoryRecycleViewAdapter(List<BlogCategory> blogCategories, boolean isSelf) {
+        this.blogCategories = blogCategories;
+        this.isSelf = isSelf;
     }
 
     @NonNull
@@ -88,36 +94,36 @@ public class MyBlogCategoryRecycleViewAdapter extends RecyclerView.Adapter<MyBlo
             itemView.setOnClickListener(view -> {
                 FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticlesFragment.newInstance(blogCategory.getCategoryId()));
             });
-            itemView.setOnLongClickListener(this);
+            if (isSelf) {
+                itemView.setOnLongClickListener(this);
+            }
         }
 
         @Override
         public boolean onLongClick(View view) {
+                List<MaterialSimpleListItem> list = new ArrayList<>();
+                list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
+                        .content("编辑")
+                        .icon(R.mipmap.ic_edit)
+                        .build());
+                list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
+                        .content("删除")
+                        .icon(R.mipmap.icon_delete)
+                        .build());
+                final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(list)
+                        .setOnItemClickListener((dialog, index, item) -> {
+                            switch (index) {
+                                case 0:
+                                    CategoryDialogFragment dialogFragment = new CategoryDialogFragment(blogCategory);
+                                    dialogFragment.show(FRSCApplicationContext.getBaseFragmentActivity().getSupportFragmentManager(), "s");
+                                    break;
+                                case 1:
+                                    presenter.deleteBlogCategory(blogCategory);
+                                    break;
+                            }
 
-            List<MaterialSimpleListItem> list = new ArrayList<>();
-            list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
-                    .content("编辑")
-                    .icon(R.mipmap.ic_edit)
-                    .build());
-            list.add(new MaterialSimpleListItem.Builder(FRSCApplicationContext.getActivity())
-                    .content("删除")
-                    .icon(R.mipmap.icon_delete)
-                    .build());
-            final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(list)
-                    .setOnItemClickListener((dialog, index, item) -> {
-                        switch (index) {
-                            case 0:
-                                CategoryDialogFragment dialogFragment = new CategoryDialogFragment(blogCategory);
-                                dialogFragment.show(FRSCApplicationContext.getBaseFragmentActivity().getSupportFragmentManager(), "s");
-                                break;
-                            case 1:
-                                presenter.deleteBlogCategory(blogCategory);
-                                break;
-                        }
-
-                    });
-            new MaterialDialog.Builder(FRSCApplicationContext.getActivity()).adapter(adapter, null).show();
-
+                        });
+                new MaterialDialog.Builder(FRSCApplicationContext.getActivity()).adapter(adapter, null).show();
             return false;
         }
         public void showBlogCount(long count){

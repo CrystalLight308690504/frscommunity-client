@@ -19,9 +19,11 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.MyFragmentPresenter;
 import com.crystallightghot.frscommunityclient.view.activity.BaseActivity;
+import com.crystallightghot.frscommunityclient.view.pojo.system.Role;
 import com.crystallightghot.frscommunityclient.view.pojo.system.User;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 /**
@@ -29,7 +31,7 @@ import com.xuexiang.xui.widget.imageview.RadiusImageView;
  * Use the {@link MyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyFragment extends Fragment {
+public class MyFragment extends Fragment implements BottomSheet.BottomListSheetBuilder.OnSheetItemClickListener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -72,9 +74,12 @@ public class MyFragment extends Fragment {
     @BindView(R.id.tvUserRoleName)
     TextView tvUserRoleName;
 
-
+    User user;
+    Role role;
     BaseActivity activity;
     MyFragmentPresenter presenter;
+    @BindView(R.id.btnAdm)
+    ConstraintLayout btnAdm;
 
     public MyFragment() {
         presenter = new MyFragmentPresenter(this);
@@ -106,7 +111,7 @@ public class MyFragment extends Fragment {
 
     private void init() {
         activity = (BaseActivity) getActivity();
-        User user = FRSCApplicationContext.getUser();
+         user = FRSCApplicationContext.getUser();
         if (null != user) {
             userName.setText(user.getUserName());
             if (user.getRole() != null) {
@@ -116,6 +121,10 @@ public class MyFragment extends Fragment {
             byte[] decodedString = Base64.decode(userProfile, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             this.userProfile.setImageBitmap(decodedByte);
+            role = user.getRole();
+            if (role.getCode().equals("user")) {
+                btnAdm.setVisibility(View.INVISIBLE);
+            }
         }
         loadData();
     }
@@ -128,7 +137,7 @@ public class MyFragment extends Fragment {
 
     }
 
-    @OnClick({R.id.btnArrowRight, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting, R.id.tvicFllowed, R.id.tvicFan})
+    @OnClick({R.id.btnArrowRight, R.id.ivBlog, R.id.ivAnswer, R.id.ivCllection, R.id.ivMyHelp, R.id.btnSetting, R.id.tvicFllowed, R.id.tvicFan, R.id.btnAdm})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnArrowRight:
@@ -155,7 +164,31 @@ public class MyFragment extends Fragment {
                 break;
             case R.id.tvicFan:
                 FRSCIntentUtil.intentToSingleFragmentActivity(MyFanFragment.newInstance());
-
+                break;
+             case R.id.btnAdm:
+                 if (role.getCode().equals("superAdm")) {
+                     new BottomSheet.BottomListSheetBuilder(getActivity())
+                             .addItem("用户管理", "用户管理")
+                             .addItem("博客管理", "用户管理")
+                             .setIsCenter(true)
+                             .setOnSheetItemClickListener(this)
+                             .build()
+                             .show();
+                 }else if (role.getCode().equals("blogAdm")) {
+                     new BottomSheet.BottomListSheetBuilder(getActivity())
+                             .addItem("博客管理", "用户管理")
+                             .setIsCenter(true)
+                             .setOnSheetItemClickListener(this)
+                             .build()
+                             .show();
+                 }else if(role.getCode().equals("userAdm")) {
+                     new BottomSheet.BottomListSheetBuilder(getActivity())
+                             .addItem("用户管理", "用户管理")
+                             .setIsCenter(true)
+                             .setOnSheetItemClickListener(this)
+                             .build()
+                             .show();
+                 }
                 break;
             default:
                 break;
@@ -190,7 +223,20 @@ public class MyFragment extends Fragment {
         userName.setText(user.getUserName());
     }
 
-
+    @Override
+    public void onClick(BottomSheet dialog, View itemView, int position, String tag) {
+        dialog.dismiss();
+        switch (tag) {
+            case "用户管理":
+                FRSCIntentUtil.intentToSingleFragmentActivity(ManageUserFragment.newInstance());
+                break;
+            case "博客管理":
+                FRSCIntentUtil.intentToSingleFragmentActivity(ManageBlogFragment.newInstance());
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 

@@ -32,5 +32,7 @@ public class Blog {
 
     private Timestamp createdTime;
 
+    private int isShowed;
+
     User user;
 }

@@ -72,10 +72,10 @@ public class UserInformationViewPagerBlogItemFragment extends Fragment {
     }
 
     public void loadingData(List<BlogCategory> blogCategories) {
-        MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories);
+        MyBlogCategoryRecycleViewAdapter adapter = new MyBlogCategoryRecycleViewAdapter(blogCategories, false);
         rvLists.setAdapter(adapter);
         refreshLayout.resetNoMoreData();
-        refreshLayout.setEnableLoadMore(true);
+        refreshLayout.setEnableLoadMore(false);
         llStateful.showContent();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();

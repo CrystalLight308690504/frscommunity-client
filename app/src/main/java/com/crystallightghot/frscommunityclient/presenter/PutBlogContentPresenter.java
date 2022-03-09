@@ -35,6 +35,7 @@ public class PutBlogContentPresenter implements PutBlogContentContract.Presenter
     }
 
     public void addBlog(Blog blog) {
+        blog.setIsShowed(1);
         model.addBlog(blog);
     }
 
@@ -54,7 +55,6 @@ public class PutBlogContentPresenter implements PutBlogContentContract.Presenter
                     XToastUtils.error(message.getMessage());
                 }
                 break;
-
         }
     }
 

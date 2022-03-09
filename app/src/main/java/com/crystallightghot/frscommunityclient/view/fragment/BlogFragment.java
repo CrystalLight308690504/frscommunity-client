@@ -45,7 +45,7 @@ public class BlogFragment extends BaseFragment {
     BlogPresenter presenter;
     @BindView(R.id.ll_stateful)
     StatefulLayout llStateful;
-    @BindView(R.id.icBack)
+    @BindView(R.id.icSearchBackground)
     TextView icBack;
     private String[] skatingTypesName;
     BlogViewPagerAdapter blogViewPagerAdapter;
@@ -158,14 +158,14 @@ public class BlogFragment extends BaseFragment {
         super.onDestroy();
     }
 
-    @OnClick({R.id.blog_more_list, R.id.btnSearch, R.id.icBack})
+    @OnClick({R.id.blog_more_list, R.id.btnSearch, R.id.icSearchBackground})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blog_more_list:
                 FRSCIntentUtil.intentToSingleFragmentActivity(SkatingTypeFragment.newInstance(""));
                 break;
             case R.id.btnSearch:
-            case R.id.icBack:
+            case R.id.icSearchBackground:
                 FRSCIntentUtil.intentToSingleFragmentActivity(BlogSearchFragment.newInstance(""));
                 break;
             default:

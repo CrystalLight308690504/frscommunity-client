@@ -72,9 +72,11 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             if (null == userQuery) {
                 userDao.insert(user);
             }
-
-            user.getRole().setUserId(user.getUserId());
-            daoSession.getRoleDao().insert(user.getRole());
+            Role role = user.getRole();
+            if (null != role) {
+                role.setUserId(user.getUserId());
+                daoSession.getRoleDao().insert(user.getRole());
+            }
 
             // 记录当前用户登陆状态
             LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();

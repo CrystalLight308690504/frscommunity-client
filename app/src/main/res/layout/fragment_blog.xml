@@ -37,7 +37,7 @@
               app:layout_constraintRight_toRightOf="parent"
               app:layout_constraintTop_toTopOf="@id/tbSkatingTypes"
               app:layout_constraintBottom_toBottomOf="@id/tbSkatingTypes"
-              android:id="@+id/icBack"
+              android:id="@+id/icSearchBackground"
               android:layout_marginRight="@dimen/distance_normal"
     />
     <ImageButton
@@ -47,9 +47,9 @@
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/distance_small"
             android:scaleType="fitCenter"
-            app:layout_constraintLeft_toLeftOf="@id/icBack"
-            app:layout_constraintTop_toTopOf="@+id/icBack"
-            app:layout_constraintBottom_toBottomOf="@id/icBack"
+            app:layout_constraintLeft_toLeftOf="@id/icSearchBackground"
+            app:layout_constraintTop_toTopOf="@+id/icSearchBackground"
+            app:layout_constraintBottom_toBottomOf="@id/icSearchBackground"
             android:layout_marginRight="@dimen/distance_max"
            />
 

@@ -1,5 +1,7 @@
 package com.crystallightghot.frscommunityclient.model;
 
+import com.crystallightghot.frscommunityclient.presenter.ManageUserFragmentPresenter;
+import com.crystallightghot.frscommunityclient.presenter.ManageUserRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.pojo.system.UserFollower;
 import com.crystallightghot.frscommunityclient.view.util.FRSCOKHttp3RequestUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCGsonUtil;
@@ -70,4 +72,13 @@ public class UserModel {
     }
 
 
+    public void loadUsers(int pagerIndex, Object respondMessageKey) {
+        String url = FRSCRequestIO.SystemIO.FIND_USERS.getRequestIO() + pagerIndex;
+        FRSCOKHttp3RequestUtil.callGetRequest(url,respondMessageKey);
+    }
+
+    public void changeRole(long userId, long roleId, Object respondMessageKey) {
+        String url = FRSCRequestIO.SystemIO.CHANG_USER_ROLE.getRequestIO() + userId + "/" + roleId;
+        FRSCOKHttp3RequestUtil.callPostRequest(url,"",respondMessageKey);
+    }
 }

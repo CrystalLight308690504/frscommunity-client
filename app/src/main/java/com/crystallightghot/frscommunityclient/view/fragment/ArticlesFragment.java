@@ -81,13 +81,13 @@ public class ArticlesFragment extends BaseFragment {
         refreshLayout.finishRefresh();
         if (blogs.size() == 0) {
             llStateful.showEmpty();
-            refreshLayout.setEnableLoadMore(false);
             return;
         }
         refreshLayout.resetNoMoreData();
         refreshLayout.setEnableLoadMore(true);
         llStateful.showContent();
         articles.setAdapter(new ArticlesAdapter(blogs));
+        refreshLayout.setEnableLoadMore(false);
     }
 
 

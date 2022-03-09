@@ -74,6 +74,10 @@ public class UserInformationFragment extends Fragment {
     User user;
     @BindView(R.id.tvApplauseCount)
     TextView tvApplauseCount;
+    @BindView(R.id.tvUserRoleName)
+    TextView tvUserRoleName;
+    @BindView(R.id.icApplauseCount)
+    TextView icApplauseCount;
 
     public UserInformationFragment() {
         FRSCEventBusUtil.register(this);
@@ -134,6 +138,7 @@ public class UserInformationFragment extends Fragment {
         userInformationBackground.setImageBitmap(decodedByte);
         userGender.setText(user.getGender());
         userSelfIntroduce.setText(user.getDescription());
+        tvUserRoleName.setText(user.getRole().getRoleName());
 
         // 隐藏按钮
         if (user.getUserId().equals(FRSCApplicationContext.getUser().getUserId())) {
@@ -150,7 +155,7 @@ public class UserInformationFragment extends Fragment {
         presenter.loadApplauseCount(user.getUserId());
 
         String[] tabTitles = new String[]{"博客"};
-        vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, tabTitles,user));
+        vpContentViewPager.setAdapter(new UserInformationBlogViewPagerItemAdapter(this, tabTitles, user));
         new TabLayoutMediator(tlSkatingTypes, vpContentViewPager, (tab, position) -> tab.setText(tabTitles[position])
         ).attach();
     }

@@ -37,6 +37,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     ArticlesAdapterPresenter presenter;
 
 
+
     public ArticlesAdapter(ArrayList<Blog> blogs) {
         this.blogs = blogs;
         presenter = new ArticlesAdapterPresenter(this);
@@ -74,6 +75,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         @BindView(R.id.article_content)
         TextView articleContent;
         public View itemView;
+        @BindView(R.id.tvIsShowed)
+        TextView tvIsShowed;
         @Getter
         Blog blog;
 
@@ -92,6 +95,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
                 FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(blog));
             });
             itemView.setOnLongClickListener(this);
+            if (1 == blog.getIsShowed() ) {
+                tvIsShowed.setText("可见");
+            }else {
+                tvIsShowed.setText("不可见");
+            }
         }
 
         @Override
