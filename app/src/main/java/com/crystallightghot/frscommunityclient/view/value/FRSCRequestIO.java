@@ -41,8 +41,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-//            String host = "http://42.194.211.199:";
-            String host = localHost;
+            String host = "http://42.194.211.199:";
+//            String host = localHost;
             String port = "9002";
             return host + port + requestInterface;
         }
@@ -86,8 +86,8 @@ public class FRSCRequestIO {
         }
 
         public String getRequestIO() {
-//            String host = "http://42.194.211.199:";
-            String host = localHost;
+            String host = "http://42.194.211.199:";
+//            String host = localHost;
             String port = "9003";
             return host + port + requestInterface;
         }
