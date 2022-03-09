@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
+import com.crystallightghot.frscommunityclient.presenter.ManageBlogRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
@@ -36,6 +37,8 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
 
     @Getter
     List<Blog> blogs = new ArrayList<>();
+
+
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(FRSCApplicationContext.getActivity()).inflate(R.layout.recycle_item_manage_blog, parent, false);
@@ -54,7 +57,6 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.profile)
@@ -71,11 +73,16 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
         TextView articleContent;
         @BindView(R.id.btnIsShowed)
         Button btnIsShowed;
+        @BindView(R.id.tvIsShowed)
+        TextView tvIsShowed;
+
         private Blog blog;
+        ManageBlogRecycleViewAdapterViewHolderPresenter presenter;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            presenter = new ManageBlogRecycleViewAdapterViewHolderPresenter(this);
             itemView.setOnClickListener(view -> FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(blog)));
         }
 
@@ -91,13 +98,16 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
             articleTitle.setText(blog.getBlogTitle());
             articleContent.setText(blog.getContent());
             if (blog.getIsShowed() == 1) {
+                tvIsShowed.setText("可见");
                 btnIsShowed.setSelected(false);
-                btnIsShowed.setText("可见");
-            }else {
-                btnIsShowed.setSelected(true);
                 btnIsShowed.setText("不可见");
+            } else {
+                tvIsShowed.setText("不可见");
+                btnIsShowed.setSelected(true);
+                btnIsShowed.setText("可见");
             }
         }
+
         @OnClick({R.id.profile, R.id.btnIsShowed})
         public void onClick(View view) {
             switch (view.getId()) {
@@ -105,6 +115,13 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
                     break;
                 case R.id.btnIsShowed:
                     btnIsShowed.setSelected(!btnIsShowed.isSelected());
+                    if (btnIsShowed.isSelected()) {
+                        presenter.changIsShowed(blog.getBlogId(), false);
+                        btnIsShowed.setText("可见");
+                    } else {
+                        btnIsShowed.setText("不可见");
+                        presenter.changIsShowed(blog.getBlogId(), true);
+                    }
                     break;
             }
         }

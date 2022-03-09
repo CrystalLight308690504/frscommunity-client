@@ -143,4 +143,14 @@ public class BlogModel {
         String url = FRSCRequestIO.BlogIO.FIND_BLOGS_COLLECTED.getRequestIO() + userId + "/" + pagerIndex;
         FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
     }
+
+    public void loadBlogs(int pagerIndex, Object respondMessageKey) {
+        String url = FRSCRequestIO.BlogIO.FIND_BLOGS.getRequestIO() + pagerIndex;
+        FRSCOKHttp3RequestUtil.callGetRequest(url, respondMessageKey);
+    }
+
+    public void changBlogIsShowed(long blogId, boolean isShowed, Object respondMessageKey) {
+        String url = FRSCRequestIO.BlogIO.CHANG_BLOG_IS_SHOWED.getRequestIO() + blogId + "/" + isShowed;
+        FRSCOKHttp3RequestUtil.callPostRequest(url,"", respondMessageKey);
+    }
 }
