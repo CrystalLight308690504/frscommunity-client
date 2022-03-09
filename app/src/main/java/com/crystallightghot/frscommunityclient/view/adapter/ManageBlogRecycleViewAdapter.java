@@ -17,8 +17,10 @@ import butterknife.OnClick;
 import com.crystallightghot.frscommunityclient.R;
 import com.crystallightghot.frscommunityclient.presenter.ManageBlogRecycleViewAdapterViewHolderPresenter;
 import com.crystallightghot.frscommunityclient.view.fragment.ArticleContentSpecifiedFragment;
+import com.crystallightghot.frscommunityclient.view.fragment.UserInformationFragment;
 import com.crystallightghot.frscommunityclient.view.pojo.blog.Blog;
 import com.crystallightghot.frscommunityclient.view.util.FRSCApplicationContext;
+import com.crystallightghot.frscommunityclient.view.util.FRSCFragmentUtil;
 import com.crystallightghot.frscommunityclient.view.util.FRSCIntentUtil;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 import lombok.Getter;
@@ -83,7 +85,7 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
             super(itemView);
             ButterKnife.bind(this, itemView);
             presenter = new ManageBlogRecycleViewAdapterViewHolderPresenter(this);
-            itemView.setOnClickListener(view -> FRSCIntentUtil.intentToSingleFragmentActivity(ArticleContentSpecifiedFragment.newInstance(blog)));
+            itemView.setOnClickListener(view -> FRSCFragmentUtil.intentToFragmentAddedToBackStack(ArticleContentSpecifiedFragment.newInstance(blog)));
         }
 
         public void initView(Blog blog) {
@@ -112,6 +114,7 @@ public class ManageBlogRecycleViewAdapter extends RecyclerView.Adapter<ManageBlo
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.profile:
+                    FRSCFragmentUtil.intentToFragmentNoAddedToBackStack(UserInformationFragment.newInstance(blog.getUser()));
                     break;
                 case R.id.btnIsShowed:
                     btnIsShowed.setSelected(!btnIsShowed.isSelected());
