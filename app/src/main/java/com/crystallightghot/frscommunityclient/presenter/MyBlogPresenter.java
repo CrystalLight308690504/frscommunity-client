@@ -129,7 +129,7 @@ public class MyBlogPresenter implements MyBlogContract.Presenter{
 
 
     public void loadingBlogs(Long categoryId) {
-        articlesFragment.showLoadingDialog();
+//        articlesFragment.showLoadingDialog();
         User user = FRSCApplicationContext.getUser();
         blogModel.loadingBlogs(user.getUserId(), categoryId);
     }

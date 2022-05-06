@@ -176,7 +176,7 @@ public class MyFragment extends Fragment implements BottomSheet.BottomListSheetB
                              .show();
                  }else if (role.getCode().equals("blogAdm")) {
                      new BottomSheet.BottomListSheetBuilder(getActivity())
-                             .addItem("博客管理", "用户管理")
+                             .addItem("博客管理", "博客管理")
                              .setIsCenter(true)
                              .setOnSheetItemClickListener(this)
                              .build()

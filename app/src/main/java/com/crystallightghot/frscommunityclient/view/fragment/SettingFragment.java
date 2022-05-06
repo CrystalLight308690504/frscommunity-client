@@ -82,7 +82,6 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     private void initView() {
         activity = (BaseFragmentActivity) getActivity();
         presenter = new SettingPresenter(this, FRSCApplicationContext.getUser());
-
         View.OnClickListener onClickListener = v -> {
             if (v instanceof XUICommonListItemView) {
                 CharSequence text = ((XUICommonListItemView) v).getText();
