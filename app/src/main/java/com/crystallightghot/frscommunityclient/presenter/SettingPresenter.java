@@ -42,28 +42,14 @@ public class SettingPresenter implements SettingContract.Presenter, RequestCallB
         User user = FRSCApplicationContext.getUser();
         DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
         LoginInformationDao informationDao = daoSession.getLoginInformationDao();
-        List<LoginInformation> informationList = informationDao.queryBuilder()
-                .where(LoginInformationDao.Properties.UserId.eq(user.getUserId()))
-                .build().
-                list();
-        for (int i = 0; i <informationList.size(); i++) {
-            informationDao.delete(informationList.get(i));
-        }
-
+        informationDao.deleteAll();
         // 删除用户
         UserDao userDao = daoSession.getUserDao();
-        List<User> list = userDao.queryBuilder()
-                .where(UserDao.Properties.UserId.eq(user.getUserId()))
-                .build()
-                .list();
-        if (null != list) {
-            for (int i = 0; i < list.size(); i++) {
-                userDao.delete(list.get(i));
-            }
-        }
+        userDao.deleteAll();
         // 删除角色
         RoleDao roleDao = daoSession.getRoleDao();
-        roleDao.deleteByKey(user.getRole().getUserId());
+        roleDao.deleteAll();
+
         UnLoginMessage message = new UnLoginMessage();
         message.setMessage(requestResult.getMessage());
         message.setSuccess(true);

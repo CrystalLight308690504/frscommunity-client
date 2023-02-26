@@ -65,35 +65,23 @@ public class LoginPresenter implements LoginContract.Presenter, RequestCallBack 
             // 存储到本地数据库
             DaoSession daoSession = FRSCDataBaseUtil.getWriteDaoSession();
             UserDao userDao = daoSession.getUserDao();
-            User userQuery = userDao.queryBuilder()
-                    .where(UserDao.Properties.UserId.eq(user.getUserId()))
-                    .build()
-                    .unique();
-            if (null == userQuery) {
-                userDao.insert(user);
-            }
+            userDao.deleteAll();
+            userDao.insert(user);
+
+            RoleDao roleDao = daoSession.getRoleDao();
+            roleDao.deleteAll();
 
             Role role = user.getRole();
-            if (null != role) {
-                RoleDao roleDao = daoSession.getRoleDao();
-                Role roleQuery = roleDao.queryBuilder()
-                        .where(RoleDao.Properties.UserId.eq(user.getUserId()))
-                        .build()
-                        .unique();
-                if (null != roleQuery) {
-                    roleDao.delete(roleQuery);
-                }
-
-                role.setUserId(user.getUserId());
-                roleDao.insert(role);
-            }
+            role.setUserId(user.getUserId());
+            roleDao.insert(role);
 
             // 记录当前用户登陆状态
             LoginInformationDao loginInformationDao = daoSession.getLoginInformationDao();
+            loginInformationDao.deleteAll();
             LoginInformation loginInformation = new LoginInformation(null, user.getUserId(), 1);
             loginInformationDao.insert(loginInformation);
-            EventBus.getDefault().post(message);
 
+            EventBus.getDefault().post(message);
         } else {
             view.hideLoadingDialog();
             RequestMessage message = new RequestMessage();
